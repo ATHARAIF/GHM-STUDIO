@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://curxl7jch8dov"]
+
+[ext_resource type="PackedScene" uid="uid://cr5swioqymwul" path="res://scenes/cards/card_default.tscn" id="1_cklld"]
+[ext_resource type="PackedScene" uid="uid://b7gpn2iovmhqq" path="res://scenes/tiles/tile_card_1.tscn" id="2_cklld"]
+[ext_resource type="PackedScene" uid="uid://p28gc2yns503" path="res://scenes/tiles/tile_card_2.tscn" id="3_sn7xr"]
+[ext_resource type="PackedScene" uid="uid://cj5nsaw585e1f" path="res://scenes/tiles/tile_card_4.tscn" id="4_wnc42"]
+[ext_resource type="PackedScene" uid="uid://ckfpcpi6g0s6h" path="res://scenes/tiles/tile_card_5.tscn" id="5_rp7l2"]
+[ext_resource type="PackedScene" uid="uid://c00aplsmusuef" path="res://scenes/tiles/tile_card_3.tscn" id="6_6rdkt"]
+[ext_resource type="PackedScene" uid="uid://w57tt2i70xj6" path="res://scenes/tiles/nutzee.tscn" id="7_q8d3l"]
+
+[sub_resource type="Theme" id="Theme_ybjhs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ybjhs"]
+font_size = 54
+
+[node name="CardHand" type="HBoxContainer" unique_id=1143458886]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -444.0
+offset_top = -150.0
+offset_right = 444.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+theme = SubResource("Theme_ybjhs")
+alignment = 1
+
+[node name="Card" parent="." unique_id=914919374 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("2_cklld")
+
+[node name="Label" type="Label" parent="Card" unique_id=1904207943]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 36.0
+offset_right = 79.0
+offset_bottom = 110.0
+text = "1"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card2" parent="." unique_id=1168549735 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("3_sn7xr")
+
+[node name="Label" type="Label" parent="Card2" unique_id=1561940879]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 36.0
+offset_right = 79.0
+offset_bottom = 110.0
+text = "2"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card4" parent="." unique_id=986803190 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("4_wnc42")
+
+[node name="Label" type="Label" parent="Card4" unique_id=688281783]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 36.0
+offset_right = 79.0
+offset_bottom = 110.0
+text = "3"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card5" parent="." unique_id=479380472 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("5_rp7l2")
+
+[node name="Label" type="Label" parent="Card5" unique_id=1929235120]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 36.0
+offset_right = 79.0
+offset_bottom = 110.0
+text = "4"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card3" parent="." unique_id=66450454 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("6_6rdkt")
+
+[node name="Label" type="Label" parent="Card3" unique_id=848341419]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 36.0
+offset_right = 79.0
+offset_bottom = 110.0
+text = "5"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card6" parent="." unique_id=540236722 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("7_q8d3l")
+
+[node name="Label" type="Label" parent="Card6" unique_id=567416772]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 36.0
+offset_right = 79.0
+offset_bottom = 110.0
+text = "6"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
