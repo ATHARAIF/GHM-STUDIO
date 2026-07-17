@@ -1,0 +1,267 @@
+[gd_scene format=3 uid="uid://curxl7jch8dov"]
+
+[ext_resource type="PackedScene" uid="uid://cr5swioqymwul" path="res://scenes/cards/card_default.tscn" id="1_cklld"]
+[ext_resource type="PackedScene" uid="uid://b7gpn2iovmhqq" path="res://scenes/tiles/cards/weeding.tscn" id="2_cklld"]
+[ext_resource type="PackedScene" uid="uid://p28gc2yns503" path="res://scenes/tiles/cards/pruning.tscn" id="3_sn7xr"]
+[ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="3_svfyg"]
+[ext_resource type="Script" uid="uid://bj1ap4xeolcck" path="res://scripts/cards/card_hand.gd" id="4_hand_script"]
+[ext_resource type="PackedScene" uid="uid://c00aplsmusuef" path="res://scenes/tiles/cards/harvest.tscn" id="6_6rdkt"]
+[ext_resource type="PackedScene" uid="uid://c4dstwtf8kjdq" path="res://scenes/tiles/cards/cleaning.tscn" id="7_cln"]
+[ext_resource type="PackedScene" uid="uid://crxbeavs471v7" path="res://scenes/tiles/cards/dry.tscn" id="8_dry"]
+[ext_resource type="PackedScene" uid="uid://cc1hn1r7dtd7k" path="res://scenes/tiles/cards/roasting.tscn" id="9_rst"]
+[ext_resource type="PackedScene" uid="uid://crpiafvocy2wl" path="res://scenes/tiles/cards/bean_testing.tscn" id="10_bnt"]
+[ext_resource type="PackedScene" uid="uid://m058fikgyiak" path="res://scenes/tiles/cards/packing.tscn" id="11_pck"]
+
+[sub_resource type="Theme" id="Theme_ybjhs"]
+
+[sub_resource type="Resource" id="Resource_ryfwb"]
+script = ExtResource("3_svfyg")
+card_name = "Weeding"
+stage_id = 1
+cost = 300
+duration = 3
+effect_defect = -5.0
+effect_growth_rate = 10
+turn_start = 3
+turn_over = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_ybjhs"]
+
+[sub_resource type="Resource" id="Resource_d3amg"]
+script = ExtResource("3_svfyg")
+card_name = "Pruning"
+stage_id = 2
+cost = 250
+effect_aroma = 5
+effect_yield = 15
+turn_start = 6
+turn_over = 8
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_svfyg"]
+script = ExtResource("3_svfyg")
+card_name = "Harvest"
+stage_id = 3
+cost = 300
+duration = 3
+turn_start = 8
+turn_over = 11
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_cln"]
+script = ExtResource("3_svfyg")
+card_name = "Cleaning"
+stage_id = 4
+cost = 150
+duration = 2
+turn_start = 11
+turn_over = 13
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_dry"]
+script = ExtResource("3_svfyg")
+card_name = "Dry"
+stage_id = 5
+cost = 100
+requires_interaction = true
+interaction_type = "DRY"
+turn_start = 13
+turn_over = 16
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_rst"]
+script = ExtResource("3_svfyg")
+card_name = "Roasting"
+stage_id = 6
+cost = 300
+duration = 2
+requires_interaction = true
+interaction_type = "ROASTING"
+turn_start = 16
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_bnt"]
+script = ExtResource("3_svfyg")
+card_name = "Bean Testing"
+stage_id = 7
+requires_interaction = true
+interaction_type = "TESTING"
+unlock_condition = "after_roasting"
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_pck"]
+script = ExtResource("3_svfyg")
+card_name = "Packing"
+stage_id = 8
+duration = 2
+unlock_condition = "after_testing"
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[node name="CardHand" type="HBoxContainer" unique_id=898298064]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -444.0
+offset_top = -150.0
+offset_right = 444.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+theme = SubResource("Theme_ybjhs")
+alignment = 1
+script = ExtResource("4_hand_script")
+
+[node name="Weeding" parent="." unique_id=914919374 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("2_cklld")
+card_data = SubResource("Resource_ryfwb")
+fade_duration = 0.15
+return_duration = 0.25
+
+[node name="Label" type="Label" parent="Weeding" unique_id=1904207943]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 117.0
+offset_bottom = 150.0
+text = "Weeding"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pruning" parent="." unique_id=1168549735 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("3_sn7xr")
+card_data = SubResource("Resource_d3amg")
+fade_duration = 0.15
+return_duration = 0.25
+
+[node name="Label" type="Label" parent="Pruning" unique_id=1561940879]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 115.0
+offset_bottom = 151.0
+text = "Pruning"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Harvest" parent="." unique_id=66450454 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("6_6rdkt")
+card_data = SubResource("Resource_svfyg")
+fade_duration = 0.15
+return_duration = 0.25
+
+[node name="Label" type="Label" parent="Harvest" unique_id=848341419]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 116.0
+offset_bottom = 149.0
+text = "Harvest"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cleaning" parent="." unique_id=462708242 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("7_cln")
+card_data = SubResource("Resource_cln")
+fade_duration = 0.15
+return_duration = 0.25
+
+[node name="Label" type="Label" parent="Cleaning" unique_id=1467666858]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 115.0
+offset_bottom = 149.0
+text = "Cleaning"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dry" parent="." unique_id=162224958 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("8_dry")
+card_data = SubResource("Resource_dry")
+fade_duration = 0.15
+return_duration = 0.25
+
+[node name="Label" type="Label" parent="Dry" unique_id=1204729453]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 115.0
+offset_bottom = 148.0
+text = "Dry"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Roasting" parent="." unique_id=679340384 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("9_rst")
+card_data = SubResource("Resource_rst")
+fade_duration = 0.15
+return_duration = 0.25
+
+[node name="Label" type="Label" parent="Roasting" unique_id=2023880853]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 115.0
+offset_bottom = 150.0
+text = "Roasting"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bean Testing" parent="." unique_id=1380564907 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("10_bnt")
+card_data = SubResource("Resource_bnt")
+fade_duration = 0.15
+return_duration = 0.25
+
+[node name="Label" type="Label" parent="Bean Testing" unique_id=475794068]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 116.0
+offset_bottom = 150.0
+text = "Bean Testing"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Packing" parent="." unique_id=1738642996 instance=ExtResource("1_cklld")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+tile_scene = ExtResource("11_pck")
+card_data = SubResource("Resource_pck")
+fade_duration = 0.15
+return_duration = 0.25
+
+[node name="Label" type="Label" parent="Packing" unique_id=1717071854]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 150.0
+text = "Packing"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1

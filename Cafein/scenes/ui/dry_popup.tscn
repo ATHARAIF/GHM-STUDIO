@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://ddyxy0w123abf"]
+
+[ext_resource type="Script" uid="uid://btlos4ymojm3l" path="res://scripts/ui/dry_popup.gd" id="1_popup"]
+
+[node name="DryPopup" type="CanvasLayer" unique_id=1231566695]
+layer = 20
+script = ExtResource("1_popup")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=426898449]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1591585059]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=979941571]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=335529605]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Header" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1350941717]
+layout_mode = 2
+
+[node name="LblTitle" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Header" unique_id=306863197]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "DRY RESULT"
+horizontal_alignment = 1
+
+[node name="BtnClose" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Header" unique_id=361270422]
+layout_mode = 2
+text = "   X   "
+
+[node name="VBoxData" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=290737826]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LblQuality" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=2085832908]
+layout_mode = 2
+text = "Quality"
+horizontal_alignment = 1
+
+[node name="LblQualityValue" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=964207463]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
+theme_override_font_sizes/font_size = 24
+text = "Good"
+horizontal_alignment = 1
+
+[node name="LblQuantity" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=1866594049]
+layout_mode = 2
+text = "Quantity"
+horizontal_alignment = 1
+
+[node name="LblQuantityValue" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=1318724539]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
+theme_override_font_sizes/font_size = 24
+text = "0 kg"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=186176704]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BtnProcess" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=636878321]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Process Bean"
+
+[node name="BtnSell" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=790781104]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Sell Bean"

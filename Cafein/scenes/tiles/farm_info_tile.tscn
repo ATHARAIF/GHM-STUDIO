@@ -1,0 +1,135 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddyxyzw123abc"]
+
+[ext_resource type="Script" path="res://scripts/tiles/farm_info_tile.gd" id="1_abcde"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_info"]
+size = Vector3(2, 0.2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_info"]
+albedo_color = Color(0.4, 0.25, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_info"]
+material = SubResource("StandardMaterial3D_info")
+size = Vector3(2, 0.2, 2)
+
+[node name="FarmInfoTile" type="Node3D"]
+script = ExtResource("1_abcde")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_info")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_info")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+billboard = 1
+no_depth_test = true
+text = "Klik untuk info"
+font_size = 32
+outline_size = 12
+
+[node name="PopupUI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="ColorRect" type="ColorRect" parent="PopupUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="CenterContainer" type="CenterContainer" parent="PopupUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PopupUI/CenterContainer"]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupUI/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Header" type="HBoxContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LblLocation" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "LOKASI LAHAN"
+
+[node name="BtnClose" type="Button" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/Header"]
+layout_mode = 2
+text = "   X   "
+
+[node name="Timeline" type="HBoxContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Lbl1" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Altitude"
+
+[node name="ValAltitude" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.4, 0.2, 1)
+text = "0m"
+horizontal_alignment = 2
+
+[node name="Lbl2" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Soil Quality"
+
+[node name="ValSoil" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.4, 0.2, 1)
+text = "0"
+horizontal_alignment = 2
+
+[node name="Lbl3" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Bonus Aroma"
+
+[node name="ValAroma" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
+text = "+0"
+horizontal_alignment = 2
+
+[node name="Lbl4" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Bonus Body"
+
+[node name="ValBody" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
+text = "+0"
+horizontal_alignment = 2
+
+[node name="Lbl5" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Bonus Acidity"
+
+[node name="ValAcidity" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
+text = "+0"
+horizontal_alignment = 2
+
+[connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]
