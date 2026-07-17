@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="tile game"
+config/name="Late Bloom Project"
 run/main_scene="uid://bcehomfgtbuls"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"

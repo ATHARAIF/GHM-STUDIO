@@ -7,6 +7,5 @@ script = ExtResource("1_j5tis")
 float_height = 2.0
 ghost_float_alpha = 1.0
 ghost_indicator_alpha = 0.4
-valid_color = Color(0.99482805, 0.8045696, 1.540184e-06, 1)
-use_original_color_when_valid = false
+valid_color = Color(6.6420434e-06, 0.9993561, 0.045342304, 1)
 place_duration = 0.5
