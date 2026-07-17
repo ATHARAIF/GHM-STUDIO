@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dwkww7rnr70dg"]
+
+[ext_resource type="PackedScene" uid="uid://ds6a03mqx3sm0" path="res://assets/3D/tiles/decorations/coffee_tree.glb" id="1_7wklo"]
+
+[node name="PlantProp" unique_id=531915815 instance=ExtResource("1_7wklo")]

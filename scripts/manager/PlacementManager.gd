@@ -4,9 +4,8 @@ extends Node
 @export var float_height: float = 0.4
 @export var ghost_float_alpha: float = 0.55
 @export var ghost_indicator_alpha: float = 0.25
-@export var valid_color: Color = Color(1, 1, 1)   # jika mau ngikut warna asli tile, biarin putih & pastikan use_original_color_when_valid = true
+@export var valid_color: Color = Color(0.3, 1, 0.3)
 @export var invalid_color: Color = Color(1, 0.3, 0.3)
-@export var use_original_color_when_valid: bool = true
 
 @export_group("Animation")
 @export var rotate_duration: float = 0.2
@@ -153,14 +152,20 @@ func update_ghost(mouse_pos: Vector2) -> void:
 		return
 
 	if ghost_float == null:
+		# ghost_float = tampilan ASLI tile scene apa adanya -- gak ada material yang diubah/
+		# di-regenerate sama sekali. Transparansi dicapai lewat GeometryInstance3D.transparency
+		# (fitur bawaan Godot buat blend alpha di level render, material asli gak disentuh).
 		ghost_float = current_tile_scene.instantiate()
-		_set_ghost_transparent(ghost_float, ghost_float_alpha)
+		_apply_native_transparency(ghost_float, ghost_float_alpha)
 		ghost_float.rotation_degrees.y = rotation_steps * 90.0
 		get_tree().current_scene.add_child(ghost_float)
 
 	if ghost_indicator == null:
+		# ghost_indicator = "shadow" flat, cuma nunjukin footprint base_tile + warna valid/invalid.
+		# gak peduli sama tekstur/material asli, emang didesain buat keliatan simpel kaya bayangan.
 		ghost_indicator = current_tile_scene.instantiate()
-		_set_ghost_transparent(ghost_indicator, ghost_indicator_alpha)
+		_strip_to_base_tile(ghost_indicator)
+		_make_flat_shadow(ghost_indicator, ghost_indicator_alpha)
 		ghost_indicator.rotation_degrees.y = rotation_steps * 90.0
 		get_tree().current_scene.add_child(ghost_indicator)
 		ghost_visual_rotation = rotation_steps * 90.0
@@ -182,7 +187,7 @@ func update_ghost(mouse_pos: Vector2) -> void:
 	float_pos.y += float_height
 	ghost_float.global_position = float_pos
 
-	_tint_ghost(ghost_indicator, not valid)
+	_tint_shadow(ghost_indicator, not valid)
 
 func try_place(mouse_pos: Vector2, tile_scene: PackedScene) -> bool:
 	var world_pos = _get_ground_position(mouse_pos)
@@ -273,7 +278,7 @@ func _compute_shape_from_scene(tile_scene: PackedScene) -> Array[Vector2i]:
 
 func _find_base_tile_node(node: Node) -> Node3D:
 	for child in node.get_children():
-		if child.name == "base_tile" and child is Node3D:
+		if child.name == "base tile" and child is Node3D:
 			return child
 		var found := _find_base_tile_node(child)
 		if found:
@@ -333,41 +338,55 @@ func _get_ground_position(mouse_pos: Vector2):
 	var plane := Plane(Vector3.UP, 0.0)
 	return plane.intersects_ray(origin, dir)
 
-func _set_ghost_transparent(node: Node, alpha: float) -> void:
+func _strip_to_base_tile(root: Node3D) -> void:
+	var base := _find_base_tile_node(root)
+	if base == null or base == root:
+		return   # gak ketemu base_tile (atau base_tile-nya root sendiri), biarin apa adanya
+
+	# kumpulin base_tile + semua leluhurnya sampe root -- jalur ini harus dibiarin utuh
+	var keep_chain: Array[Node] = []
+	var n: Node = base
+	while n != null:
+		keep_chain.append(n)
+		if n == root:
+			break
+		n = n.get_parent()
+
+	_prune_except(root, base, keep_chain)
+
+func _prune_except(node: Node, base: Node3D, keep_chain: Array[Node]) -> void:
+	for child in node.get_children():
+		if child == base:
+			continue   # base_tile & semua anaknya dibiarin utuh
+		if keep_chain.has(child):
+			_prune_except(child, base, keep_chain)   # node perantara menuju base_tile, turun terus tapi jangan dihapus
+		else:
+			child.free()   # apapun ini -- decoration, labels, atau grup baru apapun -- buang total
+
+func _apply_native_transparency(node: Node, alpha: float) -> void:
+	for child in node.get_children():
+		if child is GeometryInstance3D:
+			child.transparency = 1.0 - alpha   # transparency: 0=opaque, 1=full transparan (kebalikan dari alpha)
+		_apply_native_transparency(child, alpha)
+
+func _make_flat_shadow(node: Node, alpha: float) -> void:
 	for child in node.get_children():
 		if child is MeshInstance3D:
-			var original_color := Color(1, 1, 1)
-			if child.get_surface_override_material(0):
-				original_color = child.get_surface_override_material(0).albedo_color
-			elif child.mesh and child.mesh.surface_get_material(0):
-				original_color = child.mesh.surface_get_material(0).albedo_color
-
 			var mat := StandardMaterial3D.new()
-			mat.albedo_color = Color(original_color.r, original_color.g, original_color.b, alpha)
+			mat.albedo_color = Color(valid_color.r, valid_color.g, valid_color.b, alpha)
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			child.material_override = mat
-			child.set_meta("ghost_mat", mat)
-			child.set_meta("ghost_base_color", original_color)
-			child.set_meta("ghost_alpha", alpha)
-		_set_ghost_transparent(child, alpha)
+			child.set_meta("shadow_mat", mat)
+			child.set_meta("shadow_alpha", alpha)
+		_make_flat_shadow(child, alpha)
 
-func _tint_ghost(node: Node3D, invalid: bool) -> void:
-	if node == null:
-		return
-	_apply_tint(node, invalid)
-
-func _apply_tint(node: Node, invalid: bool) -> void:
+func _tint_shadow(node: Node, invalid: bool) -> void:
 	for child in node.get_children():
-		if child is MeshInstance3D and child.has_meta("ghost_mat"):
-			var alpha: float = child.get_meta("ghost_alpha")
-			if invalid:
-				child.get_meta("ghost_mat").albedo_color = Color(invalid_color.r, invalid_color.g, invalid_color.b, alpha)
-			elif use_original_color_when_valid:
-				var base: Color = child.get_meta("ghost_base_color")
-				child.get_meta("ghost_mat").albedo_color = Color(base.r, base.g, base.b, alpha)
-			else:
-				child.get_meta("ghost_mat").albedo_color = Color(valid_color.r, valid_color.g, valid_color.b, alpha)
-		_apply_tint(child, invalid)
+		if child is MeshInstance3D and child.has_meta("shadow_mat"):
+			var alpha: float = child.get_meta("shadow_alpha")
+			var color: Color = invalid_color if invalid else valid_color
+			child.get_meta("shadow_mat").albedo_color = Color(color.r, color.g, color.b, alpha)
+		_tint_shadow(child, invalid)
 
 func _clear_ghost() -> void:
 	if ghost_float:

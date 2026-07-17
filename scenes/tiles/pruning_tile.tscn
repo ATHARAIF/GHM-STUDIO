@@ -1,0 +1,167 @@
+[gd_scene format=4 uid="uid://b7cg6uvvi5ata"]
+
+[ext_resource type="PackedScene" uid="uid://ds6a03mqx3sm0" path="res://assets/3D/tiles/decorations/coffee_tree.glb" id="1_1op8b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21oj4"]
+resource_name = "Material"
+albedo_color = Color(0.49019608, 0.49019608, 0.49019608, 1)
+metallic = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ypb2v"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.12, 1),
+"format": 34896613377,
+"index_count": 180,
+"index_data": PackedByteArray("CQAKAAgACAAGAAkACAARAAYACQAGABIAEQASAAYAEwARAAgACAAKABMAFAASABEAEwAVABEAFQAUABEACgALABMADQAVABMAEwALAA0ADQADABUAAgADAA0AFgAUABUAAwAWABUAAgAXAAMAFwAWAAMADQAQAAIAEAAXAAIACwAQAA0AFwAYABYAFgAZABQAGAAZABYAGQAaABQAFAAaABIAEAAbABcAGwAYABcACwAPABAADwAbABAADwABABsABAAPAAsACgAEAAsAAAABAA8ABAAAAA8AAQAcABsAGwAcABgAAAAcAAEAHAAdABgAGAAdABkAHgAcAAAAHgAAAAQAHgAdABwADAAEAAoADAAeAAQACQAMAAoADgAdAB4ADgAeAAwAHwAMAAkAHwAOAAwACQASAB8AHwASABoABwAOAB8AHwAaAAcADgAFAB0ABwAFAA4ABwAaAAUAHQAFABkAGQAFABoA"),
+"lods": [0.004838286, PackedByteArray("CQAKAAgACgALAAgACAAGAAkACQAMAAoADQAGAAgACAALAA0ACQAGAAcABwAMAAkADAAEAAoACgAEAAsABwAOAAwABwAGAAUABwAFAA4ADgAAAAwADAAAAAQADgAFAAAABAAPAAsABAAAAA8ACwAPABAACwAQAA0AAAABAA8AAAAFAAEADwABABAAAQAFAAMAAwAFAAYAEAABAAMADQADAAYAEAADAAIAAgADAA0ADQAQAAIA"), 0.7607734, PackedByteArray("AAABAAIAAgABAAMABAAAAAIAAQAFAAMAAAAFAAEAAwAFAAYAAgADAAYABwAFAAAABwAAAAQABwAGAAUACAAEAAIABwAEAAgAAgAGAAgACAAGAAcA")],
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("//9U1QAAAAD//wAAAAAAAP//VNX//wAA//8AAP//AAB29///iAgAAAAAAAAAAAAAAAAAAP//AAAAAFTVAAAAAAAAVNX//wAAAABU1Xb3AACICP//dvcAAHb3//929wAAiAj//4gIAAB291TV//8AAIgIVNUAAAAA//9U1YgIAAD//1TVdvcAAIgIAAD//wAAAAAAAHb3AACICFTV//8AAIgIAAB29wAAdvcAAP//AAB29wAAdvcAAP//AAB29wAAdvcAAIgIAACICAAAiAgAAAAAAACICAAA//8AAIgIAAB29wAAAAAAAIgIAAAAAAAAdvdU1QAAAAAAAFTViAgAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a60f3"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.12, 1),
+"attribute_data": PackedByteArray("/5//f/9f/3//n/8//1//P1S1qmr/3/8//9//f/+f/3//n////1////+f/7//X/+//1//f/8f/3//X/8//x//P/+f/7//X/+//5//f/9f/3//n/8//1//P/9fAAD/nwAA/99UVanKVFVUtVRVVLX/P/+fVFX/n/8//5+qav+fVFWpyqpqqcr/f/+fqmr/n6nq/5+qqv+fqiqpyv8//59VFf9fVRX/X6oq/59U1f9fVNX/X6nq/19UVapKVFWqSv8/qkqqav9fqmqqSv9/VTX/f1U1qmr/H6pqVTVUVf8fVFVVNf8//19UVf9fqmr/n1SV/19Ulf9fqqr/36pq/9+qaqnKqmr/31RVqcpUVf+fqmr/n1RVqcqqalS1qmqpylRVVLVUVVS1/39Utapqqcr/f1S1/3+pyqpqVLWqalS1VFWpylRVVLVUVanK/z9Utf8/"),
+"format": 34896613399,
+"index_count": 180,
+"index_data": PackedByteArray("GAAZAAUABQAZACYAJwAoABcAFwAoABYAJwApACgAJQApACcAJQAVACkAFAAVACUAKgArAAoACgArAAsAKgAsACsAIwAsACoAIwAJACwACAAJACMALQAuAA4ADgAuAC8ALQAwAC4AMQAwAC0AMQAyADAADAAyADEAMgAzADAAMAAzADQAMAA0AC4AMwANADQANAANADUALgA0ADYANAA1ADYALgA2AC8ANgA1ADcALwA2ADgANgA3ADgAOAA3AA8AHwA5AAIAAgA5AAMAHwA6ADkAHgA6AB8AHgABADoAAAABAB4AOwA8ABIAEgA8ABMAOwA9ADwAJAA9ADsAJAARAD0AEAARACQABgAhAD4APgAhACAAPwBAAEEAQQBAAEIABABDABoAGgBDAEQARQBGAEcARwBGAEgASQAHAEoASgAHACIASwBMAE0ATQBMAE4ATwAcABsAGwAcAB0AUABRAFIAUgBRAFMA"),
+"lods": [0.004838286, PackedByteArray("GAAZAAUAGQAaAAUABQAaABsAGgAcABsAGwAcAB0AGQAEABoABAAeABoAGgAeAB8AHgABAB8AAAABAB4AHwABAAMAHwADAAIAIAAEABkAGAAgABkABgAgABgABgAhACAAIQAHACAAIAAHAAQABAAHACIACAAJACMAIwAJAAoACgAJAAsADAANAA4ADgANAA8AEAARACQAJAARABIAEgARABMAFAAVACUAJQAVABYAJQAWABcA"), 0.7607734, PackedByteArray("AAABAAIAAgABAAMABAAAAAIABQAEAAIABgAEAAUABgAHAAQACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFAAWABcA")],
+"material": SubResource("StandardMaterial3D_21oj4"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 84,
+"vertex_data": PackedByteArray("//9U1QAAVNX//wAAAABU1f//VNX//1TV//8AAP//VNV29///iAiF8AAAVNX//7n2AABU1QAA2/b//1TVAAC3+AAAVNX//1TVAAAAAP//VNUAAFTVAABU1QAAAAAAAFTV//8AAAAA/78AAAAAAAD/v///AAD///+/AAAAAP///78AAFTVAAD//wAAAAAAAP////9U1QAA/////wAAAAD/////VNX///+///8AAP///78AAAAA////vwAAVNX///+/AABU1Xb3QPSICP//dve59nb3//9294XwdvdU1f//fvb//1TVdvd+9v//VNX//zT5//9U1YgIVNX//1TVdvdU1YgI//+ICJP6iAhU1QAA4/j//1TViAiT+gAAVNV291TViAhU1QAA//9291TV////v4gIVNX//zT5iAhU1f///7+ICAAA////v3b3AAD///+/AABU1YgIVNUAAAAAiAhU1QAAAAB291TV//8AAHb3/7929wAAdvf/v3b3AAD///+/dvcAAIgI/7///wAAiAj/v3b3AAAAAP+/iAgAAAAA/7+ICAAAiAj/vwAAAACICP+/iAgAAHb3/78AAAAAdvf/v4gIAAD///+///8AAHb3VNX//wAAiAhU1Xb3VNUAAP//dvcAAAAA//+ICAAAAAD//wAAVNWICOP4AABU1YgIhfCICP//iAiF8AAAVNV294XwiAj//3b3hfD//1TViAiF8P//VNV294XwiAj//4gI//929///iAj//4gI//929///dvf//3b3//9291TVAADb9nb3//+ICLf4iAhU1QAA//9291TVAAD//4gI//+ICP//dvf//4gI//929///dvdA9IgI//929///dvf//3b3//+ICFTV/////3b3VNX/////qiqqKqoqqiqqKqoqqiqqKjY4kg9AeKGzvng6xYJDsQlU1VTVVNVU1VTVVNVU1VTVAAD/fwAA/38AAP9/AAD/f/+//7//v/+//7//v/+//7//////////////////////IXrGtEB4obM2OJIPvDOSB7wzkgeFMpAJqiqqKqoqqir1c9rBFXZZw9tBCQxU1VTV/7//v/////9vdoWy////////////////VNVU1VTVVNVU1VTVAAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/qiqqKqoqqir/v/+//7//v/+//78VdlnDbXA2uG1wNrhtcDa4bXA2uDY4kg82OJIP/3//v/9//7//f/+//3//vztFQQeCQ7EJ/3+50f9/udH/f7nR/3+50cY03QX/f0Wu/39Frv9/Ra7/f0Wu")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ypb2v")
+
+[sub_resource type="MultiMesh" id="MultiMesh_vg7ev"]
+transform_format = 1
+
+[node name="tile_card_1" type="Node3D" unique_id=699342220]
+
+[node name="base tile" type="Node3D" parent="." unique_id=335034879]
+
+[node name="TileTest5" type="MeshInstance3D" parent="base tile" unique_id=1658703780]
+mesh = SubResource("ArrayMesh_a60f3")
+
+[node name="TileTest6" type="MeshInstance3D" parent="base tile" unique_id=1429340211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("ArrayMesh_a60f3")
+
+[node name="TileTest7" type="MeshInstance3D" parent="base tile" unique_id=45081542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+mesh = SubResource("ArrayMesh_a60f3")
+
+[node name="TileTest8" type="MeshInstance3D" parent="base tile" unique_id=1184917837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+mesh = SubResource("ArrayMesh_a60f3")
+
+[node name="decoration" type="Node3D" parent="." unique_id=1366385511]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0, 0)
+
+[node name="coffee_tree2" parent="decoration" unique_id=253626480 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -1.3141122, 0.11389224, -1.3677945)
+
+[node name="coffee_tree3" parent="decoration" unique_id=94364139 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.99267983, 0.11389224, -1.3677945)
+
+[node name="coffee_tree4" parent="decoration" unique_id=574633105 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.66614544, 0.11389224, -1.3677945)
+
+[node name="coffee_tree5" parent="decoration" unique_id=1999079364 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.31410062, 0.11389224, -1.3677945)
+
+[node name="coffee_tree6" parent="decoration" unique_id=313354879 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.007331729, 0.11389224, -1.3677945)
+
+[node name="coffee_tree7" parent="decoration" unique_id=1462198909 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.33386612, 0.11389224, -1.3677945)
+
+[node name="coffee_tree8" parent="decoration" unique_id=1477574065 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.6782579, 0.11389224, -1.3677945)
+
+[node name="coffee_tree9" parent="decoration" unique_id=1178303779 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.99969023, 0.11389224, -1.3677945)
+
+[node name="coffee_tree10" parent="decoration" unique_id=594113385 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 1.3262246, 0.11389224, -1.3677945)
+
+[node name="coffee_tree11" parent="decoration" unique_id=341072972 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -1.3141122, 0.11389224, -1.0172563)
+
+[node name="coffee_tree12" parent="decoration" unique_id=391611646 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.99267983, 0.11389224, -1.0172563)
+
+[node name="coffee_tree13" parent="decoration" unique_id=1006702641 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.66614544, 0.11389224, -1.0172563)
+
+[node name="coffee_tree14" parent="decoration" unique_id=1459301913 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.31410062, 0.11389224, -1.0172563)
+
+[node name="coffee_tree15" parent="decoration" unique_id=1373101973 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.007331729, 0.11389224, -1.0172563)
+
+[node name="coffee_tree16" parent="decoration" unique_id=216752219 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.33386612, 0.11389224, -1.0172563)
+
+[node name="coffee_tree17" parent="decoration" unique_id=210208769 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.6782579, 0.11389224, -1.0172563)
+
+[node name="coffee_tree18" parent="decoration" unique_id=1889578875 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.99969023, 0.11389224, -1.0172563)
+
+[node name="coffee_tree19" parent="decoration" unique_id=1543137378 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 1.3262246, 0.11389224, -1.0172563)
+
+[node name="coffee_tree20" parent="decoration" unique_id=2026453565 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -1.3141122, 0.11389224, -0.66671795)
+
+[node name="coffee_tree21" parent="decoration" unique_id=1116072103 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.99267983, 0.11389224, -0.66671795)
+
+[node name="coffee_tree22" parent="decoration" unique_id=139154446 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.66614544, 0.11389224, -0.66671795)
+
+[node name="coffee_tree23" parent="decoration" unique_id=1537737752 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.31410062, 0.11389224, -0.66671795)
+
+[node name="coffee_tree24" parent="decoration" unique_id=1337592184 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.007331729, 0.11389224, -0.66671795)
+
+[node name="coffee_tree25" parent="decoration" unique_id=1291106028 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.33386612, 0.11389224, -0.66671795)
+
+[node name="coffee_tree26" parent="decoration" unique_id=53803886 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.6782579, 0.11389224, -0.66671795)
+
+[node name="coffee_tree27" parent="decoration" unique_id=1768333387 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.99969023, 0.11389224, -0.66671795)
+
+[node name="coffee_tree28" parent="decoration" unique_id=461883491 instance=ExtResource("1_1op8b")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 1.3262246, 0.11389224, -0.66671795)
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="decoration" unique_id=326713893]
+multimesh = SubResource("MultiMesh_vg7ev")
+
+[node name="labels" type="Node3D" parent="." unique_id=142051388]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="bean_name" type="Label3D" parent="labels" unique_id=309596117]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.011326238, 0.12827879, 0.84245455)
+pixel_size = 0.001
+text = "Pruning
+"
+font_size = 198
+
+[node name="turn" type="Label3D" parent="labels" unique_id=1733010523]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.011326238, 0.12827879, 1.1556913)
+pixel_size = 0.001
+text = "1
+"
+font_size = 256

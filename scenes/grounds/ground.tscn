@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bgl7itmh3ifw" path="res://scripts/tiles/ground.gd" id="1_lmksl"]
 [ext_resource type="PackedScene" uid="uid://cj3djbtpfddtc" path="res://scenes/tiles/base/tile_ground.tscn" id="2_mej4j"]
 [ext_resource type="Script" uid="uid://br3fhnsgmnusd" path="res://scripts/tiles/GroundTile.gd" id="3_w5yvf"]
+[ext_resource type="Shader" uid="uid://bcxjo56cugxhg" path="res://shaders/graphic_shader.gdshader" id="4_4a7qg"]
 [ext_resource type="PackedScene" uid="uid://curxl7jch8dov" path="res://scenes/cards/card_hand.tscn" id="4_w5yvf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m6fyy"]
@@ -18,6 +19,12 @@ sky_material = SubResource("ProceduralSkyMaterial_m6fyy")
 [sub_resource type="Environment" id="Environment_ybjhs"]
 background_mode = 2
 sky = SubResource("Sky_ckjl0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybjhs"]
+shader = ExtResource("4_4a7qg")
+shader_parameter/warm_color = Color(0.5, 1, 0.89166665, 1)
+shader_parameter/tint_amount = 0.27200001292
+shader_parameter/contrast = 1.4670000696825
 
 [node name="ground" type="Node3D" unique_id=1641503286]
 script = ExtResource("1_lmksl")
@@ -136,8 +143,28 @@ script = ExtResource("3_w5yvf")
 [node name="decoration" type="Node3D" parent="tile_grounds/tile_ground61" unique_id=688724761]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.090809196, -3)
 
-[node name="CardHand" parent="." unique_id=1143458886 instance=ExtResource("4_w5yvf")]
-anchors_preset = 7
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1474311546]
 environment = SubResource("Environment_ybjhs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2085296074]
+
+[node name="CRT_Shader" type="ColorRect" parent="CanvasLayer" unique_id=1568674359]
+visible = false
+material = SubResource("ShaderMaterial_ybjhs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="basic_Shader" type="ColorRect" parent="CanvasLayer" unique_id=1457174090]
+material = SubResource("ShaderMaterial_ybjhs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CardHand" parent="CanvasLayer" unique_id=1143458886 instance=ExtResource("4_w5yvf")]
