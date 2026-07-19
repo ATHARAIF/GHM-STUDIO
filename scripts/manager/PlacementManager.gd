@@ -209,7 +209,7 @@ func try_place(mouse_pos: Vector2, tile_scene: PackedScene) -> bool:
 	final_pos.y += ground_top_offset + tile_bottom_offset
 	tile.rotation_degrees.y = rotation_steps * 90.0
 
-	# spawn di posisi ghost float (ngambang), baru animasi jatuh ke posisi final
+	# spawn di posisi ghost float (ngambang), baru animasi jatuh ke posisi final.
 	var start_pos = final_pos
 	start_pos.y += float_height
 	tile.global_position = start_pos
