@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://br3fhnsgmnusd" path="res://scripts/tiles/GroundTile.gd" id="3_w5yvf"]
 [ext_resource type="Shader" uid="uid://dq8okqltd833b" path="res://shaders/CRT_shader.gdshader" id="4_4a7qg"]
 [ext_resource type="PackedScene" uid="uid://curxl7jch8dov" path="res://scenes/cards/card_hand.tscn" id="4_w5yvf"]
-[ext_resource type="Shader" uid="uid://bcxjo56cugxhg" path="res://shaders/graphic_shader.gdshader" id="5_jgxd4"]
+[ext_resource type="Shader" uid="uid://df2ltnm1ltiqk" path="res://shaders/raining.gdshader" id="5_jgxd4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4a7qg"]
 resource_name = "color test"
@@ -80,9 +80,19 @@ shader_parameter/vignette_intensity = 1.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ybjhs"]
 shader = ExtResource("5_jgxd4")
-shader_parameter/warm_color = Color(0.72, 0.9626667, 1, 1)
-shader_parameter/tint_amount = 0.2290000108775
-shader_parameter/contrast = 1.29200006137
+shader_parameter/overcast_color = Color(0.2, 0.25, 0.35, 1)
+shader_parameter/overcast_blend = 0.330000015675
+shader_parameter/saturation = 0.4
+shader_parameter/rain_speed = 0.89200003911012
+shader_parameter/rain_density = 0.142000006745
+shader_parameter/rain_angle = 0.28800006118
+shader_parameter/rain_color = Color(0.8, 0.9, 1, 0.5)
+shader_parameter/rain_width = 0.012000000569999999
+shader_parameter/rain_length = 0.15700000675898
+shader_parameter/rain_scale = 0.85700003744762
+shader_parameter/lightning_frequency = 2.28900010546762
+shader_parameter/lightning_chance = 0.1290000061275
+shader_parameter/lightning_color = Color(1, 1, 1, 1)
 
 [node name="ground" type="Node3D" unique_id=1641503286]
 script = ExtResource("1_lmksl")
@@ -505,6 +515,16 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="basic_Shader" type="ColorRect" parent="CanvasLayer" unique_id=1457174090]
+visible = false
+material = SubResource("ShaderMaterial_ybjhs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="raining" type="ColorRect" parent="CanvasLayer" unique_id=857185800]
 material = SubResource("ShaderMaterial_ybjhs")
 anchors_preset = 15
 anchor_right = 1.0
