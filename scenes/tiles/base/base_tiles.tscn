@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://d4jkvh7x4iwh1" path="res://assets/3D/tiles/base_tiles/cornerv2.glb" id="12_mpsep"]
 [ext_resource type="PackedScene" uid="uid://bxw1i8idgadat" path="res://assets/3D/tiles/base_tiles/1side_2corner.glb" id="13_8v1c6"]
 [ext_resource type="PackedScene" uid="uid://bwyye4kdchesq" path="res://assets/3D/tiles/base_tiles/tile_ground.glb" id="14_524co"]
+[ext_resource type="PackedScene" uid="uid://c028uyn6hgfcp" path="res://assets/3D/tiles/base_tiles/1side_1corner_1.glb" id="15_4ipuy"]
+[ext_resource type="PackedScene" uid="uid://dnh03uprxb171" path="res://assets/3D/tiles/base_tiles/1side_1corner_2.glb" id="16_x5c1a"]
 
 [node name="base_tiles" type="Node3D" unique_id=674472095]
 
@@ -61,6 +63,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.005, -4)
 [node name="ground" parent="tile_ground" index="0" unique_id=334912373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 
+[node name="1side_1corner_1" parent="." unique_id=955035052 instance=ExtResource("15_4ipuy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
+
+[node name="1side_1corner_2" parent="." unique_id=1119675299 instance=ExtResource("16_x5c1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+
 [editable path="1corner"]
 [editable path="1side_2corner2"]
 [editable path="1side_border2"]
@@ -75,3 +83,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 [editable path="full_border2"]
 [editable path="no_border2"]
 [editable path="tile_ground"]
+[editable path="1side_1corner_1"]
+[editable path="1side_1corner_2"]

@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://d4k66hgy7flsd"]
-
-[ext_resource type="PackedScene" uid="uid://dqfuy4weq0vhj" path="res://assets/3D/buildings/warehouse.glb" id="1_2mvx0"]
-
-[node name="warehouse" unique_id=1577510470 instance=ExtResource("1_2mvx0")]
