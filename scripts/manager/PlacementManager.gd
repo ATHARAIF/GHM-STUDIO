@@ -19,6 +19,8 @@ var current_base_shape: Array[Vector2i] = [Vector2i.ZERO]   # shape asli, belum 
 var current_shape: Array[Vector2i] = [Vector2i.ZERO]        # shape setelah dirotate, dipake buat validasi
 var rotation_steps: int = 0   # 0-3, tiap step = 90 derajat
 var ghost_visual_rotation: float = 0.0   # rotasi kontinu (gak di-wrap), buat animasi tween
+var ghost_float_rotate_tween: Tween
+var ghost_indicator_rotate_tween: Tween
 
 var ground_tiles: Array[GroundTile] = []
 var grid: Dictionary = {}          # Vector2i -> GroundTile
@@ -112,19 +114,35 @@ func rotate_ghost() -> void:
 	rotation_steps = (rotation_steps + 1) % 4
 	current_shape = _rotate_shape(current_base_shape, rotation_steps)
 
+	var start_rot := ghost_visual_rotation
 	ghost_visual_rotation += 90.0   # terus nambah (gak di-wrap), biar tween-nya muter searah terus
+	var target_rot := ghost_visual_rotation
 
 	if ghost_float:
-		var tw := create_tween()
-		tw.set_trans(Tween.TRANS_BACK)
-		tw.set_ease(Tween.EASE_OUT)
-		tw.tween_property(ghost_float, "rotation_degrees:y", ghost_visual_rotation, rotate_duration)
+		if ghost_float_rotate_tween:
+			ghost_float_rotate_tween.kill()
+		ghost_float_rotate_tween = create_tween()
+		ghost_float_rotate_tween.set_trans(Tween.TRANS_BACK)
+		ghost_float_rotate_tween.set_ease(Tween.EASE_OUT)
+		# pake tween_method, BUKAN tween_property -- biar gak pernah "baca balik" rotation_degrees
+		# dari node (yang bisa wrap jadi -180 pas kebetulan lagi di 180, bikin jarak tempuh salah hitung)
+		ghost_float_rotate_tween.tween_method(_set_ghost_float_rotation, start_rot, target_rot, rotate_duration)
 
 	if ghost_indicator:
-		var tw2 := create_tween()
-		tw2.set_trans(Tween.TRANS_BACK)
-		tw2.set_ease(Tween.EASE_OUT)
-		tw2.tween_property(ghost_indicator, "rotation_degrees:y", ghost_visual_rotation, rotate_duration)
+		if ghost_indicator_rotate_tween:
+			ghost_indicator_rotate_tween.kill()
+		ghost_indicator_rotate_tween = create_tween()
+		ghost_indicator_rotate_tween.set_trans(Tween.TRANS_BACK)
+		ghost_indicator_rotate_tween.set_ease(Tween.EASE_OUT)
+		ghost_indicator_rotate_tween.tween_method(_set_ghost_indicator_rotation, start_rot, target_rot, rotate_duration)
+
+func _set_ghost_float_rotation(value: float) -> void:
+	if ghost_float:
+		ghost_float.rotation_degrees.y = value
+
+func _set_ghost_indicator_rotation(value: float) -> void:
+	if ghost_indicator:
+		ghost_indicator.rotation_degrees.y = value
 
 func _rotate_shape(shape: Array[Vector2i], steps: int) -> Array[Vector2i]:
 	var result: Array[Vector2i] = shape.duplicate()
@@ -159,6 +177,7 @@ func update_ghost(mouse_pos: Vector2) -> void:
 		_apply_native_transparency(ghost_float, ghost_float_alpha)
 		ghost_float.rotation_degrees.y = rotation_steps * 90.0
 		get_tree().current_scene.add_child(ghost_float)
+		ghost_visual_rotation = rotation_steps * 90.0   # sync tracker rotasi tiap kali ghost di-(re)buat
 
 	if ghost_indicator == null:
 		# ghost_indicator = "shadow" flat, cuma nunjukin footprint base_tile + warna valid/invalid.
@@ -168,7 +187,7 @@ func update_ghost(mouse_pos: Vector2) -> void:
 		_make_flat_shadow(ghost_indicator, ghost_indicator_alpha)
 		ghost_indicator.rotation_degrees.y = rotation_steps * 90.0
 		get_tree().current_scene.add_child(ghost_indicator)
-		ghost_visual_rotation = rotation_steps * 90.0
+		ghost_visual_rotation = rotation_steps * 90.0   # sync tracker rotasi tiap kali ghost di-(re)buat
 
 	var anchor_coord := _world_to_grid(world_pos)
 	var valid := _can_place(anchor_coord, current_shape)
@@ -177,9 +196,12 @@ func update_ghost(mouse_pos: Vector2) -> void:
 	if valid:
 		var anchor_tile: GroundTile = grid[anchor_coord]
 		base_pos = anchor_tile.global_position
-		base_pos.y += ground_top_offset + tile_bottom_offset
 	else:
 		base_pos = world_pos   # gak snap, ngikut posisi mouse bebas
+
+	# tinggi yang sama dipake di kedua kondisi (valid/invalid), biar indicator gak "tenggelam"
+	# ketutupan mesh ground pas lagi invalid/floating
+	base_pos.y += ground_top_offset + tile_bottom_offset
 
 	ghost_indicator.global_position = base_pos
 
@@ -396,3 +418,5 @@ func _clear_ghost() -> void:
 	if ghost_indicator:
 		ghost_indicator.queue_free()
 		ghost_indicator = null
+	ghost_float_rotate_tween = null
+	ghost_indicator_rotate_tween = null

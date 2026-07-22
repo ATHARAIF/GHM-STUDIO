@@ -4,8 +4,5 @@
 
 [node name="PlacementManager" type="Node" unique_id=1244060309]
 script = ExtResource("1_j5tis")
-float_height = 2.0
+float_height = 1.5
 ghost_float_alpha = 1.0
-ghost_indicator_alpha = 0.4
-valid_color = Color(6.6420434e-06, 0.9993561, 0.045342304, 1)
-place_duration = 0.5

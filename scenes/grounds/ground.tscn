@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://d4k66hgy7flsd" path="res://scenes/environtment/warehouse_2.tscn" id="8_ukd3u"]
 [ext_resource type="PackedScene" uid="uid://bdk741fhg4k35" path="res://assets/3D/environtment/tree/tree.glb" id="9_5fh0g"]
 [ext_resource type="PackedScene" uid="uid://c4c5cwiyvnpal" path="res://assets/3D/buildings/warehouse_1.glb" id="13_l53mr"]
+[ext_resource type="PackedScene" uid="uid://dj1s7kk2pyxc5" path="res://assets/3D/buildings/tool_shed_1.glb" id="14_3suc6"]
+[ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="15_juvny"]
+[ext_resource type="Texture2D" uid="uid://b83ny3br6cx0f" path="res://assets/ui/item_sprites/mukamuel.png" id="16_p5s2n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dwf10"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -123,18 +126,20 @@ shader_parameter/lightning_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dwf10"]
 shader = ExtResource("7_wpuq4")
-shader_parameter/winter_color = Color(0.7055, 0.77775, 0.85, 1)
-shader_parameter/winter_blend = 0.21200001007
-shader_parameter/saturation = 0.4
+shader_parameter/winter_color = Color(0.9265196, 0.9458415, 0.9652845, 1)
+shader_parameter/winter_blend = 0.2930000139175
+shader_parameter/saturation = 0.7
 shader_parameter/snow_speed = 0.5
-shader_parameter/snow_density = 0.1550000073625
+shader_parameter/snow_density = 0.14000000665
 shader_parameter/wind_sway = 2.0
 shader_parameter/sway_speed = 1.5
 shader_parameter/snow_size = 0.08
 shader_parameter/snow_color = Color(1, 1, 1, 0.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvvxj"]
-size = Vector3(50.575195, 1, 32.158203)
+size = Vector3(129.23358, 1, 122.23395)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5gtgg"]
 
 [node name="ground" type="Node3D" unique_id=1641503286]
 script = ExtResource("1_lmksl")
@@ -145,11 +150,14 @@ environment = SubResource("Environment_lbc21")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=184307939]
 transform = Transform3D(-0.91205055, 0.16332261, -0.37615097, -0.08331026, 0.824343, 0.55992687, 0.4015261, 0.5420188, -0.7382362, -6.208373, 4.496863, -7.872581)
 shadow_enabled = true
-shadow_bias = 0.068
-shadow_normal_bias = 5.17
-shadow_transmittance_bias = -2.344
-shadow_blur = 1.187
+shadow_bias = 0.02
+shadow_blur = 2.04
 directional_shadow_mode = 0
+directional_shadow_split_2 = 1.0
+directional_shadow_split_3 = 1.0
+directional_shadow_fade_start = 0.0
+directional_shadow_max_distance = 67.0
+directional_shadow_pancake_size = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1644767472]
 transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 0, 0.8660254, 0.50000006, 0.7071068, -0.35355338, 0.61237246, -9.219639, 6.957306, 9.220211)
@@ -577,6 +585,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="raining" type="ColorRect" parent="CanvasLayer" unique_id=857185800]
+visible = false
 material = SubResource("ShaderMaterial_ybjhs")
 anchors_preset = 15
 anchor_right = 1.0
@@ -586,7 +595,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="snow" type="ColorRect" parent="CanvasLayer" unique_id=655920320]
-visible = false
 material = SubResource("ShaderMaterial_dwf10")
 anchors_preset = 15
 anchor_right = 1.0
@@ -627,31 +635,47 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
 transform = Transform3D(-0.4, 0, 6.039832e-08, 0, 0.4, 0, -6.039832e-08, 0, -0.4, 5.4409823, 0.5028924, -1.1653428)
 
 [node name="tree" parent="." unique_id=1089535370 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.74250567, 0, -0.6698398, 0, 1, 0, 0.6698398, 0, -0.74250567, -2.7361853, 0, -4.0783744)
+transform = Transform3D(-0.5876861, 0, 0.12093407, 0, 0.6, 0, -0.12093407, 0, -0.5876861, -0.6032703, 0.1558542, -5.8687167)
 
-[node name="tree2" parent="." unique_id=198950565 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(0.096303664, 0, -0.995352, 0, 1, 0, 0.995352, 0, 0.096303664, -1.1819465, 0, -4.0783744)
+[node name="tree2" parent="." unique_id=1300836432 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.4455034, 0, -0.40190387, 0, 0.6, 0, 0.40190387, 0, -0.4455034, -0.15736675, 0.15585408, -5.555203)
 
-[node name="tree3" parent="." unique_id=315975059 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(0.14478719, 0, 0.98946285, 0, 1, 0, -0.98946285, 0, 0.14478719, 1.0091097, 0, -4.0783744)
+[node name="tree3" parent="." unique_id=1305049494 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(0.2886956, 0, -0.52597994, 0, 0.6, 0, 0.52597994, 0, 0.2886956, 0.26028854, 0.15585396, -5.82171)
 
-[node name="tree4" parent="." unique_id=915320139 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(0.9815597, 0, 0.19115594, 0, 1, 0, -0.19115594, 0, 0.9815597, 0.15132642, 0, -5.080547)
+[node name="tree4" parent="." unique_id=1519145716 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.59608084, 0, 0.06846626, 0, 0.6, 0, -0.06846626, 0, -0.59608084, 0.54229337, 0.15585408, -5.674458)
 
-[node name="tree5" parent="." unique_id=1802786506 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(0.7859864, 0, -0.61824375, 0, 1, 0, 0.61824375, 0, 0.7859864, -1.5947278, 0, -5.1950617)
+[node name="tree5" parent="." unique_id=197109037 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.4455034, 0, -0.40190387, 0, 0.6, 0, 0.40190387, 0, -0.4455034, 1.0678183, 0.1558542, -5.2713895)
+
+[node name="tree6" parent="." unique_id=1355694667 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.53804606, 0, 0.26553062, 0, 0.6, 0, -0.26553062, 0, -0.53804606, 1.1014596, 0.15585408, -4.851846)
 
 [node name="warehouse_1" parent="." unique_id=394532502 instance=ExtResource("13_l53mr")]
 transform = Transform3D(-0.2, 0, 3.019916e-08, 0, 0.2, 0, -3.019916e-08, 0, -0.2, 5.2480593, 0.35997322, 0.31855023)
 
 [node name="Area3D" type="StaticBody3D" parent="." unique_id=667419275]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.018382907, 6.4369926)
-visible = false
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2108103316]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4956055, -0.6092825, -11.019531)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22439575, -0.6092825, -4.1495667)
 shape = SubResource("BoxShape3D_vvvxj")
+
+[node name="tool_shed_1" parent="." unique_id=1737704632 instance=ExtResource("14_3suc6")]
+transform = Transform3D(0.04254407, 0, -0.34740466, 0, 0.35000002, 0, 0.34740466, 0, 0.04254407, 0.08593643, 0.2553219, -4.4111104)
+
+[node name="player" type="MeshInstance3D" parent="tool_shed_1" unique_id=1143777819]
+transform = Transform3D(0.10616478, 0, -0.28058693, 0, 0.3, 0, 0.28058693, 0, 0.10616478, -0.25187397, 0.1927265, -0.48531032)
+mesh = SubResource("CapsuleMesh_5gtgg")
+
+[node name="cangkul" parent="tool_shed_1/player" unique_id=843398065 instance=ExtResource("15_juvny")]
+transform = Transform3D(0.86870503, 1.2123376, 1.3325124, -1.2739325, 1.4593935, -0.4972607, -1.2737539, -0.6327789, 1.4061091, -0.3084793, -0.078562975, -0.43156624)
+
+[node name="Sprite3D" type="Sprite3D" parent="tool_shed_1/player" unique_id=312910031]
+transform = Transform3D(0.10606601, 0, -0.10606602, 0, 0.15, 0, 0.10606602, 0, 0.10606601, 0.33825684, 0.38494205, -0.37294197)
+texture = ExtResource("16_p5s2n")
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/CRT" to="CanvasLayer" method="_on_crt_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/basic" to="CanvasLayer" method="_on_basic_pressed"]
