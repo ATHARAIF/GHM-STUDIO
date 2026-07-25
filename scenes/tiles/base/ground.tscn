@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bcehomfgtbuls"]
+[gd_scene format=3 uid="uid://cp5gqw8ircinu"]
 
 [ext_resource type="Script" uid="uid://bgl7itmh3ifw" path="res://scripts/tiles/ground.gd" id="1_lmksl"]
 [ext_resource type="PackedScene" uid="uid://cj3djbtpfddtc" path="res://scenes/tiles/base/tile_ground.tscn" id="2_mej4j"]

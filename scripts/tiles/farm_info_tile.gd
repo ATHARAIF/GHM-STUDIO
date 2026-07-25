@@ -47,10 +47,18 @@ func _update_timeline() -> void:
 	for child in timeline_container.get_children():
 		child.queue_free()
 		
-	var stages = ["Planting", "Weeding", "Pruning", "Harvest", "Cleaning", "Dry"]
+	var stages = ["Planting", "Weeding", "Pruning", "Suckering", "Harvest"]
+	var stage_id_map = [0, 1, 2, -1, 3] # -1 berarti card belum dibuat
 	
-	# Buat 6 stage dot
-	for i in range(6):
+	var c_stage = StageManager.current_stage
+	var mapped_current_stage = 0
+	if c_stage == 0: mapped_current_stage = 0
+	elif c_stage == 1: mapped_current_stage = 1
+	elif c_stage == 2: mapped_current_stage = 2
+	elif c_stage >= 3: mapped_current_stage = 4
+	
+	# Buat 5 stage dot
+	for i in range(5):
 		var vbox = VBoxContainer.new()
 		vbox.alignment = BoxContainer.ALIGNMENT_CENTER
 		
@@ -58,26 +66,29 @@ func _update_timeline() -> void:
 		circle.custom_minimum_size = Vector2(24, 24)
 		circle.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		
-		var is_completed = StageManager.coffee_batch and StageManager.coffee_batch.completed_stages.has(i)
-		var is_processing = false
-		for dict in StageManager.active_tiles:
-			if dict.data.stage_id == i:
-				is_processing = true
-				break
+		var active_batch = StageManager.get_active_farm_batch()
+		var actual_stage_id = stage_id_map[i]
 		
-		# Kasus khusus Planting (0)
+		var is_completed = false
+		if actual_stage_id != -1 and active_batch:
+			is_completed = active_batch.completed_stages.has(actual_stage_id)
+			
+		var is_processing = false
+		if actual_stage_id != -1:
+			for dict in StageManager.active_tiles:
+				if dict.data.stage_id == actual_stage_id:
+					is_processing = true
+					break
+		
+		# Kasus khusus Planting (0) selalu hijau karena sudah ada dari awal
 		if i == 0:
-			var turn_in_year = ((StageManager.current_turn - 1) % 20) + 1
-			if turn_in_year >= 3:
-				is_completed = true
-			else:
-				is_processing = true
+			is_completed = true
 				
 		if is_completed:
 			circle.color = Color(0.2, 0.8, 0.2) # Hijau (Selesai)
 		elif is_processing:
 			circle.color = Color(1.0, 0.8, 0.0) # Kuning (Sekarang)
-		elif i < StageManager.current_stage:
+		elif i < mapped_current_stage:
 			circle.color = Color(0.8, 0.2, 0.2) # Merah (Terlewati)
 		else:
 			circle.color = Color(0.4, 0.4, 0.4) # Abu-abu (Belum)
@@ -92,7 +103,7 @@ func _update_timeline() -> void:
 		timeline_container.add_child(vbox)
 		
 		# Garis penghubung
-		if i < 5:
+		if i < 4:
 			var line = ColorRect.new()
 			line.custom_minimum_size = Vector2(30, 4)
 			line.size_flags_vertical = Control.SIZE_SHRINK_CENTER

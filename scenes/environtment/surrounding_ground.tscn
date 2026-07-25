@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dqal3c8f8dmld"]
+
+[ext_resource type="PackedScene" uid="uid://c7duwdl56mum1" path="res://assets/3D/environtment/surrounding_ground.glb" id="1_cibm7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jlpiy"]
+albedo_color = Color(0.37335393, 0.71007794, 0.19764555, 1)
+
+[node name="surrounding_ground" unique_id=1246640729 instance=ExtResource("1_cibm7")]
+
+[node name="Cube" parent="." index="0" unique_id=1138285306]
+surface_material_override/0 = SubResource("StandardMaterial3D_jlpiy")

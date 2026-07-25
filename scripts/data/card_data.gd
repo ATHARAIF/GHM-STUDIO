@@ -10,6 +10,9 @@ class_name CardData
 @export var effect_aroma: int = 0
 @export var effect_acidity: int = 0
 @export var effect_body: int = 0
+@export var effect_sweetness: int = 0
+@export var effect_complexity: int = 0
+@export var effect_aftertaste: int = 0
 @export var effect_moisture: float = 0.0
 @export var effect_defect: float = 0.0
 @export var effect_yield: int = 0
@@ -21,6 +24,16 @@ class_name CardData
 
 
 @export_group("Availability")
-@export var turn_start: int = 0
-@export var turn_over: int = 0
+enum AvailabilityType { RECURRING_ANNUAL, ONE_TIME_UNLOCK, EVENT_DRIVEN }
+@export var availability: AvailabilityType = AvailabilityType.RECURRING_ANNUAL
+
+# For RECURRING_ANNUAL
+@export var active_start_turn: int = 1
+@export var active_end_turn: int = 20
+
+# For ONE_TIME_UNLOCK
+@export var unlock_year: int = 2025
+@export var unlock_turn: int = 1
+
+# For EVENT_DRIVEN
 @export var unlock_condition: String = ""

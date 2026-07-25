@@ -12,6 +12,9 @@ extends Node
 @export var rotate_duration: float = 0.2
 @export var place_duration: float = 0.35
 
+@export_group("UI")
+@export var pruning_popup: CanvasLayer
+
 var camera: Camera3D
 var ghost_float: Node3D      # tile yang ngambang, ngikutin cursor
 var ghost_indicator: Node3D  # "bayangan" rata di ground, nunjukin valid/invalid
@@ -32,6 +35,7 @@ var tile_bottom_offset: float = 0.0
 var placement_data: Dictionary = {}   # tile_instance (Node3D) -> {scene, base_shape, shape, anchor, rotation_steps, card_node}
 
 var current_card_node: Control = null   # referensi LANGSUNG ke node Card asli yang lagi di-drag (bukan path/scene)
+var pending_pruning_tile: Node3D = null
 
 func _input(event: InputEvent) -> void:
 	# pake _input (bukan _unhandled_input) biar gak ketelen sama Control/GUI manapun
@@ -239,12 +243,56 @@ func try_place(mouse_pos: Vector2, tile_scene: PackedScene, card_data: CardData)
 	}
 	
 	if card_data != null:
-		StageManager.register_placed_tile(tile, card_data)
+		if card_data.card_name == "Pruning":
+			pending_pruning_tile = tile
+			if pruning_popup:
+				pruning_popup.show_popup()
+		else:
+			StageManager.register_placed_tile(tile, card_data)
 
 	current_tile_scene = null   # reset, biar pickup detection ("current_tile_scene == null") gak ke-block
 	current_card_node = null
 
 	return true
+
+func _on_pruning_confirmed(method: String, intensity: float) -> void:
+	if pending_pruning_tile and placement_data.has(pending_pruning_tile):
+		var data = placement_data[pending_pruning_tile]
+		data["pruning_method"] = method
+		data["pruning_intensity"] = intensity
+		StageManager.register_placed_tile(pending_pruning_tile, data["card_data"], {
+			"pruning_method": method,
+			"pruning_intensity": intensity
+		})
+	pending_pruning_tile = null
+
+func _on_pruning_cancelled() -> void:
+	if pending_pruning_tile and placement_data.has(pending_pruning_tile):
+		var data = placement_data[pending_pruning_tile]
+		var card = data.get("card_node", null)
+		
+		# Free occupied cells
+		for offset in data.shape:
+			var c: Vector2i = data.anchor + offset
+			if grid.has(c):
+				grid[c].clear()
+				
+		placement_data.erase(pending_pruning_tile)
+		pending_pruning_tile.queue_free()
+		
+		# Return card to hand using the card's native animation logic
+		if card and is_instance_valid(card):
+			if card.has_method("set"):
+				card.set("is_placed", false)
+				card.show()
+				card.set("top_level", true)
+				var op = card.get("origin_parent")
+				var oi = card.get("origin_index")
+				if op:
+					op.move_child(card, oi)
+				card.call("animate_return_from", card.global_position)
+				
+	pending_pruning_tile = null
 
 func _can_place(anchor_coord: Vector2i, shape: Array[Vector2i]) -> bool:
 	for offset in shape:

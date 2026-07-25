@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cfcdyfqy7trvf"]
+
+[ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_fs8qw"]
+[ext_resource type="PackedScene" uid="uid://crpiafvocy2wl" path="res://scenes/tiles/cards/process/testing_tile.tscn" id="2_fs8qw"]
+[ext_resource type="Texture2D" uid="uid://b4vw736uj0nt6" path="res://assets/ui/hands/card_base/bean testing.png" id="3_fs8qw"]
+[ext_resource type="FontFile" uid="uid://cti4vc502liyu" path="res://assets/font/edosz.ttf" id="4_stcel"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_733xs"]
+font = ExtResource("4_stcel")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ggcpd"]
+font = ExtResource("4_stcel")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_levbn"]
+font = ExtResource("4_stcel")
+
+[node name="testing" type="Control" unique_id=914919374]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 503.0
+offset_top = 563.0
+offset_right = 614.0
+offset_bottom = 720.0
+script = ExtResource("1_fs8qw")
+tile_scene = ExtResource("2_fs8qw")
+
+[node name="card" type="NinePatchRect" parent="." unique_id=1435024142]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 152.0
+texture = ExtResource("3_fs8qw")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 30
+patch_margin_bottom = 22
+
+[node name="lahan" type="Label" parent="card" unique_id=2120876566]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 21.0
+offset_right = 106.0
+offset_bottom = 57.0
+text = "LAHAN"
+label_settings = SubResource("LabelSettings_733xs")
+
+[node name="turn" type="Label" parent="card" unique_id=1513768389]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 65.0
+offset_right = 77.0
+offset_bottom = 137.0
+text = "3"
+label_settings = SubResource("LabelSettings_ggcpd")
+
+[node name="proses" type="Label" parent="card" unique_id=137526354]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 54.0
+offset_right = 88.0
+offset_bottom = 73.0
+text = "TESTING"
+label_settings = SubResource("LabelSettings_levbn")

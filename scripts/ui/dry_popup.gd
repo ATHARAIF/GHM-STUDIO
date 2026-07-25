@@ -19,7 +19,7 @@ func show_popup(tile_data: Dictionary) -> void:
 	current_tile_data = tile_data
 	
 	# Tampilkan hasil panen saat ini
-	var batch = StageManager.coffee_batch
+	var batch = StageManager.get_oldest_ready_batch(5)
 	if batch:
 		# Dummy quality calculation based on aroma + body - defect
 		var quality_score = (batch.aroma + batch.body) - batch.defect_rate
@@ -28,7 +28,7 @@ func show_popup(tile_data: Dictionary) -> void:
 		elif quality_score < 10: quality_text = "Poor"
 		
 		lbl_quality.text = quality_text
-		lbl_quantity.text = str(batch.yield_kg) + " kg"
+		lbl_quantity.text = str(batch.cherry_kg) + " kg"
 		
 	show()
 

@@ -1,6 +1,6 @@
 extends Node
 
-signal turn_changed(turn: int, season: int)
+signal turn_changed(turn: int, season: int, year: int)
 signal stage_changed(stage: int)
 signal budget_changed(budget: int)
 signal stats_changed()
@@ -9,11 +9,9 @@ signal interaction_requested(interaction_type: String, tile_data: Dictionary)
 enum Season { SPRING, SUMMER, FALL, WINTER }
 
 var current_stage: int = 0
-var current_turn: int = 1
-var current_season: int = Season.SPRING
 var budget: int = 50000
 var current_location: FarmLocation
-var coffee_batch: CoffeeBatch
+var batches: Dictionary = {}
 
 var active_tiles: Array[Dictionary] = []
 var batch_flags: Dictionary = {}
@@ -23,14 +21,54 @@ signal batch_flag_unlocked(flag_name: String) # { "tile": Node3D, "data": CardDa
 func _ready() -> void:
 	current_location = FarmLocation.new()
 	
-	coffee_batch = CoffeeBatch.new()
-	# Inisialisasi stat awal digabung dengan bonus dari lahan / varietas
-	coffee_batch.aroma = current_location.base_aroma
-	coffee_batch.body = current_location.base_body
-	# Default acidity di GDD adalah 50, lalu dimodifikasi oleh varietas (-5)
-	coffee_batch.acidity = clamp(50 + current_location.base_acidity, 0, 100)
+	_create_new_batch(2025)
 	
-func register_placed_tile(tile_node: Node3D, card_data: CardData) -> void:
+func _create_new_batch(year: int) -> void:
+	var b = CoffeeBatch.new()
+	b.batch_year = year
+	b.aroma = current_location.base_aroma
+	b.body = current_location.base_body
+	b.acidity = current_location.base_acidity
+	b.sweetness = current_location.base_sweetness
+	b.complexity = current_location.base_complexity
+	b.aftertaste = current_location.base_aftertaste
+	b.moisture = current_location.base_moisture
+	b.defect_rate = current_location.base_defect_rate
+	b.cherry_kg = current_location.base_yield
+	batches[year] = b
+	
+func get_active_farm_batch() -> CoffeeBatch:
+	if not batches.has(TimeManager.year):
+		_create_new_batch(TimeManager.year)
+	return batches[TimeManager.year]
+	
+func get_oldest_ready_batch(stage_id: int) -> CoffeeBatch:
+	# Jika stage_id <= 5 (sampai Dry), selalu ambil batch tahun berjalan
+	if stage_id <= 5:
+		return get_active_farm_batch()
+		
+	# Jika post-harvest (Roasting, dst), cari batch tertua yang siap
+	# Tapi user bilang: "saat ini dibuat keduanya keluar dulu saja" 
+	# Jadi sementara kita pakai get_active_farm_batch() atau batch yang umurnya paling muda jika belum ada requirement ketat
+	# Sesuai komentar user: "kondisi koding saat ini hanya bisa menampilkan stat batch terakhir aja... saat ini dibuat keduanya keluar dulu saja"
+	# Untuk memudahkan, kita panggil batch terakhir yang ditanam (current_year) atau yang paling tua.
+	
+	var oldest_year = 9999
+	var target_batch: CoffeeBatch = null
+	for y in batches.keys():
+		var b = batches[y]
+		# Asumsikan kalau mau di-Roast (stage 6), minimal harus sudah punya completed_stages.has(5) (Dry)
+		if b.completed_stages.has(5) and not b.completed_stages.has(stage_id):
+			if y < oldest_year:
+				oldest_year = y
+				target_batch = b
+				
+	if target_batch:
+		return target_batch
+		
+	return get_active_farm_batch()
+	
+func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Dictionary = {}) -> void:
 	if card_data == null:
 		return
 		
@@ -38,18 +76,20 @@ func register_placed_tile(tile_node: Node3D, card_data: CardData) -> void:
 	if label:
 		label.text = str(card_data.duration)
 		
-	var name_label = _find_bean_name_label(tile_node)
+	var name_label = _find_lahan_name_label(tile_node)
 	if name_label and current_location:
 		name_label.text = current_location.location_name
 		
-	active_tiles.append({
+	var tile_dict = {
 		"tile": tile_node,
 		"data": card_data,
 		"remaining_duration": card_data.duration,
 		"label": label,
 		"paid": false,
 		"ready": false
-	})
+	}
+	tile_dict.merge(extra_data)
+	active_tiles.append(tile_dict)
 
 
 func unregister_placed_tile(tile_node: Node3D) -> void:
@@ -67,22 +107,16 @@ func _find_turn_label(node: Node) -> Label3D:
 		if found: return found
 	return null
 
-func _find_bean_name_label(node: Node) -> Label3D:
+func _find_lahan_name_label(node: Node) -> Label3D:
 	for child in node.get_children():
-		if child is Label3D and child.name == "bean_name":
+		if child is Label3D and child.name == "lahan":
 			return child
-		var found = _find_bean_name_label(child)
+		var found = _find_lahan_name_label(child)
 		if found: return found
 	return null
 
 func advance_turn() -> void:
-	current_turn += 1
-	if current_turn > 20:
-		pass # Demoo ends here conceptually
-		
-	@warning_ignore("integer_division")
-	var season_idx = int((current_turn - 1) / 5) % 4
-	current_season = season_idx
+	TimeManager.advance_turn()
 	
 	# Update active tiles and lock them
 	for i in range(active_tiles.size() - 1, -1, -1):
@@ -114,7 +148,8 @@ func advance_turn() -> void:
 					tile_dict.label.modulate = Color(1.0, 1.0, 0.0) # Highlight yellow
 			else:
 				# Apply effects immediately for normal cards
-				coffee_batch.apply_effects(tile_dict.data)
+				var target_b = get_oldest_ready_batch(tile_dict.data.stage_id)
+				target_b.apply_effects(tile_dict)
 				stats_changed.emit()
 				if tile_dict.tile and is_instance_valid(tile_dict.tile):
 					PlacementManager.remove_tile_from_grid(tile_dict.tile)
@@ -122,7 +157,7 @@ func advance_turn() -> void:
 				# Remove from active ticking list
 				active_tiles.remove_at(i)
 				
-	turn_changed.emit(current_turn, current_season)
+	turn_changed.emit(TimeManager.turn_in_year, TimeManager.season, TimeManager.year)
 	_check_stage_progression()
 
 func is_tile_ready_for_interaction(tile_node: Node3D) -> bool:
@@ -142,8 +177,8 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 	var index = active_tiles.find(tile_dict)
 	if index != -1:
 		active_tiles.remove_at(index)
-		
-	coffee_batch.apply_effects(tile_dict.data)
+	var target_b = get_oldest_ready_batch(tile_dict.data.stage_id)
+	target_b.apply_effects(tile_dict)
 	if tile_dict.tile and is_instance_valid(tile_dict.tile):
 		PlacementManager.remove_tile_from_grid(tile_dict.tile)
 		
@@ -158,31 +193,25 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 		stats_changed.emit()
 	else:
 		# Sell logic: convert yield to budget
-		var income = (coffee_batch.yield_kg * 10) + (coffee_batch.aroma * 5)
+		var income = (target_b.cherry_kg * 10) + (target_b.aroma * 5)
 		budget += income
 		budget_changed.emit(budget)
 
-		
 		# Reset batch as it is sold
-		var old_completed = coffee_batch.completed_stages.duplicate()
-		coffee_batch = CoffeeBatch.new()
-		coffee_batch.completed_stages = old_completed
-		if current_location:
-			coffee_batch.aroma = current_location.base_aroma
-			coffee_batch.body = current_location.base_body
-			coffee_batch.acidity = clamp(50 + current_location.base_acidity, 0, 100)
+		if batches.has(target_b.batch_year):
+			batches.erase(target_b.batch_year)
 			
 		stats_changed.emit()
 
 func _check_stage_progression() -> void:
 	# Define stage mapping according to GDD
-	var turn_in_year = ((current_turn - 1) % 20) + 1
+	var turn_in_year = TimeManager.turn_in_year
 	var next_stage = current_stage
 	
 	if turn_in_year == 1:
 		next_stage = 0
-		if coffee_batch:
-			coffee_batch.completed_stages.clear()
+		if not batches.has(TimeManager.year):
+			_create_new_batch(TimeManager.year)
 	elif turn_in_year == 3: next_stage = 1
 	elif turn_in_year == 6: next_stage = 2
 	elif turn_in_year == 8: next_stage = 3

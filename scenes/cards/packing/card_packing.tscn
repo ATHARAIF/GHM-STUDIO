@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://ryf10txn2ha2"]
+
+[ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_eywe2"]
+[ext_resource type="PackedScene" uid="uid://m058fikgyiak" path="res://scenes/tiles/cards/packing/packing_tile.tscn" id="2_eywe2"]
+[ext_resource type="Texture2D" uid="uid://bnr7pkjfvv0gi" path="res://assets/ui/hands/card_base/packing.png" id="3_eywe2"]
+[ext_resource type="FontFile" uid="uid://cti4vc502liyu" path="res://assets/font/edosz.ttf" id="4_8e2by"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_733xs"]
+font = ExtResource("4_8e2by")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ggcpd"]
+font = ExtResource("4_8e2by")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_levbn"]
+font = ExtResource("4_8e2by")
+
+[node name="packing" type="Control" unique_id=914919374]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 503.0
+offset_top = 563.0
+offset_right = 614.0
+offset_bottom = 720.0
+script = ExtResource("1_eywe2")
+tile_scene = ExtResource("2_eywe2")
+
+[node name="card" type="NinePatchRect" parent="." unique_id=1435024142]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 152.0
+texture = ExtResource("3_eywe2")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 30
+patch_margin_bottom = 22
+
+[node name="lahan" type="Label" parent="card" unique_id=2120876566]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 21.0
+offset_right = 106.0
+offset_bottom = 57.0
+text = "LAHAN"
+label_settings = SubResource("LabelSettings_733xs")
+
+[node name="turn" type="Label" parent="card" unique_id=1513768389]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 65.0
+offset_right = 77.0
+offset_bottom = 137.0
+text = "3"
+label_settings = SubResource("LabelSettings_ggcpd")
+
+[node name="proses" type="Label" parent="card" unique_id=137526354]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 54.0
+offset_right = 90.0
+offset_bottom = 73.0
+text = "PACKING"
+label_settings = SubResource("LabelSettings_levbn")

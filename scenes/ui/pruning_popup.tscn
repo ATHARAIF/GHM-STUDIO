@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://b755fr0qv6osp"]
+
+[ext_resource type="Script" path="res://scripts/ui/pruning_popup.gd" id="1_popup"]
+
+[node name="PruningPopup" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_popup")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(500, 350)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Header" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LblTitle" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "PRUNING SETUP"
+horizontal_alignment = 1
+
+[node name="BtnClose" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Header"]
+layout_mode = 2
+text = "   X   "
+
+[node name="VBoxMethod" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LblMethod" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxMethod"]
+layout_mode = 2
+text = "Select Method:"
+horizontal_alignment = 1
+
+[node name="HBoxMethods" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxMethod"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BtnSingle" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxMethod/HBoxMethods"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+text = "Single-Stem"
+
+[node name="BtnMulti" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxMethod/HBoxMethods"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+text = "Multi-Stem"
+
+[node name="VBoxIntensity" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LblIntensity" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxIntensity"]
+layout_mode = 2
+text = "Select Intensity:"
+horizontal_alignment = 1
+
+[node name="SliderIntensity" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxIntensity"]
+layout_mode = 2
+min_value = 0.0
+max_value = 100.0
+value = 50.0
+step = 25.0
+custom_minimum_size = Vector2(400, 20)
+size_flags_horizontal = 4
+
+[node name="LblIntensityVal" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxIntensity"]
+layout_mode = 2
+text = "Medium"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.8, 0.8, 0.2, 1)
+
+[node name="HBoxButtons" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BtnCancel" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxButtons"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Cancel"
+
+[node name="BtnConfirm" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxButtons"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Confirm"

@@ -12,6 +12,7 @@ class_name Card
 # [3] PLACED   - udah jadi tile di ground, card-nya di-hide tapi TETEP HIDUP (bukan di-free)
 
 var dragging: bool = false
+var is_placed: bool = false
 var origin_parent: Control
 var origin_index: int
 var is_outside_hand: bool = false
@@ -42,6 +43,7 @@ func _gui_input(event: InputEvent) -> void:
 # data (label, ukuran, dll) otomatis konsisten, gak perlu di-restore manual satu-satu.
 func resume_drag_at(mouse_pos: Vector2, initial_rotation_steps: int = 0) -> void:
 	pending_rotation_steps = initial_rotation_steps
+	is_placed = false
 	show()
 	modulate.a = 1.0
 	_begin_drag(mouse_pos - size / 2.0)
@@ -109,6 +111,7 @@ func _end_drag() -> void:
 
 	if placed:
 		# state [2] -> [3]: card gak di-free, cuma di-hide. Tetep hidup buat di-resume nanti.
+		is_placed = true
 		hide()
 		top_level = false
 		return

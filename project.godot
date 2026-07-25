@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlacementManager="*uid://b6uium5s0ij74"
 StageManager="*res://scripts/managers/stage_manager.gd"
+TimeManager="*res://scripts/managers/time_manager.gd"
 
 [display]
 

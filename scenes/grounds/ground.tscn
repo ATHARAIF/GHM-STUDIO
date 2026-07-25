@@ -1,0 +1,742 @@
+[gd_scene format=4 uid="uid://bcehomfgtbuls"]
+
+[ext_resource type="Script" uid="uid://bgl7itmh3ifw" path="res://scripts/tiles/ground.gd" id="1_lmksl"]
+[ext_resource type="PackedScene" uid="uid://bwyye4kdchesq" path="res://assets/3D/tiles/base_tiles/tile_ground.glb" id="2_4a7qg"]
+[ext_resource type="Script" uid="uid://br3fhnsgmnusd" path="res://scripts/tiles/GroundTile.gd" id="3_w5yvf"]
+[ext_resource type="Shader" uid="uid://dq8okqltd833b" path="res://shaders/CRT_shader.gdshader" id="4_4a7qg"]
+[ext_resource type="Script" uid="uid://c7h8e2vy7ord" path="res://scripts/events/overlay.gd" id="4_lbc21"]
+[ext_resource type="PackedScene" uid="uid://curxl7jch8dov" path="res://scenes/cards/card_hand.tscn" id="4_w5yvf"]
+[ext_resource type="Shader" uid="uid://df2ltnm1ltiqk" path="res://shaders/raining.gdshader" id="5_jgxd4"]
+[ext_resource type="Shader" uid="uid://bcxjo56cugxhg" path="res://shaders/graphic_shader.gdshader" id="7_dwf10"]
+[ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environtment/surrounding_ground.tscn" id="7_wbbc8"]
+[ext_resource type="Shader" uid="uid://bplh3j7psqlhk" path="res://shaders/snow.gdshader" id="7_wpuq4"]
+[ext_resource type="PackedScene" uid="uid://d4k66hgy7flsd" path="res://scenes/environtment/warehouse_2.tscn" id="8_ukd3u"]
+[ext_resource type="PackedScene" uid="uid://bdk741fhg4k35" path="res://assets/3D/environtment/tree/tree.glb" id="9_5fh0g"]
+[ext_resource type="PackedScene" uid="uid://c4c5cwiyvnpal" path="res://assets/3D/buildings/warehouse_1.glb" id="13_l53mr"]
+[ext_resource type="PackedScene" uid="uid://dj1s7kk2pyxc5" path="res://assets/3D/buildings/tool_shed_1.glb" id="14_3suc6"]
+[ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="15_juvny"]
+[ext_resource type="Texture2D" uid="uid://b83ny3br6cx0f" path="res://assets/ui/item_sprites/mukamuel.png" id="16_p5s2n"]
+[ext_resource type="PackedScene" uid="uid://cx4x2m3u4v5w" path="res://scenes/ui/main_hud.tscn" id="17_hud"]
+[ext_resource type="PackedScene" uid="uid://ddyxy0w123abc" path="res://scenes/tiles/farm_info_tile.tscn" id="18_farm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dwf10"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_wpuq4"]
+sky_material = SubResource("ProceduralSkyMaterial_dwf10")
+
+[sub_resource type="Environment" id="Environment_lbc21"]
+background_mode = 2
+sky = SubResource("Sky_wpuq4")
+ambient_light_source = 2
+ambient_light_color = Color(0.67481464, 0.67481464, 0.6748146, 1)
+ssao_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4a7qg"]
+resource_name = "color test"
+cull_mode = 2
+albedo_color = Color(0.92, 0.8342867, 0.8004, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ra74m"]
+resource_name = "ground_border"
+cull_mode = 2
+albedo_color = Color(0.74, 0.63677, 0.5402, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ouq1h"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.08658825, -0.5, 1, 0.14000002, 1),
+"format": 34359742465,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAwAEAAAABQAEAAMAAAAGAAEABQAHAAQAAAAEAAcAAQAHAAUAAAAHAAYAAQAGAAcACAAJAAoACgAJAAsACgALAAwACAANAAkADgANAAgACQAPAAsADAALAA8ACQANAA8ADAAPAA4ADgAPAA0A"),
+"name": "color test",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAAAvy5Vsb0AAAC/AAAAP0rGWj0AAAC/AAAAv0rGWj0AAAC/AAAAv0rGWj0AAAA/AAAAvy5Vsb0AAAA/AAAAP0rGWj0AAAA/AAAAPy5Vsb0AAAC/AAAAPy5Vsb0AAAA/kG78PkrGWj2Qbvw+kG78PlngIj2Qbvy+kG78PkrGWj2Qbvy+kG78vlngIj2Qbvy+kG78vkrGWj2Qbvy+kG78PlngIj2Qbvw+kG78vkrGWj2Qbvw+kG78vlngIj2Qbvw+")
+}, {
+"aabb": AABB(-0.5, 0.05341176, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAAAEAAEAAgADAAUABgAEAAAABQADAAcABgAHAAQABQAHAAYA"),
+"name": "ground_border",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("Nv4AAMgBAAD//wAA//8AADb+AAA2/gAAAAAAAP//AAD//wAAAAAAAMgBAAA2/gAAyAEAAMgBAAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jgxd4"]
+resource_name = "tile_ground_Cube_002"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.08658825, -0.5, 1, 0.14000002, 1),
+"attribute_data": PackedByteArray("AADAPgAAQD8AACA/AAAAPwAAID8AAEA/AADAPgAAAD8AACA/AACAPwAAwD4AAEA/AAAgPwAAQD8AAMA+AACAPwAAID8AAIA+AADAPgAAAAAAACA/AAAAAAAAwD4AAIA+3wshP8AXgj7fCyE/Quj9Pt8LIT9C6P0+3wshP8AXgj4AAAA+AAAAPwAAwD4AAIA+AADAPgAAAD8AAAA+AACAPgAAID8AAAA/AADAPgAAgD4AACA/AACAPgAAwD4AAAA/3wshP0Lo/T4i9F4/vBeCPiH0Xj9C6P0+3wshP8AXgj7fCyE/Quj9PiH0Xj9C6P0+IfReP0Lo/T7fCyE/Quj9PiH0Xj9C6P0+IvReP7wXgj4i9F4/vBeCPiH0Xj9C6P0+IvReP7wXgj7fCyE/wBeCPt8LIT/AF4I+IvReP7wXgj4="),
+"format": 34359742487,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUA"),
+"material": SubResource("StandardMaterial3D_4a7qg"),
+"name": "color test",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("AAAAvy5Vsb0AAAC/AAAAP0rGWj0AAAC/AAAAv0rGWj0AAAC/AAAAPy5Vsb0AAAC/AAAAv0rGWj0AAAA/AAAAvy5Vsb0AAAC/AAAAv0rGWj0AAAC/AAAAvy5Vsb0AAAA/AAAAP0rGWj0AAAA/AAAAvy5Vsb0AAAA/AAAAv0rGWj0AAAA/AAAAPy5Vsb0AAAA/kG78PkrGWj2Qbvw+kG78PlngIj2Qbvy+kG78PkrGWj2Qbvy+kG78PlngIj2Qbvw+AAAAvy5Vsb0AAAC/AAAAPy5Vsb0AAAA/AAAAPy5Vsb0AAAC/AAAAvy5Vsb0AAAA/AAAAP0rGWj0AAAC/AAAAPy5Vsb0AAAA/AAAAP0rGWj0AAAA/AAAAPy5Vsb0AAAC/kG78PlngIj2Qbvy+kG78vlngIj2Qbvw+kG78vlngIj2Qbvy+kG78PlngIj2Qbvw+kG78PkrGWj2Qbvy+kG78vlngIj2Qbvy+kG78vkrGWj2Qbvy+kG78PlngIj2Qbvy+kG78vkrGWj2Qbvy+kG78vlngIj2Qbvw+kG78vkrGWj2Qbvw+kG78vlngIj2Qbvy+kG78vkrGWj2Qbvw+kG78PlngIj2Qbvw+kG78PkrGWj2Qbvw+kG78vlngIj2Qbvw+//////9//////////3//////////f/////////9///8AAP9//3///wAA/3//f///AAD/f/9///8AAP9//3////9//3//f////3//f/9/////f/9//3////9//3//f///AAD/f////78AAP9/////vwAA/3////+/AAD/f////7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v////3//f///////f/9///////9//3///////3//f////3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f/9/////P/9//3////8//3//f////z//f/9/////P////3////+/////f////7////9/////v////3////+//////////7//////////v/////////+//////////78=")
+}, {
+"aabb": AABB(-0.5, 0.05341176, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("C6Hzfv+f/z8LoQtB/9//P/+f/3/z3gtB897zfv/f/38="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAAAEAAEAAgADAAUABgAEAAAABQADAAcABgAHAAQABQAHAAYA"),
+"material": SubResource("StandardMaterial3D_ra74m"),
+"name": "ground_border",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("Nv4AAMgBs/L//wAA//+d8jb+AAA2/mjyAAAAAP//ovL//wAAAACi8sgBAAA2/rPyyAEAAMgBaPIAAAAAAACd8sDGgg2XjTO5yY0aucjGkw3IxpMNwMaCDcmNGrmXjTO5")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ouq1h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbbc8"]
+shader = ExtResource("4_4a7qg")
+shader_parameter/curvature = 3.5
+shader_parameter/scanline_count = 450.0
+shader_parameter/scanline_opacity = 0.25
+shader_parameter/vignette_intensity = 1.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpuq4"]
+shader = ExtResource("7_dwf10")
+shader_parameter/warm_color = Color(0.6623425, 0.9999997, 0.82108176, 1)
+shader_parameter/tint_amount = 0.182000008645
+shader_parameter/contrast = 1.15
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybjhs"]
+shader = ExtResource("5_jgxd4")
+shader_parameter/overcast_color = Color(0.2, 0.25, 0.35, 1)
+shader_parameter/overcast_blend = 0.1770000084075
+shader_parameter/saturation = 0.4
+shader_parameter/rain_speed = 0.89200003911012
+shader_parameter/rain_density = 0.1930000091675
+shader_parameter/rain_angle = 0.28800006118
+shader_parameter/rain_color = Color(0.8, 0.9, 1, 0.16862746)
+shader_parameter/rain_width = 0.0010000000475
+shader_parameter/rain_length = 0.25700001150898
+shader_parameter/rain_scale = 0.67800002894512
+shader_parameter/lightning_frequency = 2.28900010546762
+shader_parameter/lightning_chance = 0.1290000061275
+shader_parameter/lightning_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwf10"]
+shader = ExtResource("7_wpuq4")
+shader_parameter/winter_color = Color(0.9265196, 0.9458415, 0.9652845, 1)
+shader_parameter/winter_blend = 0.2930000139175
+shader_parameter/saturation = 0.7
+shader_parameter/snow_speed = 0.5
+shader_parameter/snow_density = 0.14000000665
+shader_parameter/wind_sway = 2.0
+shader_parameter/sway_speed = 1.5
+shader_parameter/snow_size = 0.08
+shader_parameter/snow_color = Color(1, 1, 1, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vvvxj"]
+size = Vector3(129.23358, 1, 122.23395)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5gtgg"]
+
+[node name="ground" type="Node3D" unique_id=1641503286]
+script = ExtResource("1_lmksl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1708000246]
+environment = SubResource("Environment_lbc21")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=184307939]
+transform = Transform3D(-0.91205055, 0.16332261, -0.37615097, -0.08331026, 0.824343, 0.55992687, 0.4015261, 0.5420188, -0.7382362, -6.208373, 4.496863, -7.872581)
+shadow_enabled = true
+shadow_bias = 0.02
+shadow_blur = 2.04
+directional_shadow_mode = 0
+directional_shadow_split_2 = 1.0
+directional_shadow_split_3 = 1.0
+directional_shadow_fade_start = 0.0
+directional_shadow_max_distance = 67.0
+directional_shadow_pancake_size = 0.0
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1644767472]
+transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 0, 0.8660254, 0.50000006, 0.7071068, -0.35355338, 0.61237246, -9.219639, 6.957306, 9.220211)
+projection = 1
+current = true
+size = 8.878
+far = 82.75
+
+[node name="tile_grounds" type="Node3D" parent="." unique_id=865124454]
+metadata/_edit_lock_ = true
+
+[node name="tile_ground50" parent="tile_grounds" unique_id=1474943789 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground50" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground51" parent="tile_grounds" unique_id=139279169 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, 0)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground51" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground52" parent="tile_grounds" unique_id=2052176509 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, 0)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground52" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground53" parent="tile_grounds" unique_id=1483518040 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, 0)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground53" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground54" parent="tile_grounds" unique_id=233449050 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, 0)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground54" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground55" parent="tile_grounds" unique_id=696832363 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, 0)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground55" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground56" parent="tile_grounds" unique_id=274527066 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, 0)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground56" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground57" parent="tile_grounds" unique_id=1010187868 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground57" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground58" parent="tile_grounds" unique_id=961909321 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, 1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground58" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground59" parent="tile_grounds" unique_id=893448684 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, 1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground59" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground60" parent="tile_grounds" unique_id=1622250333 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, 1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground60" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground61" parent="tile_grounds" unique_id=1163920806 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, 1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground61" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground62" parent="tile_grounds" unique_id=2136798460 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, 1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground62" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground63" parent="tile_grounds" unique_id=278295728 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, 1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground63" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground64" parent="tile_grounds" unique_id=1363902265 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground64" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground65" parent="tile_grounds" unique_id=296228805 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, 2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground65" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground66" parent="tile_grounds" unique_id=1584942153 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, 2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground66" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground67" parent="tile_grounds" unique_id=900909005 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, 2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground67" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground68" parent="tile_grounds" unique_id=1472444681 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, 2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground68" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground69" parent="tile_grounds" unique_id=1103138574 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, 2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground69" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground70" parent="tile_grounds" unique_id=335768498 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, 2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground70" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground71" parent="tile_grounds" unique_id=1215152802 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground71" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground72" parent="tile_grounds" unique_id=1932211147 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, 3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground72" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground73" parent="tile_grounds" unique_id=1853013671 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, 3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground73" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground74" parent="tile_grounds" unique_id=691186701 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, 3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground74" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground75" parent="tile_grounds" unique_id=1640798880 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, 3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground75" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground76" parent="tile_grounds" unique_id=677379805 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, 3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground76" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground77" parent="tile_grounds" unique_id=429655447 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, 3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground77" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground78" parent="tile_grounds" unique_id=974510068 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, -1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground78" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground79" parent="tile_grounds" unique_id=1652196520 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, -1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground79" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground80" parent="tile_grounds" unique_id=158540564 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, -1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground80" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground81" parent="tile_grounds" unique_id=1535705995 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, -1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground81" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground82" parent="tile_grounds" unique_id=1016589502 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, -1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground82" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground83" parent="tile_grounds" unique_id=291167767 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, -1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground83" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground84" parent="tile_grounds" unique_id=1662640217 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, -1)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground84" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground85" parent="tile_grounds" unique_id=1433100181 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, -2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground85" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground86" parent="tile_grounds" unique_id=2051277699 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, -2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground86" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground87" parent="tile_grounds" unique_id=1906641763 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, -2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground87" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground88" parent="tile_grounds" unique_id=1675552582 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, -2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground88" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground89" parent="tile_grounds" unique_id=576604985 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, -2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground89" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground90" parent="tile_grounds" unique_id=499887962 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, -2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground90" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground91" parent="tile_grounds" unique_id=1992768261 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, -2)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground91" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground92" parent="tile_grounds" unique_id=422451495 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, -3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground92" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground93" parent="tile_grounds" unique_id=2091497314 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, -3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground93" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground94" parent="tile_grounds" unique_id=534101998 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, -3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground94" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground95" parent="tile_grounds" unique_id=876372003 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, -3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground95" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground96" parent="tile_grounds" unique_id=930326706 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, -3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground96" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground97" parent="tile_grounds" unique_id=995146321 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, -3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground97" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="tile_ground98" parent="tile_grounds" unique_id=2097120897 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, -3)
+script = ExtResource("3_w5yvf")
+
+[node name="ground" parent="tile_grounds/tile_ground98" index="0" unique_id=639973261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+mesh = SubResource("ArrayMesh_jgxd4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2085296074]
+script = ExtResource("4_lbc21")
+
+[node name="CRT_Shader" type="ColorRect" parent="CanvasLayer" unique_id=1568674359]
+visible = false
+material = SubResource("ShaderMaterial_wbbc8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="basic_Shader" type="ColorRect" parent="CanvasLayer" unique_id=1457174090]
+visible = false
+material = SubResource("ShaderMaterial_wpuq4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="raining" type="ColorRect" parent="CanvasLayer" unique_id=857185800]
+visible = false
+material = SubResource("ShaderMaterial_ybjhs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="snow" type="ColorRect" parent="CanvasLayer" unique_id=655920320]
+visible = false
+material = SubResource("ShaderMaterial_dwf10")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CardHand" parent="CanvasLayer" unique_id=1143458886 instance=ExtResource("4_w5yvf")]
+anchors_preset = 7
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=49488600]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CRT" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1655084445]
+layout_mode = 2
+text = "CRT"
+
+[node name="basic" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=810160199]
+layout_mode = 2
+text = "basic"
+
+[node name="rain" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1028170283]
+layout_mode = 2
+text = "raining"
+
+[node name="snow" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1565279874]
+layout_mode = 2
+text = "snow"
+
+[node name="environtment" type="Node3D" parent="." unique_id=1341241664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015738487, 0)
+
+[node name="surrounding_ground" parent="environtment" unique_id=1246640729 instance=ExtResource("7_wbbc8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
+
+[node name="warehouse" parent="environtment" unique_id=1577510470 instance=ExtResource("8_ukd3u")]
+transform = Transform3D(-0.4, 0, 6.039832e-08, 0, 0.4, 0, -6.039832e-08, 0, -0.4, 5.4409823, 0.5028924, -1.1653428)
+
+[node name="tree" parent="." unique_id=1089535370 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.5876861, 0, 0.12093407, 0, 0.6, 0, -0.12093407, 0, -0.5876861, -0.6032703, 0.1558542, -5.8687167)
+
+[node name="tree2" parent="." unique_id=1300836432 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.4455034, 0, -0.40190387, 0, 0.6, 0, 0.40190387, 0, -0.4455034, -0.15736675, 0.15585408, -5.555203)
+
+[node name="tree3" parent="." unique_id=1305049494 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(0.2886956, 0, -0.52597994, 0, 0.6, 0, 0.52597994, 0, 0.2886956, 0.26028854, 0.15585396, -5.82171)
+
+[node name="tree4" parent="." unique_id=1519145716 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.59608084, 0, 0.06846626, 0, 0.6, 0, -0.06846626, 0, -0.59608084, 0.54229337, 0.15585408, -5.674458)
+
+[node name="tree5" parent="." unique_id=197109037 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.4455034, 0, -0.40190387, 0, 0.6, 0, 0.40190387, 0, -0.4455034, 1.0678183, 0.1558542, -5.2713895)
+
+[node name="tree6" parent="." unique_id=1355694667 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.53804606, 0, 0.26553062, 0, 0.6, 0, -0.26553062, 0, -0.53804606, 1.1014596, 0.15585408, -4.851846)
+
+[node name="warehouse_1" parent="." unique_id=394532502 instance=ExtResource("13_l53mr")]
+transform = Transform3D(-0.2, 0, 3.019916e-08, 0, 0.2, 0, -3.019916e-08, 0, -0.2, 5.2480593, 0.35997322, 0.31855023)
+
+[node name="Area3D" type="StaticBody3D" parent="." unique_id=667419275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.018382907, 6.4369926)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2108103316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22439575, -0.6092825, -4.1495667)
+shape = SubResource("BoxShape3D_vvvxj")
+
+[node name="tool_shed_1" parent="." unique_id=1737704632 instance=ExtResource("14_3suc6")]
+transform = Transform3D(0.04254407, 0, -0.34740466, 0, 0.35000002, 0, 0.34740466, 0, 0.04254407, 0.08593643, 0.2553219, -4.4111104)
+
+[node name="player" type="MeshInstance3D" parent="tool_shed_1" unique_id=1143777819]
+transform = Transform3D(0.10616478, 0, -0.28058693, 0, 0.3, 0, 0.28058693, 0, 0.10616478, -0.25187397, 0.1927265, -0.48531032)
+mesh = SubResource("CapsuleMesh_5gtgg")
+
+[node name="cangkul" parent="tool_shed_1/player" unique_id=843398065 instance=ExtResource("15_juvny")]
+transform = Transform3D(0.86870503, 1.2123376, 1.3325124, -1.2739325, 1.4593935, -0.4972607, -1.2737539, -0.6327789, 1.4061091, -0.3084793, -0.078562975, -0.43156624)
+
+[node name="Sprite3D" type="Sprite3D" parent="tool_shed_1/player" unique_id=312910031]
+transform = Transform3D(0.10606601, 0, -0.10606602, 0, 0.15, 0, 0.10606602, 0, 0.10606601, 0.33825684, 0.38494205, -0.37294197)
+texture = ExtResource("16_p5s2n")
+
+[node name="MainHUD" parent="." unique_id=1308397270 instance=ExtResource("17_hud")]
+
+[node name="FarmInfoTile" parent="." unique_id=1856349914 instance=ExtResource("18_farm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.801547, 0.23734295, -2.470316)
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/CRT" to="CanvasLayer" method="_on_crt_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/basic" to="CanvasLayer" method="_on_basic_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/rain" to="CanvasLayer" method="_on_rain_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/snow" to="CanvasLayer" method="_on_snow_pressed"]
+
+[editable path="tile_grounds/tile_ground50"]
+[editable path="tile_grounds/tile_ground51"]
+[editable path="tile_grounds/tile_ground52"]
+[editable path="tile_grounds/tile_ground53"]
+[editable path="tile_grounds/tile_ground54"]
+[editable path="tile_grounds/tile_ground55"]
+[editable path="tile_grounds/tile_ground56"]
+[editable path="tile_grounds/tile_ground57"]
+[editable path="tile_grounds/tile_ground58"]
+[editable path="tile_grounds/tile_ground59"]
+[editable path="tile_grounds/tile_ground60"]
+[editable path="tile_grounds/tile_ground61"]
+[editable path="tile_grounds/tile_ground62"]
+[editable path="tile_grounds/tile_ground63"]
+[editable path="tile_grounds/tile_ground64"]
+[editable path="tile_grounds/tile_ground65"]
+[editable path="tile_grounds/tile_ground66"]
+[editable path="tile_grounds/tile_ground67"]
+[editable path="tile_grounds/tile_ground68"]
+[editable path="tile_grounds/tile_ground69"]
+[editable path="tile_grounds/tile_ground70"]
+[editable path="tile_grounds/tile_ground71"]
+[editable path="tile_grounds/tile_ground72"]
+[editable path="tile_grounds/tile_ground73"]
+[editable path="tile_grounds/tile_ground74"]
+[editable path="tile_grounds/tile_ground75"]
+[editable path="tile_grounds/tile_ground76"]
+[editable path="tile_grounds/tile_ground77"]
+[editable path="tile_grounds/tile_ground78"]
+[editable path="tile_grounds/tile_ground79"]
+[editable path="tile_grounds/tile_ground80"]
+[editable path="tile_grounds/tile_ground81"]
+[editable path="tile_grounds/tile_ground82"]
+[editable path="tile_grounds/tile_ground83"]
+[editable path="tile_grounds/tile_ground84"]
+[editable path="tile_grounds/tile_ground85"]
+[editable path="tile_grounds/tile_ground86"]
+[editable path="tile_grounds/tile_ground87"]
+[editable path="tile_grounds/tile_ground88"]
+[editable path="tile_grounds/tile_ground89"]
+[editable path="tile_grounds/tile_ground90"]
+[editable path="tile_grounds/tile_ground91"]
+[editable path="tile_grounds/tile_ground92"]
+[editable path="tile_grounds/tile_ground93"]
+[editable path="tile_grounds/tile_ground94"]
+[editable path="tile_grounds/tile_ground95"]
+[editable path="tile_grounds/tile_ground96"]
+[editable path="tile_grounds/tile_ground97"]
+[editable path="tile_grounds/tile_ground98"]
