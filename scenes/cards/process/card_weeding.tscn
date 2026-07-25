@@ -3,17 +3,18 @@
 [ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_3vf0w"]
 [ext_resource type="Texture2D" uid="uid://cv2m35gh7knun" path="res://assets/ui/hands/card_base/weeding.png" id="2_3vf0w"]
 [ext_resource type="PackedScene" uid="uid://jgswer4eplps" path="res://scenes/tiles/weeding_tile.tscn" id="2_k8wx8"]
-[ext_resource type="FontFile" uid="uid://cti4vc502liyu" path="res://assets/font/edosz.ttf" id="3_0hboc"]
+[ext_resource type="FontFile" uid="uid://crctwom8u2fxw" path="res://assets/font/Staatliches-Regular.ttf" id="4_06my2"]
+[ext_resource type="FontFile" uid="uid://daatclpt7cthy" path="res://tres/new_font_file.tres" id="5_1jl3g"]
+[ext_resource type="Texture2D" uid="uid://csafaiwwovi6l" path="res://assets/ui/hands/card_base/tile_type.png" id="5_06my2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ckjl0"]
-font = ExtResource("3_0hboc")
-font_size = 32
+font = ExtResource("4_06my2")
 
 [sub_resource type="LabelSettings" id="LabelSettings_0hboc"]
-font = ExtResource("3_0hboc")
+font = ExtResource("5_1jl3g")
 
 [sub_resource type="LabelSettings" id="LabelSettings_ybjhs"]
-font = ExtResource("3_0hboc")
+font = ExtResource("4_06my2")
 font_size = 64
 
 [node name="weeding" type="Control" unique_id=914919374]
@@ -22,46 +23,86 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = 503.0
 offset_top = 272.0
-offset_right = 614.0
+offset_right = 623.0
 offset_bottom = 429.0
 script = ExtResource("1_3vf0w")
 tile_scene = ExtResource("2_k8wx8")
-fade_duration = null
-return_duration = null
+fade_duration = 0.0
+return_duration = 0.0
 
 [node name="card" type="NinePatchRect" parent="." unique_id=120917109]
 layout_mode = 0
 offset_right = 119.0
 offset_bottom = 152.0
 texture = ExtResource("2_3vf0w")
-patch_margin_left = 24
-patch_margin_top = 24
-patch_margin_right = 30
-patch_margin_bottom = 22
+region_rect = Rect2(0, 0, 512, 512)
+patch_margin_left = 48
+patch_margin_top = 48
+patch_margin_right = 48
+patch_margin_bottom = 48
 
-[node name="lahan" type="Label" parent="card" unique_id=1190349712]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 21.0
-offset_right = 106.0
-offset_bottom = 57.0
-text = "LAHAN"
+[node name="nama_lahan_kiri" type="Label" parent="card" unique_id=1190349712]
+visible = false
+custom_minimum_size = Vector2(140, 20)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = 70.0
+offset_right = 141.0
+offset_bottom = 91.0
+grow_vertical = 2
+rotation = -1.5707964
+text = "KINTAMANI"
 label_settings = SubResource("LabelSettings_ckjl0")
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="nama_lahan_kanan" type="Label" parent="card" unique_id=103870756]
+custom_minimum_size = Vector2(140, 20)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -70.0
+offset_right = 138.0
+offset_bottom = -49.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -4.712389
+text = "KINTAMANI"
+label_settings = SubResource("LabelSettings_ckjl0")
+horizontal_alignment = 2
+autowrap_mode = 2
 
 [node name="proses" type="Label" parent="card" unique_id=1613963206]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 54.0
-offset_right = 91.0
-offset_bottom = 73.0
+offset_left = 36.0
+offset_top = 6.0
+offset_right = 86.0
+offset_bottom = 27.0
 text = "WEEDING"
 label_settings = SubResource("LabelSettings_0hboc")
 
 [node name="turn" type="Label" parent="card" unique_id=1308928553]
+visible = false
 layout_mode = 0
-offset_left = 43.0
-offset_top = 65.0
-offset_right = 77.0
-offset_bottom = 137.0
+offset_left = 47.0
+offset_top = 67.0
+offset_right = 75.0
+offset_bottom = 148.0
 text = "3"
 label_settings = SubResource("LabelSettings_ybjhs")
+
+[node name="TextureRect" type="TextureRect" parent="card" unique_id=1345068629]
+layout_mode = 0
+offset_left = 6.9999995
+offset_top = 6.9999995
+offset_right = 263.0
+offset_bottom = 263.0
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("5_06my2")

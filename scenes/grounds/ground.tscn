@@ -5,16 +5,16 @@
 [ext_resource type="Script" uid="uid://br3fhnsgmnusd" path="res://scripts/tiles/GroundTile.gd" id="3_w5yvf"]
 [ext_resource type="Shader" uid="uid://dq8okqltd833b" path="res://shaders/CRT_shader.gdshader" id="4_4a7qg"]
 [ext_resource type="Script" uid="uid://c7h8e2vy7ord" path="res://scripts/events/overlay.gd" id="4_lbc21"]
-[ext_resource type="PackedScene" uid="uid://curxl7jch8dov" path="res://scenes/cards/card_hand.tscn" id="4_w5yvf"]
 [ext_resource type="Shader" uid="uid://df2ltnm1ltiqk" path="res://shaders/raining.gdshader" id="5_jgxd4"]
 [ext_resource type="Shader" uid="uid://bcxjo56cugxhg" path="res://shaders/graphic_shader.gdshader" id="7_dwf10"]
 [ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environtment/surrounding_ground.tscn" id="7_wbbc8"]
 [ext_resource type="Shader" uid="uid://bplh3j7psqlhk" path="res://shaders/snow.gdshader" id="7_wpuq4"]
 [ext_resource type="PackedScene" uid="uid://d4k66hgy7flsd" path="res://scenes/environtment/warehouse_2.tscn" id="8_ukd3u"]
-[ext_resource type="PackedScene" uid="uid://bdk741fhg4k35" path="res://assets/3D/environtment/tree/tree.glb" id="9_5fh0g"]
 [ext_resource type="PackedScene" uid="uid://c4c5cwiyvnpal" path="res://assets/3D/buildings/warehouse_1.glb" id="13_l53mr"]
 [ext_resource type="PackedScene" uid="uid://dj1s7kk2pyxc5" path="res://assets/3D/buildings/tool_shed_1.glb" id="14_3suc6"]
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="15_juvny"]
+[ext_resource type="PackedScene" uid="uid://cxy720dnitlvc" path="res://scenes/overlay/overlays.tscn" id="15_p5s2n"]
+[ext_resource type="PackedScene" uid="uid://dhlxe0q8f5nqk" path="res://assets/3D/buildings/production_house.glb" id="16_juvny"]
 [ext_resource type="Texture2D" uid="uid://b83ny3br6cx0f" path="res://assets/ui/item_sprites/mukamuel.png" id="16_p5s2n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dwf10"]
@@ -136,10 +136,10 @@ shader_parameter/sway_speed = 1.5
 shader_parameter/snow_size = 0.08
 shader_parameter/snow_color = Color(1, 1, 1, 0.8)
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5gtgg"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvvxj"]
 size = Vector3(129.23358, 1, 122.23395)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_5gtgg"]
 
 [node name="ground" type="Node3D" unique_id=1641503286]
 script = ExtResource("1_lmksl")
@@ -160,7 +160,7 @@ directional_shadow_max_distance = 67.0
 directional_shadow_pancake_size = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1644767472]
-transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 0, 0.8660254, 0.50000006, 0.7071068, -0.35355338, 0.61237246, -9.219639, 6.957306, 9.220211)
+transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 0, 0.8660254, 0.50000006, 0.7071068, -0.35355338, 0.61237246, -9.219639, 7.539463, 9.220211)
 projection = 1
 current = true
 size = 8.878
@@ -562,6 +562,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2085296074]
+visible = false
 script = ExtResource("4_lbc21")
 
 [node name="CRT_Shader" type="ColorRect" parent="CanvasLayer" unique_id=1568674359]
@@ -595,33 +596,36 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="snow" type="ColorRect" parent="CanvasLayer" unique_id=655920320]
+visible = false
 material = SubResource("ShaderMaterial_dwf10")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CardHand" parent="CanvasLayer" unique_id=1143458886 instance=ExtResource("4_w5yvf")]
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=49488600]
+[node name="toggle_shader" type="HBoxContainer" parent="CanvasLayer" unique_id=49488600]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CRT" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1655084445]
+[node name="CRT" type="Button" parent="CanvasLayer/toggle_shader" unique_id=1655084445]
 layout_mode = 2
 text = "CRT"
 
-[node name="basic" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=810160199]
+[node name="basic" type="Button" parent="CanvasLayer/toggle_shader" unique_id=810160199]
 layout_mode = 2
 text = "basic"
 
-[node name="rain" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1028170283]
+[node name="rain" type="Button" parent="CanvasLayer/toggle_shader" unique_id=1028170283]
 layout_mode = 2
 text = "raining"
 
-[node name="snow" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1565279874]
+[node name="snow" type="Button" parent="CanvasLayer/toggle_shader" unique_id=1565279874]
 layout_mode = 2
 text = "snow"
 
@@ -633,38 +637,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
 
 [node name="warehouse" parent="environtment" unique_id=1577510470 instance=ExtResource("8_ukd3u")]
 transform = Transform3D(-0.4, 0, 6.039832e-08, 0, 0.4, 0, -6.039832e-08, 0, -0.4, 5.4409823, 0.5028924, -1.1653428)
-
-[node name="tree" parent="." unique_id=1089535370 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.5876861, 0, 0.12093407, 0, 0.6, 0, -0.12093407, 0, -0.5876861, -0.6032703, 0.1558542, -5.8687167)
-
-[node name="tree2" parent="." unique_id=1300836432 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.4455034, 0, -0.40190387, 0, 0.6, 0, 0.40190387, 0, -0.4455034, -0.15736675, 0.15585408, -5.555203)
-
-[node name="tree3" parent="." unique_id=1305049494 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(0.2886956, 0, -0.52597994, 0, 0.6, 0, 0.52597994, 0, 0.2886956, 0.26028854, 0.15585396, -5.82171)
-
-[node name="tree4" parent="." unique_id=1519145716 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.59608084, 0, 0.06846626, 0, 0.6, 0, -0.06846626, 0, -0.59608084, 0.54229337, 0.15585408, -5.674458)
-
-[node name="tree5" parent="." unique_id=197109037 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.4455034, 0, -0.40190387, 0, 0.6, 0, 0.40190387, 0, -0.4455034, 1.0678183, 0.1558542, -5.2713895)
-
-[node name="tree6" parent="." unique_id=1355694667 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.53804606, 0, 0.26553062, 0, 0.6, 0, -0.26553062, 0, -0.53804606, 1.1014596, 0.15585408, -4.851846)
+visible = false
 
 [node name="warehouse_1" parent="." unique_id=394532502 instance=ExtResource("13_l53mr")]
-transform = Transform3D(-0.2, 0, 3.019916e-08, 0, 0.2, 0, -3.019916e-08, 0, -0.2, 5.2480593, 0.35997322, 0.31855023)
-
-[node name="Area3D" type="StaticBody3D" parent="." unique_id=667419275]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.018382907, 6.4369926)
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2108103316]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22439575, -0.6092825, -4.1495667)
-shape = SubResource("BoxShape3D_vvvxj")
+transform = Transform3D(-0.3, 0, 4.5298744e-08, 0, 0.3, 0, -4.5298744e-08, 0, -0.3, 4.8833356, 0.5293399, 0.48452926)
 
 [node name="tool_shed_1" parent="." unique_id=1737704632 instance=ExtResource("14_3suc6")]
-transform = Transform3D(0.04254407, 0, -0.34740466, 0, 0.35000002, 0, 0.34740466, 0, 0.04254407, 0.08593643, 0.2553219, -4.4111104)
+transform = Transform3D(0.04254407, 0, -0.34740466, 0, 0.35000002, 0, 0.34740466, 0, 0.04254407, 4.849037, 0.2553219, -0.9926903)
 
 [node name="player" type="MeshInstance3D" parent="tool_shed_1" unique_id=1143777819]
 transform = Transform3D(0.10616478, 0, -0.28058693, 0, 0.3, 0, 0.28058693, 0, 0.10616478, -0.25187397, 0.1927265, -0.48531032)
@@ -677,10 +656,23 @@ transform = Transform3D(0.86870503, 1.2123376, 1.3325124, -1.2739325, 1.4593935,
 transform = Transform3D(0.10606601, 0, -0.10606602, 0, 0.15, 0, 0.10606602, 0, 0.10606601, 0.33825684, 0.38494205, -0.37294197)
 texture = ExtResource("16_p5s2n")
 
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/CRT" to="CanvasLayer" method="_on_crt_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/basic" to="CanvasLayer" method="_on_basic_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/rain" to="CanvasLayer" method="_on_rain_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/snow" to="CanvasLayer" method="_on_snow_pressed"]
+[node name="Area3D" type="StaticBody3D" parent="." unique_id=667419275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.018382907, 6.4369926)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2108103316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22439575, -0.6092825, -4.1495667)
+shape = SubResource("BoxShape3D_vvvxj")
+
+[node name="overlays" parent="." unique_id=1895636831 instance=ExtResource("15_p5s2n")]
+
+[node name="production_house" parent="." unique_id=451303715 instance=ExtResource("16_juvny")]
+transform = Transform3D(-1.3113417e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.3113417e-08, 4.798667, 0.53348887, 1.7025429)
+
+[connection signal="pressed" from="CanvasLayer/toggle_shader/CRT" to="CanvasLayer" method="_on_crt_pressed"]
+[connection signal="pressed" from="CanvasLayer/toggle_shader/basic" to="CanvasLayer" method="_on_basic_pressed"]
+[connection signal="pressed" from="CanvasLayer/toggle_shader/rain" to="CanvasLayer" method="_on_rain_pressed"]
+[connection signal="pressed" from="CanvasLayer/toggle_shader/snow" to="CanvasLayer" method="_on_snow_pressed"]
 
 [editable path="tile_grounds/tile_ground50"]
 [editable path="tile_grounds/tile_ground51"]
