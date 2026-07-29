@@ -8,8 +8,7 @@
 [ext_resource type="Shader" uid="uid://df2ltnm1ltiqk" path="res://shaders/raining.gdshader" id="5_jgxd4"]
 [ext_resource type="Shader" uid="uid://bcxjo56cugxhg" path="res://shaders/graphic_shader.gdshader" id="7_dwf10"]
 [ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environtment/surrounding_ground.tscn" id="7_wbbc8"]
-[ext_resource type="Shader" uid="uid://bplh3j7psqlhk" path="res://shaders/snow.gdshader" id="7_wpuq4"]
-[ext_resource type="PackedScene" uid="uid://d4k66hgy7flsd" path="res://scenes/environtment/warehouse_2.tscn" id="8_ukd3u"]
+[ext_resource type="Shader" uid="uid://dk88um0b32dpf" path="res://shaders/godray.gdshader" id="8_rlmho"]
 [ext_resource type="PackedScene" uid="uid://c4c5cwiyvnpal" path="res://assets/3D/buildings/warehouse_1.glb" id="13_l53mr"]
 [ext_resource type="PackedScene" uid="uid://dj1s7kk2pyxc5" path="res://assets/3D/buildings/tool_shed_1.glb" id="14_3suc6"]
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="15_juvny"]
@@ -104,8 +103,8 @@ shader_parameter/vignette_intensity = 1.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wpuq4"]
 shader = ExtResource("7_dwf10")
-shader_parameter/warm_color = Color(0.6623425, 0.9999997, 0.82108176, 1)
-shader_parameter/tint_amount = 0.182000008645
+shader_parameter/warm_color = Color(1, 0.796, 0.49, 1)
+shader_parameter/tint_amount = 0.1610000076475
 shader_parameter/contrast = 1.15
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ybjhs"]
@@ -125,21 +124,24 @@ shader_parameter/lightning_chance = 0.1290000061275
 shader_parameter/lightning_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dwf10"]
-shader = ExtResource("7_wpuq4")
-shader_parameter/winter_color = Color(0.9265196, 0.9458415, 0.9652845, 1)
-shader_parameter/winter_blend = 0.2930000139175
-shader_parameter/saturation = 0.7
-shader_parameter/snow_speed = 0.5
-shader_parameter/snow_density = 0.14000000665
-shader_parameter/wind_sway = 2.0
-shader_parameter/sway_speed = 1.5
-shader_parameter/snow_size = 0.08
-shader_parameter/snow_color = Color(1, 1, 1, 0.8)
+shader = ExtResource("8_rlmho")
+shader_parameter/ray_color = Color(1, 0.855, 0.42000002, 0.5372549)
+shader_parameter/angle = 36.7890017474775
+shader_parameter/ray_speed = 0.0
+shader_parameter/ray_density = 14.165
+shader_parameter/pulse_speed = 1.55
+shader_parameter/pulse_intensity = 0.86
+shader_parameter/pulse_variation = -1.25
+shader_parameter/fade_strength = 1.3900000000000001
+shader_parameter/cloud_direction = Vector2(0.05, 0.02)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5411765)
+shader_parameter/cloud_scale_base = 2.58
+shader_parameter/cloud_scale_randomness = 1.375
+shader_parameter/cloud_speed_variation = 1.38
+shader_parameter/cloud_threshold = 0.855
+shader_parameter/cloud_smoothness = 0.1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_5gtgg"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vvvxj"]
-size = Vector3(129.23358, 1, 122.23395)
 
 [node name="ground" type="Node3D" unique_id=1641503286]
 script = ExtResource("1_lmksl")
@@ -562,6 +564,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2085296074]
+layer = 0
 visible = false
 script = ExtResource("4_lbc21")
 
@@ -609,7 +612,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="godray" type="ColorRect" parent="CanvasLayer" unique_id=234950679]
+material = SubResource("ShaderMaterial_dwf10")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="toggle_shader" type="HBoxContainer" parent="CanvasLayer" unique_id=49488600]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -635,10 +652,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015738487, 0)
 [node name="surrounding_ground" parent="environtment" unique_id=1246640729 instance=ExtResource("7_wbbc8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
 
-[node name="warehouse" parent="environtment" unique_id=1577510470 instance=ExtResource("8_ukd3u")]
-transform = Transform3D(-0.4, 0, 6.039832e-08, 0, 0.4, 0, -6.039832e-08, 0, -0.4, 5.4409823, 0.5028924, -1.1653428)
-visible = false
-
 [node name="warehouse_1" parent="." unique_id=394532502 instance=ExtResource("13_l53mr")]
 transform = Transform3D(-0.3, 0, 4.5298744e-08, 0, 0.3, 0, -4.5298744e-08, 0, -0.3, 4.8833356, 0.5293399, 0.48452926)
 
@@ -655,14 +668,6 @@ transform = Transform3D(0.86870503, 1.2123376, 1.3325124, -1.2739325, 1.4593935,
 [node name="Sprite3D" type="Sprite3D" parent="tool_shed_1/player" unique_id=312910031]
 transform = Transform3D(0.10606601, 0, -0.10606602, 0, 0.15, 0, 0.10606602, 0, 0.10606601, 0.33825684, 0.38494205, -0.37294197)
 texture = ExtResource("16_p5s2n")
-
-[node name="Area3D" type="StaticBody3D" parent="." unique_id=667419275]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.018382907, 6.4369926)
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2108103316]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22439575, -0.6092825, -4.1495667)
-shape = SubResource("BoxShape3D_vvvxj")
 
 [node name="overlays" parent="." unique_id=1895636831 instance=ExtResource("15_p5s2n")]
 

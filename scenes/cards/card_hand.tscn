@@ -2,12 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/process/card_weeding.tscn" id="1_3cugw"]
 [ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/process/card_pruning.tscn" id="3_jdkk6"]
-[ext_resource type="PackedScene" uid="uid://dsqncnaefqa5s" path="res://scenes/cards/process/card_harvest.tscn" id="4_htdyw"]
-[ext_resource type="PackedScene" uid="uid://d2ona4ccnpy16" path="res://scenes/cards/process/card_cleaning.tscn" id="5_osmjm"]
-[ext_resource type="PackedScene" uid="uid://caa1hq7glxit3" path="res://scenes/cards/process/card_drying.tscn" id="6_ryfwb"]
-[ext_resource type="PackedScene" uid="uid://dkjaal8v0syd" path="res://scenes/cards/process/card_roasting.tscn" id="7_ryfwb"]
-[ext_resource type="PackedScene" uid="uid://cfcdyfqy7trvf" path="res://scenes/cards/process/card_testing.tscn" id="8_4144y"]
-[ext_resource type="PackedScene" uid="uid://ryf10txn2ha2" path="res://scenes/cards/process/card_packing.tscn" id="9_5h2ai"]
 
 [sub_resource type="Theme" id="Theme_ybjhs"]
 
@@ -32,29 +26,5 @@ size_flags_vertical = 8
 
 [node name="pruning" parent="." unique_id=222149724 instance=ExtResource("3_jdkk6")]
 custom_minimum_size = Vector2(120, 150)
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="harvest" parent="." unique_id=467668895 instance=ExtResource("4_htdyw")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="cleaning" parent="." unique_id=460675607 instance=ExtResource("5_osmjm")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="drying" parent="." unique_id=1650479465 instance=ExtResource("6_ryfwb")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="roasting" parent="." unique_id=1472147729 instance=ExtResource("7_ryfwb")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="testing" parent="." unique_id=567504433 instance=ExtResource("8_4144y")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="packing" parent="." unique_id=1235604908 instance=ExtResource("9_5h2ai")]
 layout_mode = 2
 size_flags_vertical = 8

@@ -3,19 +3,17 @@
 [ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_3vf0w"]
 [ext_resource type="Texture2D" uid="uid://cv2m35gh7knun" path="res://assets/ui/hands/card_base/weeding.png" id="2_3vf0w"]
 [ext_resource type="PackedScene" uid="uid://jgswer4eplps" path="res://scenes/tiles/weeding_tile.tscn" id="2_k8wx8"]
-[ext_resource type="FontFile" uid="uid://crctwom8u2fxw" path="res://assets/font/Staatliches-Regular.ttf" id="4_06my2"]
-[ext_resource type="FontFile" uid="uid://daatclpt7cthy" path="res://tres/new_font_file.tres" id="5_1jl3g"]
 [ext_resource type="Texture2D" uid="uid://csafaiwwovi6l" path="res://assets/ui/hands/card_base/tile_type.png" id="5_06my2"]
 
+[sub_resource type="FontVariation" id="FontVariation_mudfh"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_ckjl0"]
-font = ExtResource("4_06my2")
+font = SubResource("FontVariation_mudfh")
+
+[sub_resource type="FontVariation" id="FontVariation_lci0v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0hboc"]
-font = ExtResource("5_1jl3g")
-
-[sub_resource type="LabelSettings" id="LabelSettings_ybjhs"]
-font = ExtResource("4_06my2")
-font_size = 64
+font = SubResource("FontVariation_lci0v")
 
 [node name="weeding" type="Control" unique_id=914919374]
 custom_minimum_size = Vector2(120, 150)
@@ -40,24 +38,6 @@ patch_margin_left = 48
 patch_margin_top = 48
 patch_margin_right = 48
 patch_margin_bottom = 48
-
-[node name="nama_lahan_kiri" type="Label" parent="card" unique_id=1190349712]
-visible = false
-custom_minimum_size = Vector2(140, 20)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 1.0
-offset_top = 70.0
-offset_right = 141.0
-offset_bottom = 91.0
-grow_vertical = 2
-rotation = -1.5707964
-text = "KINTAMANI"
-label_settings = SubResource("LabelSettings_ckjl0")
-horizontal_alignment = 2
-autowrap_mode = 2
 
 [node name="nama_lahan_kanan" type="Label" parent="card" unique_id=103870756]
 custom_minimum_size = Vector2(140, 20)
@@ -87,16 +67,6 @@ offset_right = 86.0
 offset_bottom = 27.0
 text = "WEEDING"
 label_settings = SubResource("LabelSettings_0hboc")
-
-[node name="turn" type="Label" parent="card" unique_id=1308928553]
-visible = false
-layout_mode = 0
-offset_left = 47.0
-offset_top = 67.0
-offset_right = 75.0
-offset_bottom = 148.0
-text = "3"
-label_settings = SubResource("LabelSettings_ybjhs")
 
 [node name="TextureRect" type="TextureRect" parent="card" unique_id=1345068629]
 layout_mode = 0

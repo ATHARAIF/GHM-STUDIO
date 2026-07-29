@@ -3,18 +3,17 @@
 [ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_uh35d"]
 [ext_resource type="Texture2D" uid="uid://d0day460ifwue" path="res://assets/ui/hands/card_base/pruning.png" id="2_733xs"]
 [ext_resource type="PackedScene" uid="uid://b7cg6uvvi5ata" path="res://scenes/tiles/pruning_tile.tscn" id="2_ggcpd"]
-[ext_resource type="FontFile" uid="uid://cti4vc502liyu" path="res://assets/font/edosz.ttf" id="3_ggcpd"]
+[ext_resource type="Texture2D" uid="uid://csafaiwwovi6l" path="res://assets/ui/hands/card_base/tile_type.png" id="6_pir0o"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_733xs"]
-font = ExtResource("3_ggcpd")
-font_size = 32
+[sub_resource type="FontVariation" id="FontVariation_wtkax"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_rf85q"]
-font = ExtResource("3_ggcpd")
+[sub_resource type="LabelSettings" id="LabelSettings_65u6n"]
+font = SubResource("FontVariation_wtkax")
 
-[sub_resource type="LabelSettings" id="LabelSettings_ggcpd"]
-font = ExtResource("3_ggcpd")
-font_size = 64
+[sub_resource type="FontVariation" id="FontVariation_ibey8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_awcp8"]
+font = SubResource("FontVariation_ibey8")
 
 [node name="pruning" type="Control" unique_id=914919374]
 layout_mode = 3
@@ -38,29 +37,40 @@ patch_margin_top = 24
 patch_margin_right = 30
 patch_margin_bottom = 22
 
-[node name="lahan" type="Label" parent="card" unique_id=2120876566]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 21.0
-offset_right = 106.0
-offset_bottom = 57.0
-text = "LAHAN"
-label_settings = SubResource("LabelSettings_733xs")
+[node name="nama_lahan_kanan" type="Label" parent="card" unique_id=1602403233]
+custom_minimum_size = Vector2(140, 20)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -70.0
+offset_right = 138.0
+offset_bottom = -49.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -4.712389
+text = "KINTAMANI"
+label_settings = SubResource("LabelSettings_65u6n")
+horizontal_alignment = 2
+autowrap_mode = 2
 
-[node name="proses" type="Label" parent="card" unique_id=1558627943]
+[node name="proses" type="Label" parent="card" unique_id=1903874577]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 54.0
-offset_right = 91.0
-offset_bottom = 73.0
-text = "PRUNING"
-label_settings = SubResource("LabelSettings_rf85q")
+offset_left = 36.0
+offset_top = 6.0
+offset_right = 86.0
+offset_bottom = 27.0
+text = "WEEDING"
+label_settings = SubResource("LabelSettings_awcp8")
 
-[node name="turn" type="Label" parent="card" unique_id=1513768389]
+[node name="TextureRect" type="TextureRect" parent="card" unique_id=2140082924]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 65.0
-offset_right = 77.0
-offset_bottom = 137.0
-text = "3"
-label_settings = SubResource("LabelSettings_ggcpd")
+offset_left = 6.9999995
+offset_top = 6.9999995
+offset_right = 263.0
+offset_bottom = 263.0
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("6_pir0o")

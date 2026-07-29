@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://cxy720dnitlvc"]
 
 [ext_resource type="PackedScene" uid="uid://curxl7jch8dov" path="res://scenes/cards/card_hand.tscn" id="1_2obvf"]
+[ext_resource type="FontFile" uid="uid://v1ewsba7k7da" path="res://tres/default_font.tres" id="1_kcchj"]
 [ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="2_6230l"]
+[ext_resource type="FontFile" uid="uid://ud5do37aik3k" path="res://assets/font/LeagueGothic-Regular-VariableFont_wdth.ttf" id="2_jciqr"]
+
+[sub_resource type="FontVariation" id="FontVariation_te4qh"]
+base_font = ExtResource("2_jciqr")
+spacing_glyph = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6230l"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -17,7 +23,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="main" type="CanvasLayer" parent="." unique_id=2121045524]
-visible = false
 
 [node name="header" type="ColorRect" parent="main" unique_id=866420312]
 anchors_preset = 10
@@ -42,6 +47,7 @@ custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_kcchj")
 text = "📅 04 SPRING"
 
 [node name="fame" type="Button" parent="main/header/HBoxContainer" unique_id=501780795]
@@ -77,14 +83,14 @@ custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-text = "📖journal"
+text = "📖JOURNAL"
 
 [node name="setting" type="Button" parent="main/header/HBoxContainer2" unique_id=989173619]
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-text = "⚙️setting
+text = "⚙️SETTING
 "
 
 [node name="menu" type="Button" parent="main/header/HBoxContainer2" unique_id=1075578230]
@@ -92,7 +98,7 @@ custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-text = "Ⓜ️menu"
+text = "Ⓜ️MENU"
 
 [node name="effect" type="Button" parent="main/header" unique_id=727160163]
 layout_mode = 1
@@ -104,6 +110,7 @@ offset_top = 48.0
 offset_right = 211.0
 offset_bottom = 84.0
 grow_horizontal = 2
+theme_override_fonts/font = SubResource("FontVariation_te4qh")
 text = "🌧️ RAINING : ALL BEANS ARE WET!"
 
 [node name="footer" type="ColorRect" parent="main" unique_id=2031305487]
@@ -141,9 +148,10 @@ offset_bottom = 36.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "⏭️
-next turn"
+NEXT TURN"
 
 [node name="menu_tabs" type="CanvasLayer" parent="." unique_id=813571542]
+visible = false
 
 [node name="background" type="ColorRect" parent="menu_tabs" unique_id=1763953984]
 anchors_preset = 15
@@ -220,6 +228,7 @@ custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
 [node name="menu_coffee_log" type="CanvasLayer" parent="." unique_id=348317728]
+visible = false
 
 [node name="container" type="VBoxContainer" parent="menu_coffee_log" unique_id=1133760874]
 anchors_preset = 7
@@ -266,7 +275,7 @@ size_flags_vertical = 8
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6230l")
 toggle_mode = true
 button_pressed = true
-text = "coffee bean"
+text = "packaging | coffee bean | 1000 | 9/10"
 
 [node name="bean2" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=1713440994]
 custom_minimum_size = Vector2(220, 60)
@@ -274,7 +283,7 @@ custom_maximum_size = Vector2(220, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "coffee bean"
+text = "ini dibuat sepertiga layar UI"
 
 [node name="bean3" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=993799245]
 custom_minimum_size = Vector2(220, 60)

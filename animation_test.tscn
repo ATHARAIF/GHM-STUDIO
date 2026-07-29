@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://5fwtkgdppjo8"]
+
+[node name="animation_test" unique_id=1204507655]
+
+[node name="AnimationPlayer" parent="." index="1" unique_id=1743853176]
+autoplay = &"CubeAction_002"
