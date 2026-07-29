@@ -12,8 +12,6 @@ extends Node
 @export var rotate_duration: float = 0.2
 @export var place_duration: float = 0.35
 
-@export_group("UI")
-@export var pruning_popup: CanvasLayer
 
 var camera: Camera3D
 var ghost_float: Node3D      # tile yang ngambang, ngikutin cursor
@@ -23,6 +21,8 @@ var current_base_shape: Array[Vector2i] = [Vector2i.ZERO]   # shape asli, belum 
 var current_shape: Array[Vector2i] = [Vector2i.ZERO]        # shape setelah dirotate, dipake buat validasi
 var rotation_steps: int = 0   # 0-3, tiap step = 90 derajat
 var ghost_visual_rotation: float = 0.0   # rotasi kontinu (gak di-wrap), buat animasi tween
+var ghost_float_rotate_tween: Tween
+var ghost_indicator_rotate_tween: Tween
 
 var ground_tiles: Array[GroundTile] = []
 var grid: Dictionary = {}          # Vector2i -> GroundTile
@@ -35,7 +35,13 @@ var tile_bottom_offset: float = 0.0
 var placement_data: Dictionary = {}   # tile_instance (Node3D) -> {scene, base_shape, shape, anchor, rotation_steps, card_node}
 
 var current_card_node: Control = null   # referensi LANGSUNG ke node Card asli yang lagi di-drag (bukan path/scene)
-var pending_pruning_tile: Node3D = null
+var pending_interaction_tile: Node3D = null
+
+func _ready() -> void:
+	if has_node("/root/EventManager"):
+		var em = get_node("/root/EventManager")
+		em.card_placement_interaction_confirmed.connect(_on_interaction_confirmed)
+		em.card_placement_interaction_cancelled.connect(_on_interaction_cancelled)
 
 func _input(event: InputEvent) -> void:
 	# pake _input (bukan _unhandled_input) biar gak ketelen sama Control/GUI manapun
@@ -125,19 +131,35 @@ func rotate_ghost() -> void:
 	rotation_steps = (rotation_steps + 1) % 4
 	current_shape = _rotate_shape(current_base_shape, rotation_steps)
 
+	var start_rot := ghost_visual_rotation
 	ghost_visual_rotation += 90.0   # terus nambah (gak di-wrap), biar tween-nya muter searah terus
+	var target_rot := ghost_visual_rotation
 
 	if ghost_float:
-		var tw := create_tween()
-		tw.set_trans(Tween.TRANS_BACK)
-		tw.set_ease(Tween.EASE_OUT)
-		tw.tween_property(ghost_float, "rotation_degrees:y", ghost_visual_rotation, rotate_duration)
-
+		if ghost_float_rotate_tween:
+			ghost_float_rotate_tween.kill()
+		ghost_float_rotate_tween = create_tween()
+		ghost_float_rotate_tween.set_trans(Tween.TRANS_BACK)
+		ghost_float_rotate_tween.set_ease(Tween.EASE_OUT)
+		# pake tween_method, BUKAN tween_property -- biar gak pernah "baca balik" rotation_degrees
+		# dari node (yang bisa wrap jadi -180 pas kebetulan lagi di 180, bikin jarak tempuh salah hitung)
+		ghost_float_rotate_tween.tween_method(_set_ghost_float_rotation, start_rot, target_rot, rotate_duration)
+		
 	if ghost_indicator:
-		var tw2 := create_tween()
-		tw2.set_trans(Tween.TRANS_BACK)
-		tw2.set_ease(Tween.EASE_OUT)
-		tw2.tween_property(ghost_indicator, "rotation_degrees:y", ghost_visual_rotation, rotate_duration)
+		if ghost_indicator_rotate_tween:
+			ghost_indicator_rotate_tween.kill()
+		ghost_indicator_rotate_tween = create_tween()
+		ghost_indicator_rotate_tween.set_trans(Tween.TRANS_BACK)
+		ghost_indicator_rotate_tween.set_ease(Tween.EASE_OUT)
+		ghost_indicator_rotate_tween.tween_method(_set_ghost_indicator_rotation, start_rot, target_rot, rotate_duration)
+
+func _set_ghost_float_rotation(value: float) -> void:
+	if ghost_float:
+		ghost_float.rotation_degrees.y = value
+
+func _set_ghost_indicator_rotation(value: float) -> void:
+	if ghost_indicator:
+		ghost_indicator.rotation_degrees.y = value
 
 func _rotate_shape(shape: Array[Vector2i], steps: int) -> Array[Vector2i]:
 	var result: Array[Vector2i] = shape.duplicate()
@@ -169,6 +191,7 @@ func update_ghost(mouse_pos: Vector2) -> void:
 		_apply_native_transparency(ghost_float, ghost_float_alpha)
 		ghost_float.rotation_degrees.y = rotation_steps * 90.0
 		get_tree().current_scene.add_child(ghost_float)
+		ghost_visual_rotation = rotation_steps * 90.0
 
 	if ghost_indicator == null:
 		ghost_indicator = current_tile_scene.instantiate()
@@ -185,10 +208,11 @@ func update_ghost(mouse_pos: Vector2) -> void:
 	if valid:
 		var anchor_tile: GroundTile = grid[anchor_coord]
 		base_pos = anchor_tile.global_position
-		base_pos.y += ground_top_offset + tile_bottom_offset
+		#base_pos.y += ground_top_offset + tile_bottom_offset
 	else:
 		base_pos = world_pos   # gak snap, ngikut posisi mouse bebas
-
+	
+	base_pos.y += ground_top_offset + tile_bottom_offset
 	ghost_indicator.global_position = base_pos
 
 	var float_pos := base_pos
@@ -243,11 +267,17 @@ func try_place(mouse_pos: Vector2, tile_scene: PackedScene, card_data: CardData)
 	}
 	
 	if card_data != null:
-		if card_data.card_name == "Pruning":
-			pending_pruning_tile = tile
-			if pruning_popup:
-				pruning_popup.show_popup()
+		print("Card data placement_interaction: ", card_data.get("placement_interaction"))
+		if card_data.get("placement_interaction"):
+			pending_interaction_tile = tile
+			if has_node("/root/EventManager"):
+				print("Emitting interaction request for ", card_data.card_name)
+				var em = get_node("/root/EventManager")
+				em.card_placement_interaction_requested.emit(card_data.card_name, tile, card_data)
+			else:
+				print("EventManager singleton not found!")
 		else:
+			print("No interaction requested, registering tile directly.")
 			StageManager.register_placed_tile(tile, card_data)
 
 	current_tile_scene = null   # reset, biar pickup detection ("current_tile_scene == null") gak ke-block
@@ -255,20 +285,18 @@ func try_place(mouse_pos: Vector2, tile_scene: PackedScene, card_data: CardData)
 
 	return true
 
-func _on_pruning_confirmed(method: String, intensity: float) -> void:
-	if pending_pruning_tile and placement_data.has(pending_pruning_tile):
-		var data = placement_data[pending_pruning_tile]
-		data["pruning_method"] = method
-		data["pruning_intensity"] = intensity
-		StageManager.register_placed_tile(pending_pruning_tile, data["card_data"], {
-			"pruning_method": method,
-			"pruning_intensity": intensity
-		})
-	pending_pruning_tile = null
+func _on_interaction_confirmed(card_name: String, tile: Node3D, card_data: Resource, extra_data: Dictionary) -> void:
+	if pending_interaction_tile == tile and placement_data.has(tile):
+		var data = placement_data[tile]
+		for key in extra_data:
+			data[key] = extra_data[key]
+		StageManager.register_placed_tile(tile, data["card_data"], extra_data)
+	if pending_interaction_tile == tile:
+		pending_interaction_tile = null
 
-func _on_pruning_cancelled() -> void:
-	if pending_pruning_tile and placement_data.has(pending_pruning_tile):
-		var data = placement_data[pending_pruning_tile]
+func _on_interaction_cancelled(card_name: String, tile: Node3D, card_data: Resource) -> void:
+	if pending_interaction_tile == tile and placement_data.has(tile):
+		var data = placement_data[tile]
 		var card = data.get("card_node", null)
 		
 		# Free occupied cells
@@ -277,8 +305,8 @@ func _on_pruning_cancelled() -> void:
 			if grid.has(c):
 				grid[c].clear()
 				
-		placement_data.erase(pending_pruning_tile)
-		pending_pruning_tile.queue_free()
+		placement_data.erase(tile)
+		tile.queue_free()
 		
 		# Return card to hand using the card's native animation logic
 		if card and is_instance_valid(card):
@@ -292,7 +320,8 @@ func _on_pruning_cancelled() -> void:
 					op.move_child(card, oi)
 				card.call("animate_return_from", card.global_position)
 				
-	pending_pruning_tile = null
+	if pending_interaction_tile == tile:
+		pending_interaction_tile = null
 
 func _can_place(anchor_coord: Vector2i, shape: Array[Vector2i]) -> bool:
 	for offset in shape:
@@ -486,6 +515,8 @@ func _clear_ghost() -> void:
 	if ghost_indicator:
 		ghost_indicator.queue_free()
 		ghost_indicator = null
+	ghost_float_rotate_tween = null
+	ghost_indicator_rotate_tween = null
 
 func remove_tile_from_grid(tile: Node3D) -> void:
 	if not placement_data.has(tile):

@@ -5,15 +5,17 @@ extends CanvasLayer
 @onready var lbl_budget = $MarginContainer/VBoxContainer/TopBar/Budget/LblBudget
 @onready var lbl_stage = $MarginContainer/VBoxContainer/TopBar/Stage/LblStage
 
-@onready var lbl_body = $MarginContainer/VBoxContainer/StatsBar/Body
-@onready var lbl_acidity = $MarginContainer/VBoxContainer/StatsBar/Acidity
-@onready var lbl_sweetness = $MarginContainer/VBoxContainer/StatsBar/Sweetness
-@onready var lbl_aroma = $MarginContainer/VBoxContainer/StatsBar/Aroma
-@onready var lbl_complexity = $MarginContainer/VBoxContainer/StatsBar/Complexity
-@onready var lbl_aftertaste = $MarginContainer/VBoxContainer/StatsBar/Aftertaste
-@onready var lbl_moisture = $MarginContainer/VBoxContainer/StatsBar/Moisture
-@onready var lbl_defect = $MarginContainer/VBoxContainer/StatsBar/Defect
-@onready var lbl_yield = $MarginContainer/VBoxContainer/StatsBar/Yield
+@onready var lbl_body = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Body
+@onready var lbl_acidity = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Acidity
+@onready var lbl_sweetness = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Sweetness
+@onready var lbl_aroma = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Aroma
+@onready var lbl_flavor = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Flavor
+@onready var lbl_bitterness = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Bitterness
+@onready var lbl_complexity = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Complexity
+@onready var lbl_aftertaste = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Aftertaste
+@onready var lbl_moisture = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Moisture
+@onready var lbl_defect = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Defect
+@onready var lbl_yield = $MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid/Yield
 @onready var btn_end_turn = $MarginContainer/Control/BtnEndTurn
 
 func _ready() -> void:
@@ -27,11 +29,6 @@ func _ready() -> void:
 	
 	if lbl_stage:
 		lbl_stage.hide()
-		
-	if has_node("PruningPopup"):
-		PlacementManager.pruning_popup = $PruningPopup
-		$PruningPopup.confirmed.connect(PlacementManager._on_pruning_confirmed)
-		$PruningPopup.cancelled.connect(PlacementManager._on_pruning_cancelled)
 		
 	_update_all()
 
@@ -68,12 +65,14 @@ func _on_budget_changed(budget: int) -> void:
 
 func _on_stats_changed() -> void:
 	var b = StageManager.get_active_farm_batch()
-	lbl_body.text = "Body: %d" % b.body
-	lbl_acidity.text = "Acidity: %d" % b.acidity
-	lbl_sweetness.text = "Sweetness: %d" % b.sweetness
-	lbl_aroma.text = "Aroma: %d" % b.aroma
-	lbl_complexity.text = "Complexity: %d" % b.complexity
-	lbl_aftertaste.text = "aftertaste: %d" % b.aftertaste
+	lbl_body.text = "Body: %.2f" % b.body
+	lbl_acidity.text = "Acidity: %.2f" % b.acidity
+	lbl_sweetness.text = "Sweetness: %.2f" % b.sweetness
+	lbl_aroma.text = "Aroma: %.2f" % b.aroma
+	lbl_flavor.text = "Flavor: %.2f" % b.flavor
+	lbl_bitterness.text = "Bitterness: %.2f" % b.bitterness
+	lbl_complexity.text = "Complexity: %.2f" % b.complexity
+	lbl_aftertaste.text = "Aftertaste: %.2f" % b.aftertaste
 	lbl_moisture.text = "Moisture: %.1f%%" % b.moisture
 	lbl_defect.text = "Defect: %.1f%%" % b.defect_rate
 	lbl_yield.text = "Yield: %dkg" % b.cherry_kg

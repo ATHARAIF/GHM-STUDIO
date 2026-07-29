@@ -37,6 +37,10 @@ func _ready() -> void:
 	btn_close.pressed.connect(func(): popup_ui.hide())
 	popup_ui.hide()
 	
+	if has_node("/root/EventManager"):
+		var em = get_node("/root/EventManager")
+		em.card_placement_interaction_requested.connect(func(_a, _b, _c): popup_ui.hide())
+	
 	# Sembunyikan label 3D karena sekarang kita pakai UI Popup
 	if has_node("Label3D"):
 		$Label3D.hide()
@@ -48,7 +52,7 @@ func _update_timeline() -> void:
 		child.queue_free()
 		
 	var stages = ["Planting", "Weeding", "Pruning", "Suckering", "Harvest"]
-	var stage_id_map = [0, 1, 2, -1, 3] # -1 berarti card belum dibuat
+	var process_map = ["FP00", "FP01", "FP02", "FP03", "FP04"]
 	
 	var c_stage = StageManager.current_stage
 	var mapped_current_stage = 0
@@ -67,16 +71,16 @@ func _update_timeline() -> void:
 		circle.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		
 		var active_batch = StageManager.get_active_farm_batch()
-		var actual_stage_id = stage_id_map[i]
+		var actual_process_id = process_map[i]
 		
 		var is_completed = false
-		if actual_stage_id != -1 and active_batch:
-			is_completed = active_batch.completed_stages.has(actual_stage_id)
+		if active_batch:
+			is_completed = active_batch.completed_processes.has(actual_process_id)
 			
 		var is_processing = false
-		if actual_stage_id != -1:
+		if actual_process_id != "FP00":
 			for dict in StageManager.active_tiles:
-				if dict.data.stage_id == actual_stage_id:
+				if dict.data.process_id == actual_process_id:
 					is_processing = true
 					break
 		

@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://cx4x2m3u4v5w"]
 
 [ext_resource type="Script" uid="uid://ca341oaktpwcu" path="res://scripts/ui/main_hud.gd" id="1_q1w2e"]
-[ext_resource type="PackedScene" uid="uid://ddyxyzw123abf" path="res://scenes/ui/harvest_popup.tscn" id="2_harvest"]
 [ext_resource type="PackedScene" uid="uid://ddyxy0w123abf" path="res://scenes/ui/dry_popup.tscn" id="3_dry"]
-[ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/pruning_popup.tscn" id="4_prun"]
+[ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/controllers/pruning_controller.tscn" id="4_prun"]
 
 [node name="MainHUD" type="CanvasLayer" unique_id=176383737]
 script = ExtResource("1_q1w2e")
@@ -61,43 +60,64 @@ theme_override_font_sizes/font_size = 18
 text = "Turn: 1/5"
 horizontal_alignment = 2
 
-[node name="StatsBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=722893702]
+[node name="StatsPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=172465648]
 layout_mode = 2
-theme_override_constants/separation = 30
+size_flags_horizontal = 0
 
-[node name="Body" type="Label" parent="MarginContainer/VBoxContainer/StatsBar" unique_id=1371727763]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/StatsPanel" unique_id=419453495]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="StatsGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/StatsPanel/Margin" unique_id=1413516637]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 5
+columns = 4
+
+[node name="Body" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=21924554]
 layout_mode = 2
 text = "Body: 0"
 
-[node name="Acidity" type="Label" parent="MarginContainer/VBoxContainer/StatsBar" unique_id=1672260947]
+[node name="Acidity" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1787323554]
 layout_mode = 2
 text = "Acidity: 0"
 
-[node name="Sweetness" type="Label" parent="MarginContainer/VBoxContainer/StatsBar" unique_id=1875868373]
+[node name="Sweetness" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1554023410]
 layout_mode = 2
 text = "Sweetness: 0"
 
-[node name="Aroma" type="Label" parent="MarginContainer/VBoxContainer/StatsBar" unique_id=649723334]
+[node name="Aroma" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=598692839]
 layout_mode = 2
 text = "Aroma: 0"
 
-[node name="Complexity" type="Label" parent="MarginContainer/VBoxContainer/StatsBar" unique_id=1034458619]
+[node name="Flavor" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=256882403]
+layout_mode = 2
+text = "Flavor: 0"
+
+[node name="Bitterness" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=827477104]
+layout_mode = 2
+text = "Bitterness: 0"
+
+[node name="Complexity" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=746035065]
 layout_mode = 2
 text = "Complexity: 0"
 
-[node name="Aftertaste" type="Label" parent="MarginContainer/VBoxContainer/StatsBar" unique_id=1327905176]
+[node name="Aftertaste" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=2038222473]
 layout_mode = 2
 text = "Aftertaste: 0"
 
-[node name="Defect" type="Label" parent="MarginContainer/VBoxContainer/StatsBar" unique_id=2036479668]
+[node name="Defect" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1361213424]
 layout_mode = 2
 text = "Defect: 10.0%"
 
-[node name="Moisture" type="Label" parent="MarginContainer/VBoxContainer/StatsBar" unique_id=768780123]
+[node name="Moisture" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=628190098]
 layout_mode = 2
 text = "Moisture: 25.0%"
 
-[node name="Yield" type="Label" parent="MarginContainer/VBoxContainer/StatsBar" unique_id=849483279]
+[node name="Yield" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1775234278]
 layout_mode = 2
 text = "Yield: 0kg"
 
@@ -119,8 +139,11 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 24
 text = "End Turn"
 
-[node name="HarvestPopup" parent="." unique_id=2061107133 instance=ExtResource("2_harvest")]
+[node name="HarvestPopup" parent="." unique_id=2061107133 instance=ExtResource("3_dry")]
+visible = false
 
 [node name="DryPopup" parent="." unique_id=1010791625 instance=ExtResource("3_dry")]
+visible = false
 
-[node name="PruningPopup" parent="." unique_id=2081107134 instance=ExtResource("4_prun")]
+[node name="PruningController" parent="." unique_id=2081107134 instance=ExtResource("4_prun")]
+visible = false

@@ -2,23 +2,24 @@ extends Resource
 class_name CardData
 
 @export var card_name: String = ""
-@export var stage_id: int = 0
+@export var process_id: String = ""
 @export var cost: int = 0
 @export var duration: int = 1
 
 @export_group("Effects")
-@export var effect_aroma: int = 0
-@export var effect_acidity: int = 0
-@export var effect_body: int = 0
-@export var effect_sweetness: int = 0
-@export var effect_complexity: int = 0
-@export var effect_aftertaste: int = 0
+@export var effect_aroma: float = 0.0
+@export var effect_acidity: float = 0.0
+@export var effect_body: float = 0.0
+@export var effect_sweetness: float = 0.0
+@export var effect_complexity: float = 0.0
+@export var effect_aftertaste: float = 0.0
 @export var effect_moisture: float = 0.0
 @export var effect_defect: float = 0.0
 @export var effect_yield: int = 0
-@export var effect_growth_rate: int = 0
+#@export var effect_growth_rate: int = 0
 
 @export_group("Interaction")
+@export var placement_interaction: bool = false
 @export var requires_interaction: bool = false
 @export var interaction_type: String = "" # e.g., "HARVEST"
 

@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c4c5cwiyvnpal" path="res://assets/3D/buildings/warehouse_1.glb" id="13_l53mr"]
 [ext_resource type="PackedScene" uid="uid://dj1s7kk2pyxc5" path="res://assets/3D/buildings/tool_shed_1.glb" id="14_3suc6"]
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="15_juvny"]
+[ext_resource type="PackedScene" uid="uid://dhlxe0q8f5nqk" path="res://assets/3D/buildings/production_house.glb" id="16_juvny"]
 [ext_resource type="Texture2D" uid="uid://b83ny3br6cx0f" path="res://assets/ui/item_sprites/mukamuel.png" id="16_p5s2n"]
 [ext_resource type="PackedScene" uid="uid://cx4x2m3u4v5w" path="res://scenes/ui/main_hud.tscn" id="17_hud"]
 [ext_resource type="PackedScene" uid="uid://ddyxy0w123abc" path="res://scenes/tiles/farm_info_tile.tscn" id="18_farm"]
@@ -607,7 +608,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="CardHand" parent="CanvasLayer" unique_id=1143458886 instance=ExtResource("4_w5yvf")]
-anchors_preset = 7
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=49488600]
 offset_right = 40.0
@@ -635,30 +635,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015738487, 0)
 [node name="surrounding_ground" parent="environtment" unique_id=1246640729 instance=ExtResource("7_wbbc8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
 
-[node name="warehouse" parent="environtment" unique_id=1577510470 instance=ExtResource("8_ukd3u")]
-transform = Transform3D(-0.4, 0, 6.039832e-08, 0, 0.4, 0, -6.039832e-08, 0, -0.4, 5.4409823, 0.5028924, -1.1653428)
-
-[node name="tree" parent="." unique_id=1089535370 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.5876861, 0, 0.12093407, 0, 0.6, 0, -0.12093407, 0, -0.5876861, -0.6032703, 0.1558542, -5.8687167)
-
-[node name="tree2" parent="." unique_id=1300836432 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.4455034, 0, -0.40190387, 0, 0.6, 0, 0.40190387, 0, -0.4455034, -0.15736675, 0.15585408, -5.555203)
-
-[node name="tree3" parent="." unique_id=1305049494 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(0.2886956, 0, -0.52597994, 0, 0.6, 0, 0.52597994, 0, 0.2886956, 0.26028854, 0.15585396, -5.82171)
-
-[node name="tree4" parent="." unique_id=1519145716 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.59608084, 0, 0.06846626, 0, 0.6, 0, -0.06846626, 0, -0.59608084, 0.54229337, 0.15585408, -5.674458)
-
-[node name="tree5" parent="." unique_id=197109037 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.4455034, 0, -0.40190387, 0, 0.6, 0, 0.40190387, 0, -0.4455034, 1.0678183, 0.1558542, -5.2713895)
-
-[node name="tree6" parent="." unique_id=1355694667 instance=ExtResource("9_5fh0g")]
-transform = Transform3D(-0.53804606, 0, 0.26553062, 0, 0.6, 0, -0.26553062, 0, -0.53804606, 1.1014596, 0.15585408, -4.851846)
-
-[node name="warehouse_1" parent="." unique_id=394532502 instance=ExtResource("13_l53mr")]
-transform = Transform3D(-0.2, 0, 3.019916e-08, 0, 0.2, 0, -3.019916e-08, 0, -0.2, 5.2480593, 0.35997322, 0.31855023)
-
 [node name="Area3D" type="StaticBody3D" parent="." unique_id=667419275]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.018382907, 6.4369926)
 collision_mask = 2
@@ -667,24 +643,56 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22439575, -0.6092825, -4.1495667)
 shape = SubResource("BoxShape3D_vvvxj")
 
-[node name="tool_shed_1" parent="." unique_id=1737704632 instance=ExtResource("14_3suc6")]
-transform = Transform3D(0.04254407, 0, -0.34740466, 0, 0.35000002, 0, 0.34740466, 0, 0.04254407, 0.08593643, 0.2553219, -4.4111104)
-
-[node name="player" type="MeshInstance3D" parent="tool_shed_1" unique_id=1143777819]
-transform = Transform3D(0.10616478, 0, -0.28058693, 0, 0.3, 0, 0.28058693, 0, 0.10616478, -0.25187397, 0.1927265, -0.48531032)
-mesh = SubResource("CapsuleMesh_5gtgg")
-
-[node name="cangkul" parent="tool_shed_1/player" unique_id=843398065 instance=ExtResource("15_juvny")]
-transform = Transform3D(0.86870503, 1.2123376, 1.3325124, -1.2739325, 1.4593935, -0.4972607, -1.2737539, -0.6327789, 1.4061091, -0.3084793, -0.078562975, -0.43156624)
-
-[node name="Sprite3D" type="Sprite3D" parent="tool_shed_1/player" unique_id=312910031]
-transform = Transform3D(0.10606601, 0, -0.10606602, 0, 0.15, 0, 0.10606602, 0, 0.10606601, 0.33825684, 0.38494205, -0.37294197)
-texture = ExtResource("16_p5s2n")
-
 [node name="MainHUD" parent="." unique_id=1308397270 instance=ExtResource("17_hud")]
 
 [node name="FarmInfoTile" parent="." unique_id=1856349914 instance=ExtResource("18_farm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.801547, 0.23734295, -2.470316)
+
+[node name="Building" type="Node3D" parent="." unique_id=974439094]
+
+[node name="warehouse" parent="Building" unique_id=1577510470 instance=ExtResource("8_ukd3u")]
+transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 2.7328196, 0.54341125, 6.7524567)
+visible = false
+
+[node name="production_house" parent="Building" unique_id=447700919 instance=ExtResource("16_juvny")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, 6.8532724, 0.63073754, 0.11180356)
+
+[node name="warehouse_1" parent="Building" unique_id=394532502 instance=ExtResource("13_l53mr")]
+transform = Transform3D(-0.45, 0, 6.794811e-08, 0, 0.45, 0, -6.794811e-08, 0, -0.45, 1.9668131, 0.691283, 5.7898884)
+
+[node name="tool_shed_1" parent="Building" unique_id=1737704632 instance=ExtResource("14_3suc6")]
+transform = Transform3D(0.060777232, 0, -0.49629238, 0, 0.5, 0, 0.49629238, 0, 0.060777232, 0.21877465, 0.2703983, -4.727638)
+
+[node name="player" type="MeshInstance3D" parent="Building/tool_shed_1" unique_id=1143777819]
+transform = Transform3D(0.10616478, 0, -0.28058693, 0, 0.3, 0, 0.28058693, 0, 0.10616478, -0.25187397, 0.1927265, -0.48531032)
+mesh = SubResource("CapsuleMesh_5gtgg")
+
+[node name="cangkul" parent="Building/tool_shed_1/player" unique_id=843398065 instance=ExtResource("15_juvny")]
+transform = Transform3D(0.86870503, 1.2123376, 1.3325124, -1.2739325, 1.4593935, -0.4972607, -1.2737539, -0.6327789, 1.4061091, -0.3084793, -0.078562975, -0.43156624)
+
+[node name="Sprite3D" type="Sprite3D" parent="Building/tool_shed_1/player" unique_id=312910031]
+transform = Transform3D(0.10606601, 0, -0.10606602, 0, 0.15, 0, 0.10606602, 0, 0.10606601, 0.33825684, 0.38494205, -0.37294197)
+texture = ExtResource("16_p5s2n")
+
+[node name="Tree" type="Node3D" parent="." unique_id=29535850]
+
+[node name="tree" parent="Tree" unique_id=1089535370 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.6856338, 0, 0.14108974, 0, 0.7, 0, -0.14108974, 0, -0.6856338, 0.31064606, 0.25996682, -7.0106587)
+
+[node name="tree2" parent="Tree" unique_id=1300836432 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.51975393, 0, -0.4688878, 0, 0.7, 0, 0.4688878, 0, -0.51975393, 0.7565496, 0.2599667, -6.697145)
+
+[node name="tree3" parent="Tree" unique_id=1305049494 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(0.3368115, 0, -0.6136432, 0, 0.7, 0, 0.6136432, 0, 0.3368115, 1.1742048, 0.25996658, -6.963652)
+
+[node name="tree4" parent="Tree" unique_id=1519145716 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.6954276, 0, 0.079877295, 0, 0.7, 0, -0.079877295, 0, -0.6954276, 1.4562097, 0.2599667, -6.8164)
+
+[node name="tree5" parent="Tree" unique_id=197109037 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.51975393, 0, -0.4688878, 0, 0.7, 0, 0.4688878, 0, -0.51975393, 1.9817346, 0.25996682, -6.4133315)
+
+[node name="tree6" parent="Tree" unique_id=1355694667 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.62772036, 0, 0.3097857, 0, 0.7, 0, -0.3097857, 0, -0.62772036, 2.015376, 0.2599667, -5.9937882)
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/CRT" to="CanvasLayer" method="_on_crt_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/basic" to="CanvasLayer" method="_on_basic_pressed"]

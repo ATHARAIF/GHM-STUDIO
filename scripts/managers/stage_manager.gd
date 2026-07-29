@@ -42,9 +42,9 @@ func get_active_farm_batch() -> CoffeeBatch:
 		_create_new_batch(TimeManager.year)
 	return batches[TimeManager.year]
 	
-func get_oldest_ready_batch(stage_id: int) -> CoffeeBatch:
-	# Jika stage_id <= 5 (sampai Dry), selalu ambil batch tahun berjalan
-	if stage_id <= 5:
+func get_oldest_ready_batch(process_id: String) -> CoffeeBatch:
+	# Jika process_id berawalan FP (Farm Phase)
+	if process_id.begins_with("FP"):
 		return get_active_farm_batch()
 		
 	# Jika post-harvest (Roasting, dst), cari batch tertua yang siap
@@ -57,8 +57,8 @@ func get_oldest_ready_batch(stage_id: int) -> CoffeeBatch:
 	var target_batch: CoffeeBatch = null
 	for y in batches.keys():
 		var b = batches[y]
-		# Asumsikan kalau mau di-Roast (stage 6), minimal harus sudah punya completed_stages.has(5) (Dry)
-		if b.completed_stages.has(5) and not b.completed_stages.has(stage_id):
+		# Asumsikan kalau mau diproses lebih lanjut, minimal sudah lewat FP04 (Harvest)
+		if b.completed_processes.has("FP04") and not b.completed_processes.has(process_id):
 			if y < oldest_year:
 				oldest_year = y
 				target_batch = b
@@ -148,7 +148,7 @@ func advance_turn() -> void:
 					tile_dict.label.modulate = Color(1.0, 1.0, 0.0) # Highlight yellow
 			else:
 				# Apply effects immediately for normal cards
-				var target_b = get_oldest_ready_batch(tile_dict.data.stage_id)
+				var target_b = get_oldest_ready_batch(tile_dict.data.process_id)
 				target_b.apply_effects(tile_dict)
 				stats_changed.emit()
 				if tile_dict.tile and is_instance_valid(tile_dict.tile):
@@ -177,7 +177,7 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 	var index = active_tiles.find(tile_dict)
 	if index != -1:
 		active_tiles.remove_at(index)
-	var target_b = get_oldest_ready_batch(tile_dict.data.stage_id)
+	var target_b = get_oldest_ready_batch(tile_dict.data.process_id)
 	target_b.apply_effects(tile_dict)
 	if tile_dict.tile and is_instance_valid(tile_dict.tile):
 		PlacementManager.remove_tile_from_grid(tile_dict.tile)

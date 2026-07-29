@@ -13,13 +13,19 @@ func _ready() -> void:
 	btn_sell.pressed.connect(_on_sell_pressed)
 	btn_close.pressed.connect(_on_close_pressed)
 	
+	if has_node("ColorRect"):
+		$ColorRect.gui_input.connect(func(event: InputEvent):
+			if event is InputEventMouseButton or event is InputEventMouseMotion:
+				get_viewport().set_input_as_handled()
+		)
+	
 	hide()
 	
 func show_popup(tile_data: Dictionary) -> void:
 	current_tile_data = tile_data
 	
 	# Tampilkan hasil panen saat ini
-	var batch = StageManager.get_oldest_ready_batch(5)
+	var batch = StageManager.get_oldest_ready_batch("WP02")
 	if batch:
 		# Dummy quality calculation based on aroma + body - defect
 		var quality_score = (batch.aroma + batch.body) - batch.defect_rate

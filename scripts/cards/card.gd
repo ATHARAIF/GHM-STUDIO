@@ -21,17 +21,8 @@ var pending_rotation_steps: int = 0   # dipake pas resume drag dari pickup, biar
 
 func _ready() -> void:
 	origin_parent = get_parent()
-	if StageManager:
-		StageManager.stage_changed.connect(_on_stage_changed)
-		_on_stage_changed(StageManager.current_stage)
 
-func _on_stage_changed(stage: int) -> void:
-	if card_data == null:
-		return
-	if card_data.stage_id == stage and not dragging and not top_level:
-		show()
-	elif not dragging and not top_level:
-		hide()
+
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:

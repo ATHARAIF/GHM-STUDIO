@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cv2m35gh7knun"
-path="res://.godot/imported/card.png-13ad5473fcbd7a58910fe01d402a451e.ctex"
+uid="uid://b2mwty0x6mrtc"
+path="res://.godot/imported/weeding_test_2.svg-185bcf77b732b79f6f565762d8d893e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/hands/card/card.png"
-dest_files=["res://.godot/imported/card.png-13ad5473fcbd7a58910fe01d402a451e.ctex"]
+source_file="res://assets/ui/hands/card_base/weeding_test_2.svg"
+dest_files=["res://.godot/imported/weeding_test_2.svg-185bcf77b732b79f6f565762d8d893e7.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

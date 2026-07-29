@@ -29,7 +29,7 @@ func _update_cards_visibility() -> void:
 					is_visible = (TimeManager.turn_in_year >= cd.active_start_turn and TimeManager.turn_in_year <= cd.active_end_turn)
 					# Sembunyikan jika batch tahun ini sudah menyelesaikan stage tersebut
 					var active_batch = StageManager.get_active_farm_batch()
-					if active_batch and active_batch.completed_stages.has(cd.stage_id):
+					if active_batch and active_batch.completed_processes.has(cd.process_id):
 						is_visible = false
 						
 				CardData.AvailabilityType.ONE_TIME_UNLOCK:

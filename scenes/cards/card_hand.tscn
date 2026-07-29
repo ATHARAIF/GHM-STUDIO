@@ -1,56 +1,58 @@
 [gd_scene format=3 uid="uid://curxl7jch8dov"]
 
-[ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/planting/card_weeding.tscn" id="1_weed"]
-[ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/planting/card_pruning.tscn" id="1_prun"]
-[ext_resource type="PackedScene" uid="uid://dsqncnaefqa5s" path="res://scenes/cards/planting/card_harvest.tscn" id="1_harv"]
 [ext_resource type="PackedScene" uid="uid://d2ona4ccnpy16" path="res://scenes/cards/process/card_cleaning.tscn" id="1_cln"]
 [ext_resource type="PackedScene" uid="uid://caa1hq7glxit3" path="res://scenes/cards/process/card_drying.tscn" id="1_dry"]
+[ext_resource type="PackedScene" uid="uid://dsqncnaefqa5s" path="res://scenes/cards/planting/card_harvest.tscn" id="1_harv"]
+[ext_resource type="PackedScene" uid="uid://ryf10txn2ha2" path="res://scenes/cards/packing/card_packing.tscn" id="1_pack"]
+[ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/planting/card_pruning.tscn" id="1_prun"]
 [ext_resource type="PackedScene" uid="uid://dkjaal8v0syd" path="res://scenes/cards/process/card_roasting.tscn" id="1_rst"]
 [ext_resource type="PackedScene" uid="uid://cfcdyfqy7trvf" path="res://scenes/cards/process/card_testing.tscn" id="1_test"]
-[ext_resource type="PackedScene" uid="uid://ryf10txn2ha2" path="res://scenes/cards/packing/card_packing.tscn" id="1_pack"]
-[ext_resource type="PackedScene" uid="uid://b7gpn2iovmhqq" path="res://scenes/tiles/cards/planting/weeding_tile.tscn" id="2_cklld"]
-[ext_resource type="PackedScene" uid="uid://p28gc2yns503" path="res://scenes/tiles/cards/planting/pruning_tile.tscn" id="3_sn7xr"]
+[ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/planting/card_weeding.tscn" id="1_weed"]
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="3_svfyg"]
 [ext_resource type="Script" uid="uid://bj1ap4xeolcck" path="res://scripts/cards/card_hand.gd" id="4_hand_script"]
-[ext_resource type="PackedScene" uid="uid://c00aplsmusuef" path="res://scenes/tiles/cards/planting/harvest_tile.tscn" id="6_6rdkt"]
-[ext_resource type="PackedScene" uid="uid://c4dstwtf8kjdq" path="res://scenes/tiles/cards/process/cleaning_tile.tscn" id="7_cln"]
-[ext_resource type="PackedScene" uid="uid://crxbeavs471v7" path="res://scenes/tiles/cards/process/drying_tile.tscn" id="8_dry"]
-[ext_resource type="PackedScene" uid="uid://cc1hn1r7dtd7k" path="res://scenes/tiles/cards/process/roasting_tile.tscn" id="9_rst"]
-[ext_resource type="PackedScene" uid="uid://crpiafvocy2wl" path="res://scenes/tiles/cards/process/testing_tile.tscn" id="10_bnt"]
-[ext_resource type="PackedScene" uid="uid://m058fikgyiak" path="res://scenes/tiles/cards/packing/packing_tile.tscn" id="11_pck"]
+[ext_resource type="PackedScene" uid="uid://bk2wo6fivyj3g" path="res://scenes/cards/planting/card_suckering.tscn" id="4_x7x6a"]
 
 [sub_resource type="Theme" id="Theme_ybjhs"]
 
 [sub_resource type="Resource" id="Resource_ryfwb"]
 script = ExtResource("3_svfyg")
 card_name = "Weeding"
-stage_id = 1
+process_id = "FP01"
 cost = 300
-duration = 3
+duration = 2
 effect_defect = -5.0
-effect_growth_rate = 10
 active_start_turn = 3
 active_end_turn = 6
 
-[sub_resource type="LabelSettings" id="LabelSettings_ybjhs"]
+[sub_resource type="Resource" id="Resource_suckering"]
+script = ExtResource("3_svfyg")
+card_name = "Suckering"
+process_id = "FP03"
+cost = 300
+duration = 2
+active_start_turn = 6
+active_end_turn = 8
+metadata/_custom_type_script = "uid://uich76k1cing"
 
 [sub_resource type="Resource" id="Resource_d3amg"]
 script = ExtResource("3_svfyg")
 card_name = "Pruning"
-stage_id = 2
+process_id = "FP02"
 cost = 250
-effect_aroma = 5
-effect_yield = 15
-active_start_turn = 6
-active_end_turn = 8
+duration = 2
+placement_interaction = true
+active_start_turn = 3
+active_end_turn = 6
 metadata/_custom_type_script = "uid://uich76k1cing"
 
 [sub_resource type="Resource" id="Resource_svfyg"]
 script = ExtResource("3_svfyg")
 card_name = "Harvest"
-stage_id = 3
+process_id = "FP04"
 cost = 300
 duration = 3
+requires_interaction = true
+interaction_type = "HARVEST"
 active_start_turn = 8
 active_end_turn = 11
 metadata/_custom_type_script = "uid://uich76k1cing"
@@ -58,7 +60,7 @@ metadata/_custom_type_script = "uid://uich76k1cing"
 [sub_resource type="Resource" id="Resource_cln"]
 script = ExtResource("3_svfyg")
 card_name = "Cleaning"
-stage_id = 4
+process_id = "WP01"
 cost = 150
 duration = 2
 active_start_turn = 11
@@ -68,7 +70,7 @@ metadata/_custom_type_script = "uid://uich76k1cing"
 [sub_resource type="Resource" id="Resource_dry"]
 script = ExtResource("3_svfyg")
 card_name = "Dry"
-stage_id = 5
+process_id = "WP02"
 cost = 100
 requires_interaction = true
 interaction_type = "DRY"
@@ -79,7 +81,7 @@ metadata/_custom_type_script = "uid://uich76k1cing"
 [sub_resource type="Resource" id="Resource_rst"]
 script = ExtResource("3_svfyg")
 card_name = "Roasting"
-stage_id = 6
+process_id = "DP01"
 cost = 300
 duration = 2
 requires_interaction = true
@@ -93,7 +95,7 @@ metadata/_custom_type_script = "uid://uich76k1cing"
 [sub_resource type="Resource" id="Resource_bnt"]
 script = ExtResource("3_svfyg")
 card_name = "Bean Testing"
-stage_id = 7
+process_id = "DP02"
 requires_interaction = true
 interaction_type = "TESTING"
 availability = 2
@@ -103,13 +105,14 @@ metadata/_custom_type_script = "uid://uich76k1cing"
 [sub_resource type="Resource" id="Resource_pck"]
 script = ExtResource("3_svfyg")
 card_name = "Packing"
-stage_id = 8
+process_id = "DP03"
 duration = 2
 availability = 2
 unlock_condition = "after_testing"
 metadata/_custom_type_script = "uid://uich76k1cing"
 
 [node name="CardHand" type="HBoxContainer" unique_id=898298064]
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -126,65 +129,38 @@ alignment = 1
 script = ExtResource("4_hand_script")
 
 [node name="Weeding" parent="." unique_id=914919374 instance=ExtResource("1_weed")]
-custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
-tile_scene = ExtResource("2_cklld")
 card_data = SubResource("Resource_ryfwb")
-fade_duration = 0.15
-return_duration = 0.25
+
+[node name="Suckering" parent="." unique_id=2029337744 instance=ExtResource("4_x7x6a")]
+layout_mode = 2
+card_data = SubResource("Resource_suckering")
 
 [node name="Pruning" parent="." unique_id=1168549735 instance=ExtResource("1_prun")]
 custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
-tile_scene = ExtResource("3_sn7xr")
 card_data = SubResource("Resource_d3amg")
-fade_duration = 0.15
-return_duration = 0.25
 
 [node name="Harvest" parent="." unique_id=66450454 instance=ExtResource("1_harv")]
-custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
-tile_scene = ExtResource("6_6rdkt")
 card_data = SubResource("Resource_svfyg")
-fade_duration = 0.15
-return_duration = 0.25
 
 [node name="Cleaning" parent="." unique_id=462708242 instance=ExtResource("1_cln")]
-custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
-tile_scene = ExtResource("7_cln")
 card_data = SubResource("Resource_cln")
-fade_duration = 0.15
-return_duration = 0.25
 
 [node name="Dry" parent="." unique_id=162224958 instance=ExtResource("1_dry")]
-custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
-tile_scene = ExtResource("8_dry")
 card_data = SubResource("Resource_dry")
-fade_duration = 0.15
-return_duration = 0.25
 
 [node name="Roasting" parent="." unique_id=679340384 instance=ExtResource("1_rst")]
-custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
-tile_scene = ExtResource("9_rst")
 card_data = SubResource("Resource_rst")
-fade_duration = 0.15
-return_duration = 0.25
 
 [node name="Bean Testing" parent="." unique_id=1380564907 instance=ExtResource("1_test")]
-custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
-tile_scene = ExtResource("10_bnt")
 card_data = SubResource("Resource_bnt")
-fade_duration = 0.15
-return_duration = 0.25
 
 [node name="Packing" parent="." unique_id=1738642996 instance=ExtResource("1_pack")]
-custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
-tile_scene = ExtResource("11_pck")
 card_data = SubResource("Resource_pck")
-fade_duration = 0.15
-return_duration = 0.25
