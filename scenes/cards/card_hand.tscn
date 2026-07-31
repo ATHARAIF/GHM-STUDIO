@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://curxl7jch8dov"]
 
 [ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/process/card_weeding.tscn" id="1_3cugw"]
+[ext_resource type="PackedScene" uid="uid://bdqnmb8k0jiym" path="res://scenes/cards/process/card_suckering.tscn" id="3_htdyw"]
 [ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/process/card_pruning.tscn" id="3_jdkk6"]
 
 [sub_resource type="Theme" id="Theme_ybjhs"]
@@ -25,6 +26,11 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="pruning" parent="." unique_id=222149724 instance=ExtResource("3_jdkk6")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="suckering" parent="." unique_id=896293076 instance=ExtResource("3_htdyw")]
 custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
 size_flags_vertical = 8

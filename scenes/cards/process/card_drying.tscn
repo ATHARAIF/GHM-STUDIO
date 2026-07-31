@@ -3,18 +3,6 @@
 [ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_2cvv2"]
 [ext_resource type="PackedScene" uid="uid://emxxbkk186oc" path="res://scenes/tiles/drying_tile.tscn" id="2_2cvv2"]
 [ext_resource type="Texture2D" uid="uid://c2e4ogod36ce0" path="res://assets/ui/hands/card_base/dry.png" id="3_2cvv2"]
-[ext_resource type="FontFile" uid="uid://cti4vc502liyu" path="res://assets/font/edosz.ttf" id="4_unbep"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_733xs"]
-font = ExtResource("4_unbep")
-font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_ggcpd"]
-font = ExtResource("4_unbep")
-font_size = 64
-
-[sub_resource type="LabelSettings" id="LabelSettings_2cvv2"]
-font = ExtResource("4_unbep")
 
 [node name="drying" type="Control" unique_id=914919374]
 custom_minimum_size = Vector2(120, 150)
@@ -36,30 +24,3 @@ patch_margin_left = 24
 patch_margin_top = 24
 patch_margin_right = 30
 patch_margin_bottom = 22
-
-[node name="lahan" type="Label" parent="card" unique_id=2120876566]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 21.0
-offset_right = 106.0
-offset_bottom = 57.0
-text = "LAHAN"
-label_settings = SubResource("LabelSettings_733xs")
-
-[node name="turn" type="Label" parent="card" unique_id=1513768389]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 65.0
-offset_right = 77.0
-offset_bottom = 137.0
-text = "3"
-label_settings = SubResource("LabelSettings_ggcpd")
-
-[node name="proses" type="Label" parent="card" unique_id=309933808]
-layout_mode = 0
-offset_left = 36.0
-offset_top = 54.0
-offset_right = 85.0
-offset_bottom = 73.0
-text = "DRYING"
-label_settings = SubResource("LabelSettings_2cvv2")

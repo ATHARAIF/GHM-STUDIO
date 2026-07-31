@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c7duwdl56mum1" path="res://assets/3D/environtment/surrounding_ground.glb" id="1_cibm7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jlpiy"]
-albedo_color = Color(0.37335393, 0.71007794, 0.19764555, 1)
+albedo_color = Color(0.039215688, 0.54901963, 0.22352941, 1)
 
 [node name="surrounding_ground" unique_id=1246640729 instance=ExtResource("1_cibm7")]
 
