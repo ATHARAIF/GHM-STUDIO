@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlacementManager="*uid://b6uium5s0ij74"
+PlacementManager="*res://scenes/placement_manager.tscn"
 StageManager="*res://scripts/managers/stage_manager.gd"
 TimeManager="*res://scripts/managers/time_manager.gd"
 EventManager="*res://scripts/managers/event_manager.gd"

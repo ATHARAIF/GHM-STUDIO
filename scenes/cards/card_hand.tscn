@@ -2,15 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://d2ona4ccnpy16" path="res://scenes/cards/process/card_cleaning.tscn" id="1_cln"]
 [ext_resource type="PackedScene" uid="uid://caa1hq7glxit3" path="res://scenes/cards/process/card_drying.tscn" id="1_dry"]
-[ext_resource type="PackedScene" uid="uid://dsqncnaefqa5s" path="res://scenes/cards/planting/card_harvest.tscn" id="1_harv"]
+[ext_resource type="PackedScene" uid="uid://dsqncnaefqa5s" path="res://scenes/cards/farm/card_harvest.tscn" id="1_harv"]
 [ext_resource type="PackedScene" uid="uid://ryf10txn2ha2" path="res://scenes/cards/packing/card_packing.tscn" id="1_pack"]
-[ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/planting/card_pruning.tscn" id="1_prun"]
+[ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/farm/card_pruning.tscn" id="1_prun"]
 [ext_resource type="PackedScene" uid="uid://dkjaal8v0syd" path="res://scenes/cards/process/card_roasting.tscn" id="1_rst"]
 [ext_resource type="PackedScene" uid="uid://cfcdyfqy7trvf" path="res://scenes/cards/process/card_testing.tscn" id="1_test"]
-[ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/planting/card_weeding.tscn" id="1_weed"]
+[ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/farm/card_weeding.tscn" id="1_weed"]
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="3_svfyg"]
 [ext_resource type="Script" uid="uid://bj1ap4xeolcck" path="res://scripts/cards/card_hand.gd" id="4_hand_script"]
-[ext_resource type="PackedScene" uid="uid://bk2wo6fivyj3g" path="res://scenes/cards/planting/card_suckering.tscn" id="4_x7x6a"]
+[ext_resource type="PackedScene" uid="uid://bk2wo6fivyj3g" path="res://scenes/cards/farm/card_suckering.tscn" id="4_x7x6a"]
 
 [sub_resource type="Theme" id="Theme_ybjhs"]
 
@@ -20,7 +20,13 @@ card_name = "Weeding"
 process_id = "FP01"
 cost = 300
 duration = 2
+effect_sweetness = 0.5
+effect_flavor = 0.5
 effect_defect = -5.0
+penalty_aroma = -0.5
+penalty_sweetness = -0.5
+penalty_flavor = -0.5
+penalty_bitterness = 0.5
 active_start_turn = 3
 active_end_turn = 6
 
@@ -30,6 +36,11 @@ card_name = "Suckering"
 process_id = "FP03"
 cost = 300
 duration = 2
+effect_acidity = 1.0
+effect_sweetness = 1.0
+penalty_acidity = -0.5
+penalty_sweetness = -0.5
+penalty_flavor = -0.5
 active_start_turn = 6
 active_end_turn = 8
 metadata/_custom_type_script = "uid://uich76k1cing"
@@ -51,6 +62,7 @@ card_name = "Harvest"
 process_id = "FP04"
 cost = 300
 duration = 3
+placement_interaction = true
 requires_interaction = true
 interaction_type = "HARVEST"
 active_start_turn = 8

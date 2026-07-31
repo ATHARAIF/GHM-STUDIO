@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dkjaal8v0syd"]
 
 [ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_levbn"]
-[ext_resource type="PackedScene" uid="uid://cc1hn1r7dtd7k" path="res://scenes/tiles/cards/process/roasting_tile.tscn" id="2_levbn"]
+[ext_resource type="PackedScene" uid="uid://cc1hn1r7dtd7k" path="res://scenes/tiles/process/roasting_tile.tscn" id="2_levbn"]
 [ext_resource type="Texture2D" uid="uid://bp628hoy0bm0g" path="res://assets/ui/hands/card_base/roasting.png" id="3_levbn"]
 [ext_resource type="FontFile" uid="uid://cti4vc502liyu" path="res://assets/font/edosz.ttf" id="4_3effs"]
 

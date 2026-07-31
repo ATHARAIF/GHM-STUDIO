@@ -25,12 +25,7 @@ shape = SubResource("BoxShape3D_info")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("BoxMesh_info")
 
-[node name="Label3D" type="Label3D" parent="." unique_id=468167473]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-visible = false
-billboard = 1
-no_depth_test = true
-text = "Klik untuk info"
+
 
 [node name="PopupUI" type="CanvasLayer" parent="." unique_id=1705760726]
 layer = 10

@@ -22,6 +22,7 @@ func _update_cards_visibility() -> void:
 			if cd == null or (child.get("is_placed") != null and child.get("is_placed") == true):
 				continue
 			
+			var was_visible = child.visible
 			var is_visible = false
 			
 			match cd.availability:
@@ -31,6 +32,12 @@ func _update_cards_visibility() -> void:
 					var active_batch = StageManager.get_active_farm_batch()
 					if active_batch and active_batch.completed_processes.has(cd.process_id):
 						is_visible = false
+					
+					# Deteksi jika baru saja expired (lewat turn) dan belum dimainkan
+					if TimeManager.turn_in_year == cd.active_end_turn + 1 and was_visible and not is_visible:
+						if active_batch and not active_batch.completed_processes.has(cd.process_id):
+							child.visible = false # Cegah infinite recursion karena apply_missed_penalty meng-emit stats_changed
+							StageManager.apply_missed_penalty(cd)
 						
 				CardData.AvailabilityType.ONE_TIME_UNLOCK:
 					is_visible = (TimeManager.year > cd.unlock_year) or (TimeManager.year == cd.unlock_year and TimeManager.turn_in_year >= cd.unlock_turn)

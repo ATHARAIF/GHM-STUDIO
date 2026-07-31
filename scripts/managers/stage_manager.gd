@@ -26,15 +26,19 @@ func _ready() -> void:
 func _create_new_batch(year: int) -> void:
 	var b = CoffeeBatch.new()
 	b.batch_year = year
-	b.aroma = current_location.base_aroma
-	b.body = current_location.base_body
-	b.acidity = current_location.base_acidity
-	b.sweetness = current_location.base_sweetness
-	b.complexity = current_location.base_complexity
-	b.aftertaste = current_location.base_aftertaste
-	b.moisture = current_location.base_moisture
-	b.defect_rate = current_location.base_defect_rate
-	b.cherry_kg = current_location.base_yield
+	
+	if current_location and current_location.variety_data:
+		var var_data = current_location.variety_data
+		b.aroma = var_data.base_aroma
+		b.body = var_data.base_body
+		b.acidity = var_data.base_acidity
+		b.sweetness = var_data.base_sweetness
+		b.flavor = var_data.base_flavor
+		b.bitterness = var_data.base_bitterness
+		b.moisture = var_data.base_moisture
+		b.defect_rate = var_data.base_defect_rate
+		b.cherry_kg = var_data.base_yield_potential
+	
 	batches[year] = b
 	
 func get_active_farm_batch() -> CoffeeBatch:
@@ -125,7 +129,11 @@ func advance_turn() -> void:
 		# Deduct cost if not yet paid (placed this turn)
 		if not tile_dict.paid:
 			tile_dict.paid = true
-			budget -= tile_dict.data.cost
+			var final_cost = tile_dict.data.cost
+			if tile_dict.has("override_cost"):
+				final_cost = tile_dict["override_cost"]
+			
+			budget -= final_cost
 			budget_changed.emit(budget)
 			
 		# Lock the tile if it's not locked yet
@@ -158,6 +166,23 @@ func advance_turn() -> void:
 				active_tiles.remove_at(i)
 				
 	turn_changed.emit(TimeManager.turn_in_year, TimeManager.season, TimeManager.year)
+
+func apply_missed_penalty(card_data: CardData) -> void:
+	var target_b = get_oldest_ready_batch(card_data.process_id)
+	target_b.aroma = clamp(target_b.aroma + card_data.penalty_aroma, 0.0, 100.0)
+	target_b.acidity = clamp(target_b.acidity + card_data.penalty_acidity, 0.0, 100.0)
+	target_b.body = clamp(target_b.body + card_data.penalty_body, 0.0, 100.0)
+	target_b.sweetness = clamp(target_b.sweetness + card_data.penalty_sweetness, 0.0, 100.0)
+	target_b.flavor = clamp(target_b.flavor + card_data.penalty_flavor, 0.0, 100.0)
+	target_b.bitterness = clamp(target_b.bitterness + card_data.penalty_bitterness, 0.0, 100.0)
+	target_b.complexity = clamp(target_b.complexity + card_data.penalty_complexity, 0.0, 100.0)
+	target_b.aftertaste = clamp(target_b.aftertaste + card_data.penalty_aftertaste, 0.0, 100.0)
+	target_b.moisture = clamp(target_b.moisture + card_data.penalty_moisture, 0.0, 100.0)
+	target_b.defect_rate = clamp(target_b.defect_rate + card_data.penalty_defect, 0.0, 100.0)
+	target_b.cherry_kg = clamp(target_b.cherry_kg + card_data.penalty_yield, 0, 5000)
+	
+	print("Penalti diberikan karena gagal menyelesaikan proses: ", card_data.card_name)
+	stats_changed.emit()
 	_check_stage_progression()
 
 func is_tile_ready_for_interaction(tile_node: Node3D) -> bool:

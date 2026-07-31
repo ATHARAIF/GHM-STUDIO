@@ -56,6 +56,10 @@ func _on_interaction_requested(interaction_type: String, tile_data: Dictionary) 
 		if has_node("DryPopup"):
 			$DryPopup.show_popup(tile_data)
 			btn_end_turn.disabled = true
+	elif interaction_type == "HARVEST":
+		if has_node("HarvestResultPopup"):
+			$HarvestResultPopup.show_popup(tile_data)
+			btn_end_turn.disabled = true
 
 func _on_stage_changed(stage: int) -> void:
 	lbl_stage.text = "Stage: " + str(stage)

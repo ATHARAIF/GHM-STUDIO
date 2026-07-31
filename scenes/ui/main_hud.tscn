@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://cx4x2m3u4v5w"]
 
 [ext_resource type="Script" uid="uid://ca341oaktpwcu" path="res://scripts/ui/main_hud.gd" id="1_q1w2e"]
-[ext_resource type="PackedScene" uid="uid://ddyxy0w123abf" path="res://scenes/ui/dry_popup.tscn" id="3_dry"]
-[ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/controllers/pruning_controller.tscn" id="4_prun"]
+[ext_resource type="PackedScene" uid="uid://ddyxy0w123abf" path="res://scenes/ui/popups/dry_popup.tscn" id="3_dry"]
+[ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/popups/pruning_popup.tscn" id="4_prun"]
+[ext_resource type="PackedScene" path="res://scenes/ui/popups/harvest_method_popup.tscn" id="5_harv"]
+[ext_resource type="PackedScene" path="res://scenes/ui/popups/harvest_result_popup.tscn" id="6_hres"]
 
 [node name="MainHUD" type="CanvasLayer" unique_id=176383737]
 script = ExtResource("1_q1w2e")
@@ -145,5 +147,12 @@ visible = false
 [node name="DryPopup" parent="." unique_id=1010791625 instance=ExtResource("3_dry")]
 visible = false
 
-[node name="PruningController" parent="." unique_id=2081107134 instance=ExtResource("4_prun")]
+[node name="PruningPopup" parent="." unique_id=2081107134 instance=ExtResource("4_prun")]
 visible = false
+
+[node name="HarvestMethodPopup" parent="." instance=ExtResource("5_harv")]
+visible = false
+
+[node name="HarvestResultPopup" parent="." instance=ExtResource("6_hres")]
+visible = false
+
