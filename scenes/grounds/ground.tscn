@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bgl7itmh3ifw" path="res://scripts/tiles/ground.gd" id="1_lmksl"]
 [ext_resource type="PackedScene" uid="uid://bwyye4kdchesq" path="res://assets/3D/tiles/base_tiles/tile_ground.glb" id="2_4a7qg"]
+[ext_resource type="Script" uid="uid://ci8v8k6p0366h" path="res://scripts/control/camera.gd" id="2_wpuq4"]
 [ext_resource type="Script" uid="uid://br3fhnsgmnusd" path="res://scripts/tiles/GroundTile.gd" id="3_w5yvf"]
 [ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environtment/surrounding_ground.tscn" id="7_wbbc8"]
+[ext_resource type="PackedScene" uid="uid://curxl7jch8dov" path="res://scenes/cards/card_hand.tscn" id="12_lbc21"]
 [ext_resource type="PackedScene" uid="uid://c4c5cwiyvnpal" path="res://assets/3D/buildings/warehouse_1.glb" id="13_l53mr"]
 [ext_resource type="PackedScene" uid="uid://dj1s7kk2pyxc5" path="res://assets/3D/buildings/tool_shed_1.glb" id="14_3suc6"]
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="15_juvny"]
@@ -98,23 +100,30 @@ script = ExtResource("1_lmksl")
 environment = SubResource("Environment_lbc21")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=184307939]
-transform = Transform3D(-0.91205055, 0.16332261, -0.37615097, -0.08331026, 0.824343, 0.55992687, 0.4015261, 0.5420188, -0.7382362, -6.208373, 4.496863, -7.872581)
+transform = Transform3D(-0.7126593, 0.33391702, -0.61694103, 0.046917938, 0.90016544, 0.43301392, 0.6999396, 0.2796458, -0.6571779, -70.89526, 39.7022, -39.552307)
+light_specular = 0.0
+light_bake_mode = 0
 shadow_enabled = true
-shadow_bias = 0.02
-shadow_blur = 2.04
+shadow_transmittance_bias = -16.0
+shadow_blur = 0.0
 directional_shadow_mode = 0
-directional_shadow_split_2 = 1.0
-directional_shadow_split_3 = 1.0
+directional_shadow_blend_splits = true
 directional_shadow_fade_start = 0.0
-directional_shadow_max_distance = 67.0
-directional_shadow_pancake_size = 0.0
+directional_shadow_max_distance = 17.2
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1644767472]
-transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 0, 0.8660254, 0.50000006, 0.7071068, -0.35355338, 0.61237246, -9.219639, 7.539463, 9.220211)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1644767472 node_paths=PackedStringArray("excluded_area")]
+transform = Transform3D(0.7071067, 0.29883623, -0.64085627, 0, 0.90630776, 0.42261824, 0.7071067, -0.29883623, 0.64085627, -7.56, 4.539, 7.265)
 projection = 1
 current = true
-size = 8.878
-far = 82.75
+size = 8.602549
+far = 98.92
+script = ExtResource("2_wpuq4")
+zoom_min = 2.0
+zoom_max = 9.5
+pan_speed = 5.0
+pan_bounds_min = Vector2(-1, -1)
+pan_bounds_max = Vector2(1, 1)
+excluded_area = NodePath("../footer")
 
 [node name="tile_grounds" type="Node3D" parent="." unique_id=865124454]
 metadata/_edit_lock_ = true
@@ -518,10 +527,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015738487, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
 
 [node name="warehouse_1" parent="." unique_id=394532502 instance=ExtResource("13_l53mr")]
-transform = Transform3D(-0.3, 0, 4.5298744e-08, 0, 0.3, 0, -4.5298744e-08, 0, -0.3, 4.8833356, 0.5293399, 0.48452926)
+transform = Transform3D(-0.3, 0, 4.5298744e-08, 0, 0.3, 0, -4.5298744e-08, 0, -0.3, 5.3079348, 0.5293392, -2.2917943)
 
 [node name="tool_shed_1" parent="." unique_id=1737704632 instance=ExtResource("14_3suc6")]
-transform = Transform3D(0.04254407, 0, -0.34740466, 0, 0.35000002, 0, 0.34740466, 0, 0.04254407, 4.849037, 0.2553219, -0.9926903)
+transform = Transform3D(0.3499832, 0, -0.003427837, 0, 0.35000002, 0, 0.003427837, 0, 0.3499832, 0.6398926, 0.25532165, -5.039459)
 
 [node name="player" type="MeshInstance3D" parent="tool_shed_1" unique_id=1143777819]
 transform = Transform3D(0.10616478, 0, -0.28058693, 0, 0.3, 0, 0.28058693, 0, 0.10616478, -0.25187397, 0.1927265, -0.48531032)
@@ -537,7 +546,44 @@ texture = ExtResource("16_p5s2n")
 [node name="overlays" parent="." unique_id=1895636831 instance=ExtResource("15_p5s2n")]
 
 [node name="production_house" parent="." unique_id=451303715 instance=ExtResource("16_juvny")]
-transform = Transform3D(-1.3113417e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.3113417e-08, 4.798667, 0.53348887, 1.7025429)
+transform = Transform3D(-0.0046455413, 0, -0.299964, 0, 0.29999995, 0, 0.299964, 0, -0.0046455413, 5.0151243, 0.53348887, 1.2075381)
+
+[node name="footer" type="ColorRect" parent="." unique_id=713612773]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -136.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.19607843)
+
+[node name="CardHand" parent="footer" unique_id=1143458886 instance=ExtResource("12_lbc21")]
+layout_mode = 1
+anchors_preset = 12
+anchor_left = 0.0
+anchor_right = 1.0
+offset_left = 175.99998
+offset_top = -120.0
+offset_right = 176.0
+offset_bottom = 30.0
+scale = Vector2(0.7, 0.7)
+
+[node name="Button" type="Button" parent="footer" unique_id=1078340121]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -36.0
+offset_right = -32.0
+offset_bottom = 36.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "⏭️
+NEXT TURN"
 
 [editable path="tile_grounds/tile_ground50"]
 [editable path="tile_grounds/tile_ground51"]

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/process/card_weeding.tscn" id="1_3cugw"]
 [ext_resource type="PackedScene" uid="uid://bdqnmb8k0jiym" path="res://scenes/cards/process/card_suckering.tscn" id="3_htdyw"]
 [ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/process/card_pruning.tscn" id="3_jdkk6"]
+[ext_resource type="PackedScene" uid="uid://dwhnowe17f8c2" path="res://scenes/tiles/harvest_tile.tscn" id="4_htdyw"]
 
 [sub_resource type="Theme" id="Theme_ybjhs"]
 
@@ -34,3 +35,4 @@ size_flags_vertical = 8
 custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
 size_flags_vertical = 8
+tile_scene = ExtResource("4_htdyw")
