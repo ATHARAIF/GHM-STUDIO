@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://curxl7jch8dov"]
 
 [ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/process/card_weeding.tscn" id="1_3cugw"]
-[ext_resource type="PackedScene" uid="uid://bdqnmb8k0jiym" path="res://scenes/cards/process/card_suckering.tscn" id="3_htdyw"]
-[ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/process/card_pruning.tscn" id="3_jdkk6"]
-[ext_resource type="PackedScene" uid="uid://dwhnowe17f8c2" path="res://scenes/tiles/harvest_tile.tscn" id="4_htdyw"]
+[ext_resource type="PackedScene" uid="uid://b7cg6uvvi5ata" path="res://scenes/tiles/pruning_tile.tscn" id="2_3cugw"]
 
 [sub_resource type="Theme" id="Theme_ybjhs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdkk6"]
+bg_color = Color(0.41001457, 0.49988216, 0.5693871, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 10
+anti_aliasing = false
 
 [node name="CardHand" type="HBoxContainer" unique_id=1143458886]
 anchors_preset = 7
@@ -14,25 +21,51 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -576.0
-offset_top = -207.0
+offset_top = -176.0
 offset_right = 576.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 theme = SubResource("Theme_ybjhs")
+theme_override_constants/separation = 36
 alignment = 1
 
 [node name="weeding" parent="." unique_id=914919374 instance=ExtResource("1_3cugw")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="pruning" parent="." unique_id=222149724 instance=ExtResource("3_jdkk6")]
-custom_minimum_size = Vector2(120, 150)
+[node name="pruning" parent="." unique_id=1252818490 instance=ExtResource("1_3cugw")]
 layout_mode = 2
 size_flags_vertical = 8
+tile_scene = ExtResource("2_3cugw")
 
-[node name="suckering" parent="." unique_id=896293076 instance=ExtResource("3_htdyw")]
-custom_minimum_size = Vector2(120, 150)
-layout_mode = 2
-size_flags_vertical = 8
-tile_scene = ExtResource("4_htdyw")
+[node name="background" parent="pruning/base_card/base" parent_id_path=PackedInt32Array(1252818490, 1349060828, 953399339) index="0" unique_id=1838299447]
+theme_override_styles/panel = SubResource("StyleBoxFlat_jdkk6")
+
+[node name="Label" parent="pruning/base_card/base/background/process_name" parent_id_path=PackedInt32Array(1252818490, 1349060828, 113510021) index="0" unique_id=630004058]
+text = "PRUNING"
+
+[node name="tiles" parent="pruning/base_card/base/background/tile_shape" parent_id_path=PackedInt32Array(1252818490, 1349060828, 1510772812) index="0" unique_id=1461447877]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 13.0
+offset_bottom = 13.0
+
+[node name="ColorRect5" parent="pruning/base_card/base/background/tile_shape/tiles" index="4" unique_id=688714867]
+visible = true
+
+[node name="ColorRect6" parent="pruning/base_card/base/background/tile_shape/tiles" index="5" unique_id=202174173]
+visible = true
+
+[node name="ColorRect7" parent="pruning/base_card/base/background/tile_shape/tiles" index="6" unique_id=179383272]
+visible = true
+
+[node name="ColorRect8" parent="pruning/base_card/base/background/tile_shape/tiles" index="7" unique_id=2014299443]
+visible = true
+
+[node name="ColorRect9" parent="pruning/base_card/base/background/tile_shape/tiles" index="8" unique_id=1695161695]
+visible = true
+
+[editable path="pruning"]
+[editable path="pruning/base_card"]

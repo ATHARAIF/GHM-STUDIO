@@ -301,7 +301,7 @@ func _compute_shape_from_scene(tile_scene: PackedScene) -> Array[Vector2i]:
 # child.name samain sama node base tile
 func _find_base_tile_node(node: Node) -> Node3D:
 	for child in node.get_children():
-		if child.name == "base tile" and child is Node3D:
+		if child.name == "base_tile" and child is Node3D:
 			return child
 		var found := _find_base_tile_node(child)
 		if found:

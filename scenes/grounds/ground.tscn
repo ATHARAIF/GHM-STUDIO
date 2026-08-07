@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bgl7itmh3ifw" path="res://scripts/tiles/ground.gd" id="1_lmksl"]
 [ext_resource type="PackedScene" uid="uid://bwyye4kdchesq" path="res://assets/3D/tiles/base_tiles/tile_ground.glb" id="2_4a7qg"]
-[ext_resource type="Script" uid="uid://ci8v8k6p0366h" path="res://scripts/control/camera.gd" id="2_wpuq4"]
 [ext_resource type="Script" uid="uid://br3fhnsgmnusd" path="res://scripts/tiles/GroundTile.gd" id="3_w5yvf"]
 [ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environtment/surrounding_ground.tscn" id="7_wbbc8"]
 [ext_resource type="PackedScene" uid="uid://curxl7jch8dov" path="res://scenes/cards/card_hand.tscn" id="12_lbc21"]
@@ -111,19 +110,12 @@ directional_shadow_blend_splits = true
 directional_shadow_fade_start = 0.0
 directional_shadow_max_distance = 17.2
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1644767472 node_paths=PackedStringArray("excluded_area")]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1644767472]
 transform = Transform3D(0.7071067, 0.29883623, -0.64085627, 0, 0.90630776, 0.42261824, 0.7071067, -0.29883623, 0.64085627, -7.56, 4.539, 7.265)
 projection = 1
 current = true
 size = 8.602549
 far = 98.92
-script = ExtResource("2_wpuq4")
-zoom_min = 2.0
-zoom_max = 9.5
-pan_speed = 5.0
-pan_bounds_min = Vector2(-1, -1)
-pan_bounds_max = Vector2(1, 1)
-excluded_area = NodePath("../footer")
 
 [node name="tile_grounds" type="Node3D" parent="." unique_id=865124454]
 metadata/_edit_lock_ = true

@@ -243,7 +243,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8gf4j")
 
-[sub_resource type="MultiMesh" id="MultiMesh_43pgf"]
+[sub_resource type="MultiMesh" id="MultiMesh_f04fk"]
 transform_format = 1
 instance_count = 27
 mesh = SubResource("ArrayMesh_7b6nj")
@@ -251,59 +251,59 @@ buffer = PackedFloat32Array(-0.036914732, 0, -0.054237552, 0, 0, 0.020395724, 0,
 
 [node name="harvest_tile" type="Node3D" unique_id=699342220]
 
-[node name="base tile" type="Node3D" parent="." unique_id=706541822]
+[node name="base_tile" type="Node3D" parent="." unique_id=706541822]
 
-[node name="corner_border2" parent="base tile" unique_id=231021662 instance=ExtResource("1_suf1s")]
+[node name="corner_border2" parent="base_tile" unique_id=231021662 instance=ExtResource("1_suf1s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 
-[node name="corner_border" parent="base tile/corner_border2" index="0" unique_id=1428358411]
+[node name="corner_border" parent="base_tile/corner_border2" index="0" unique_id=1428358411]
 mesh = SubResource("ArrayMesh_qcmwn")
 
-[node name="corner_border3" parent="base tile" unique_id=1260972546 instance=ExtResource("1_suf1s")]
+[node name="corner_border3" parent="base_tile" unique_id=1260972546 instance=ExtResource("1_suf1s")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, 0, 1)
 
-[node name="corner_border" parent="base tile/corner_border3" index="0" unique_id=1428358411]
+[node name="corner_border" parent="base_tile/corner_border3" index="0" unique_id=1428358411]
 mesh = SubResource("ArrayMesh_utltn")
 
-[node name="corner_border4" parent="base tile" unique_id=1330424589 instance=ExtResource("1_suf1s")]
+[node name="corner_border4" parent="base_tile" unique_id=1330424589 instance=ExtResource("1_suf1s")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1, 0, 1)
 
-[node name="corner_border" parent="base tile/corner_border4" index="0" unique_id=1428358411]
+[node name="corner_border" parent="base_tile/corner_border4" index="0" unique_id=1428358411]
 mesh = SubResource("ArrayMesh_we4im")
 
-[node name="corner_border5" parent="base tile" unique_id=88316142 instance=ExtResource("1_suf1s")]
+[node name="corner_border5" parent="base_tile" unique_id=88316142 instance=ExtResource("1_suf1s")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 0, -1)
 
-[node name="corner_border" parent="base tile/corner_border5" index="0" unique_id=1428358411]
+[node name="corner_border" parent="base_tile/corner_border5" index="0" unique_id=1428358411]
 mesh = SubResource("ArrayMesh_qcmwn")
 
-[node name="no_border2" parent="base tile" unique_id=1899927144 instance=ExtResource("2_43pgf")]
+[node name="no_border2" parent="base_tile" unique_id=1899927144 instance=ExtResource("2_43pgf")]
 
-[node name="no_border" parent="base tile/no_border2" index="0" unique_id=819013069]
+[node name="no_border" parent="base_tile/no_border2" index="0" unique_id=819013069]
 mesh = SubResource("ArrayMesh_pwq35")
 
-[node name="1side_border2" parent="base tile" unique_id=605663851 instance=ExtResource("3_utltn")]
+[node name="1side_border2" parent="base_tile" unique_id=605663851 instance=ExtResource("3_utltn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="1side_border" parent="base tile/1side_border2" index="0" unique_id=899103081]
+[node name="1side_border" parent="base_tile/1side_border2" index="0" unique_id=899103081]
 mesh = SubResource("ArrayMesh_qcmwn")
 
-[node name="1side_border3" parent="base tile" unique_id=1383426372 instance=ExtResource("3_utltn")]
+[node name="1side_border3" parent="base_tile" unique_id=1383426372 instance=ExtResource("3_utltn")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 1)
 
-[node name="1side_border" parent="base tile/1side_border3" index="0" unique_id=899103081]
+[node name="1side_border" parent="base_tile/1side_border3" index="0" unique_id=899103081]
 mesh = SubResource("ArrayMesh_utltn")
 
-[node name="1side_border4" parent="base tile" unique_id=431656727 instance=ExtResource("3_utltn")]
+[node name="1side_border4" parent="base_tile" unique_id=431656727 instance=ExtResource("3_utltn")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, 0, 0)
 
-[node name="1side_border" parent="base tile/1side_border4" index="0" unique_id=899103081]
+[node name="1side_border" parent="base_tile/1side_border4" index="0" unique_id=899103081]
 mesh = SubResource("ArrayMesh_utltn")
 
-[node name="1side_border5" parent="base tile" unique_id=474597567 instance=ExtResource("3_utltn")]
+[node name="1side_border5" parent="base_tile" unique_id=474597567 instance=ExtResource("3_utltn")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 0, 0)
 
-[node name="1side_border" parent="base tile/1side_border5" index="0" unique_id=899103081]
+[node name="1side_border" parent="base_tile/1side_border5" index="0" unique_id=899103081]
 mesh = SubResource("ArrayMesh_xk55f")
 
 [node name="decoration" type="Node3D" parent="." unique_id=489955234]
@@ -312,7 +312,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020626113, 0)
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="decoration" unique_id=305733650]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2812912, 0.09617047, -1.2942908)
 visible = false
-multimesh = SubResource("MultiMesh_43pgf")
+multimesh = SubResource("MultiMesh_f04fk")
 script = ExtResource("4_utltn")
 glb_file = ExtResource("5_we4im")
 grid_size = Vector2i(9, 3)
@@ -321,12 +321,12 @@ spacing = Vector2(0.325, 0.3)
 [node name="harvest_decor" parent="." unique_id=1022004594 instance=ExtResource("6_f04fk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022, 0)
 
-[editable path="base tile/corner_border2"]
-[editable path="base tile/corner_border3"]
-[editable path="base tile/corner_border4"]
-[editable path="base tile/corner_border5"]
-[editable path="base tile/no_border2"]
-[editable path="base tile/1side_border2"]
-[editable path="base tile/1side_border3"]
-[editable path="base tile/1side_border4"]
-[editable path="base tile/1side_border5"]
+[editable path="base_tile/corner_border2"]
+[editable path="base_tile/corner_border3"]
+[editable path="base_tile/corner_border4"]
+[editable path="base_tile/corner_border5"]
+[editable path="base_tile/no_border2"]
+[editable path="base_tile/1side_border2"]
+[editable path="base_tile/1side_border3"]
+[editable path="base_tile/1side_border4"]
+[editable path="base_tile/1side_border5"]

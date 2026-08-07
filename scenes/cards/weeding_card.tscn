@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://1qm48fitjyat"]
+
+[ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_1oqfb"]
+[ext_resource type="PackedScene" uid="uid://jgswer4eplps" path="res://scenes/tiles/weeding_tile.tscn" id="2_qouf3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybjhs"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 10
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ckjl0"]
+bg_color = Color(0.6, 0, 0, 1)
+border_blend = true
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 1
+
+[node name="weeding_card" type="Control" unique_id=1349060828]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1032.0
+offset_bottom = -468.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1oqfb")
+tile_scene = ExtResource("2_qouf3")
+
+[node name="background" type="Panel" parent="." unique_id=1838299447]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ybjhs")
+
+[node name="tile_shape" type="GridContainer" parent="background" unique_id=1461447877]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 24.0
+offset_right = 112.0
+offset_bottom = 43.0
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 3
+
+[node name="ColorRect" type="ColorRect" parent="background/tile_shape" unique_id=127395370]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="background/tile_shape" unique_id=599651930]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="background/tile_shape" unique_id=1127367033]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="background/tile_shape" unique_id=271636847]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="background/tile_shape" unique_id=688714867]
+visible = false
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="background/tile_shape" unique_id=202174173]
+visible = false
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="background/tile_shape" unique_id=179383272]
+visible = false
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="background/tile_shape" unique_id=2014299443]
+visible = false
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="background/tile_shape" unique_id=1695161695]
+visible = false
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
+[node name="process_name" type="Panel" parent="background" unique_id=113510021]
+custom_minimum_size = Vector2(100, 20)
+custom_maximum_size = Vector2(100, -1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 20.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ckjl0")
