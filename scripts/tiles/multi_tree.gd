@@ -30,6 +30,19 @@ extends MultiMeshInstance3D
 		custom_rotation = value
 		_generate_grid()
 
+# --- TAMBAHAN FITUR RANDOM ---
+@export_group("Randomization")
+@export var enable_random_rotation: bool = false :
+	set(value):
+		enable_random_rotation = value
+		_generate_grid()
+
+# Range seberapa jauh objek boleh muter acak (dalam derajat)
+# Misal Y diisi 180, nanti tiap objek bakal punya rotasi Y acak antara -180 sampai 180
+@export var random_rotation_range: Vector3 = Vector3(0, 180, 0) :
+	set(value):
+		random_rotation_range = value
+		_generate_grid()
 
 # --- LOGIKA AUTO-UPDATE & FIX PROPORSI ---
 
@@ -66,25 +79,32 @@ func _generate_grid():
 		mm.instance_count = grid_size.x * grid_size.y
 		mm.mesh = mesh_target 
 		
-		# Konversi input derajat dari Inspector ke Radian (karena Godot bacanya radian)
-		var rot_rad = Vector3(
-			deg_to_rad(custom_rotation.x),
-			deg_to_rad(custom_rotation.y),
-			deg_to_rad(custom_rotation.z)
-		)
-		
 		var index = 0
 		for x in range(grid_size.x):
 			for z in range(grid_size.y):
 				var pos = Vector3(x * spacing.x, 0, z * spacing.y)
 				
-				# Bikin Basis baru buat scale dan rotasi custom dari lu
+				# 1. Kalkulasi Rotasi Akhir (Custom + Random)
+				var final_rot_deg = custom_rotation
+				if enable_random_rotation:
+					final_rot_deg.x += randf_range(-random_rotation_range.x, random_rotation_range.x)
+					final_rot_deg.y += randf_range(-random_rotation_range.y, random_rotation_range.y)
+					final_rot_deg.z += randf_range(-random_rotation_range.z, random_rotation_range.z)
+				
+				var rot_rad = Vector3(
+					deg_to_rad(final_rot_deg.x),
+					deg_to_rad(final_rot_deg.y),
+					deg_to_rad(final_rot_deg.z)
+				)
+				
+				# 2. Fix Rotasi Objeknya (Bukan Origin Grid)
+				# Kita cuma ngambil rotasi aslinya (.basis) dan digabung sama rotasi/skala custom
 				var custom_basis = Basis.from_euler(rot_rad).scaled(custom_scale)
-				var custom_transform = Transform3D(custom_basis, pos)
+				var final_basis = custom_basis * original_transform.basis
 				
-				# Kalikan sama transform asli GLB biar proporsinya tetap ngikutin Blender
-				var final_transform = custom_transform * original_transform
-				
+				# 3. Terapin Transform Akhir
+				# Masukin basis rotasi yang udah bener ke koordinat grid (pos), origin asli GLB diabaikan biar gak ngorbit
+				var final_transform = Transform3D(final_basis, pos)
 				mm.set_instance_transform(index, final_transform)
 				index += 1
 				

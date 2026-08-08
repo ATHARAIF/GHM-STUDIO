@@ -76,23 +76,37 @@ func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Di
 	if card_data == null:
 		return
 		
-	var label = _find_turn_label(tile_node)
-	if label:
-		label.text = str(card_data.duration)
-		
-	var name_label = _find_lahan_name_label(tile_node)
-	if name_label and current_location:
-		name_label.text = current_location.location_name
-		
+	var tile_labels = _find_tile_labels(tile_node)
+	if tile_labels:
+		tile_labels.set_turn(card_data.duration)
+		if current_location:
+			tile_labels.set_lahan_name(current_location.location_name)
+			
 	var tile_dict = {
 		"tile": tile_node,
 		"data": card_data,
 		"remaining_duration": card_data.duration,
-		"label": label,
+		"tile_labels": tile_labels,
 		"paid": false,
 		"ready": false
 	}
 	tile_dict.merge(extra_data)
+	
+	if card_data.duration <= 0:
+		if card_data.requires_interaction:
+			tile_dict.ready = true
+			if tile_labels:
+				tile_labels.set_ready_state(true)
+		else:
+			# Apply effects immediately for normal cards
+			var target_b = get_oldest_ready_batch(card_data.process_id)
+			if target_b:
+				target_b.apply_effects(tile_dict)
+			stats_changed.emit()
+			if tile_node and is_instance_valid(tile_node):
+				PlacementManager.remove_tile_from_grid(tile_node)
+			return # Do not append to active_tiles if instantly resolved
+			
 	active_tiles.append(tile_dict)
 
 
@@ -103,19 +117,12 @@ func unregister_placed_tile(tile_node: Node3D) -> void:
 			break
 
 
-func _find_turn_label(node: Node) -> Label3D:
-	for child in node.get_children():
-		if child is Label3D and child.name == "turn":
-			return child
-		var found = _find_turn_label(child)
-		if found: return found
-	return null
 
-func _find_lahan_name_label(node: Node) -> Label3D:
+func _find_tile_labels(node: Node) -> Node3D:
 	for child in node.get_children():
-		if child is Label3D and child.name == "lahan":
+		if child.name == "tile_labels" or child.has_method("set_ready_state"):
 			return child
-		var found = _find_lahan_name_label(child)
+		var found = _find_tile_labels(child)
 		if found: return found
 	return null
 
@@ -145,15 +152,14 @@ func advance_turn() -> void:
 			
 		tile_dict.remaining_duration -= 1
 		
-		if tile_dict.label and is_instance_valid(tile_dict.label):
-			tile_dict.label.text = str(max(0, tile_dict.remaining_duration))
+		if tile_dict.get("tile_labels") and is_instance_valid(tile_dict.tile_labels):
+			tile_dict.tile_labels.set_turn(max(0, tile_dict.remaining_duration))
 			
 		if tile_dict.remaining_duration <= 0:
 			if tile_dict.data.requires_interaction:
 				tile_dict.ready = true
-				if tile_dict.label and is_instance_valid(tile_dict.label):
-					tile_dict.label.text = "!"
-					tile_dict.label.modulate = Color(1.0, 1.0, 0.0) # Highlight yellow
+				if tile_dict.get("tile_labels") and is_instance_valid(tile_dict.tile_labels):
+					tile_dict.tile_labels.set_ready_state(true)
 			else:
 				# Apply effects immediately for normal cards
 				var target_b = get_oldest_ready_batch(tile_dict.data.process_id)
@@ -237,12 +243,14 @@ func _check_stage_progression() -> void:
 		next_stage = 0
 		if not batches.has(TimeManager.year):
 			_create_new_batch(TimeManager.year)
-	elif turn_in_year == 3: next_stage = 1
-	elif turn_in_year == 6: next_stage = 2
-	elif turn_in_year == 8: next_stage = 3
-	elif turn_in_year == 11: next_stage = 4
-	elif turn_in_year == 13: next_stage = 5
-	# Stage 6, 7, 8 happen after Roasting, handled separately or via UI
+	elif turn_in_year >= 3 and turn_in_year < 6:
+		next_stage = 1 # Weeding & Pruning window (mapped to 1 so neither is red)
+	elif turn_in_year >= 6 and turn_in_year < 8:
+		next_stage = 3 # Suckering
+	elif turn_in_year >= 8 and turn_in_year < 13:
+		next_stage = 4 # Harvest
+	elif turn_in_year >= 13:
+		next_stage = 5 # Processing
 	
 	if next_stage != current_stage:
 		current_stage = next_stage

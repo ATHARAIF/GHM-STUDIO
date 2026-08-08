@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b755fr0qv6osp"]
 
-[ext_resource type="Script" uid="uid://ck4mkq8uutl11" path="res://scripts/ui/popups/pruning_popup.gd" id="1_popup"]
+[ext_resource type="Script" uid="uid://dsbfmugajaa0w" path="res://scripts/ui/popups/pruning_popup.gd" id="1_popup"]
 
 [node name="PruningPopup" type="CanvasLayer" unique_id=723379850]
 layer = 20
@@ -110,7 +110,6 @@ text = "Ripeness"
 
 [node name="VRip" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=140845084]
 layout_mode = 2
-text = "++++"
 horizontal_alignment = 2
 
 [node name="LQual" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=549590835]
@@ -120,7 +119,6 @@ text = "Quality"
 
 [node name="VQual" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=1123209970]
 layout_mode = 2
-text = "+++"
 horizontal_alignment = 2
 
 [node name="LQuant" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=1568941827]
@@ -130,7 +128,6 @@ text = "Quantity"
 
 [node name="VQuant" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=130604661]
 layout_mode = 2
-text = "--"
 horizontal_alignment = 2
 
 [node name="RightPanel" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBox/Split" unique_id=1392305758]

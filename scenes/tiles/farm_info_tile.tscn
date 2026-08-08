@@ -12,7 +12,7 @@ albedo_color = Color(0.4, 0.25, 0.15, 1)
 material = SubResource("StandardMaterial3D_info")
 size = Vector3(2, 0.2, 2)
 
-[node name="FarmInfoTile" type="Node3D" unique_id=1637197955]
+[node name="farm_info_tile" type="Node3D" unique_id=1637197955]
 script = ExtResource("1_abcde")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1834968503]
@@ -24,8 +24,6 @@ shape = SubResource("BoxShape3D_info")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=717974260]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("BoxMesh_info")
-
-
 
 [node name="PopupUI" type="CanvasLayer" parent="." unique_id=1705760726]
 layer = 10

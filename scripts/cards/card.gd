@@ -19,8 +19,61 @@ var is_outside_hand: bool = false
 var active_tween: Tween
 var pending_rotation_steps: int = 0   # dipake pas resume drag dari pickup, biar rotasi kebawa
 
+@onready var lbl_process = $Background/VBox/Header/Margin/LblProcess
+@onready var lbl_target = $Background/VBox/Subheader/Margin/LblTarget
+@onready var lbl_turn = $Background/VBox/Body/BadgeLeft/LblTurn
+@onready var header_panel = $Background/VBox/Header
+@onready var subheader_panel = $Background/VBox/Subheader
+@onready var badge_left = $Background/VBox/Body/BadgeLeft
+@onready var badge_right = $Background/VBox/Body/BadgeRight
+
 func _ready() -> void:
 	origin_parent = get_parent()
+	mouse_filter = MOUSE_FILTER_STOP
+	
+	if card_data:
+		_setup_ui()
+
+func _setup_ui() -> void:
+	if lbl_process:
+		lbl_process.text = card_data.card_name.to_upper()
+	if lbl_turn:
+		lbl_turn.text = str(card_data.duration)
+		
+	if lbl_target and header_panel and subheader_panel:
+		var style = header_panel.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		var sub_style = subheader_panel.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		var badge_l_style = badge_left.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		var badge_r_style = badge_right.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		
+		var loc = StageManager.current_location
+		var var_name = "Kopi"
+		if loc and loc.variety_data:
+			var_name = loc.variety_data.variety_name
+			
+		# Farm cards start with F, Process start with P or W
+		if card_data.process_id.begins_with("F"):
+			if loc:
+				lbl_target.text = loc.location_name.to_upper()
+			else:
+				lbl_target.text = "LAHAN"
+				
+			if style: style.bg_color = Color(0.18, 0.55, 0.55) # Cyan for farm
+			if sub_style: sub_style.bg_color = Color(0.12, 0.40, 0.40)
+			if badge_l_style: badge_l_style.bg_color = Color(0.12, 0.40, 0.40)
+			if badge_r_style: badge_r_style.bg_color = Color(0.12, 0.40, 0.40)
+		else:
+			lbl_target.text = ("%s %d" % [var_name, TimeManager.year]).to_upper()
+			
+			if style: style.bg_color = Color(0.63, 0.13, 0.35) # Magenta for process
+			if sub_style: sub_style.bg_color = Color(0.43, 0.08, 0.20)
+			if badge_l_style: badge_l_style.bg_color = Color(0.43, 0.08, 0.20)
+			if badge_r_style: badge_r_style.bg_color = Color(0.43, 0.08, 0.20)
+			
+		header_panel.add_theme_stylebox_override("panel", style)
+		subheader_panel.add_theme_stylebox_override("panel", sub_style)
+		badge_left.add_theme_stylebox_override("panel", badge_l_style)
+		badge_right.add_theme_stylebox_override("panel", badge_r_style)
 
 
 

@@ -1,65 +1,9 @@
-[gd_scene format=3 uid="uid://dsqncnaefqa5s"]
+[gd_scene load_steps=3 format=3 uid="uid://dsqncnaefqa5s"]
 
-[ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_fja0j"]
-[ext_resource type="PackedScene" uid="uid://c00aplsmusuef" path="res://scenes/tiles/farm/harvest_tile.tscn" id="2_fja0j"]
-[ext_resource type="Texture2D" uid="uid://bgvameegqvu8r" path="res://assets/ui/hands/card_base/harvest.png" id="3_fja0j"]
-[ext_resource type="FontFile" uid="uid://cti4vc502liyu" path="res://assets/font/edosz.ttf" id="4_llxeb"]
+[ext_resource type="PackedScene" uid="uid://dh5e6j7k8l9m0" path="res://scenes/cards/card_base.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://c00aplsmusuef" path="res://scenes/tiles/farm/harvest_tile.tscn" id="2_tile"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_733xs"]
-font = ExtResource("4_llxeb")
-font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_ggcpd"]
-font = ExtResource("4_llxeb")
-font_size = 64
-
-[sub_resource type="LabelSettings" id="LabelSettings_fja0j"]
-font = ExtResource("4_llxeb")
-
-[node name="harvest" type="Control" unique_id=914919374]
-custom_minimum_size = Vector2(120, 150)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 503.0
-offset_top = 563.0
-offset_right = 614.0
-offset_bottom = 720.0
-script = ExtResource("1_fja0j")
-tile_scene = ExtResource("2_fja0j")
-
-[node name="card" type="NinePatchRect" parent="." unique_id=1435024142]
-layout_mode = 0
-offset_right = 119.0
-offset_bottom = 152.0
-texture = ExtResource("3_fja0j")
-patch_margin_left = 24
-patch_margin_top = 24
-patch_margin_right = 30
-patch_margin_bottom = 22
-
-[node name="lahan" type="Label" parent="card" unique_id=2120876566]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 21.0
-offset_right = 106.0
-offset_bottom = 57.0
-text = "LAHAN"
-label_settings = SubResource("LabelSettings_733xs")
-
-[node name="turn" type="Label" parent="card" unique_id=1513768389]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 65.0
-offset_right = 77.0
-offset_bottom = 137.0
-text = "3"
-label_settings = SubResource("LabelSettings_ggcpd")
-
-[node name="proses" type="Label" parent="card" unique_id=589847630]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 54.0
-offset_right = 90.0
-offset_bottom = 73.0
-text = "HARVEST"
-label_settings = SubResource("LabelSettings_fja0j")
+[ext_resource type="Resource" uid="uid://cvoe0b05psis3" path="res://resources/cards/harvest.tres" id="3_data"]
+[node name="card_harvest" instance=ExtResource("1_base")]
+card_data = ExtResource("3_data")
+tile_scene = ExtResource("2_tile")

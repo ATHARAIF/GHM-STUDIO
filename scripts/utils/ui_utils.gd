@@ -12,7 +12,7 @@ static func _on_input_blocker_gui_input(event: InputEvent, popup_node: Node) -> 
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
 		popup_node.get_viewport().set_input_as_handled()
 
-static func build_farm_timeline(timeline_container: Container, circle_size: int = 16, line_len: int = 16, font_size: int = 10, line_height: int = 2) -> void:
+static func build_farm_timeline(timeline_container: Container, circle_size: int = 16, line_len: int = 16, font_size: int = 10, line_height: int = 2, pending_process_id: String = "") -> void:
 	if not timeline_container: return
 	
 	for child in timeline_container.get_children():
@@ -26,7 +26,8 @@ static func build_farm_timeline(timeline_container: Container, circle_size: int 
 	if c_stage == 0: mapped_current_stage = 0
 	elif c_stage == 1: mapped_current_stage = 1
 	elif c_stage == 2: mapped_current_stage = 2
-	elif c_stage >= 3: mapped_current_stage = 4
+	elif c_stage == 3: mapped_current_stage = 3
+	elif c_stage >= 4: mapped_current_stage = 4
 	
 	# Buat 5 stage dot
 	for i in range(5):
@@ -46,10 +47,13 @@ static func build_farm_timeline(timeline_container: Container, circle_size: int 
 			
 		var is_processing = false
 		if actual_process_id != "FP00":
-			for dict in StageManager.active_tiles:
-				if dict.data.process_id == actual_process_id:
-					is_processing = true
-					break
+			if actual_process_id == pending_process_id:
+				is_processing = true
+			else:
+				for dict in StageManager.active_tiles:
+					if dict.data.process_id == actual_process_id:
+						is_processing = true
+						break
 		
 		# Kasus khusus Planting (0) selalu hijau karena sudah ada dari awal
 		if i == 0:

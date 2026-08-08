@@ -1,0 +1,170 @@
+[gd_scene format=3 uid="uid://dh5e6j7k8mam0"]
+
+[ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://dv33rb6fgcmji" path="res://assets/font/SpecialGothicCondensedOne-Regular.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="3_icon"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.960784, 0.941176, 0.878431, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+bg_color = Color(0.63, 0.13, 0.35, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_subheader"]
+bg_color = Color(0.35, 0.1, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge"]
+bg_color = Color(0.4, 0.1, 0.2, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_header"]
+font = ExtResource("2_font")
+font_size = 20
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_subheader"]
+font = ExtResource("2_font")
+font_size = 14
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_badge"]
+font = ExtResource("2_font")
+font_size = 16
+font_color = Color(1, 1, 1, 1)
+
+[node name="card_base" type="Control"]
+custom_minimum_size = Vector2(120, 160)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 120.0
+offset_bottom = 160.0
+script = ExtResource("1_script")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+mouse_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+clip_children = 2
+
+[node name="VBox" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+mouse_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="Background/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="Margin" type="MarginContainer" parent="Background/VBox/Header"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 2
+
+[node name="LblProcess" type="Label" parent="Background/VBox/Header/Margin"]
+layout_mode = 2
+mouse_filter = 1
+text = "PROCESS"
+label_settings = SubResource("LabelSettings_header")
+vertical_alignment = 1
+
+[node name="Subheader" type="PanelContainer" parent="Background/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_subheader")
+
+[node name="Margin" type="MarginContainer" parent="Background/VBox/Subheader"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="LblTarget" type="Label" parent="Background/VBox/Subheader/Margin"]
+layout_mode = 2
+mouse_filter = 1
+text = "LAHAN"
+label_settings = SubResource("LabelSettings_subheader")
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Body" type="Control" parent="Background/VBox"]
+layout_mode = 2
+mouse_filter = 1
+size_flags_vertical = 3
+
+[node name="MainImage" type="TextureRect" parent="Background/VBox/Body"]
+layout_mode = 1
+mouse_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeLeft" type="PanelContainer" parent="Background/VBox/Body"]
+layout_mode = 1
+mouse_filter = 1
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")
+
+[node name="LblTurn" type="Label" parent="Background/VBox/Body/BadgeLeft"]
+layout_mode = 2
+mouse_filter = 1
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+label_settings = SubResource("LabelSettings_badge")
+
+[node name="BadgeRight" type="PanelContainer" parent="Background/VBox/Body"]
+layout_mode = 1
+mouse_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = 30.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")

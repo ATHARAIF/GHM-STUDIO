@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://mplpbfmhtfej"
-path="res://.godot/imported/Teyvat-Regular.ttf-6f4bfdb0e0712be7adb71bb882b9248f.fontdata"
+uid="uid://dv33rb6fgcmji"
+path="res://.godot/imported/SpecialGothicCondensedOne-Regular.ttf-905fea98ca2f8bae9deee96c0d2dfeae.fontdata"
 
 [deps]
 
-source_file="res://assets/font/Teyvat-Regular.ttf"
-dest_files=["res://.godot/imported/Teyvat-Regular.ttf-6f4bfdb0e0712be7adb71bb882b9248f.fontdata"]
+source_file="res://assets/font/SpecialGothicCondensedOne-Regular.ttf"
+dest_files=["res://.godot/imported/SpecialGothicCondensedOne-Regular.ttf-905fea98ca2f8bae9deee96c0d2dfeae.fontdata"]
 
 [params]
 

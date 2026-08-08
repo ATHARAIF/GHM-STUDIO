@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-@onready var btn_single = $CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods/BtnSingle
-@onready var btn_multi = $CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods/BtnMulti
+@onready var hbox_methods = $CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods
+@onready var slider_hbox = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox
 @onready var slider_intensity = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox/SliderIntensity
 @onready var lbl_intensity_val = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox/LblIntensityVal
 
@@ -16,9 +16,9 @@ extends CanvasLayer
 @onready var val_plant = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid/VPlant
 @onready var timeline_container = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Timeline
 
-var selected_method: String = "Single-Stem"
+var available_methods: Array[ProcessMethodData] = []
+var selected_method: ProcessMethodData
 
-# Store modifiers to pass them later
 var mod_acidity: float = 0.0
 var mod_aroma: float = 0.0
 var mod_sweetness: float = 0.0
@@ -27,10 +27,18 @@ var mod_body: float = 0.0
 var mod_bitterness: float = 0.0
 var mod_quant_pct: float = 0.0
 
+var current_tile: Node3D
+var current_card_data: Resource
+
 func _ready() -> void:
-	btn_single.pressed.connect(func(): _select_method("Single-Stem"))
-	btn_multi.pressed.connect(func(): _select_method("Multi-Stem"))
+	$CenterContainer/PanelContainer/VBox/Header/LblTitle.text = "PRUNING"
+	if StageManager.current_location:
+		lbl_farm_name.text = StageManager.current_location.location_name
 	
+	_load_methods()
+	_build_method_buttons()
+	
+	slider_intensity.value = 50.0
 	slider_intensity.value_changed.connect(_on_slider_changed)
 	
 	btn_confirm.pressed.connect(_on_confirm)
@@ -41,75 +49,85 @@ func _ready() -> void:
 		em.card_placement_interaction_requested.connect(_on_card_placement_interaction_requested)
 	
 	UIUtils.setup_input_blocker(self)
-	
-	_select_method("Single-Stem")
-	_on_slider_changed(slider_intensity.value)
-	
 	hide()
 
-func _select_method(method: String) -> void:
+func _load_methods() -> void:
+	var path = "res://resources/methods/pruning/"
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".tres"):
+				var res = load(path + file_name) as ProcessMethodData
+				if res:
+					available_methods.append(res)
+			file_name = dir.get_next()
+
+func _build_method_buttons() -> void:
+	for child in hbox_methods.get_children():
+		child.queue_free()
+		
+	for method in available_methods:
+		var btn = Button.new()
+		btn.text = method.method_name
+		btn.custom_minimum_size = Vector2(150, 100)
+		btn.pressed.connect(func(): _select_method(method))
+		hbox_methods.add_child(btn)
+
+func _select_method(method: ProcessMethodData) -> void:
 	selected_method = method
-	if method == "Single-Stem":
-		btn_single.modulate = Color(0.2, 0.8, 0.2)
-		btn_multi.modulate = Color(1.0, 1.0, 1.0)
-	else:
-		btn_single.modulate = Color(1.0, 1.0, 1.0)
-		btn_multi.modulate = Color(0.2, 0.8, 0.2)
+	slider_hbox.show()
+	
+	for child in hbox_methods.get_children():
+		if child is Button:
+			if child.text == method.method_name:
+				child.modulate = Color(0.2, 0.8, 0.2)
+			else:
+				child.modulate = Color(1.0, 1.0, 1.0)
+				
+	_on_slider_changed(slider_intensity.value)
 
 func _on_slider_changed(val: float) -> void:
-	var text = "Medium"
-	var rip_text = "+"
-	var qual_text = "++"
-	var quant_text = ""
+	if not selected_method:
+		return
+		
+	# Fallback to the old math formula ONLY if slider_levels is empty
+	if selected_method.slider_levels.size() == 0:
+		return
+		
+	var idx = 0
+	if val <= 0: idx = 0
+	elif val <= 25: idx = 1
+	elif val <= 50: idx = 2
+	elif val <= 75: idx = 3
+	else: idx = 4
 	
-	var rip_color = Color(0.2, 0.6, 1.0)
-	var qual_color = Color(0.2, 0.6, 1.0)
-	var quant_color = Color.WHITE
+	# Clamp index just in case the array is smaller than 5
+	idx = clampi(idx, 0, selected_method.slider_levels.size() - 1)
+	var level = selected_method.slider_levels[idx]
 	
-	if val <= 0:
-		text = "Very Low"
-		qual_text = "++++"; qual_color = Color(0.2, 0.8, 0.2)
-		rip_text = "+++"; rip_color = Color(0.2, 0.8, 0.2)
-		quant_text = "--"; quant_color = Color(0.8, 0.2, 0.2)
-		mod_acidity = 0.50; mod_aroma = 0.50; mod_sweetness = 0.50; mod_flavor = 0.50; mod_body = 0.0; mod_bitterness = 0.0; mod_quant_pct = -0.2
-	elif val <= 25:
-		text = "Low"
-		qual_text = "+++"; qual_color = Color(0.2, 0.8, 0.2)
-		rip_text = "++"; rip_color = Color(0.2, 0.8, 0.2)
-		quant_text = "-"; quant_color = Color(0.8, 0.2, 0.2)
-		mod_acidity = 0.35; mod_aroma = 0.35; mod_sweetness = 0.35; mod_flavor = 0.35; mod_body = 0.0; mod_bitterness = 0.0; mod_quant_pct = -0.1
-	elif val <= 50:
-		text = "Medium"
-		qual_text = "++"; qual_color = Color(0.2, 0.6, 1.0)
-		rip_text = "+"; rip_color = Color(0.2, 0.6, 1.0)
-		quant_text = ""; quant_color = Color.WHITE
-		mod_acidity = 0.20; mod_aroma = 0.20; mod_sweetness = 0.20; mod_flavor = 0.20; mod_body = 0.0; mod_bitterness = 0.0; mod_quant_pct = 0.0
-	elif val <= 75:
-		text = "High"
-		qual_text = "-"; qual_color = Color(0.8, 0.2, 0.2)
-		rip_text = "--"; rip_color = Color(0.8, 0.2, 0.2)
-		quant_text = "+++"; quant_color = Color(0.2, 0.6, 1.0)
-		mod_acidity = -0.20; mod_aroma = -0.20; mod_sweetness = -0.20; mod_flavor = -0.20; mod_body = 0.0; mod_bitterness = 0.0; mod_quant_pct = 0.3
-	else:
-		text = "Very High"
-		qual_text = "--"; qual_color = Color(0.8, 0.2, 0.2)
-		rip_text = "---"; rip_color = Color(0.8, 0.2, 0.2)
-		quant_text = "++++"; quant_color = Color(1.0, 1.0, 0.0)
-		mod_acidity = -0.35; mod_aroma = -0.35; mod_sweetness = -0.35; mod_flavor = -0.35; mod_body = 0.0; mod_bitterness = 0.0; mod_quant_pct = 0.4
+	# Extract exactly from the resource! No math needed!
+	mod_acidity = level.mod_acidity
+	mod_aroma = level.mod_aroma
+	mod_sweetness = level.mod_sweetness
+	mod_flavor = level.mod_flavor
+	mod_body = level.mod_body
+	mod_bitterness = level.mod_bitterness
+	mod_quant_pct = level.mod_quant_pct
 	
-	lbl_intensity_val.text = text
+	# UI Visuals
+	lbl_intensity_val.text = level.level_name
 	
-	val_ripeness.text = rip_text
-	val_ripeness.add_theme_color_override("font_color", rip_color)
+	val_ripeness.text = level.ui_rip_text
+	val_ripeness.add_theme_color_override("font_color", level.ui_rip_color)
 	
-	val_quality.text = qual_text
-	val_quality.add_theme_color_override("font_color", qual_color)
+	val_quality.text = level.ui_qual_text
+	val_quality.add_theme_color_override("font_color", level.ui_qual_color)
 	
-	val_quantity.text = quant_text
-	val_quantity.add_theme_color_override("font_color", quant_color)
+	val_quantity.text = level.ui_quant_text
+	val_quantity.add_theme_color_override("font_color", level.ui_quant_color)
 
-var current_tile: Node3D
-var current_card_data: Resource
 
 func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, card_data: Resource) -> void:
 	if card_name == "Pruning":
@@ -118,28 +136,38 @@ func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, c
 		show_popup()
 
 func show_popup() -> void:
-	# Update texts
 	if StageManager.current_location:
 		lbl_farm_name.text = StageManager.current_location.location_name
-		# Assuming we just set plant variety hardcoded as Kintamani for now based on user feedback
-		val_plant.text = "Kintamani"
+		if StageManager.current_location.variety_data:
+			val_plant.text = StageManager.current_location.variety_data.variety_name
 	
 	_update_timeline()
+	selected_method = null
+	slider_hbox.hide()
 	
-	# Reset state if needed
-	_select_method("Single-Stem")
+	# Reset button colors
+	for child in hbox_methods.get_children():
+		if child is Button:
+			child.modulate = Color(1.0, 1.0, 1.0)
+			
 	slider_intensity.value = 50.0
 	show()
 
 func _update_timeline() -> void:
-	UIUtils.build_farm_timeline(timeline_container, 16, 16, 10, 2)
+	var pending_id = ""
+	if current_card_data and current_card_data.get("process_id"):
+		pending_id = current_card_data.process_id
+	UIUtils.build_farm_timeline(timeline_container, 16, 16, 10, 2, pending_id)
 
 func _on_confirm() -> void:
+	if selected_method == null:
+		return
+		
 	hide()
-	if has_node("/root/EventManager"):
+	if has_node("/root/EventManager") and selected_method != null:
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_confirmed.emit("Pruning", current_tile, current_card_data, {
-			"pruning_method": selected_method,
+			"pruning_method": selected_method.method_name,
 			"pruning_intensity": slider_intensity.value,
 			"mod_acidity": mod_acidity,
 			"mod_aroma": mod_aroma,

@@ -1,7 +1,6 @@
 extends CanvasLayer
 
-@onready var btn_single = $CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods/BtnSingle
-@onready var btn_multi = $CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods/BtnMulti
+@onready var hbox_methods = $CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods
 @onready var slider_intensity = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox/SliderIntensity
 @onready var lbl_intensity_val = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox/LblIntensityVal
 
@@ -16,25 +15,13 @@ extends CanvasLayer
 @onready var val_plant = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid/VPlant
 @onready var timeline_container = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Timeline
 
-var selected_method: String = "Selective"
-
-var mod_acidity: float = 0.0
-var mod_aroma: float = 0.0
-var mod_sweetness: float = 0.0
-var mod_flavor: float = 0.0
-var mod_body: float = 0.0
-var mod_bitterness: float = 0.0
-var mod_defect: float = 0.0
-var override_cost: int = 0
-var mod_quant_pct: float = 0.0
+var available_methods: Array[ProcessMethodData] = []
+var selected_method: ProcessMethodData
 
 var current_tile: Node3D
 var current_card_data: Resource
 
-
-
 func _ready() -> void:
-	# Rename labels and headers
 	$CenterContainer/PanelContainer/VBox/Header/LblTitle.text = "HARVEST METHOD"
 	if StageManager.current_location:
 		lbl_farm_name.text = StageManager.current_location.location_name
@@ -42,11 +29,8 @@ func _ready() -> void:
 	$CenterContainer/PanelContainer/VBox/Split/RightPanel/LblMethod.text = "Select Harvesting Method:"
 	$CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox.hide() # Hide intensity slider
 	
-	btn_single.text = "Strip Picking"
-	btn_multi.text = "Selective Picking"
-	
-	btn_single.pressed.connect(_on_method_selected.bind("Strip"))
-	btn_multi.pressed.connect(_on_method_selected.bind("Selective"))
+	_load_methods()
+	_build_method_buttons()
 	
 	btn_confirm.pressed.connect(_on_confirm)
 	btn_close.pressed.connect(_on_cancel)
@@ -56,87 +40,53 @@ func _ready() -> void:
 		em.card_placement_interaction_requested.connect(_on_card_placement_interaction_requested)
 	
 	UIUtils.setup_input_blocker(self)
-		
-	_select_method("Selective")
 	hide()
 
-func _on_method_selected(method_name: String) -> void:
-	_select_method(method_name)
+func _load_methods() -> void:
+	var path = "res://resources/methods/harvest/"
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".tres"):
+				var res = load(path + file_name) as ProcessMethodData
+				if res:
+					available_methods.append(res)
+			file_name = dir.get_next()
 
-func _select_method(method_name: String) -> void:
-	selected_method = method_name
-	
-	btn_single.modulate = Color(1, 1, 1)
-	btn_multi.modulate = Color(1, 1, 1)
-	
-	mod_acidity = 0.0
-	mod_aroma = 0.0
-	mod_sweetness = 0.0
-	mod_flavor = 0.0
-	mod_body = 0.0
-	mod_bitterness = 0.0
-	mod_defect = 0.0
-	mod_quant_pct = 0.0
-	
-	var qual_text = ""
-	var qual_color = Color.WHITE
-	var rip_text = ""
-	var rip_color = Color.WHITE
-	var quant_text = ""
-	var quant_color = Color.WHITE
-	
-	if method_name == "Strip":
-		btn_single.modulate = Color(0.2, 0.8, 0.2)
-		override_cost = 500
+func _build_method_buttons() -> void:
+	for child in hbox_methods.get_children():
+		child.queue_free()
 		
-		# Quality Turun
-		mod_acidity = -0.2
-		mod_sweetness = -0.2
-		mod_flavor = -0.2
-		mod_defect = 5.0
-		qual_text = "-"
-		qual_color = Color(0.8, 0.4, 0.4)
+	for method in available_methods:
+		var btn = Button.new()
+		btn.text = method.method_name
+		btn.custom_minimum_size = Vector2(150, 100)
+		btn.pressed.connect(func(): _select_method(method))
+		hbox_methods.add_child(btn)
 		
-		# Ripeness Acak (Fair)
-		rip_text = "Mixed"
-		rip_color = Color(0.8, 0.8, 0.4)
-		
-		# Yield Normal
-		mod_quant_pct = 0.0
-		quant_text = "100%"
-		quant_color = Color.WHITE
-		
-	elif method_name == "Selective":
-		btn_multi.modulate = Color(0.2, 0.8, 0.2)
-		override_cost = 800
-		
-		# Quality Sangat Baik
-		mod_acidity = 0.3
-		mod_sweetness = 0.3
-		mod_flavor = 0.3
-		mod_defect = -5.0
-		qual_text = "++"
-		qual_color = Color(0.4, 0.8, 0.4)
-		
-		# Ripeness Sempurna
-		rip_text = "Perfect"
-		rip_color = Color(0.4, 0.8, 0.4)
-		
-		# Yield Turun (hanya petik yang matang)
-		mod_quant_pct = -0.15 # -15%
-		quant_text = "85%"
-		quant_color = Color(0.8, 0.4, 0.4)
-		
+	if available_methods.size() > 0:
+		_select_method(available_methods[0])
 
-		
-	val_quality.text = qual_text
-	val_quality.modulate = qual_color
-	val_ripeness.text = rip_text
-	val_ripeness.modulate = rip_color
-	val_quantity.text = quant_text
-	val_quantity.modulate = quant_color
+func _select_method(method: ProcessMethodData) -> void:
+	selected_method = method
 	
-	val_plant.text = "$%d" % override_cost
+	for child in hbox_methods.get_children():
+		if child is Button:
+			if child.text == method.method_name:
+				child.modulate = Color(0.2, 0.8, 0.2)
+			else:
+				child.modulate = Color(1, 1, 1)
+	
+	val_quality.text = method.ui_qual_text
+	val_quality.modulate = method.ui_qual_color
+	val_ripeness.text = method.ui_rip_text
+	val_ripeness.modulate = method.ui_rip_color
+	val_quantity.text = method.ui_quant_text
+	val_quantity.modulate = method.ui_quant_color
+	
+	val_plant.text = "$%d" % method.override_cost
 	$CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid/LPlant.text = "Cost:"
 
 func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, card_data: Resource) -> void:
@@ -151,22 +101,28 @@ func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, c
 		show()
 
 func _update_timeline() -> void:
-	UIUtils.build_farm_timeline(timeline_container, 16, 16, 10, 2)
+	var pending_id = ""
+	if current_card_data and current_card_data.get("process_id"):
+		pending_id = current_card_data.process_id
+	UIUtils.build_farm_timeline(timeline_container, 16, 16, 10, 2, pending_id)
 
 func _on_confirm() -> void:
 	hide()
 	
+	if selected_method == null:
+		return
+		
 	var extra_data = {
-		"harvest_method": selected_method,
-		"override_cost": override_cost,
-		"mod_acidity": mod_acidity,
-		"mod_aroma": mod_aroma,
-		"mod_sweetness": mod_sweetness,
-		"mod_flavor": mod_flavor,
-		"mod_body": mod_body,
-		"mod_bitterness": mod_bitterness,
-		"mod_defect": mod_defect,
-		"mod_quant_pct": mod_quant_pct
+		"harvest_method": selected_method.method_name,
+		"override_cost": selected_method.override_cost,
+		"mod_acidity": selected_method.mod_acidity,
+		"mod_aroma": selected_method.mod_aroma,
+		"mod_sweetness": selected_method.mod_sweetness,
+		"mod_flavor": selected_method.mod_flavor,
+		"mod_body": selected_method.mod_body,
+		"mod_bitterness": selected_method.mod_bitterness,
+		"mod_defect": selected_method.mod_defect,
+		"mod_quant_pct": selected_method.mod_quant_pct
 	}
 	
 	if has_node("/root/EventManager"):

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bjmcjs8opej6"
-path="res://.godot/imported/Khaenriah-Regular.ttf-a4f89dfd22e012b96594507762193427.fontdata"
+uid="uid://ud5do37aik3k"
+path="res://.godot/imported/LeagueGothic-Regular-VariableFont_wdth.ttf-e8ba176a281177f5855ce2866621132f.fontdata"
 
 [deps]
 
-source_file="res://assets/font/Khaenriah-Regular.ttf"
-dest_files=["res://.godot/imported/Khaenriah-Regular.ttf-a4f89dfd22e012b96594507762193427.fontdata"]
+source_file="res://assets/font/LeagueGothic-Regular-VariableFont_wdth.ttf"
+dest_files=["res://.godot/imported/LeagueGothic-Regular-VariableFont_wdth.ttf-e8ba176a281177f5855ce2866621132f.fontdata"]
 
 [params]
 

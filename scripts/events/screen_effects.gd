@@ -5,19 +5,20 @@ extends CanvasLayer # Ganti ini sesuai tipe node tempat script ini nempel (kalo 
 @onready var basic_shader = $basic_Shader
 @onready var rain_shader = $raining
 @onready var snow_shader = $snow
+@onready var godray = $godray
 
 # 2. Ambil referensi ke semua tombol di dalam HBoxContainer
-@onready var btn_crt = $HBoxContainer/CRT
-@onready var btn_basic = $HBoxContainer/basic
-@onready var btn_rain = $HBoxContainer/rain
-@onready var btn_snow = $HBoxContainer/snow
+@onready var btn_crt = $toggle_shader/CRT
+@onready var btn_basic = $toggle_shader/basic
+@onready var btn_rain = $toggle_shader/rain
+@onready var btn_snow = $toggle_shader/snow
 
 func _ready():
 	
 	# Opsional: Atur shader mana yang nyala pertama kali pas game mulai
 	# Di sini gw set default-nya ke 'snow' sesuai screenshot lo
 	matikan_semua_shader()
-	basic_shader.visible = true
+	godray.visible = true
 
 
 # Fungsi helper buat nyembunyiin semua shader sekaligus biar ga repot

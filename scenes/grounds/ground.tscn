@@ -3,21 +3,15 @@
 [ext_resource type="Script" uid="uid://bgl7itmh3ifw" path="res://scripts/tiles/ground.gd" id="1_lmksl"]
 [ext_resource type="PackedScene" uid="uid://bwyye4kdchesq" path="res://assets/3D/tiles/base_tiles/tile_ground.glb" id="2_4a7qg"]
 [ext_resource type="Script" uid="uid://br3fhnsgmnusd" path="res://scripts/tiles/ground_tile.gd" id="3_w5yvf"]
-[ext_resource type="Shader" uid="uid://dq8okqltd833b" path="res://shaders/CRT_shader.gdshader" id="4_4a7qg"]
-[ext_resource type="Script" uid="uid://c7h8e2vy7ord" path="res://scripts/events/overlay.gd" id="4_lbc21"]
-[ext_resource type="PackedScene" uid="uid://curxl7jch8dov" path="res://scenes/cards/card_hand.tscn" id="4_w5yvf"]
-[ext_resource type="Shader" uid="uid://df2ltnm1ltiqk" path="res://shaders/raining.gdshader" id="5_jgxd4"]
-[ext_resource type="Shader" uid="uid://bcxjo56cugxhg" path="res://shaders/graphic_shader.gdshader" id="7_dwf10"]
 [ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environment/surrounding_ground.tscn" id="7_wbbc8"]
-[ext_resource type="Shader" uid="uid://bplh3j7psqlhk" path="res://shaders/snow.gdshader" id="7_wpuq4"]
 [ext_resource type="PackedScene" uid="uid://d4k66hgy7flsd" path="res://scenes/environment/warehouse_2.tscn" id="8_ukd3u"]
 [ext_resource type="PackedScene" uid="uid://bdk741fhg4k35" path="res://assets/3D/environtment/tree/tree.glb" id="9_5fh0g"]
 [ext_resource type="PackedScene" uid="uid://c4c5cwiyvnpal" path="res://assets/3D/buildings/warehouse_1.glb" id="13_l53mr"]
 [ext_resource type="PackedScene" uid="uid://dj1s7kk2pyxc5" path="res://assets/3D/buildings/tool_shed_1.glb" id="14_3suc6"]
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="15_juvny"]
+[ext_resource type="PackedScene" uid="uid://cxy720dnitlvc" path="res://scenes/ui/main_hud.tscn" id="15_p5s2n"]
 [ext_resource type="PackedScene" uid="uid://dhlxe0q8f5nqk" path="res://assets/3D/buildings/production_house.glb" id="16_juvny"]
 [ext_resource type="Texture2D" uid="uid://b83ny3br6cx0f" path="res://assets/ui/item_sprites/mukamuel.png" id="16_p5s2n"]
-[ext_resource type="PackedScene" uid="uid://cx4x2m3u4v5w" path="res://scenes/ui/main_hud.tscn" id="17_hud"]
 [ext_resource type="PackedScene" uid="uid://ddyxy0w123abc" path="res://scenes/tiles/farm_info_tile.tscn" id="18_farm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dwf10"]
@@ -97,47 +91,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ouq1h")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbbc8"]
-shader = ExtResource("4_4a7qg")
-shader_parameter/curvature = 3.5
-shader_parameter/scanline_count = 450.0
-shader_parameter/scanline_opacity = 0.25
-shader_parameter/vignette_intensity = 1.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpuq4"]
-shader = ExtResource("7_dwf10")
-shader_parameter/warm_color = Color(0.6623425, 0.9999997, 0.82108176, 1)
-shader_parameter/tint_amount = 0.182000008645
-shader_parameter/contrast = 1.15
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybjhs"]
-shader = ExtResource("5_jgxd4")
-shader_parameter/overcast_color = Color(0.2, 0.25, 0.35, 1)
-shader_parameter/overcast_blend = 0.1770000084075
-shader_parameter/saturation = 0.4
-shader_parameter/rain_speed = 0.89200003911012
-shader_parameter/rain_density = 0.1930000091675
-shader_parameter/rain_angle = 0.28800006118
-shader_parameter/rain_color = Color(0.8, 0.9, 1, 0.16862746)
-shader_parameter/rain_width = 0.0010000000475
-shader_parameter/rain_length = 0.25700001150898
-shader_parameter/rain_scale = 0.67800002894512
-shader_parameter/lightning_frequency = 2.28900010546762
-shader_parameter/lightning_chance = 0.1290000061275
-shader_parameter/lightning_color = Color(1, 1, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwf10"]
-shader = ExtResource("7_wpuq4")
-shader_parameter/winter_color = Color(0.9265196, 0.9458415, 0.9652845, 1)
-shader_parameter/winter_blend = 0.2930000139175
-shader_parameter/saturation = 0.7
-shader_parameter/snow_speed = 0.5
-shader_parameter/snow_density = 0.14000000665
-shader_parameter/wind_sway = 2.0
-shader_parameter/sway_speed = 1.5
-shader_parameter/snow_size = 0.08
-shader_parameter/snow_color = Color(1, 1, 1, 0.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvvxj"]
 size = Vector3(129.23358, 1, 122.23395)
@@ -564,71 +517,6 @@ script = ExtResource("3_w5yvf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2085296074]
-script = ExtResource("4_lbc21")
-
-[node name="CRT_Shader" type="ColorRect" parent="CanvasLayer" unique_id=1568674359]
-visible = false
-material = SubResource("ShaderMaterial_wbbc8")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="basic_Shader" type="ColorRect" parent="CanvasLayer" unique_id=1457174090]
-visible = false
-material = SubResource("ShaderMaterial_wpuq4")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="raining" type="ColorRect" parent="CanvasLayer" unique_id=857185800]
-visible = false
-material = SubResource("ShaderMaterial_ybjhs")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="snow" type="ColorRect" parent="CanvasLayer" unique_id=655920320]
-visible = false
-material = SubResource("ShaderMaterial_dwf10")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="CardHand" parent="CanvasLayer" unique_id=1143458886 instance=ExtResource("4_w5yvf")]
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=49488600]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CRT" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1655084445]
-layout_mode = 2
-text = "CRT"
-
-[node name="basic" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=810160199]
-layout_mode = 2
-text = "basic"
-
-[node name="rain" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1028170283]
-layout_mode = 2
-text = "raining"
-
-[node name="snow" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1565279874]
-layout_mode = 2
-text = "snow"
-
 [node name="environtment" type="Node3D" parent="." unique_id=1341241664]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015738487, 0)
 
@@ -642,8 +530,6 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2108103316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22439575, -0.6092825, -4.1495667)
 shape = SubResource("BoxShape3D_vvvxj")
-
-[node name="MainHUD" parent="." unique_id=1308397270 instance=ExtResource("17_hud")]
 
 [node name="FarmInfoTile" parent="." unique_id=1856349914 instance=ExtResource("18_farm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.801547, 0.23734295, -2.470316)
@@ -694,10 +580,7 @@ transform = Transform3D(-0.51975393, 0, -0.4688878, 0, 0.7, 0, 0.4688878, 0, -0.
 [node name="tree6" parent="Tree" unique_id=1355694667 instance=ExtResource("9_5fh0g")]
 transform = Transform3D(-0.62772036, 0, 0.3097857, 0, 0.7, 0, -0.3097857, 0, -0.62772036, 2.015376, 0.2599667, -5.9937882)
 
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/CRT" to="CanvasLayer" method="_on_crt_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/basic" to="CanvasLayer" method="_on_basic_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/rain" to="CanvasLayer" method="_on_rain_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/snow" to="CanvasLayer" method="_on_snow_pressed"]
+[node name="main_hud" parent="." unique_id=1895636831 instance=ExtResource("15_p5s2n")]
 
 [editable path="tile_grounds/tile_ground50"]
 [editable path="tile_grounds/tile_ground51"]

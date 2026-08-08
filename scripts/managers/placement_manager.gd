@@ -1,28 +1,18 @@
 extends Node
 
-@export_group("Ghost Visual")
-@export var float_height: float = 0.4
-@export var ghost_float_alpha: float = 0.55
-@export var ghost_indicator_alpha: float = 0.25
-@export var valid_color: Color = Color(0.3, 1, 0.3)   # jika mau ngikut warna asli tile, biarin putih & pastikan use_original_color_when_valid = true
-@export var invalid_color: Color = Color(1, 0.3, 0.3)
-#@export var use_original_color_when_valid: bool = true
 
 @export_group("Animation")
-@export var rotate_duration: float = 0.2
+@export var float_height: float = 0.4
 @export var place_duration: float = 0.35
 
+@onready var ghost_visualizer = $GhostVisualizer
 
 var camera: Camera3D
-var ghost_float: Node3D      # tile yang ngambang, ngikutin cursor
-var ghost_indicator: Node3D  # "bayangan" rata di ground, nunjukin valid/invalid
 var current_tile_scene: PackedScene
-var current_base_shape: Array[Vector2i] = [Vector2i.ZERO]   # shape asli, belum dirotate
-var current_shape: Array[Vector2i] = [Vector2i.ZERO]        # shape setelah dirotate, dipake buat validasi
-var rotation_steps: int = 0   # 0-3, tiap step = 90 derajat
-var ghost_visual_rotation: float = 0.0   # rotasi kontinu (gak di-wrap), buat animasi tween
-var ghost_float_rotate_tween: Tween
-var ghost_indicator_rotate_tween: Tween
+var current_base_shape: Array[Vector2i] = [Vector2i.ZERO]
+var current_shape: Array[Vector2i] = [Vector2i.ZERO]
+var rotation_steps: int = 0
+var ghost_visual_rotation: float = 0.0
 
 var ground_tiles: Array[GroundTile] = []
 var grid: Dictionary = {}          # Vector2i -> GroundTile
@@ -36,19 +26,26 @@ var placement_data: Dictionary = {}   # tile_instance (Node3D) -> {scene, base_s
 
 var current_card_node: Control = null   # referensi LANGSUNG ke node Card asli yang lagi di-drag (bukan path/scene)
 var pending_interaction_tile: Node3D = null
+var moving_tile: Node3D = null
+var original_move_data: Dictionary = {}
 
 func _ready() -> void:
+	set_process(false)
 	if has_node("/root/EventManager"):
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_confirmed.connect(_on_interaction_confirmed)
 		em.card_placement_interaction_cancelled.connect(_on_interaction_cancelled)
 
+# region Core System & Input
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if current_tile_scene == null:
-			_try_pickup(event.position)
+	if event is InputEventMouseButton and event.pressed:
+		if current_tile_scene == null and moving_tile == null:
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				_try_pickup(event.position, false)
+			elif event.button_index == MOUSE_BUTTON_RIGHT:
+				_try_pickup(event.position, true)
 
-func _try_pickup(mouse_pos: Vector2) -> void:
+func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 	var world_pos = _get_ground_position(mouse_pos)
 	if world_pos == null:
 		return
@@ -78,19 +75,30 @@ func _try_pickup(mouse_pos: Vector2) -> void:
 	if card_node == null or not is_instance_valid(card_node):
 		return   # card aslinya udah gak ada (edge case), jangan diapa-apain
 
-	# lepas semua cell yang tadi ditempatin tile ini
-	for offset in data.shape:
-		var c: Vector2i = data.anchor + offset
-		if grid.has(c):
-			grid[c].clear()
-
-	StageManager.unregister_placed_tile(tile)
-	placement_data.erase(tile)
-	tile.queue_free()
-
-	# balikin ke state [2] pake NODE CARD ASLINYA -- bukan bikin card baru.
-	# semua data (label, ukuran, dll) otomatis ikut karena ini instance yang sama persis.
-	card_node.resume_drag_at(mouse_pos, data.rotation_steps)
+	if instant_cancel:
+		StageManager.unregister_placed_tile(tile)
+		placement_data.erase(tile)
+		for offset in data.shape:
+			var c: Vector2i = data.anchor + offset
+			if grid.has(c):
+				grid[c].clear()
+		tile.queue_free()
+		
+		if card_node.has_method("set"):
+			card_node.set("is_placed", false)
+			card_node.show()
+			card_node.set("top_level", true)
+			var op = card_node.get("origin_parent")
+			var oi = card_node.get("origin_index")
+			if op:
+				op.move_child(card_node, oi)
+			var card_size = card_node.get("size")
+			if card_size:
+				card_node.call("animate_return_from", get_viewport().get_mouse_position() - (card_size / 2.0))
+			else:
+				card_node.call("animate_return_from", get_viewport().get_mouse_position())
+	else:
+		_begin_move_tile(tile, data)
 
 func register_camera(cam: Camera3D) -> void:
 	camera = cam
@@ -112,6 +120,9 @@ func register_ground_tiles(tiles: Array[GroundTile]) -> void:
 
 var shape_cache: Dictionary = {}   # PackedScene -> Array[Vector2i], biar gak itung ulang tiap drag
 
+# endregion
+
+# region Drag & Drop State
 func begin_drag(tile_scene: PackedScene, card_node: Control = null, initial_rotation_steps: int = 0) -> void:
 	current_tile_scene = tile_scene
 	current_card_node = card_node
@@ -131,34 +142,12 @@ func rotate_ghost() -> void:
 	current_shape = _rotate_shape(current_base_shape, rotation_steps)
 
 	var start_rot := ghost_visual_rotation
-	ghost_visual_rotation += 90.0   # terus nambah (gak di-wrap), biar tween-nya muter searah terus
+	ghost_visual_rotation += 90.0
 	var target_rot := ghost_visual_rotation
 
-	if ghost_float:
-		if ghost_float_rotate_tween:
-			ghost_float_rotate_tween.kill()
-		ghost_float_rotate_tween = create_tween()
-		ghost_float_rotate_tween.set_trans(Tween.TRANS_BACK)
-		ghost_float_rotate_tween.set_ease(Tween.EASE_OUT)
-		# pake tween_method, BUKAN tween_property -- biar gak pernah "baca balik" rotation_degrees
-		# dari node (yang bisa wrap jadi -180 pas kebetulan lagi di 180, bikin jarak tempuh salah hitung)
-		ghost_float_rotate_tween.tween_method(_set_ghost_float_rotation, start_rot, target_rot, rotate_duration)
-		
-	if ghost_indicator:
-		if ghost_indicator_rotate_tween:
-			ghost_indicator_rotate_tween.kill()
-		ghost_indicator_rotate_tween = create_tween()
-		ghost_indicator_rotate_tween.set_trans(Tween.TRANS_BACK)
-		ghost_indicator_rotate_tween.set_ease(Tween.EASE_OUT)
-		ghost_indicator_rotate_tween.tween_method(_set_ghost_indicator_rotation, start_rot, target_rot, rotate_duration)
+	ghost_visualizer.animate_rotation(start_rot, target_rot)
 
-func _set_ghost_float_rotation(value: float) -> void:
-	if ghost_float:
-		ghost_float.rotation_degrees.y = value
 
-func _set_ghost_indicator_rotation(value: float) -> void:
-	if ghost_indicator:
-		ghost_indicator.rotation_degrees.y = value
 
 func _rotate_shape(shape: Array[Vector2i], steps: int) -> Array[Vector2i]:
 	var result: Array[Vector2i] = shape.duplicate()
@@ -168,6 +157,129 @@ func _rotate_shape(shape: Array[Vector2i], steps: int) -> Array[Vector2i]:
 			rotated.append(Vector2i(cell.y, -cell.x))   # match arah rotation_degrees.y bawaan Godot
 		result = rotated
 	return result
+
+
+func _begin_move_tile(tile: Node3D, data: Dictionary) -> void:
+	moving_tile = tile
+	original_move_data = data.duplicate()
+	
+	for offset in data.shape:
+		var c: Vector2i = data.anchor + offset
+		if grid.has(c):
+			grid[c].clear()
+			
+	tile.hide()
+	
+	current_tile_scene = data.scene
+	current_base_shape = data.base_shape.duplicate()
+	rotation_steps = data.rotation_steps
+	ghost_visual_rotation = float(rotation_steps) * 90.0
+	current_shape = _rotate_shape(current_base_shape, rotation_steps)
+	
+	set_process(true)
+
+func _process(delta: float) -> void:
+	if not moving_tile:
+		set_process(false)
+		return
+		
+	var mouse_pos = get_viewport().get_mouse_position()
+	
+	var is_outside_hand = true
+	var card = original_move_data.get("card_node", null)
+	if card and is_instance_valid(card) and card.get_parent():
+		var hand_rect = card.get_parent().get_global_rect()
+		is_outside_hand = not hand_rect.has_point(mouse_pos)
+		
+	if is_outside_hand:
+		update_ghost(mouse_pos)
+	else:
+		_clear_ghost()
+	
+	if Input.is_action_just_pressed("rotate"):
+		rotate_ghost()
+		
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if is_outside_hand:
+			_try_place_move(mouse_pos)
+		else:
+			_cancel_move()
+
+func _try_place_move(mouse_pos: Vector2) -> void:
+	var world_pos = _get_ground_position(mouse_pos)
+	_clear_ghost()
+	set_process(false)
+	
+	if world_pos == null:
+		_cancel_move(true)
+		return
+		
+	var shape := current_shape
+	var anchor_coord := _world_to_grid(world_pos)
+	
+	if not _can_place(anchor_coord, shape):
+		_cancel_move(true)
+		return
+		
+	var anchor_tile: GroundTile = grid[anchor_coord]
+	var final_pos = anchor_tile.global_position
+	final_pos.y += ground_top_offset + tile_bottom_offset
+	moving_tile.rotation_degrees.y = rotation_steps * 90.0
+	
+	var start_pos = final_pos
+	start_pos.y += float_height
+	moving_tile.global_position = start_pos
+	moving_tile.show()
+	
+	var tw := create_tween()
+	tw.set_trans(Tween.TRANS_BOUNCE)
+	tw.set_ease(Tween.EASE_OUT)
+	tw.tween_property(moving_tile, "global_position", final_pos, place_duration)
+	
+	for offset in shape:
+		var coord = anchor_coord + offset
+		grid[coord].occupy(moving_tile)
+		
+	var data = placement_data[moving_tile]
+	data["anchor"] = anchor_coord
+	data["shape"] = shape.duplicate()
+	data["rotation_steps"] = rotation_steps
+	
+	moving_tile = null
+	original_move_data.clear()
+	current_tile_scene = null
+
+func _cancel_move(skip_clear_ghost: bool = false) -> void:
+	if not skip_clear_ghost:
+		_clear_ghost()
+	set_process(false)
+	
+	var card = original_move_data.get("card_node", null)
+	
+	StageManager.unregister_placed_tile(moving_tile)
+	if placement_data.has(moving_tile):
+		placement_data.erase(moving_tile)
+	moving_tile.queue_free()
+	
+	if card and is_instance_valid(card):
+		if card.has_method("set"):
+			card.set("is_placed", false)
+			card.show()
+			card.set("top_level", true)
+			var op = card.get("origin_parent")
+			var oi = card.get("origin_index")
+			if op:
+				op.move_child(card, oi)
+			var mouse_pos = get_viewport().get_mouse_position()
+			var card_size = card.get("size")
+			if card_size:
+				card.call("animate_return_from", mouse_pos - (card_size / 2.0))
+			else:
+				card.call("animate_return_from", mouse_pos)
+			
+	moving_tile = null
+	original_move_data.clear()
+	current_tile_scene = null
 
 func end_drag() -> void:
 	_clear_ghost()
@@ -185,21 +297,6 @@ func update_ghost(mouse_pos: Vector2) -> void:
 	if world_pos == null:
 		return
 
-	if ghost_float == null:
-		ghost_float = current_tile_scene.instantiate()
-		_apply_native_transparency(ghost_float, ghost_float_alpha)
-		ghost_float.rotation_degrees.y = rotation_steps * 90.0
-		get_tree().current_scene.add_child(ghost_float)
-		ghost_visual_rotation = rotation_steps * 90.0
-
-	if ghost_indicator == null:
-		ghost_indicator = current_tile_scene.instantiate()
-		_strip_to_base_tile(ghost_indicator)
-		_make_flat_shadow(ghost_indicator, ghost_indicator_alpha)
-		ghost_indicator.rotation_degrees.y = rotation_steps * 90.0
-		get_tree().current_scene.add_child(ghost_indicator)
-		ghost_visual_rotation = rotation_steps * 90.0
-
 	var anchor_coord := _world_to_grid(world_pos)
 	var valid := _can_place(anchor_coord, current_shape)
 
@@ -207,19 +304,20 @@ func update_ghost(mouse_pos: Vector2) -> void:
 	if valid:
 		var anchor_tile: GroundTile = grid[anchor_coord]
 		base_pos = anchor_tile.global_position
-		#base_pos.y += ground_top_offset + tile_bottom_offset
 	else:
-		base_pos = world_pos   # gak snap, ngikut posisi mouse bebas
+		base_pos = world_pos
 	
 	base_pos.y += ground_top_offset + tile_bottom_offset
-	ghost_indicator.global_position = base_pos
-
+	var indicator_pos = base_pos
+	
 	var float_pos := base_pos
 	float_pos.y += float_height
-	ghost_float.global_position = float_pos
+	
+	ghost_visualizer.update_ghost(current_tile_scene, rotation_steps, ghost_visual_rotation, float_pos, indicator_pos, valid)
 
-	_tint_shadow(ghost_indicator, not valid)
+# endregion
 
+# region Placement & Interaction
 func try_place(mouse_pos: Vector2, tile_scene: PackedScene, card_data: CardData) -> bool:
 	var world_pos = _get_ground_position(mouse_pos)
 	_clear_ghost()
@@ -322,6 +420,9 @@ func _on_interaction_cancelled(card_name: String, tile: Node3D, card_data: Resou
 	if pending_interaction_tile == tile:
 		pending_interaction_tile = null
 
+# endregion
+
+# region Grid & Shape Math
 func _can_place(anchor_coord: Vector2i, shape: Array[Vector2i]) -> bool:
 	for offset in shape:
 		var coord = anchor_coord + offset
@@ -362,7 +463,7 @@ func _compute_shape_from_scene(tile_scene: PackedScene) -> Array[Vector2i]:
 
 func _find_base_tile_node(node: Node) -> Node3D:
 	for child in node.get_children():
-		if child.name == "base tile" and child is Node3D:
+		if child.name == "base_tiles" and child is Node3D:
 			return child
 		var found := _find_base_tile_node(child)
 		if found:
@@ -422,100 +523,15 @@ func _get_ground_position(mouse_pos: Vector2):
 	var plane := Plane(Vector3.UP, 0.0)
 	return plane.intersects_ray(origin, dir)
 
-func _strip_to_base_tile(root: Node3D) -> void:
-	var base := _find_base_tile_node(root)
-	if base == null or base == root:
-		return   # gak ketemu base_tile (atau base_tile-nya root sendiri), biarin apa adanya
+# endregion
 
-	# kumpulin base_tile + semua leluhurnya sampe root -- jalur ini harus dibiarin utuh
-	var keep_chain: Array[Node] = []
-	var n: Node = base
-	while n != null:
-		keep_chain.append(n)
-		if n == root:
-			break
-		n = n.get_parent()
+# region Ghost Visual Rendering
+# Delegated to ghost_visualizer.gd
+# endregion
 
-	_prune_except(root, base, keep_chain)
-	
-func _prune_except(node: Node, base: Node3D, keep_chain: Array[Node]) -> void:
-	for child in node.get_children():
-		if child == base:
-			continue   # base_tile & semua anaknya dibiarin utuh
-		if keep_chain.has(child):
-			_prune_except(child, base, keep_chain)   # node perantara menuju base_tile, turun terus tapi jangan dihapus
-		else:
-			child.free()   # apapun ini -- decoration, labels, atau grup baru apapun -- buang total
-
-func _apply_native_transparency(node: Node, alpha: float) -> void:
-	for child in node.get_children():
-		if child is GeometryInstance3D:
-			child.transparency = 1.0 - alpha   # transparency: 0=opaque, 1=full transparan (kebalikan dari alpha)
-		_apply_native_transparency(child, alpha)
-
-#func _set_ghost_transparent(node: Node, alpha: float) -> void:
-	#for child in node.get_children():
-		#if child is MeshInstance3D:
-			#var original_color := Color(1, 1, 1)
-			#if child.get_surface_override_material(0):
-				#original_color = child.get_surface_override_material(0).albedo_color
-			#elif child.mesh and child.mesh.surface_get_material(0):
-				#original_color = child.mesh.surface_get_material(0).albedo_color
-#
-			#var mat := StandardMaterial3D.new()
-			#mat.albedo_color = Color(original_color.r, original_color.g, original_color.b, alpha)
-			#mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			#child.material_override = mat
-			#child.set_meta("ghost_mat", mat)
-			#child.set_meta("ghost_base_color", original_color)
-			#child.set_meta("ghost_alpha", alpha)
-		#_set_ghost_transparent(child, alpha)
-
-#func _tint_ghost(node: Node3D, invalid: bool) -> void:
-	#if node == null:
-		#return
-	#_apply_tint(node, invalid)
-func _make_flat_shadow(node: Node, alpha: float) -> void:
-	for child in node.get_children():
-		if child is MeshInstance3D:
-			var mat := StandardMaterial3D.new()
-			mat.albedo_color = Color(valid_color.r, valid_color.g, valid_color.b, alpha)
-			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			child.material_override = mat
-			child.set_meta("shadow_mat", mat)
-			child.set_meta("shadow_alpha", alpha)
-		_make_flat_shadow(child, alpha)
-
-func _tint_shadow(node: Node, invalid: bool) -> void:
-	for child in node.get_children():
-		if child is MeshInstance3D and child.has_meta("shadow_mat"):
-			var alpha: float = child.get_meta("shadow_alpha")
-			var color: Color = invalid_color if invalid else valid_color
-			child.get_meta("shadow_mat").albedo_color = Color(color.r, color.g, color.b, alpha)
-		_tint_shadow(child, invalid)
-
-#func _apply_tint(node: Node, invalid: bool) -> void:
-	#for child in node.get_children():
-		#if child is MeshInstance3D and child.has_meta("ghost_mat"):
-			#var alpha: float = child.get_meta("ghost_alpha")
-			#if invalid:
-				#child.get_meta("ghost_mat").albedo_color = Color(invalid_color.r, invalid_color.g, invalid_color.b, alpha)
-			#elif use_original_color_when_valid:
-				#var base: Color = child.get_meta("ghost_base_color")
-				#child.get_meta("ghost_mat").albedo_color = Color(base.r, base.g, base.b, alpha)
-			#else:
-				#child.get_meta("ghost_mat").albedo_color = Color(valid_color.r, valid_color.g, valid_color.b, alpha)
-		#_apply_tint(child, invalid)
-
+# region Cleanup
 func _clear_ghost() -> void:
-	if ghost_float:
-		ghost_float.queue_free()
-		ghost_float = null
-	if ghost_indicator:
-		ghost_indicator.queue_free()
-		ghost_indicator = null
-	ghost_float_rotate_tween = null
-	ghost_indicator_rotate_tween = null
+	ghost_visualizer.clear_ghost()
 
 func remove_tile_from_grid(tile: Node3D) -> void:
 	if not placement_data.has(tile):
@@ -529,3 +545,4 @@ func remove_tile_from_grid(tile: Node3D) -> void:
 			
 	placement_data.erase(tile)
 	tile.queue_free()
+# endregion
