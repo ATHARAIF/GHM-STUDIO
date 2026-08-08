@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsqncnaefqa5s"]
+
+[ext_resource type="PackedScene" uid="uid://dh5e6j7k8l9m0" path="res://scenes/cards/card_base.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://c00aplsmusuef" path="res://scenes/tiles/farm/harvest_tile.tscn" id="2_tile"]
+
+[ext_resource type="Resource" uid="uid://cvoe0b05psis3" path="res://resources/cards/harvest.tres" id="3_data"]
+[node name="card_harvest" instance=ExtResource("1_base")]
+card_data = ExtResource("3_data")
+tile_scene = ExtResource("2_tile")

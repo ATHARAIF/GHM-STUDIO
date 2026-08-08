@@ -1,71 +1,56 @@
-[gd_scene format=3 uid="uid://curxl7jch8dov"]
+﻿[gd_scene load_steps=12 format=3 uid="uid://curxl7jch8dov"]
 
-[ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/process/card_weeding.tscn" id="1_3cugw"]
-[ext_resource type="PackedScene" uid="uid://b7cg6uvvi5ata" path="res://scenes/tiles/pruning_tile.tscn" id="2_3cugw"]
+[ext_resource type="PackedScene" uid="uid://d2ona4ccnpy16" path="res://scenes/cards/process/card_cleaning.tscn" id="1_cln"]
+[ext_resource type="PackedScene" uid="uid://caa1hq7glxit3" path="res://scenes/cards/process/card_drying.tscn" id="1_dry"]
+[ext_resource type="PackedScene" uid="uid://dsqncnaefqa5s" path="res://scenes/cards/farm/card_harvest.tscn" id="1_harv"]
+[ext_resource type="PackedScene" uid="uid://ryf10txn2ha2" path="res://scenes/cards/packing/card_packing.tscn" id="1_pack"]
+[ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/farm/card_pruning.tscn" id="1_prun"]
+[ext_resource type="PackedScene" uid="uid://dkjaal8v0syd" path="res://scenes/cards/process/card_roasting.tscn" id="1_rst"]
+[ext_resource type="PackedScene" uid="uid://cfcdyfqy7trvf" path="res://scenes/cards/process/card_testing.tscn" id="1_test"]
+[ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/farm/card_weeding.tscn" id="1_weed"]
+[ext_resource type="Script" uid="uid://bj1ap4xeolcck" path="res://scripts/cards/card_hand.gd" id="4_hand_script"]
+[ext_resource type="PackedScene" uid="uid://bk2wo6fivyj3g" path="res://scenes/cards/farm/card_suckering.tscn" id="4_x7x6a"]
 
 [sub_resource type="Theme" id="Theme_ybjhs"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdkk6"]
-bg_color = Color(0.41001457, 0.49988216, 0.5693871, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 10
-anti_aliasing = false
-
-[node name="CardHand" type="HBoxContainer" unique_id=1143458886]
-anchors_preset = 7
-anchor_left = 0.5
+[node name="card_hand" type="HBoxContainer"]
+custom_minimum_size = Vector2(1152, 160)
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -576.0
-offset_top = -176.0
-offset_right = 576.0
-offset_bottom = 4.0
+offset_top = -160.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_stretch_ratio = 0.0
 mouse_filter = 2
 theme = SubResource("Theme_ybjhs")
-theme_override_constants/separation = 36
 alignment = 1
+script = ExtResource("4_hand_script")
 
-[node name="weeding" parent="." unique_id=914919374 instance=ExtResource("1_3cugw")]
+[node name="card_weeding" parent="." instance=ExtResource("1_weed")]
 layout_mode = 2
-size_flags_vertical = 8
 
-[node name="pruning" parent="." unique_id=1252818490 instance=ExtResource("1_3cugw")]
+[node name="card_suckering" parent="." instance=ExtResource("4_x7x6a")]
 layout_mode = 2
-size_flags_vertical = 8
-tile_scene = ExtResource("2_3cugw")
 
-[node name="background" parent="pruning/base_card/base" parent_id_path=PackedInt32Array(1252818490, 1349060828, 953399339) index="0" unique_id=1838299447]
-theme_override_styles/panel = SubResource("StyleBoxFlat_jdkk6")
+[node name="card_pruning" parent="." instance=ExtResource("1_prun")]
+layout_mode = 2
 
-[node name="Label" parent="pruning/base_card/base/background/process_name" parent_id_path=PackedInt32Array(1252818490, 1349060828, 113510021) index="0" unique_id=630004058]
-text = "PRUNING"
+[node name="card_harvest" parent="." instance=ExtResource("1_harv")]
+layout_mode = 2
 
-[node name="tiles" parent="pruning/base_card/base/background/tile_shape" parent_id_path=PackedInt32Array(1252818490, 1349060828, 1510772812) index="0" unique_id=1461447877]
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 13.0
-offset_bottom = 13.0
+[node name="card_cleaning" parent="." instance=ExtResource("1_cln")]
+layout_mode = 2
 
-[node name="ColorRect5" parent="pruning/base_card/base/background/tile_shape/tiles" index="4" unique_id=688714867]
-visible = true
+[node name="card_drying" parent="." instance=ExtResource("1_dry")]
+layout_mode = 2
 
-[node name="ColorRect6" parent="pruning/base_card/base/background/tile_shape/tiles" index="5" unique_id=202174173]
-visible = true
+[node name="card_roasting" parent="." instance=ExtResource("1_rst")]
+layout_mode = 2
 
-[node name="ColorRect7" parent="pruning/base_card/base/background/tile_shape/tiles" index="6" unique_id=179383272]
-visible = true
+[node name="card_testing" parent="." instance=ExtResource("1_test")]
+layout_mode = 2
 
-[node name="ColorRect8" parent="pruning/base_card/base/background/tile_shape/tiles" index="7" unique_id=2014299443]
-visible = true
-
-[node name="ColorRect9" parent="pruning/base_card/base/background/tile_shape/tiles" index="8" unique_id=1695161695]
-visible = true
-
-[editable path="pruning"]
-[editable path="pruning/base_card"]
+[node name="card_packing" parent="." instance=ExtResource("1_pack")]
+layout_mode = 2

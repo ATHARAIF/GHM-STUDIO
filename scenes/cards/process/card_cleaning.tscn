@@ -1,26 +1,9 @@
-[gd_scene format=3 uid="uid://d2ona4ccnpy16"]
+[gd_scene load_steps=3 format=3 uid="uid://d2ona4ccnpy16"]
 
-[ext_resource type="Script" uid="uid://bjclcj3owmyk" path="res://scripts/cards/card.gd" id="1_2iksy"]
-[ext_resource type="PackedScene" uid="uid://bh8hu8aw67wbf" path="res://scenes/tiles/cleaning_tile.tscn" id="2_2iksy"]
-[ext_resource type="Texture2D" uid="uid://dseosxew1jdmc" path="res://assets/ui/hands/card_base/cleaning.png" id="3_2iksy"]
+[ext_resource type="PackedScene" uid="uid://dh5e6j7k8l9m0" path="res://scenes/cards/card_base.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://c4dstwtf8kjdq" path="res://scenes/tiles/process/cleaning_tile.tscn" id="2_tile"]
 
-[node name="cleaning" type="Control" unique_id=914919374]
-custom_minimum_size = Vector2(120, 150)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 503.0
-offset_top = 563.0
-offset_right = 614.0
-offset_bottom = 720.0
-script = ExtResource("1_2iksy")
-tile_scene = ExtResource("2_2iksy")
-
-[node name="card" type="NinePatchRect" parent="." unique_id=1435024142]
-layout_mode = 0
-offset_right = 119.0
-offset_bottom = 152.0
-texture = ExtResource("3_2iksy")
-patch_margin_left = 24
-patch_margin_top = 24
-patch_margin_right = 30
-patch_margin_bottom = 22
+[ext_resource type="Resource" uid="uid://jrdckov1b2t4" path="res://resources/cards/cleaning.tres" id="3_data"]
+[node name="card_cleaning" instance=ExtResource("1_base")]
+card_data = ExtResource("3_data")
+tile_scene = ExtResource("2_tile")
