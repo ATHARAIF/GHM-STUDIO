@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d4jkvh7x4iwh1" path="res://assets/3D/tiles/base_tiles/cornerv2.glb" id="3_rddau"]
 [ext_resource type="PackedScene" uid="uid://fyfn51j3jhbb" path="res://assets/3D/tiles/base_tiles/2side_border.glb" id="3_uc2j4"]
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="5_dwopd"]
+[ext_resource type="PackedScene" uid="uid://dcvt0q2nmlmqr" path="res://assets/3D/tiles/decorations/weeding_decor.glb" id="6_m8h2b"]
 [ext_resource type="FontFile" uid="uid://ud5do37aik3k" path="res://assets/font/LeagueGothic-Regular-VariableFont_wdth.ttf" id="8_lmw75"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k5css"]
@@ -227,8 +228,8 @@ text = "1
 font = ExtResource("8_lmw75")
 font_size = 256
 
-[node name="weeding_decor" parent="." unique_id=321709152]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.00055705756, 0.14538002, -1.0015848)
+[node name="weeding_decor" parent="." unique_id=925047075 instance=ExtResource("6_m8h2b")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.14536387, -1)
 
 [editable path="base_tile/2side_border2"]
 [editable path="base_tile/3side_border2"]

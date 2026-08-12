@@ -24,6 +24,9 @@ EventManager="*res://scripts/managers/event_manager.gd"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1280
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -49,3 +52,6 @@ rotate={
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 textures/default_filters/use_nearest_mipmap_filter=true
+anti_aliasing/quality/msaa_2d=1
+anti_aliasing/quality/msaa_3d=1
+anti_aliasing/quality/use_taa=true

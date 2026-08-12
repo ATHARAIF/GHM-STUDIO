@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bvjbj4uqxenef"
-path="res://.godot/imported/roasting_machine.glb-f1cbcc0a0a131f03aa024aacfc5c1eb1.scn"
+uid="uid://bjrl0iu4r6ja3"
+path="res://.godot/imported/silo.glb-8883e67d468a964b011660615cbf3fa8.scn"
 
 [deps]
 
-source_file="res://assets/3D/tiles/decorations/roasting_machine.glb"
-dest_files=["res://.godot/imported/roasting_machine.glb-f1cbcc0a0a131f03aa024aacfc5c1eb1.scn"]
+source_file="res://assets/3D/tiles/decorations/production_house/silo.glb"
+dest_files=["res://.godot/imported/silo.glb-8883e67d468a964b011660615cbf3fa8.scn"]
 
 [params]
 

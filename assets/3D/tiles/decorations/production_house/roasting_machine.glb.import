@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://frh6p78eav5l"
-path="res://.godot/imported/natural_drying_beans.glb-9f08a3e06a3eb5fd136e8a61be47f63a.scn"
+uid="uid://bvjbj4uqxenef"
+path="res://.godot/imported/roasting_machine.glb-977a93e9460b19b87c1da9ef51954178.scn"
 
 [deps]
 
-source_file="res://assets/3D/tiles/decorations/natural_drying_beans.glb"
-dest_files=["res://.godot/imported/natural_drying_beans.glb-9f08a3e06a3eb5fd136e8a61be47f63a.scn"]
+source_file="res://assets/3D/tiles/decorations/production_house/roasting_machine.glb"
+dest_files=["res://.godot/imported/roasting_machine.glb-977a93e9460b19b87c1da9ef51954178.scn"]
 
 [params]
 
