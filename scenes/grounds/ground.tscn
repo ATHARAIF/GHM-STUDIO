@@ -99,20 +99,19 @@ camera_attributes = SubResource("CameraAttributesPractical_l53mr")
 transform = Transform3D(-0.9120506, 0.16332266, -0.37615097, -0.08331029, 0.8243429, 0.5599269, 0.40152618, 0.5420189, -0.73823595, -7.023513, 4.496863, -11.5658655)
 shadow_enabled = true
 shadow_bias = 0.0
-shadow_blur = 0.0
+shadow_normal_bias = 3.4
 directional_shadow_mode = 0
 directional_shadow_split_2 = 1.0
 directional_shadow_split_3 = 1.0
 directional_shadow_fade_start = 1.0
-directional_shadow_max_distance = 20.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1644767472]
-transform = Transform3D(0.71630126, 0.36459586, -0.5949642, 0, 0.8526393, 0.5225, 0.69779116, -0.3742674, 0.6107466, -6.637, 5.016, 6.114)
+transform = Transform3D(0.71630126, 0.36459586, -0.5949642, 0, 0.8526393, 0.5225, 0.69779116, -0.3742674, 0.6107466, -21.062, 18.216, 21.374)
 projection = 1
 current = true
 size = 9.0
 near = 0.001
-far = 30.0
+far = 50.0
 
 [node name="tile_grounds" type="Node3D" parent="." unique_id=865124454]
 
@@ -538,7 +537,7 @@ visible = false
 transform = Transform3D(0.20000002, 0, -0.34641016, 0, 0.4, 0, 0.34641016, 0, 0.20000002, 9.26282, 0.63073707, 8.267212)
 
 [node name="warehouse_1" parent="Building" unique_id=394532502 instance=ExtResource("13_l53mr")]
-transform = Transform3D(-0.45, 0, 6.794811e-08, 0, 0.45, 0, -6.794811e-08, 0, -0.45, 2.0691142, 0.6828643, 9.34132)
+transform = Transform3D(-0.45, 0, 6.794811e-08, 0, 0.45, 0, -6.794811e-08, 0, -0.45, 2.0691142, 0.6870591, 9.34132)
 
 [node name="tool_shed_1" parent="Building" unique_id=1737704632 instance=ExtResource("14_3suc6")]
 transform = Transform3D(0.49798512, 0, -0.044841938, 0, 0.5, 0, 0.044841938, 0, 0.49798512, 5.0173035, 0.2703983, 6.3166165)

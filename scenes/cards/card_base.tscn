@@ -4,6 +4,14 @@
 [ext_resource type="FontFile" uid="uid://dv33rb6fgcmji" path="res://assets/font/SpecialGothicCondensedOne-Regular.ttf" id="2_font"]
 [ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="3_icon"]
 [ext_resource type="PackedScene" uid="uid://8k1gnii4ktit" path="res://scenes/cards/tile_type.tscn" id="4_vvmxj"]
+[ext_resource type="FontFile" uid="uid://ud5do37aik3k" path="res://assets/font/LeagueGothic-Regular-VariableFont_wdth.ttf" id="5_ceshu"]
+[ext_resource type="Texture2D" uid="uid://bxq222a05p7t0" path="res://assets/ui/cards/icons/info.png" id="6_fdn6n"]
+[ext_resource type="Texture2D" uid="uid://dd7s6gdu1ig3j" path="res://assets/ui/cards/tile_shapes/Type=3x2 L-Shape 1.png" id="7_f880w"]
+[ext_resource type="Texture2D" uid="uid://b1wvjt8v0mxhi" path="res://assets/ui/cards/icons/info_pressed.png" id="7_ph67t"]
+[ext_resource type="Texture2D" uid="uid://cawh4uab48t1" path="res://assets/ui/cards/icons/info_hover.png" id="8_2bmwv"]
+[ext_resource type="Texture2D" uid="uid://do38cgy1ujkfw" path="res://assets/ui/cards/icons/sunny.png" id="8_f880w"]
+[ext_resource type="Texture2D" uid="uid://bg1ymtvv16r67" path="res://assets/ui/cards/icons/turn.png" id="9_fdn6n"]
+[ext_resource type="Texture2D" uid="uid://bbisjakg105q2" path="res://assets/ui/icons/stats/money.png" id="12_f880w"]
 
 [sub_resource type="Theme" id="Theme_vvmxj"]
 
@@ -123,6 +131,48 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvvxj"]
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0exqo"]
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5lmv"]
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_vvvxj"]
+font = ExtResource("5_ceshu")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ybjhs"]
+font = ExtResource("5_ceshu")
+font_size = 36
+shadow_size = 1071
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ybjhs"]
+texture = ExtResource("6_fdn6n")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vvvxj"]
+texture = ExtResource("7_ph67t")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ckjl0"]
+texture = ExtResource("8_2bmwv")
+
+[sub_resource type="LabelSettings" id="LabelSettings_0exqo"]
+font = ExtResource("5_ceshu")
+font_size = 24
+
 [node name="card_base" type="Control" unique_id=1041257484]
 custom_minimum_size = Vector2(240, 360)
 layout_mode = 3
@@ -136,6 +186,7 @@ theme = SubResource("Theme_vvmxj")
 script = ExtResource("1_script")
 
 [node name="base_color" type="Panel" parent="." unique_id=1182114750]
+visible = false
 clip_children = 2
 custom_minimum_size = Vector2(160, 240)
 layout_mode = 1
@@ -148,6 +199,7 @@ mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_sf5il")
 
 [node name="Background" type="Panel" parent="." unique_id=259720750]
+visible = false
 clip_children = 2
 layout_mode = 1
 anchors_preset = -1
@@ -370,6 +422,7 @@ label_settings = SubResource("LabelSettings_ckjl0")
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=1607170274]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -401,6 +454,7 @@ grow_vertical = 2
 text = "i"
 
 [node name="tile_type" parent="." unique_id=326720848 instance=ExtResource("4_vvmxj")]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -410,3 +464,165 @@ offset_top = 95.0
 offset_right = 21.0
 offset_bottom = 137.0
 grow_horizontal = 2
+
+[node name="base" type="Panel" parent="." unique_id=856254241]
+layout_mode = 0
+offset_right = 264.0
+offset_bottom = 360.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vvvxj")
+
+[node name="color" type="Panel" parent="base" unique_id=1744753623]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0exqo")
+
+[node name="specs" type="Panel" parent="base/color" unique_id=572800217]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 56.0
+offset_right = -8.0
+offset_bottom = 106.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5lmv")
+
+[node name="container" type="HBoxContainer" parent="base/color/specs" unique_id=1650778147]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 47
+alignment = 1
+
+[node name="turn" type="HBoxContainer" parent="base/color/specs/container" unique_id=780836853]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="icon" type="TextureRect" parent="base/color/specs/container/turn" unique_id=1238688549]
+texture_filter = 6
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("9_fdn6n")
+stretch_mode = 2
+
+[node name="label" type="Label" parent="base/color/specs/container/turn" unique_id=590087568]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_vvvxj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="tile_type" type="TextureRect" parent="base/color/specs/container" unique_id=1456530013]
+texture_filter = 6
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_f880w")
+stretch_mode = 2
+
+[node name="weather" type="TextureRect" parent="base/color/specs/container" unique_id=769813260]
+texture_filter = 6
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_f880w")
+stretch_mode = 2
+
+[node name="process_name" type="HBoxContainer" parent="base/color" unique_id=709618382]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = 52.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="base/color/process_name" unique_id=89375677]
+texture_filter = 2
+custom_minimum_size = Vector2(184, 0)
+layout_mode = 2
+text = "PROSES"
+label_settings = SubResource("LabelSettings_ybjhs")
+
+[node name="info_button" type="Button" parent="base/color/process_name" unique_id=55031308]
+texture_filter = 6
+custom_minimum_size = Vector2(32, 32)
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_ybjhs")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_vvvxj")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ckjl0")
+
+[node name="cost" type="HBoxContainer" parent="base/color" unique_id=927495271]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -35.0
+offset_right = 72.0
+offset_bottom = -5.0
+
+[node name="icon" type="TextureRect" parent="base/color/cost" unique_id=15278839]
+texture_filter = 6
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("12_f880w")
+stretch_mode = 2
+
+[node name="label" type="Label" parent="base/color/cost" unique_id=506131656]
+custom_minimum_size = Vector2(36.62, 0)
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_0exqo")
+
+[node name="lahan" type="Label" parent="base" unique_id=1566184376]
+texture_filter = 2
+custom_minimum_size = Vector2(184, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "LAHAN"
+label_settings = SubResource("LabelSettings_ybjhs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="illustration" type="TextureRect" parent="base" unique_id=1508018916]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 136.0
+offset_right = -72.0
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_icon")

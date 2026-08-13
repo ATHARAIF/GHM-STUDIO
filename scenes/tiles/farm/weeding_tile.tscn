@@ -158,31 +158,30 @@ albedo_color = Color(0, 0, 0, 0.40392157)
 metadata/_edit_lock_ = true
 
 [node name="2side_border2" parent="base_tile" unique_id=1746806896 instance=ExtResource("3_uc2j4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="2side_border" parent="base_tile/2side_border2" index="0" unique_id=1449959788]
 mesh = SubResource("ArrayMesh_lmw75")
 
 [node name="3side_border2" parent="base_tile" unique_id=1419871748 instance=ExtResource("1_xi8ic")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="3side_border" parent="base_tile/3side_border2" index="0" unique_id=1915576880]
 mesh = SubResource("ArrayMesh_lmw75")
 
 [node name="3side_border3" parent="base_tile" unique_id=2066895487 instance=ExtResource("1_xi8ic")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0, 1)
 
 [node name="3side_border" parent="base_tile/3side_border3" index="0" unique_id=1915576880]
 mesh = SubResource("ArrayMesh_fwyrw")
 
 [node name="cornerv22" parent="base_tile" unique_id=1245215778 instance=ExtResource("3_rddau")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0, -1)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0, 0)
 
 [node name="cornerv2" parent="base_tile/cornerv22" index="0" unique_id=1878522140]
 mesh = SubResource("ArrayMesh_lmw75")
 
 [node name="decoration" type="Node3D" parent="." unique_id=1230167542]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020626113, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020626113, 1)
 
 [node name="jalur_cangkul" type="Node3D" parent="decoration" unique_id=295696892]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1.9854383)
@@ -205,7 +204,7 @@ libraries/ = SubResource("AnimationLibrary_hdog4")
 autoplay = &"cangkul"
 
 [node name="labels" type="Node3D" parent="." unique_id=1762399736]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -0.06298828, -0.043667793)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -0.06298828, 0.9563322)
 
 [node name="background" type="CSGBox3D" parent="labels" unique_id=805599715]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009920165, 0.12672067, 1.001709)
@@ -229,7 +228,7 @@ font = ExtResource("8_lmw75")
 font_size = 256
 
 [node name="weeding_decor" parent="." unique_id=925047075 instance=ExtResource("6_m8h2b")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.14536387, -1)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.14536387, 0)
 
 [editable path="base_tile/2side_border2"]
 [editable path="base_tile/3side_border2"]

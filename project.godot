@@ -49,7 +49,7 @@ rotate={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_filter=2
 rendering_device/driver.windows="d3d12"
 textures/default_filters/use_nearest_mipmap_filter=true
 anti_aliasing/quality/msaa_2d=1
