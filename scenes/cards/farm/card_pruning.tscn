@@ -10,5 +10,6 @@ tile_scene = ExtResource("2_tile")
 card_data = ExtResource("3_data")
 
 [node name="Frame31" type="Sprite2D" parent="." index="4" unique_id=1844469311]
+visible = false
 position = Vector2(415, 180)
 texture = ExtResource("4_q57c4")

@@ -12,9 +12,9 @@ extends CanvasLayer
 @onready var val_quality = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2/VQual
 @onready var val_quantity = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2/VQuant
 
-@onready var lbl_farm_name = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/LblFarmName
-@onready var val_plant = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid/VPlant
-@onready var timeline_container = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Timeline
+@onready var lbl_farm_name = $new_popup_panel/center/vbox/detail/background/vbox/hbox/stat/vbox/area_name/label
+@onready var val_plant = $new_popup_panel/center/vbox/detail/background/vbox/hbox/stat/vbox/plant/value
+@onready var timeline_container = $new_popup_panel/center/vbox/detail/background/vbox/timeline/timeline
 
 var available_methods: Array[ProcessMethodData] = []
 var selected_method: ProcessMethodData

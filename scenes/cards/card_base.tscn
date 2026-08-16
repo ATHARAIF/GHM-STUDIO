@@ -5,13 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="3_icon"]
 [ext_resource type="PackedScene" uid="uid://8k1gnii4ktit" path="res://scenes/cards/tile_type.tscn" id="4_vvmxj"]
 [ext_resource type="FontFile" uid="uid://ud5do37aik3k" path="res://assets/font/LeagueGothic-Regular-VariableFont_wdth.ttf" id="5_ceshu"]
+[ext_resource type="Texture2D" uid="uid://ceedxgjc1jkor" path="res://assets/ui/cards/icons/turn.svg" id="5_f880w"]
 [ext_resource type="Texture2D" uid="uid://bxq222a05p7t0" path="res://assets/ui/cards/icons/info.png" id="6_fdn6n"]
 [ext_resource type="Texture2D" uid="uid://dd7s6gdu1ig3j" path="res://assets/ui/cards/tile_shapes/Type=3x2 L-Shape 1.png" id="7_f880w"]
 [ext_resource type="Texture2D" uid="uid://b1wvjt8v0mxhi" path="res://assets/ui/cards/icons/info_pressed.png" id="7_ph67t"]
 [ext_resource type="Texture2D" uid="uid://cawh4uab48t1" path="res://assets/ui/cards/icons/info_hover.png" id="8_2bmwv"]
-[ext_resource type="Texture2D" uid="uid://do38cgy1ujkfw" path="res://assets/ui/cards/icons/sunny.png" id="8_f880w"]
-[ext_resource type="Texture2D" uid="uid://bg1ymtvv16r67" path="res://assets/ui/cards/icons/turn.png" id="9_fdn6n"]
-[ext_resource type="Texture2D" uid="uid://bbisjakg105q2" path="res://assets/ui/icons/stats/money.png" id="12_f880w"]
+[ext_resource type="Texture2D" uid="uid://d36yrbgi5opng" path="res://assets/ui/cards/icons/sunny.svg" id="8_f880w"]
+[ext_resource type="Texture2D" uid="uid://c4yenilqdkg8v" path="res://assets/ui/icons/stats/money.svg" id="12_k6fdg"]
 
 [sub_resource type="Theme" id="Theme_vvmxj"]
 
@@ -496,6 +496,7 @@ offset_left = 8.0
 offset_top = 56.0
 offset_right = -8.0
 offset_bottom = 106.0
+grow_horizontal = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_j5lmv")
 
@@ -519,7 +520,7 @@ texture_filter = 6
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("9_fdn6n")
+texture = ExtResource("5_f880w")
 stretch_mode = 2
 
 [node name="label" type="Label" parent="base/color/specs/container/turn" unique_id=590087568]
@@ -554,6 +555,7 @@ offset_left = 16.0
 offset_top = 8.0
 offset_right = -16.0
 offset_bottom = 52.0
+grow_horizontal = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
@@ -583,13 +585,14 @@ offset_left = 7.0
 offset_top = -35.0
 offset_right = 72.0
 offset_bottom = -5.0
+grow_vertical = 0
 
 [node name="icon" type="TextureRect" parent="base/color/cost" unique_id=15278839]
 texture_filter = 6
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("12_f880w")
+texture = ExtResource("12_k6fdg")
 stretch_mode = 2
 
 [node name="label" type="Label" parent="base/color/cost" unique_id=506131656]

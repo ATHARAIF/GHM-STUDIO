@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://drwd4ixsq2116" path="res://assets/ui/buttons/button.png" id="2_d282s"]
 [ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/popups/pruning_popup.tscn" id="4_jciqr"]
 [ext_resource type="PackedScene" uid="uid://ddyxy0w123abf" path="res://scenes/ui/popups/dry_popup.tscn" id="5_dry"]
+[ext_resource type="Theme" uid="uid://dbko6bjnlsug4" path="res://themes/button.tres" id="5_ww3d0"]
 [ext_resource type="PackedScene" uid="uid://djheffwvvtjqr" path="res://scenes/ui/popups/harvest_method_popup.tscn" id="6_harvm"]
 [ext_resource type="PackedScene" uid="uid://b0iehonihftwv" path="res://scenes/ui/popups/harvest_result_popup.tscn" id="7_harvr"]
 
@@ -32,18 +33,6 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_next"]
-bg_color = Color(0.18, 0.55, 0.35, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.8, 0.9, 0.4, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_glx4a"]
 font_size = 17
@@ -246,12 +235,12 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="Button" type="Button" parent="main/footer" unique_id=1169105168]
-custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn_next")
-text = "NEXT TURN"
+theme = ExtResource("5_ww3d0")
+theme_override_font_sizes/font_size = 32
+text = "NEXT
+TURN"
 
 [node name="PanelContainer" type="PanelContainer" parent="main" unique_id=290367956]
 anchors_preset = 4

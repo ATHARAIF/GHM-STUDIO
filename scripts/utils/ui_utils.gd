@@ -12,7 +12,7 @@ static func _on_input_blocker_gui_input(event: InputEvent, popup_node: Node) -> 
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
 		popup_node.get_viewport().set_input_as_handled()
 
-static func build_farm_timeline(timeline_container: Container, circle_size: int = 16, line_len: int = 16, font_size: int = 10, line_height: int = 2, pending_process_id: String = "") -> void:
+static func build_farm_timeline(timeline_container: Container, circle_size: int = 48, line_len: int = 32, font_size: int = 24, line_height: int = 2, pending_process_id: String = "") -> void:
 	if not timeline_container: return
 	
 	for child in timeline_container.get_children():
