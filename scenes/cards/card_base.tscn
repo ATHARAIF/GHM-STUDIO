@@ -589,11 +589,12 @@ grow_vertical = 0
 
 [node name="icon" type="TextureRect" parent="base/color/cost" unique_id=15278839]
 texture_filter = 6
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = ExtResource("12_k6fdg")
-stretch_mode = 2
+expand_mode = 2
 
 [node name="label" type="Label" parent="base/color/cost" unique_id=506131656]
 custom_minimum_size = Vector2(36.62, 0)
