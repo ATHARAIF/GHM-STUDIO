@@ -132,20 +132,21 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvvxj"]
-bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0exqo"]
+bg_color = Color(0.9490196, 0.92156863, 0.8901961, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5lmv"]
-bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -158,6 +159,7 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_ybjhs"]
 font = ExtResource("5_ceshu")
 font_size = 36
+font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
 shadow_size = 1071
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ybjhs"]
@@ -172,6 +174,12 @@ texture = ExtResource("8_2bmwv")
 [sub_resource type="LabelSettings" id="LabelSettings_0exqo"]
 font = ExtResource("5_ceshu")
 font_size = 24
+font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f880w"]
+font = ExtResource("5_ceshu")
+font_size = 36
+shadow_size = 1071
 
 [node name="card_base" type="Control" unique_id=1041257484]
 custom_minimum_size = Vector2(240, 360)
@@ -614,7 +622,7 @@ offset_top = -48.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "LAHAN"
-label_settings = SubResource("LabelSettings_ybjhs")
+label_settings = SubResource("LabelSettings_f880w")
 horizontal_alignment = 1
 vertical_alignment = 1
 

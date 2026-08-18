@@ -10,12 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://cq3g4drr5dfs5" path="res://assets/ui/icons/stats/fame.svg" id="3_ei7no"]
 [ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/popups/pruning_popup.tscn" id="4_jciqr"]
 [ext_resource type="PackedScene" uid="uid://ddyxy0w123abf" path="res://scenes/ui/popups/dry_popup.tscn" id="5_dry"]
-[ext_resource type="Theme" uid="uid://dbko6bjnlsug4" path="res://themes/button.tres" id="5_ww3d0"]
 [ext_resource type="Texture2D" uid="uid://dpcwbpo5g7wr6" path="res://assets/ui/hud/setting.svg" id="6_8npfc"]
 [ext_resource type="PackedScene" uid="uid://djheffwvvtjqr" path="res://scenes/ui/popups/harvest_method_popup.tscn" id="6_harvm"]
 [ext_resource type="Texture2D" uid="uid://b1o7el3rn2th7" path="res://assets/ui/hud/journal.svg" id="6_w0i6r"]
 [ext_resource type="PackedScene" uid="uid://b0iehonihftwv" path="res://scenes/ui/popups/harvest_result_popup.tscn" id="7_harvr"]
 [ext_resource type="Texture2D" uid="uid://b8woap0xskoli" path="res://assets/ui/hud/menu.svg" id="7_yrh06"]
+[ext_resource type="Texture2D" uid="uid://dnydooatnscro" path="res://assets/ui/hud/next_turn.svg" id="11_8npfc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_62l3y"]
 
@@ -247,7 +247,7 @@ script = ExtResource("1_hudgd")
 
 [node name="main" type="CanvasLayer" parent="." unique_id=2121045524]
 
-[node name="top-bar" type="PanelContainer" parent="main" unique_id=2015037588]
+[node name="top_bar" type="PanelContainer" parent="main" unique_id=2015037588]
 custom_minimum_size = Vector2(0, 144)
 anchors_preset = 10
 anchor_right = 1.0
@@ -255,36 +255,36 @@ offset_bottom = 128.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_62l3y")
 
-[node name="MarginContainer" type="MarginContainer" parent="main/top-bar" unique_id=1681176630]
+[node name="MarginContainer" type="MarginContainer" parent="main/top_bar" unique_id=1681176630]
 layout_mode = 2
 theme_override_constants/margin_left = 48
 theme_override_constants/margin_top = 48
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 48
 
-[node name="background2" type="Panel" parent="main/top-bar/MarginContainer" unique_id=1836154682]
+[node name="background2" type="Panel" parent="main/top_bar/MarginContainer" unique_id=1836154682]
 custom_maximum_size = Vector2(558.22, -1)
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 10.93)
 theme_override_styles/panel = SubResource("StyleBoxFlat_w0i6r")
 
-[node name="background" type="Panel" parent="main/top-bar/MarginContainer" unique_id=1999121067]
+[node name="background" type="Panel" parent="main/top_bar/MarginContainer" unique_id=1999121067]
 custom_maximum_size = Vector2(558.22, -1)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_62l3y")
 
-[node name="hbox" type="HBoxContainer" parent="main/top-bar/MarginContainer" unique_id=1280108781]
+[node name="hbox" type="HBoxContainer" parent="main/top_bar/MarginContainer" unique_id=1280108781]
 layout_mode = 2
 
-[node name="left" type="HBoxContainer" parent="main/top-bar/MarginContainer/hbox" unique_id=1833482248]
+[node name="left" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox" unique_id=1833482248]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="calendar" type="HBoxContainer" parent="main/top-bar/MarginContainer/hbox/left" unique_id=785687431]
+[node name="calendar" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=785687431]
 layout_mode = 2
 
-[node name="icon_button" type="TextureButton" parent="main/top-bar/MarginContainer/hbox/left/calendar" unique_id=312933003]
+[node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/calendar" unique_id=312933003]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme = SubResource("Theme_ybjhs")
@@ -292,19 +292,19 @@ texture_normal = ExtResource("2_62l3y")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="label" type="Label" parent="main/top-bar/MarginContainer/hbox/left/calendar" unique_id=1140470906]
+[node name="label" type="Label" parent="main/top_bar/MarginContainer/hbox/left/calendar" unique_id=1140470906]
 custom_minimum_size = Vector2(160, 0)
 custom_maximum_size = Vector2(160, -1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
 theme_override_font_sizes/font_size = 32
-text = "1 AUTUMN 2027"
+text = "1 Autumn 2027"
 
-[node name="fame" type="HBoxContainer" parent="main/top-bar/MarginContainer/hbox/left" unique_id=1342661558]
+[node name="fame" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=1342661558]
 layout_mode = 2
 
-[node name="icon_button" type="TextureButton" parent="main/top-bar/MarginContainer/hbox/left/fame" unique_id=903975016]
+[node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/fame" unique_id=903975016]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme = SubResource("Theme_ybjhs")
@@ -312,7 +312,7 @@ texture_normal = ExtResource("3_ei7no")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="label" type="Label" parent="main/top-bar/MarginContainer/hbox/left/fame" unique_id=1508862405]
+[node name="label" type="Label" parent="main/top_bar/MarginContainer/hbox/left/fame" unique_id=1508862405]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -320,10 +320,10 @@ theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
 theme_override_font_sizes/font_size = 32
 text = "50"
 
-[node name="money" type="HBoxContainer" parent="main/top-bar/MarginContainer/hbox/left" unique_id=353505207]
+[node name="money" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=353505207]
 layout_mode = 2
 
-[node name="icon_button" type="TextureButton" parent="main/top-bar/MarginContainer/hbox/left/money" unique_id=2050730404]
+[node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/money" unique_id=2050730404]
 modulate = Color(1, 0.8666667, 0, 1)
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
@@ -332,7 +332,7 @@ texture_normal = ExtResource("3_6m254")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="label" type="Label" parent="main/top-bar/MarginContainer/hbox/left/money" unique_id=651418384]
+[node name="label" type="Label" parent="main/top_bar/MarginContainer/hbox/left/money" unique_id=651418384]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -340,16 +340,16 @@ theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
 theme_override_font_sizes/font_size = 32
 text = "99,000,000"
 
-[node name="VSeparator" type="VSeparator" parent="main/top-bar/MarginContainer/hbox" unique_id=553869786]
+[node name="VSeparator" type="VSeparator" parent="main/top_bar/MarginContainer/hbox" unique_id=553869786]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ww3d0")
 
-[node name="right" type="HBoxContainer" parent="main/top-bar/MarginContainer/hbox" unique_id=228461792]
+[node name="right" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox" unique_id=228461792]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="journal" type="Button" parent="main/top-bar/MarginContainer/hbox/right" unique_id=1240284569]
+[node name="journal" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=1240284569]
 layout_mode = 2
 theme = SubResource("Theme_w0i6r")
 theme_override_font_sizes/font_size = 32
@@ -359,7 +359,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_yrh06")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
 icon = ExtResource("6_w0i6r")
 
-[node name="setting" type="Button" parent="main/top-bar/MarginContainer/hbox/right" unique_id=762216103]
+[node name="setting" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=762216103]
 layout_mode = 2
 theme = SubResource("Theme_w0i6r")
 theme_override_font_sizes/font_size = 32
@@ -369,7 +369,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_yrh06")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
 icon = ExtResource("6_8npfc")
 
-[node name="menu" type="Button" parent="main/top-bar/MarginContainer/hbox/right" unique_id=338788324]
+[node name="menu" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=338788324]
 layout_mode = 2
 theme = SubResource("Theme_w0i6r")
 theme_override_font_sizes/font_size = 32
@@ -478,14 +478,11 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 79.0
-offset_top = -381.0
-offset_right = -84.0
-offset_bottom = -17.0
+offset_top = -364.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="CardPanel" type="PanelContainer" parent="main/footer" unique_id=987654321]
@@ -504,13 +501,21 @@ theme_override_constants/margin_bottom = 10
 [node name="card_hand" parent="main/footer/CardPanel" unique_id=2079676402 instance=ExtResource("1_2obvf")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="main/footer" unique_id=1169105168]
+[node name="Button" type="Button" parent="main/footer" unique_id=444878943]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("5_ww3d0")
+offset_transform_enabled = true
+offset_transform_position = Vector2(-90, 45)
+offset_transform_visual_only = false
+theme = SubResource("Theme_w0i6r")
 theme_override_font_sizes/font_size = 32
-text = "NEXT
-TURN"
+theme_override_styles/normal = SubResource("StyleBoxFlat_phxny")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8npfc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yrh06")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
+icon = ExtResource("11_8npfc")
+icon_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="main" unique_id=290367956]
 anchors_preset = 4

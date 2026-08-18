@@ -16,7 +16,7 @@ extends Control
 @onready var debug_yield = $main/PanelContainer/DebugStats/Yield
 
 # Popup Buttons
-@onready var btn_menu = $main/header/HBoxContainer2/menu
+@onready var btn_menu = $main/top_bar/MarginContainer/hbox/right/menu
 @onready var btn_setting = $main/header/HBoxContainer2/setting
 @onready var btn_journal = $main/header/HBoxContainer2/journal
 
