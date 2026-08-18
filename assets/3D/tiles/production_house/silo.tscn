@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://csndfoxnvp64n"]
+
+[ext_resource type="PackedScene" uid="uid://0orrrgvbpxpo" path="res://assets/3D/tiles/base_tiles/no_border.glb" id="1_ulxtx"]
+[ext_resource type="PackedScene" uid="uid://bwlj8urfhkrr6" path="res://assets/3D/tiles/production_house/silo.glb" id="2_g3nqd"]
+
+[node name="Silo" type="Node3D" unique_id=1758998540]
+
+[node name="no_border4" parent="." unique_id=102566708 instance=ExtResource("1_ulxtx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.059, 0)
+
+[node name="silo" parent="no_border4" unique_id=814825784 instance=ExtResource("2_g3nqd")]
+transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0.018116474, 1.0529569, -0.011486396)
+
+[editable path="no_border4"]

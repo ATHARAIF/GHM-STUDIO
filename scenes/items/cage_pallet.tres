@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bab8268fcpjle"]
+
+[ext_resource type="Script" uid="uid://c7717xpi07gyj" path="res://scripts/data/item_data.gd" id="1_wo1m0"]
+
+[resource]
+script = ExtResource("1_wo1m0")
+item_name = "Cage Pallet"
+price = 1000
+metadata/_custom_type_script = "uid://c7717xpi07gyj"

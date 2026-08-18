@@ -1,0 +1,58 @@
+[gd_scene format=4 uid="uid://crlcb3u1owaqm"]
+
+[ext_resource type="PackedScene" uid="uid://0orrrgvbpxpo" path="res://assets/3D/tiles/base_tiles/no_border.glb" id="1_kf0mt"]
+[ext_resource type="PackedScene" uid="uid://c1imcbrbr5esx" path="res://assets/3D/tiles/production_house/roasting_machine.glb" id="2_pqsfy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51j0k"]
+resource_name = "color test"
+cull_mode = 2
+albedo_color = Color(0.90633965, 0.009095142, 0.013443476, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f6sph"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.060000002, -0.5, 1, 0.120000005, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAwAAAAIAAAAEAAEAAQAFAAMAAwAGAAAABQAGAAMAAAAGAAcABQAHAAYAAAAHAAQAAQAHAAUAAQAEAAcA"),
+"name": "color test",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAD/////AAAAAAAA//8AAAAAAAD/////AAD//wAAAAAAAP///////wAAAAAAAP//AAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dwdev"]
+resource_name = "no_border_Cube_015"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.060000002, -0.5, 1, 0.120000005, 1),
+"attribute_data": PackedByteArray("/1//v/+f/3//n/+//1//f/+f////X/+//5//v/9f////n/8//18AAP+fAAD/X/8//5//f//f/z//3/9//5//P/8f/3//X/8//1//f/8f/z//n/9//1//P/+f/z//X/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_51j0k"),
+"name": "color test",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAAAA////////AAD//wAA//8AAP////8AAAAA//8AAP////9U1QAAAAAAAFTVAAD//wAAVNUAAAAA//9U1f////////+/AAAAAP///78AAP//////v///AAD///+//////wAA//8AAP///////wAA//8AAP////////////8AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAFTV//8AAP//VNX///////9U1f//AAAAAFTV/7//v/+//7//v/+//7//v1TVVNVU1VTVVNVU1VTVVNX//////////////////////3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3+qKqoqqiqqKqoqqiqqKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_f6sph")
+
+[node name="RoastingMachine" type="Node3D" unique_id=277177122]
+
+[node name="no_border2" parent="." unique_id=44133313 instance=ExtResource("1_kf0mt")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.5, 0.059, 0)
+
+[node name="no_border" parent="no_border2" index="0" unique_id=2109705735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9071678e-10, 0, -0.0066508055)
+
+[node name="no_border2" type="MeshInstance3D" parent="no_border2" unique_id=1446131117]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3812577e-08, 0, -1.0023149)
+mesh = SubResource("ArrayMesh_dwdev")
+
+[node name="roasting_machine" parent="no_border2" unique_id=1173263518 instance=ExtResource("2_pqsfy")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.02479052, 0.13229004, 0.1996311)
+
+[editable path="no_border2"]

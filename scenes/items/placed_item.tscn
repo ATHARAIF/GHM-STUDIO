@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://drk70ivkgjt1u"]
+
+[ext_resource type="Script" uid="uid://y8yj1pebhhnx" path="res://scripts/building/placed_item.gd" id="1_sbfmf"]
+
+[node name="PlacedItem" type="StaticBody3D" unique_id=910480684]
+script = ExtResource("1_sbfmf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=468314813]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1183287631]

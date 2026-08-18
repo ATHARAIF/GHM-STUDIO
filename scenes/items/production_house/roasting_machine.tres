@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bxvtt6vtwvtbg"]
+
+[ext_resource type="PackedScene" uid="uid://crlcb3u1owaqm" path="res://assets/3D/tiles/production_house/roasting_machine.tscn" id="1_of0a3"]
+[ext_resource type="Script" uid="uid://c7717xpi07gyj" path="res://scripts/data/item_data.gd" id="2_jcoqa"]
+
+[resource]
+script = ExtResource("2_jcoqa")
+item_name = "Roasting Machine"
+price = 3000
+footprint_size = Vector2i(2, 1)
+model_scene = ExtResource("1_of0a3")
+model_includes_own_plate = true
+metadata/_custom_type_script = "uid://c7717xpi07gyj"

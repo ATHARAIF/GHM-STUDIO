@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://qiub82fgd2s0"]
+
+[ext_resource type="Script" uid="uid://c7717xpi07gyj" path="res://scripts/data/item_data.gd" id="1_l7dfy"]
+
+[resource]
+script = ExtResource("1_l7dfy")
+item_name = "Watering Can"
+price = 1500
+metadata/_custom_type_script = "uid://c7717xpi07gyj"

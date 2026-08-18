@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://cx4x2m3u4v5w"]
+
+[ext_resource type="Script" uid="uid://ca341oaktpwcu" path="res://scripts/ui/main_hud.gd" id="1_q1w2e"]
+[ext_resource type="PackedScene" uid="uid://ddyxy0w123abf" path="res://scenes/ui/dry_popup.tscn" id="3_dry"]
+[ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/controllers/pruning_controller.tscn" id="4_prun"]
+
+[node name="MainHUD" type="CanvasLayer" unique_id=176383737]
+script = ExtResource("1_q1w2e")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=706933967]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1334757595]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1616932465]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Stage" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopBar" unique_id=667011566]
+layout_mode = 2
+
+[node name="LblStage" type="Label" parent="MarginContainer/VBoxContainer/TopBar/Stage" unique_id=1366804348]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Stage: 0"
+
+[node name="Budget" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopBar" unique_id=531359044]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblBudget" type="Label" parent="MarginContainer/VBoxContainer/TopBar/Budget" unique_id=345403336]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.73, 0.3, 1)
+theme_override_font_sizes/font_size = 24
+text = "Budget: $50000"
+
+[node name="SeasonTurn" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopBar" unique_id=1512242125]
+layout_mode = 2
+
+[node name="LblSeason" type="Label" parent="MarginContainer/VBoxContainer/TopBar/SeasonTurn" unique_id=326649278]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Spring"
+horizontal_alignment = 2
+
+[node name="LblTurn" type="Label" parent="MarginContainer/VBoxContainer/TopBar/SeasonTurn" unique_id=647347248]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Turn: 1/5"
+horizontal_alignment = 2
+
+[node name="StatsPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=172465648]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/StatsPanel" unique_id=419453495]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="StatsGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/StatsPanel/Margin" unique_id=1413516637]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 5
+columns = 4
+
+[node name="Body" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=21924554]
+layout_mode = 2
+text = "Body: 0"
+
+[node name="Acidity" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1787323554]
+layout_mode = 2
+text = "Acidity: 0"
+
+[node name="Sweetness" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1554023410]
+layout_mode = 2
+text = "Sweetness: 0"
+
+[node name="Aroma" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=598692839]
+layout_mode = 2
+text = "Aroma: 0"
+
+[node name="Flavor" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=256882403]
+layout_mode = 2
+text = "Flavor: 0"
+
+[node name="Bitterness" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=827477104]
+layout_mode = 2
+text = "Bitterness: 0"
+
+[node name="Complexity" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=746035065]
+layout_mode = 2
+text = "Complexity: 0"
+
+[node name="Aftertaste" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=2038222473]
+layout_mode = 2
+text = "Aftertaste: 0"
+
+[node name="Defect" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1361213424]
+layout_mode = 2
+text = "Defect: 10.0%"
+
+[node name="Moisture" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=628190098]
+layout_mode = 2
+text = "Moisture: 25.0%"
+
+[node name="Yield" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1775234278]
+layout_mode = 2
+text = "Yield: 0kg"
+
+[node name="Control" type="Control" parent="MarginContainer" unique_id=1129595092]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BtnEndTurn" type="Button" parent="MarginContainer/Control" unique_id=1733069794]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -60.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "End Turn"
+
+[node name="HarvestPopup" parent="." unique_id=2061107133 instance=ExtResource("3_dry")]
+visible = false
+
+[node name="DryPopup" parent="." unique_id=1010791625 instance=ExtResource("3_dry")]
+visible = false
+
+[node name="PruningController" parent="." unique_id=2081107134 instance=ExtResource("4_prun")]
+visible = false

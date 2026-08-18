@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bx6yg0fhxievc"]
+
+[ext_resource type="Script" uid="uid://c7717xpi07gyj" path="res://scripts/data/item_data.gd" id="1_38w6i"]
+
+[resource]
+script = ExtResource("1_38w6i")
+item_name = "Hoe"
+price = 1000
+metadata/_custom_type_script = "uid://c7717xpi07gyj"

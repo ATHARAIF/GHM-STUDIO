@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://d4jdg0wjhak8f"]
+
+[ext_resource type="Script" uid="uid://c7717xpi07gyj" path="res://scripts/data/item_data.gd" id="1_5ju80"]
+[ext_resource type="PackedScene" uid="uid://csndfoxnvp64n" path="res://assets/3D/tiles/production_house/silo.tscn" id="1_tuql1"]
+
+[resource]
+script = ExtResource("1_5ju80")
+item_name = "Silo"
+price = 5000
+model_scene = ExtResource("1_tuql1")
+model_includes_own_plate = true
+metadata/_custom_type_script = "uid://c7717xpi07gyj"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://k5gkm0ecoty4"]
+
+[ext_resource type="PackedScene" uid="uid://0orrrgvbpxpo" path="res://assets/3D/tiles/base_tiles/no_border.glb" id="1_5l5xf"]
+[ext_resource type="Script" uid="uid://c7717xpi07gyj" path="res://scripts/data/item_data.gd" id="1_qhpiv"]
+
+[resource]
+script = ExtResource("1_qhpiv")
+item_name = "Shelf"
+price = 1500
+model_scene = ExtResource("1_5l5xf")
+metadata/_custom_type_script = "uid://c7717xpi07gyj"

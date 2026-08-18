@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://bnydmlhi54guf"]
+
+[ext_resource type="Script" uid="uid://c31qg5k76tn16" path="res://scripts/building/warehouse.gd" id="1_2p51d"]
+[ext_resource type="PackedScene" uid="uid://cj3djbtpfddtc" path="res://scenes/tiles/base/tile_ground.tscn" id="2_gjf5a"]
+[ext_resource type="Script" uid="uid://br3fhnsgmnusd" path="res://scripts/tiles/GroundTile.gd" id="3_con4k"]
+[ext_resource type="PackedScene" uid="uid://ddyxy0w123abc" path="res://scenes/tiles/farm_info_tile.tscn" id="6_kusmt"]
+[ext_resource type="Script" uid="uid://dahpvuxh3n0dt" path="res://scripts/ui/inventory_panel.gd" id="7_con4k"]
+[ext_resource type="Script" uid="uid://kk27ygvg0keh" path="res://scripts/ui/shop_panel.gd" id="8_2p51d"]
+[ext_resource type="Script" uid="uid://c7717xpi07gyj" path="res://scripts/data/item_data.gd" id="9_2p51d"]
+[ext_resource type="Resource" uid="uid://k5gkm0ecoty4" path="res://scenes/items/shelf.tres" id="9_kusmt"]
+[ext_resource type="PackedScene" uid="uid://ce1rc0432lbfy" path="res://scenes/ui/warehouse_hud.tscn" id="9_lsuul"]
+[ext_resource type="Resource" uid="uid://bab8268fcpjle" path="res://scenes/items/cage_pallet.tres" id="10_lsuul"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m6fyy"]
+ground_bottom_color = Color(0.11, 0.11, 0.11, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+sun_angle_max = 0.0
+
+[sub_resource type="Sky" id="Sky_ckjl0"]
+sky_material = SubResource("ProceduralSkyMaterial_m6fyy")
+
+[sub_resource type="Environment" id="Environment_ybjhs"]
+background_mode = 2
+sky = SubResource("Sky_ckjl0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsuul"]
+bg_color = Color(0, 0, 0, 0.003921569)
+
+[node name="warehouse" type="Node3D" unique_id=1641503286]
+script = ExtResource("1_2p51d")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=395652961]
+transform = Transform3D(0.70710677, 0.3535534, -0.6123724, 0, 0.8660254, 0.50000006, 0.70710677, -0.3535534, 0.6123724, -37, 29.54, 37)
+projection = 1
+size = 7.393
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1108854080]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 10, 12)
+light_color = Color(1, 0.92, 0.92, 1)
+
+[node name="tile_grounds" type="Node3D" parent="." unique_id=865124454]
+
+[node name="tile_ground" parent="tile_grounds" unique_id=174821479 instance=ExtResource("2_gjf5a")]
+script = ExtResource("3_con4k")
+
+[node name="tile_ground2" parent="tile_grounds" unique_id=1296841775 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground3" parent="tile_grounds" unique_id=1639595101 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground5" parent="tile_grounds" unique_id=314803066 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground4" parent="tile_grounds" unique_id=1057885365 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground46" parent="tile_grounds" unique_id=470644633 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground47" parent="tile_grounds" unique_id=533428896 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground48" parent="tile_grounds" unique_id=877290527 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground49" parent="tile_grounds" unique_id=291371163 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground50" parent="tile_grounds" unique_id=166418363 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground51" parent="tile_grounds" unique_id=1600530766 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground6" parent="tile_grounds" unique_id=1268664211 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground7" parent="tile_grounds" unique_id=1825798591 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground8" parent="tile_grounds" unique_id=715329055 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground9" parent="tile_grounds" unique_id=1123604857 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground52" parent="tile_grounds" unique_id=909705630 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground53" parent="tile_grounds" unique_id=123774912 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground54" parent="tile_grounds" unique_id=733005842 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground55" parent="tile_grounds" unique_id=86936637 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground56" parent="tile_grounds" unique_id=600104557 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground57" parent="tile_grounds" unique_id=958090232 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground58" parent="tile_grounds" unique_id=739427546 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground59" parent="tile_grounds" unique_id=1533353561 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground60" parent="tile_grounds" unique_id=1618984525 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+script = ExtResource("3_con4k")
+
+[node name="tile_ground61" parent="tile_grounds" unique_id=1318160715 instance=ExtResource("2_gjf5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
+script = ExtResource("3_con4k")
+
+[node name="decoration" type="Node3D" parent="tile_grounds/tile_ground61" unique_id=688724761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.090809196, -3)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1474311546]
+environment = SubResource("Environment_ybjhs")
+
+[node name="FarmInfoTile" parent="." unique_id=1954339693 instance=ExtResource("6_kusmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=87213701]
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer" unique_id=1968822699]
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -187.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lsuul")
+current_tab = 0
+
+[node name="Inventory" type="Control" parent="CanvasLayer/TabContainer" unique_id=1760530133]
+layout_mode = 2
+script = ExtResource("7_con4k")
+metadata/_tab_index = 0
+
+[node name="ItemGrid" type="GridContainer" parent="CanvasLayer/TabContainer/Inventory" unique_id=1142685116]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
+
+[node name="Shop" type="Control" parent="CanvasLayer/TabContainer" unique_id=1687021042]
+visible = false
+layout_mode = 2
+script = ExtResource("8_2p51d")
+available_items = Array[ExtResource("9_2p51d")]([ExtResource("10_lsuul"), ExtResource("9_kusmt")])
+metadata/_tab_index = 1
+
+[node name="ItemGrid" type="GridContainer" parent="CanvasLayer/TabContainer/Shop" unique_id=1048362880]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 3
+
+[node name="WarehouseHud" parent="." unique_id=355250284 instance=ExtResource("9_lsuul")]
+ground_scene_path = "res://scenes/grounds/ground.tscn"
+
+[node name="PlacedItems" type="Node3D" parent="." unique_id=1309355310]

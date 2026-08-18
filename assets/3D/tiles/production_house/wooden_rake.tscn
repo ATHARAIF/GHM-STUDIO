@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://siv3wqycfpww"]
+
+[ext_resource type="PackedScene" uid="uid://0orrrgvbpxpo" path="res://assets/3D/tiles/base_tiles/no_border.glb" id="1_mysp8"]
+[ext_resource type="PackedScene" uid="uid://bq3k3e5dni3th" path="res://assets/3D/tiles/production_house/wooden_rake.glb" id="2_c8jq8"]
+
+[node name="WoodenRake" type="Node3D" unique_id=1166625601]
+
+[node name="no_border5" parent="." unique_id=102566708 instance=ExtResource("1_mysp8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.059, 0)
+
+[node name="wooden_rake" parent="no_border5" unique_id=1956182602 instance=ExtResource("2_c8jq8")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.27425957, 0.11247438, 0)
+
+[editable path="no_border5"]

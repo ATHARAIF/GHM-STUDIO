@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://qup5j6v0uwsu"]
+
+[node name="WarehouseUIRoot" type="CanvasLayer" unique_id=40986010]
+
+[node name="WarehousePanel" type="Control" parent="." unique_id=744559811]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="WarehousePanel" unique_id=747660134]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15686275, 0, 0.023529412, 0.003921569)
+
+[node name="MainMargin" type="MarginContainer" parent="WarehousePanel/Background" unique_id=1986631939]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="WarehousePanel/Background/MainMargin" unique_id=581112454]
+layout_mode = 2
+
+[node name="HeaderPanel" type="Panel" parent="WarehousePanel/Background/MainMargin/MainVBox" unique_id=2128236689]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="WarehousePanel/Background/MainMargin/MainVBox/HeaderPanel" unique_id=1707466622]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="StatsHBox" type="HBoxContainer" parent="WarehousePanel/Background/MainMargin/MainVBox" unique_id=323731943]
+layout_mode = 2
+
+[node name="CapacityLabel" type="Label" parent="WarehousePanel/Background/MainMargin/MainVBox/StatsHBox" unique_id=249673177]
+layout_mode = 2
+
+[node name="ItemsLabel" type="Label" parent="WarehousePanel/Background/MainMargin/MainVBox/StatsHBox" unique_id=856671878]
+layout_mode = 2
+
+[node name="SlotGrid" type="GridContainer" parent="WarehousePanel/Background/MainMargin/MainVBox" unique_id=368972411]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="WarehousePanel/Background/MainMargin/MainVBox" unique_id=1552503702]
+layout_mode = 2

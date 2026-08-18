@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://curxl7jch8dov"]
+
+[ext_resource type="PackedScene" uid="uid://d2ona4ccnpy16" path="res://scenes/cards/process/card_cleaning.tscn" id="1_cln"]
+[ext_resource type="PackedScene" uid="uid://caa1hq7glxit3" path="res://scenes/cards/process/card_drying.tscn" id="1_dry"]
+[ext_resource type="PackedScene" uid="uid://dsqncnaefqa5s" path="res://scenes/cards/planting/card_harvest.tscn" id="1_harv"]
+[ext_resource type="PackedScene" uid="uid://ryf10txn2ha2" path="res://scenes/cards/packing/card_packing.tscn" id="1_pack"]
+[ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/planting/card_pruning.tscn" id="1_prun"]
+[ext_resource type="PackedScene" uid="uid://dkjaal8v0syd" path="res://scenes/cards/process/card_roasting.tscn" id="1_rst"]
+[ext_resource type="PackedScene" uid="uid://cfcdyfqy7trvf" path="res://scenes/cards/process/card_testing.tscn" id="1_test"]
+[ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/planting/card_weeding.tscn" id="1_weed"]
+[ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="3_svfyg"]
+[ext_resource type="Script" uid="uid://bj1ap4xeolcck" path="res://scripts/cards/card_hand.gd" id="4_hand_script"]
+[ext_resource type="PackedScene" uid="uid://bk2wo6fivyj3g" path="res://scenes/cards/planting/card_suckering.tscn" id="4_x7x6a"]
+
+[sub_resource type="Theme" id="Theme_ybjhs"]
+
+[sub_resource type="Resource" id="Resource_ryfwb"]
+script = ExtResource("3_svfyg")
+card_name = "Weeding"
+process_id = "FP01"
+cost = 300
+duration = 2
+effect_defect = -5.0
+active_start_turn = 3
+active_end_turn = 6
+
+[sub_resource type="Resource" id="Resource_suckering"]
+script = ExtResource("3_svfyg")
+card_name = "Suckering"
+process_id = "FP03"
+cost = 300
+duration = 2
+active_start_turn = 6
+active_end_turn = 8
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_d3amg"]
+script = ExtResource("3_svfyg")
+card_name = "Pruning"
+process_id = "FP02"
+cost = 250
+duration = 2
+placement_interaction = true
+active_start_turn = 3
+active_end_turn = 6
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_svfyg"]
+script = ExtResource("3_svfyg")
+card_name = "Harvest"
+process_id = "FP04"
+cost = 300
+duration = 3
+requires_interaction = true
+interaction_type = "HARVEST"
+active_start_turn = 8
+active_end_turn = 11
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_cln"]
+script = ExtResource("3_svfyg")
+card_name = "Cleaning"
+process_id = "WP01"
+cost = 150
+duration = 2
+active_start_turn = 11
+active_end_turn = 13
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_dry"]
+script = ExtResource("3_svfyg")
+card_name = "Dry"
+process_id = "WP02"
+cost = 100
+requires_interaction = true
+interaction_type = "DRY"
+active_start_turn = 13
+active_end_turn = 16
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_rst"]
+script = ExtResource("3_svfyg")
+card_name = "Roasting"
+process_id = "DP01"
+cost = 300
+duration = 2
+requires_interaction = true
+interaction_type = "ROASTING"
+availability = 1
+active_start_turn = 0
+unlock_turn = 16
+unlock_condition = "after_harvest"
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_bnt"]
+script = ExtResource("3_svfyg")
+card_name = "Bean Testing"
+process_id = "DP02"
+requires_interaction = true
+interaction_type = "TESTING"
+availability = 2
+unlock_condition = "after_roasting"
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[sub_resource type="Resource" id="Resource_pck"]
+script = ExtResource("3_svfyg")
+card_name = "Packing"
+process_id = "DP03"
+duration = 2
+availability = 2
+unlock_condition = "after_testing"
+metadata/_custom_type_script = "uid://uich76k1cing"
+
+[node name="CardHand" type="HBoxContainer" unique_id=898298064]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -444.0
+offset_top = -150.0
+offset_right = 444.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+theme = SubResource("Theme_ybjhs")
+alignment = 1
+script = ExtResource("4_hand_script")
+
+[node name="Weeding" parent="." unique_id=914919374 instance=ExtResource("1_weed")]
+layout_mode = 2
+card_data = SubResource("Resource_ryfwb")
+
+[node name="Suckering" parent="." unique_id=2029337744 instance=ExtResource("4_x7x6a")]
+layout_mode = 2
+card_data = SubResource("Resource_suckering")
+
+[node name="Pruning" parent="." unique_id=1168549735 instance=ExtResource("1_prun")]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+card_data = SubResource("Resource_d3amg")
+
+[node name="Harvest" parent="." unique_id=66450454 instance=ExtResource("1_harv")]
+layout_mode = 2
+card_data = SubResource("Resource_svfyg")
+
+[node name="Cleaning" parent="." unique_id=462708242 instance=ExtResource("1_cln")]
+layout_mode = 2
+card_data = SubResource("Resource_cln")
+
+[node name="Dry" parent="." unique_id=162224958 instance=ExtResource("1_dry")]
+layout_mode = 2
+card_data = SubResource("Resource_dry")
+
+[node name="Roasting" parent="." unique_id=679340384 instance=ExtResource("1_rst")]
+layout_mode = 2
+card_data = SubResource("Resource_rst")
+
+[node name="Bean Testing" parent="." unique_id=1380564907 instance=ExtResource("1_test")]
+layout_mode = 2
+card_data = SubResource("Resource_bnt")
+
+[node name="Packing" parent="." unique_id=1738642996 instance=ExtResource("1_pack")]
+layout_mode = 2
+card_data = SubResource("Resource_pck")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ugbx37w5issu"]
+
+[ext_resource type="PackedScene" uid="uid://0orrrgvbpxpo" path="res://assets/3D/tiles/base_tiles/no_border.glb" id="1_4e8ni"]
+[ext_resource type="PackedScene" uid="uid://dkj8y4ptkpivb" path="res://assets/3D/tiles/production_house/hopper.glb" id="2_llite"]
+
+[node name="Hopper" type="Node3D" unique_id=847762101]
+
+[node name="no_border3" parent="." unique_id=102566708 instance=ExtResource("1_4e8ni")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.059, 0)
+
+[node name="hopper" parent="no_border3" unique_id=1830595889 instance=ExtResource("2_llite")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.010075808, 1.1129308, 0.020277292)
+
+[editable path="no_border3"]

@@ -1,0 +1,156 @@
+[gd_scene format=4 uid="uid://bdm2v6esnu72l"]
+
+[ext_resource type="PackedScene" uid="uid://cop55oqrghnkw" path="res://assets/3D/tiles/base_tiles/full_border.glb" id="1_62c2w"]
+[ext_resource type="PackedScene" uid="uid://b5omglxf5doma" path="res://assets/3D/tiles/base_tiles/3side_border.glb" id="1_wimtl"]
+[ext_resource type="PackedScene" uid="uid://cldpacqp8h610" path="res://assets/3D/tiles/base_tiles/corner_border.glb" id="3_524co"]
+[ext_resource type="PackedScene" uid="uid://fyfn51j3jhbb" path="res://assets/3D/tiles/base_tiles/2side_border.glb" id="4_bcn0r"]
+[ext_resource type="PackedScene" uid="uid://cnk12vhht73ne" path="res://assets/3D/tiles/base_tiles/1side_border.glb" id="5_4ipuy"]
+[ext_resource type="PackedScene" uid="uid://0orrrgvbpxpo" path="res://assets/3D/tiles/base_tiles/no_border.glb" id="6_x5c1a"]
+[ext_resource type="PackedScene" uid="uid://b684s7wiklyd0" path="res://assets/3D/tiles/base_tiles/1corner.glb" id="7_2d6sf"]
+[ext_resource type="PackedScene" uid="uid://ddcfl72ocvg3q" path="res://assets/3D/tiles/base_tiles/2corner.glb" id="8_rrbv6"]
+[ext_resource type="PackedScene" uid="uid://bk0xj0dttboiv" path="res://assets/3D/tiles/base_tiles/3corner.glb" id="9_nqqav"]
+[ext_resource type="PackedScene" uid="uid://c3ucodc7ljlbi" path="res://assets/3D/tiles/base_tiles/4corner.glb" id="10_sreiq"]
+[ext_resource type="PackedScene" uid="uid://b4wn48hruupsm" path="res://assets/3D/tiles/base_tiles/2corner_diagonal.glb" id="11_xb11u"]
+[ext_resource type="PackedScene" uid="uid://d4jkvh7x4iwh1" path="res://assets/3D/tiles/base_tiles/cornerv2.glb" id="12_mpsep"]
+[ext_resource type="PackedScene" uid="uid://bxw1i8idgadat" path="res://assets/3D/tiles/base_tiles/1side_2corner.glb" id="13_8v1c6"]
+[ext_resource type="PackedScene" uid="uid://bwyye4kdchesq" path="res://assets/3D/tiles/base_tiles/tile_ground.glb" id="14_524co"]
+[ext_resource type="PackedScene" uid="uid://c1imcbrbr5esx" path="res://assets/3D/tiles/production_house/roasting_machine.glb" id="14_x5c1a"]
+[ext_resource type="PackedScene" uid="uid://dkj8y4ptkpivb" path="res://assets/3D/tiles/production_house/hopper.glb" id="15_2d6sf"]
+[ext_resource type="PackedScene" uid="uid://c028uyn6hgfcp" path="res://assets/3D/tiles/base_tiles/1side_1corner_1.glb" id="15_4ipuy"]
+[ext_resource type="PackedScene" uid="uid://dnh03uprxb171" path="res://assets/3D/tiles/base_tiles/1side_1corner_2.glb" id="16_x5c1a"]
+[ext_resource type="PackedScene" uid="uid://bq3k3e5dni3th" path="res://assets/3D/tiles/production_house/wooden_rake.glb" id="17_nqqav"]
+[ext_resource type="PackedScene" uid="uid://bwlj8urfhkrr6" path="res://assets/3D/tiles/production_house/silo.glb" id="19_rrbv6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51j0k"]
+resource_name = "color test"
+cull_mode = 2
+albedo_color = Color(0.90633965, 0.009095142, 0.013443476, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f6sph"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.060000002, -0.5, 1, 0.120000005, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAwAAAAIAAAAEAAEAAQAFAAMAAwAGAAAABQAGAAMAAAAGAAcABQAHAAYAAAAHAAQAAQAHAAUAAQAEAAcA"),
+"name": "color test",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAD/////AAAAAAAA//8AAAAAAAD/////AAD//wAAAAAAAP///////wAAAAAAAP//AAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dwdev"]
+resource_name = "no_border_Cube_015"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.060000002, -0.5, 1, 0.120000005, 1),
+"attribute_data": PackedByteArray("/1//v/+f/3//n/+//1//f/+f////X/+//5//v/9f////n/8//18AAP+fAAD/X/8//5//f//f/z//3/9//5//P/8f/3//X/8//1//f/8f/z//n/9//1//P/+f/z//X/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_51j0k"),
+"name": "color test",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAAAA////////AAD//wAA//8AAP////8AAAAA//8AAP////9U1QAAAAAAAFTVAAD//wAAVNUAAAAA//9U1f////////+/AAAAAP///78AAP//////v///AAD///+//////wAA//8AAP///////wAA//8AAP////////////8AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAFTV//8AAP//VNX///////9U1f//AAAAAFTV/7//v/+//7//v/+//7//v1TVVNVU1VTVVNVU1VTVVNX//////////////////////3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3+qKqoqqiqqKqoqqiqqKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_f6sph")
+
+[node name="base_tiles" type="Node3D" unique_id=674472095]
+
+[node name="1corner" parent="." unique_id=1606449544 instance=ExtResource("7_2d6sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="1side_2corner2" parent="." unique_id=1751099542 instance=ExtResource("13_8v1c6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+
+[node name="1side_border2" parent="." unique_id=545126257 instance=ExtResource("5_4ipuy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="2corner2" parent="." unique_id=1754549876 instance=ExtResource("8_rrbv6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="2corner_diagonal2" parent="." unique_id=83780604 instance=ExtResource("11_xb11u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="2side_border2" parent="." unique_id=839486207 instance=ExtResource("4_bcn0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="3corner2" parent="." unique_id=582666822 instance=ExtResource("9_nqqav")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="3side_border2" parent="." unique_id=1687574418 instance=ExtResource("1_wimtl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="4corner2" parent="." unique_id=2082353513 instance=ExtResource("10_sreiq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="cornerv22" parent="." unique_id=1245215778 instance=ExtResource("12_mpsep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="corner_border2" parent="." unique_id=959718052 instance=ExtResource("3_524co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="full_border2" parent="." unique_id=1645918567 instance=ExtResource("1_62c2w")]
+
+[node name="no_border2" parent="." unique_id=726405753 instance=ExtResource("6_x5c1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="no_border2" type="MeshInstance3D" parent="no_border2" unique_id=1882589367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0015061)
+mesh = SubResource("ArrayMesh_dwdev")
+
+[node name="roasting_machine" parent="no_border2" unique_id=1173263518 instance=ExtResource("14_x5c1a")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.024790525, 0.13229004, 0.28708494)
+
+[node name="no_border3" parent="." unique_id=44133313 instance=ExtResource("6_x5c1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0001097, 0, 0)
+
+[node name="hopper" parent="no_border3" unique_id=1830595889 instance=ExtResource("15_2d6sf")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.010075808, 1.1129308, 0.013175458)
+
+[node name="no_border4" parent="." unique_id=102566708 instance=ExtResource("6_x5c1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0101705, 0, 0)
+
+[node name="silo" parent="no_border4" unique_id=814825784 instance=ExtResource("19_rrbv6")]
+transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0.018116474, 1.0529569, -0.011486396)
+
+[node name="no_border5" parent="." unique_id=1056300515 instance=ExtResource("6_x5c1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.017891, 0, 0)
+
+[node name="wooden_rake" parent="no_border5" unique_id=1956182602 instance=ExtResource("17_nqqav")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.27425957, 0.11247438, 0)
+
+[node name="tile_ground" parent="." unique_id=1025587759 instance=ExtResource("14_524co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.005, -4)
+
+[node name="ground" parent="tile_ground" index="0" unique_id=1604976932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
+
+[node name="1side_1corner_1" parent="." unique_id=955035052 instance=ExtResource("15_4ipuy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
+
+[node name="1side_1corner_2" parent="." unique_id=1119675299 instance=ExtResource("16_x5c1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+
+[editable path="1corner"]
+[editable path="1side_2corner2"]
+[editable path="1side_border2"]
+[editable path="2corner2"]
+[editable path="2corner_diagonal2"]
+[editable path="2side_border2"]
+[editable path="3corner2"]
+[editable path="3side_border2"]
+[editable path="4corner2"]
+[editable path="cornerv22"]
+[editable path="corner_border2"]
+[editable path="full_border2"]
+[editable path="no_border2"]
+[editable path="no_border3"]
+[editable path="no_border4"]
+[editable path="no_border5"]
+[editable path="tile_ground"]
+[editable path="1side_1corner_1"]
+[editable path="1side_1corner_2"]
