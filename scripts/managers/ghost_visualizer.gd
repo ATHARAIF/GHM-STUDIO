@@ -1,12 +1,17 @@
 extends Node
 
 @export_group("Ghost Visual")
+## Tingkat transparansi (0-1) objek 3D bayangan saat melayang di udara.
 @export var ghost_float_alpha: float = 0.55
+## Tingkat transparansi (0-1) area/kotak indikator penempatan di tanah.
 @export var ghost_indicator_alpha: float = 0.25
+## Warna indikator jika posisi penempatan valid (bisa ditaruh).
 @export var valid_color: Color = Color(0.3, 1, 0.3)
+## Warna indikator jika posisi penempatan tidak valid (merah/silang).
 @export var invalid_color: Color = Color(1, 0.3, 0.3)
 
 @export_group("Animation")
+## Durasi animasi memutar arah bayangan (detik).
 @export var rotate_duration: float = 0.2
 
 var ghost_float: Node3D

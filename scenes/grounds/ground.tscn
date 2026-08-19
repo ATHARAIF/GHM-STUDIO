@@ -106,21 +106,20 @@ environment = SubResource("Environment_lbc21")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=184307939]
 transform = Transform3D(-0.91205055, 0.16332261, -0.37615097, -0.08331026, 0.824343, 0.55992687, 0.4015261, 0.5420188, -0.7382362, -6.208373, 4.496863, -7.872581)
 shadow_enabled = true
-shadow_bias = 0.02
-shadow_blur = 2.04
+shadow_bias = 0.0
+shadow_blur = 0.0
 directional_shadow_mode = 0
 directional_shadow_split_2 = 1.0
 directional_shadow_split_3 = 1.0
-directional_shadow_fade_start = 0.0
-directional_shadow_max_distance = 67.0
-directional_shadow_pancake_size = 0.0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 20.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1644767472]
-transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 0, 0.8660254, 0.50000006, 0.7071068, -0.35355338, 0.61237246, -9.219639, 6.957306, 9.220211)
+transform = Transform3D(0.71569276, 0.36492097, -0.5954969, 0, 0.85264015, 0.52249855, 0.6984153, -0.37394843, 0.61022836, -5.872, 5.016, 6.179)
 projection = 1
 current = true
-size = 8.878
-far = 82.75
+size = 10.351
+far = 30.0
 
 [node name="tile_grounds" type="Node3D" parent="." unique_id=865124454]
 metadata/_edit_lock_ = true
@@ -129,7 +128,7 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground50" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground50" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -137,7 +136,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, 0)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground51" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground51" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -145,7 +144,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, 0)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground52" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground52" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -153,7 +152,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, 0)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground53" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground53" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -161,7 +160,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, 0)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground54" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground54" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -169,7 +168,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, 0)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground55" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground55" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -177,7 +176,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, 0)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground56" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground56" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -185,7 +184,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground57" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground57" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -193,7 +192,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, 1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground58" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground58" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -201,7 +200,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, 1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground59" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground59" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -209,7 +208,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, 1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground60" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground60" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -217,7 +216,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, 1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground61" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground61" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -225,7 +224,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, 1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground62" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground62" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -233,7 +232,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, 1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground63" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground63" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -241,7 +240,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground64" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground64" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -249,7 +248,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, 2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground65" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground65" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -257,7 +256,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, 2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground66" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground66" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -265,7 +264,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, 2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground67" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground67" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -273,7 +272,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, 2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground68" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground68" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -281,7 +280,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, 2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground69" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground69" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -289,7 +288,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, 2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground70" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground70" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -297,7 +296,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground71" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground71" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -305,7 +304,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, 3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground72" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground72" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -313,7 +312,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, 3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground73" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground73" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -321,7 +320,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, 3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground74" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground74" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -329,7 +328,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, 3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground75" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground75" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -337,7 +336,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, 3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground76" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground76" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -345,7 +344,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, 3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground77" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground77" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -353,7 +352,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, -1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground78" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground78" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -361,7 +360,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, -1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground79" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground79" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -369,7 +368,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, -1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground80" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground80" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -377,7 +376,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, -1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground81" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground81" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -385,7 +384,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, -1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground82" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground82" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -393,7 +392,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, -1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground83" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground83" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -401,7 +400,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, -1)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground84" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground84" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -409,7 +408,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, -2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground85" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground85" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -417,7 +416,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, -2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground86" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground86" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -425,7 +424,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, -2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground87" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground87" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -433,7 +432,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, -2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground88" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground88" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -441,7 +440,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, -2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground89" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground89" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -449,7 +448,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, -2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground90" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground90" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -457,7 +456,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, -2)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground91" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground91" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -465,7 +464,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, -3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground92" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground92" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -473,7 +472,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.005, -3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground93" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground93" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -481,7 +480,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.005, -3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground94" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground94" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -489,7 +488,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.005, -3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground95" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground95" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -497,7 +496,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.005, -3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground96" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground96" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -505,7 +504,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.005, -3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground97" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground97" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 
@@ -513,7 +512,7 @@ mesh = SubResource("ArrayMesh_jgxd4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.005, -3)
 script = ExtResource("3_w5yvf")
 
-[node name="ground" parent="tile_grounds/tile_ground98" index="0" unique_id=639973261]
+[node name="ground" parent="tile_grounds/tile_ground98" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 mesh = SubResource("ArrayMesh_jgxd4")
 

@@ -1,6 +1,11 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cvoe0b05psis3"]
 
-[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://djheffwvvtjqr" path="res://scenes/ui/popups/harvest_method_popup.tscn" id="1_a03s9"]
+[ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_b03s9"]
+[ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+[ext_resource type="Resource" uid="uid://selective123" path="res://resources/methods/harvest/selective.tres" id="2_c03s9"]
+[ext_resource type="PackedScene" uid="uid://b0iehonihftwv" path="res://scenes/ui/popups/harvest_result_popup.tscn" id="2_ia3xb"]
+[ext_resource type="Resource" uid="uid://strip123" path="res://resources/methods/harvest/strip.tres" id="3_d03s9"]
 
 [resource]
 script = ExtResource("1_script")
@@ -10,8 +15,9 @@ cost = 300
 duration = 3
 placement_interaction = true
 requires_interaction = true
-interaction_type = "HARVEST"
+custom_popup_ui = ExtResource("1_a03s9")
+custom_result_popup_ui = ExtResource("2_ia3xb")
+popup_methods = Array[ExtResource("1_b03s9")]([ExtResource("2_c03s9"), ExtResource("3_d03s9")])
 active_start_turn = 8
 active_end_turn = 11
 metadata/_custom_type_script = "uid://uich76k1cing"
-

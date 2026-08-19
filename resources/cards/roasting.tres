@@ -1,6 +1,9 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://ddy0dvkdpxo62"]
 
+[ext_resource type="PackedScene" uid="uid://bl8rs3n33rpqj" path="res://scenes/ui/popups/roasting_popup.tscn" id="1_1t5hx"]
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_xhq3r"]
+[ext_resource type="Resource" uid="uid://p1yxpax3eaod" path="res://resources/methods/roasting/roasting_level.tres" id="2_xhq3r"]
 
 [resource]
 script = ExtResource("1_script")
@@ -8,6 +11,9 @@ card_name = "Roasting"
 process_id = "DP01"
 cost = 200
 duration = 2
+placement_interaction = true
+custom_popup_ui = ExtResource("1_1t5hx")
+popup_methods = Array[ExtResource("1_xhq3r")]([ExtResource("2_xhq3r")])
 availability = 2
-unlock_condition = "WP02"
+unlock_condition = "WP01"
 metadata/_custom_type_script = "uid://uich76k1cing"

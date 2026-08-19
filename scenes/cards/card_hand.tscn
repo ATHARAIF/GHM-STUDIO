@@ -1,9 +1,8 @@
-﻿[gd_scene load_steps=12 format=3 uid="uid://curxl7jch8dov"]
+[gd_scene format=3 uid="uid://c2uke58d1oepu"]
 
-[ext_resource type="PackedScene" uid="uid://d2ona4ccnpy16" path="res://scenes/cards/process/card_cleaning.tscn" id="1_cln"]
-[ext_resource type="PackedScene" uid="uid://caa1hq7glxit3" path="res://scenes/cards/process/card_drying.tscn" id="1_dry"]
 [ext_resource type="PackedScene" uid="uid://dsqncnaefqa5s" path="res://scenes/cards/farm/card_harvest.tscn" id="1_harv"]
 [ext_resource type="PackedScene" uid="uid://ryf10txn2ha2" path="res://scenes/cards/packing/card_packing.tscn" id="1_pack"]
+[ext_resource type="PackedScene" uid="uid://d3e0xdihdqcw4" path="res://scenes/cards/process/card_processing.tscn" id="1_proc"]
 [ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/farm/card_pruning.tscn" id="1_prun"]
 [ext_resource type="PackedScene" uid="uid://dkjaal8v0syd" path="res://scenes/cards/process/card_roasting.tscn" id="1_rst"]
 [ext_resource type="PackedScene" uid="uid://cfcdyfqy7trvf" path="res://scenes/cards/process/card_testing.tscn" id="1_test"]
@@ -13,7 +12,7 @@
 
 [sub_resource type="Theme" id="Theme_ybjhs"]
 
-[node name="card_hand" type="HBoxContainer"]
+[node name="card_hand" type="HBoxContainer" unique_id=803764765]
 custom_minimum_size = Vector2(1152, 160)
 anchors_preset = 12
 anchor_top = 1.0
@@ -28,29 +27,26 @@ theme = SubResource("Theme_ybjhs")
 alignment = 1
 script = ExtResource("4_hand_script")
 
-[node name="card_weeding" parent="." instance=ExtResource("1_weed")]
+[node name="card_weeding" parent="." unique_id=1418713304 instance=ExtResource("1_weed")]
 layout_mode = 2
 
-[node name="card_suckering" parent="." instance=ExtResource("4_x7x6a")]
+[node name="card_suckering" parent="." unique_id=1641168024 instance=ExtResource("4_x7x6a")]
 layout_mode = 2
 
-[node name="card_pruning" parent="." instance=ExtResource("1_prun")]
+[node name="card_pruning" parent="." unique_id=795219280 instance=ExtResource("1_prun")]
 layout_mode = 2
 
-[node name="card_harvest" parent="." instance=ExtResource("1_harv")]
+[node name="card_harvest" parent="." unique_id=1342137021 instance=ExtResource("1_harv")]
 layout_mode = 2
 
-[node name="card_cleaning" parent="." instance=ExtResource("1_cln")]
+[node name="card_processing" parent="." unique_id=1571066463 instance=ExtResource("1_proc")]
 layout_mode = 2
 
-[node name="card_drying" parent="." instance=ExtResource("1_dry")]
+[node name="card_roasting" parent="." unique_id=483596952 instance=ExtResource("1_rst")]
 layout_mode = 2
 
-[node name="card_roasting" parent="." instance=ExtResource("1_rst")]
+[node name="card_testing" parent="." unique_id=1036993740 instance=ExtResource("1_test")]
 layout_mode = 2
 
-[node name="card_testing" parent="." instance=ExtResource("1_test")]
-layout_mode = 2
-
-[node name="card_packing" parent="." instance=ExtResource("1_pack")]
+[node name="card_packing" parent="." unique_id=1168249238 instance=ExtResource("1_pack")]
 layout_mode = 2

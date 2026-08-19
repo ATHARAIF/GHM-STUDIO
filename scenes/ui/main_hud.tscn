@@ -1,12 +1,8 @@
 [gd_scene format=3 uid="uid://cxy720dnitlvc"]
 
-[ext_resource type="PackedScene" uid="uid://curxl7jch8dov" path="res://scenes/cards/card_hand.tscn" id="1_2obvf"]
-[ext_resource type="Script" uid="uid://ceh5lijef82ew" path="res://scripts/ui/main_hud.gd" id="1_hudgd"]
+[ext_resource type="PackedScene" uid="uid://c2uke58d1oepu" path="res://scenes/cards/card_hand.tscn" id="1_2obvf"]
+[ext_resource type="Script" uid="uid://ccgq84p33gpag" path="res://scripts/ui/main_hud.gd" id="1_hudgd"]
 [ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="2_6230l"]
-[ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/popups/pruning_popup.tscn" id="4_jciqr"]
-[ext_resource type="PackedScene" uid="uid://ddyxy0w123abf" path="res://scenes/ui/popups/dry_popup.tscn" id="5_dry"]
-[ext_resource type="PackedScene" uid="uid://djheffwvvtjqr" path="res://scenes/ui/popups/harvest_method_popup.tscn" id="6_harvm"]
-[ext_resource type="PackedScene" uid="uid://b0iehonihftwv" path="res://scenes/ui/popups/harvest_result_popup.tscn" id="7_harvr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_footer_floating"]
 bg_color = Color(0.12156863, 0.16078432, 0.2, 0)
@@ -270,6 +266,11 @@ label_settings = SubResource("LabelSettings_glx4a")
 [node name="Flavor" type="Label" parent="main/PanelContainer/DebugStats" unique_id=391158666]
 layout_mode = 2
 text = "Flavor: 0"
+label_settings = SubResource("LabelSettings_glx4a")
+
+[node name="Bitterness" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1398842063]
+layout_mode = 2
+text = "Bitterness: 0"
 label_settings = SubResource("LabelSettings_glx4a")
 
 [node name="Moisture" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1589169424]
@@ -549,15 +550,3 @@ text = "					Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum D
 					Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet "
 fit_content = true
 horizontal_alignment = 3
-
-[node name="PruningPopup" parent="." unique_id=723379850 instance=ExtResource("4_jciqr")]
-visible = false
-
-[node name="DryPopup" parent="." unique_id=825059901 instance=ExtResource("5_dry")]
-visible = false
-
-[node name="HarvestMethodPopup" parent="." unique_id=1563793212 instance=ExtResource("6_harvm")]
-visible = false
-
-[node name="HarvestResultPopup" parent="." unique_id=1722398812 instance=ExtResource("7_harvr")]
-visible = false

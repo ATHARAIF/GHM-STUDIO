@@ -2,7 +2,9 @@ extends Node
 
 
 @export_group("Animation")
+## Tinggi objek melayang (bayangan) dari atas tanah saat ditarik (meter).
 @export var float_height: float = 0.4
+## Durasi animasi jatuhnya objek dari melayang sampai menyentuh tanah (detik).
 @export var place_duration: float = 0.35
 
 @onready var ghost_visualizer = $GhostVisualizer

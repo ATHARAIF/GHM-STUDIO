@@ -68,57 +68,61 @@ text = "   X   "
 layout_mode = 2
 alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer" unique_id=1044473432]
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer" unique_id=1044473432]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="Lbl1" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=2082984929]
+[node name="Lbl1" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=2082984929]
 layout_mode = 2
 text = "Altitude"
 
-[node name="ValAltitude" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=307087747]
+[node name="ValAltitude" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=307087747]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.4, 0.2, 1)
 text = "0m"
 horizontal_alignment = 2
 
-[node name="Lbl2" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=955391516]
+[node name="Lbl2" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=955391516]
 layout_mode = 2
 text = "Soil Quality"
 
-[node name="ValSoil" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1385231259]
+[node name="ValSoil" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=1385231259]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.4, 0.2, 1)
 text = "0"
 horizontal_alignment = 2
 
-[node name="Lbl3" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=2055614530]
+[node name="Lbl3" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=2055614530]
 layout_mode = 2
 text = "Bonus Aroma"
 
-[node name="ValAroma" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=707290035]
+[node name="ValAroma" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=707290035]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
 text = "+0"
 horizontal_alignment = 2
 
-[node name="Lbl4" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=229989838]
+[node name="Lbl4" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=229989838]
 layout_mode = 2
 text = "Bonus Body"
 
-[node name="ValBody" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=2141224573]
+[node name="ValBody" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=2141224573]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
 text = "+0"
 horizontal_alignment = 2
 
-[node name="Lbl5" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=450761754]
+[node name="Lbl5" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=450761754]
 layout_mode = 2
 text = "Bonus Acidity"
 
-[node name="ValAcidity" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=928492916]
+[node name="ValAcidity" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=928492916]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
 text = "+0"

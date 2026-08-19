@@ -1,6 +1,9 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c7prpyahc2ia7"]
 
+[ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/popups/pruning_popup.tscn" id="1_a03s9"]
+[ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_b03s9"]
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+[ext_resource type="Resource" uid="uid://c83kndr7g8x1l" path="res://resources/methods/pruning/single_stem.tres" id="2_c03s9"]
 
 [resource]
 script = ExtResource("1_script")
@@ -9,6 +12,8 @@ process_id = "FP02"
 cost = 250
 duration = 2
 placement_interaction = true
+custom_popup_ui = ExtResource("1_a03s9")
+popup_methods = Array[ExtResource("1_b03s9")]([ExtResource("2_c03s9")])
 active_start_turn = 3
 active_end_turn = 6
 metadata/_custom_type_script = "uid://uich76k1cing"

@@ -17,7 +17,6 @@ func _ready() -> void:
 		
 	btn_confirm.text = "STORE TO HOPPER"
 	
-	hide()
 
 func show_popup(tile_data: Dictionary) -> void:
 	current_tile_data = tile_data
@@ -44,9 +43,9 @@ func show_popup(tile_data: Dictionary) -> void:
 
 func _on_confirm() -> void:
 	StageManager.resolve_interaction(current_tile_data, true)
-	hide()
+	queue_free()
 	get_parent().btn_end_turn.disabled = false
 
 func _on_cancel() -> void:
-	hide()
+	queue_free()
 	get_parent().btn_end_turn.disabled = false

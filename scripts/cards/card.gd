@@ -1,9 +1,13 @@
 extends Control
 class_name Card
 
+## Scene 3D (Tile) yang akan di-spawn/dimunculkan saat kartu ini dijatuhkan ke lahan.
 @export var tile_scene: PackedScene
+## Data Resource (.tres) yang menyimpan informasi nama, biaya, efek, dan aturan kartu ini.
 @export var card_data: CardData
+## Durasi animasi memudar (fade out) saat kartu dimainkan (detik).
 @export var fade_duration: float = 0.15
+## Durasi animasi kartu kembali ke tangan jika batal ditaruh (detik).
 @export var return_duration: float = 0.25
 
 # ===== STATE =====
@@ -22,6 +26,7 @@ var pending_rotation_steps: int = 0   # dipake pas resume drag dari pickup, biar
 @onready var lbl_process = $Background/VBox/Header/Margin/LblProcess
 @onready var lbl_target = $Background/VBox/Subheader/Margin/LblTarget
 @onready var lbl_turn = $Background/VBox/Body/BadgeLeft/LblTurn
+@onready var lbl_cost = $Background/VBox/Body/BadgeRight/LblCost
 @onready var header_panel = $Background/VBox/Header
 @onready var subheader_panel = $Background/VBox/Subheader
 @onready var badge_left = $Background/VBox/Body/BadgeLeft
@@ -39,6 +44,8 @@ func _setup_ui() -> void:
 		lbl_process.text = card_data.card_name.to_upper()
 	if lbl_turn:
 		lbl_turn.text = str(card_data.duration)
+	if lbl_cost:
+		lbl_cost.text = "$%d" % card_data.cost
 		
 	if lbl_target and header_panel and subheader_panel:
 		var style = header_panel.get_theme_stylebox("panel").duplicate() as StyleBoxFlat

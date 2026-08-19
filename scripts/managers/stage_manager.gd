@@ -20,24 +20,34 @@ signal batch_flag_unlocked(flag_name: String) # { "tile": Node3D, "data": CardDa
 
 func _ready() -> void:
 	current_location = FarmLocation.new()
-	
 	_create_new_batch(2025)
+	
+	if has_node("/root/TimeManager"):
+		get_node("/root/TimeManager").year_changed.connect(_on_year_changed)
+
+func _on_year_changed(new_year: int) -> void:
+	if current_location and current_location.current_tree:
+		current_location.current_tree.age_years += 1.0
+		# Recalculate base stats/yield because age changed
+		current_location.current_tree.initialize_from_terroir(current_location)
+		
+	_create_new_batch(new_year)
 	
 func _create_new_batch(year: int) -> void:
 	var b = CoffeeBatch.new()
 	b.batch_year = year
 	
-	if current_location and current_location.variety_data:
-		var var_data = current_location.variety_data
-		b.aroma = var_data.base_aroma
-		b.body = var_data.base_body
-		b.acidity = var_data.base_acidity
-		b.sweetness = var_data.base_sweetness
-		b.flavor = var_data.base_flavor
-		b.bitterness = var_data.base_bitterness
-		b.moisture = var_data.base_moisture
-		b.defect_rate = var_data.base_defect_rate
-		b.cherry_kg = var_data.base_yield_potential
+	if current_location and current_location.current_tree:
+		var tree = current_location.current_tree
+		b.aroma = tree.current_aroma
+		b.body = tree.current_body
+		b.acidity = tree.current_acidity
+		b.sweetness = tree.current_sweetness
+		b.flavor = tree.current_flavor
+		b.bitterness = tree.current_bitterness
+		b.moisture = tree.current_moisture
+		b.defect_rate = tree.current_defect
+		b.cherry_kg = tree.current_yield_potential
 	
 	batches[year] = b
 	
@@ -76,23 +86,27 @@ func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Di
 	if card_data == null:
 		return
 		
+	var duration = card_data.duration
+	if extra_data.has("turn_duration"):
+		duration = extra_data["turn_duration"]
+
 	var tile_labels = _find_tile_labels(tile_node)
 	if tile_labels:
-		tile_labels.set_turn(card_data.duration)
+		tile_labels.set_turn(duration)
 		if current_location:
 			tile_labels.set_lahan_name(current_location.location_name)
 			
 	var tile_dict = {
 		"tile": tile_node,
 		"data": card_data,
-		"remaining_duration": card_data.duration,
+		"remaining_duration": duration,
 		"tile_labels": tile_labels,
 		"paid": false,
 		"ready": false
 	}
 	tile_dict.merge(extra_data)
 	
-	if card_data.duration <= 0:
+	if duration <= 0:
 		if card_data.requires_interaction:
 			tile_dict.ready = true
 			if tile_labels:
@@ -175,17 +189,19 @@ func advance_turn() -> void:
 
 func apply_missed_penalty(card_data: CardData) -> void:
 	var target_b = get_oldest_ready_batch(card_data.process_id)
-	target_b.aroma = clamp(target_b.aroma + card_data.penalty_aroma, 0.0, 100.0)
-	target_b.acidity = clamp(target_b.acidity + card_data.penalty_acidity, 0.0, 100.0)
-	target_b.body = clamp(target_b.body + card_data.penalty_body, 0.0, 100.0)
-	target_b.sweetness = clamp(target_b.sweetness + card_data.penalty_sweetness, 0.0, 100.0)
-	target_b.flavor = clamp(target_b.flavor + card_data.penalty_flavor, 0.0, 100.0)
-	target_b.bitterness = clamp(target_b.bitterness + card_data.penalty_bitterness, 0.0, 100.0)
-	target_b.complexity = clamp(target_b.complexity + card_data.penalty_complexity, 0.0, 100.0)
-	target_b.aftertaste = clamp(target_b.aftertaste + card_data.penalty_aftertaste, 0.0, 100.0)
-	target_b.moisture = clamp(target_b.moisture + card_data.penalty_moisture, 0.0, 100.0)
-	target_b.defect_rate = clamp(target_b.defect_rate + card_data.penalty_defect, 0.0, 100.0)
-	target_b.cherry_kg = clamp(target_b.cherry_kg + card_data.penalty_yield, 0, 5000)
+	if target_b:
+		target_b.aroma = clamp(target_b.aroma + card_data.penalty_aroma, 0.0, 100.0)
+		target_b.acidity = clamp(target_b.acidity + card_data.penalty_acidity, 0.0, 100.0)
+		target_b.body = clamp(target_b.body + card_data.penalty_body, 0.0, 100.0)
+		target_b.sweetness = clamp(target_b.sweetness + card_data.penalty_sweetness, 0.0, 100.0)
+		target_b.flavor = clamp(target_b.flavor + card_data.penalty_flavor, 0.0, 100.0)
+		target_b.bitterness = clamp(target_b.bitterness + card_data.penalty_bitterness, 0.0, 100.0)
+		target_b.moisture = clamp(target_b.moisture + card_data.penalty_moisture, 0.0, 100.0)
+		target_b.defect_rate = clamp(target_b.defect_rate + card_data.penalty_defect, 0.0, 100.0)
+		target_b.cherry_kg = int(clamp(float(target_b.cherry_kg) * (1.0 + card_data.penalty_yield), 0, 5000))
+		
+	if current_location and current_location.current_tree:
+		current_location.current_tree.health_pct = clamp(current_location.current_tree.health_pct + card_data.penalty_health, 0.0, 100.0)
 	
 	print("Penalti diberikan karena gagal menyelesaikan proses: ", card_data.card_name)
 	stats_changed.emit()
@@ -200,7 +216,7 @@ func is_tile_ready_for_interaction(tile_node: Node3D) -> bool:
 func trigger_interaction(tile_node: Node3D) -> void:
 	for dict in active_tiles:
 		if dict.tile == tile_node and dict.ready:
-			interaction_requested.emit(dict.data.interaction_type, dict)
+			interaction_requested.emit(dict.data.card_name, dict)
 			return
 
 func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
@@ -213,10 +229,10 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 	if tile_dict.tile and is_instance_valid(tile_dict.tile):
 		PlacementManager.remove_tile_from_grid(tile_dict.tile)
 		
-	if tile_dict.data.interaction_type == "ROASTING":
+	if tile_dict.data.process_id == "DP01":
 		batch_flags["after_roasting"] = true
 		batch_flag_unlocked.emit("after_roasting")
-	elif tile_dict.data.interaction_type == "TESTING":
+	elif tile_dict.data.process_id == "TEST01":
 		batch_flags["after_testing"] = true
 		batch_flag_unlocked.emit("after_testing")
 		

@@ -52,7 +52,7 @@ func _ready() -> void:
 	else:
 		val_cost = grid2.get_node("VCost")
 		
-	$CenterContainer/PanelContainer/VBox/Header/LblTitle.text = "PRUNING"
+	$CenterContainer/PanelContainer/VBox/Header/LblTitle.text = "ROASTING"
 	if StageManager.current_location:
 		lbl_farm_name.text = StageManager.current_location.location_name
 	
@@ -94,7 +94,8 @@ func _select_method(method: ProcessMethodData) -> void:
 		lbl_buds.show()
 	else:
 		slider_hbox.hide()
-		lbl_buds.hide()
+		lbl_buds.text = "ROASTING LEVEL"
+	lbl_buds.show()
 	
 	for child in hbox_methods.get_children():
 		if child is Button:
@@ -154,7 +155,7 @@ func _on_slider_changed(val: float) -> void:
 
 
 func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, card_data: Resource) -> void:
-	if card_name == "Pruning":
+	if card_name == "Roasting":
 		current_tile = tile
 		current_card_data = card_data
 		show_popup()
@@ -166,22 +167,26 @@ func show_popup() -> void:
 			val_plant.text = StageManager.current_location.variety_data.variety_name
 		if val_surface: val_surface.text = str(StageManager.current_location.surface_area) + " Ha"
 	
-	_update_timeline()
-	selected_method = null
-	slider_hbox.hide()
+	timeline_container.hide()
 	
-	# Reset button colors
-	for child in hbox_methods.get_children():
-		if child is Button:
-			child.modulate = Color(1.0, 1.0, 1.0)
-			
 	slider_intensity.value = 50.0
 	
-	if current_card_data:
+	if current_card_data and current_card_data.popup_methods.size() > 0:
 		available_methods = current_card_data.popup_methods
-	_build_method_buttons()
+		selected_method = available_methods[0]
 	
-	_reset_ui()
+	if selected_method:
+		val_cost.text = "$%d" % selected_method.override_cost
+	
+	slider_hbox.show()
+	lbl_buds.text = "ROASTING LEVEL"
+	lbl_buds.show()
+	hbox_methods.get_parent().get_node("LblMethod").hide()
+	hbox_methods.hide()
+	
+	_on_slider_changed(slider_intensity.value)
+	
+	btn_confirm.disabled = false
 	show()
 
 func _update_timeline() -> void:
@@ -197,9 +202,9 @@ func _on_confirm() -> void:
 	queue_free()
 	if has_node("/root/EventManager") and selected_method != null:
 		var em = get_node("/root/EventManager")
-		em.card_placement_interaction_confirmed.emit("Pruning", current_tile, current_card_data, {
-			"pruning_method": selected_method.method_name,
-			"pruning_intensity": slider_intensity.value,
+		em.card_placement_interaction_confirmed.emit("Roasting", current_tile, current_card_data, {
+			"roasting_method": selected_method.method_name,
+			"roasting_intensity": slider_intensity.value,
 			"mod_acidity": mod_acidity,
 			"mod_aroma": mod_aroma,
 			"mod_sweetness": mod_sweetness,
@@ -215,7 +220,7 @@ func _on_cancel() -> void:
 	queue_free()
 	if has_node("/root/EventManager"):
 		var em = get_node("/root/EventManager")
-		em.card_placement_interaction_cancelled.emit("Pruning", current_tile, current_card_data)
+		em.card_placement_interaction_cancelled.emit("Roasting", current_tile, current_card_data)
 	current_tile = null
 	current_card_data = null
 
@@ -246,4 +251,5 @@ func _reset_ui() -> void:
 			child.modulate = Color(1.0, 1.0, 1.0)
 
 	slider_hbox.hide()
-	lbl_buds.hide()
+	lbl_buds.text = "ROASTING LEVEL"
+	lbl_buds.show()

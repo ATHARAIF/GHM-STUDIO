@@ -6,6 +6,18 @@ class_name CardData
 @export var cost: int = 0
 @export var duration: int = 1
 
+@export_group("Interaction")
+@export var placement_interaction: bool = false
+@export var requires_interaction: bool = false
+
+
+@export var custom_popup_ui: PackedScene
+@export var custom_result_popup_ui: PackedScene
+
+@export_group("Popup Data (For Complex Cards)")
+@export var popup_methods: Array[ProcessMethodData] = []
+@export var popup_tools: Array[ProcessMethodData] = []
+
 @export_group("Effects")
 @export var effect_aroma: float = 0.0
 @export var effect_acidity: float = 0.0
@@ -13,11 +25,10 @@ class_name CardData
 @export var effect_sweetness: float = 0.0
 @export var effect_flavor: float = 0.0
 @export var effect_bitterness: float = 0.0
-@export var effect_complexity: float = 0.0
-@export var effect_aftertaste: float = 0.0
 @export var effect_moisture: float = 0.0
 @export var effect_defect: float = 0.0
-@export var effect_yield: int = 0
+@export var effect_yield: float = 0.0
+@export var effect_health: float = 0.0
 #@export var effect_growth_rate: int = 0
 
 @export_group("Penalty Effects (If missed)")
@@ -27,16 +38,11 @@ class_name CardData
 @export var penalty_sweetness: float = 0.0
 @export var penalty_flavor: float = 0.0
 @export var penalty_bitterness: float = 0.0
-@export var penalty_complexity: float = 0.0
-@export var penalty_aftertaste: float = 0.0
 @export var penalty_moisture: float = 0.0
 @export var penalty_defect: float = 0.0
-@export var penalty_yield: int = 0
+@export var penalty_yield: float = 0.0
+@export var penalty_health: float = 0.0
 
-@export_group("Interaction")
-@export var placement_interaction: bool = false
-@export var requires_interaction: bool = false
-@export var interaction_type: String = "" # e.g., "HARVEST"
 
 
 @export_group("Availability")

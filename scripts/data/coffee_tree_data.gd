@@ -1,11 +1,37 @@
 extends Resource
 class_name CoffeeTreeData
 
+@export_group("Tree Health & Disease")
+## Umur pohon kopi dalam satuan tahun.
 @export var age_years: float = 2.0
+## Persentase kesehatan pohon kopi (0-100%).
 @export var health_pct: float = 75.0
-@export var current_brix: float = 8.0
-@export var current_acidity: float = 88.0
-@export var planting_density: int = 1450 # Pohon/Ha
+## Tingkat penyakit pada pohon (Disease) yang bisa menjalar. Berbeda dengan defect pada biji.
+@export var disease_rate: float = 0.0
+## Kerapatan tanam (Jumlah pohon per Hektar).
+@export var planting_density: int = 1600 # Pohon/Ha
+
+@export_group("Cherry & Bean Stats (Phenotype)")
+## Kadar gula (Brix) pada ceri kopi di pohon ini.
+## Nilai mutakhir Acidity (Keasaman) kopi.
+@export var current_acidity: float = 0.0
+## Nilai mutakhir Aroma kopi.
+@export var current_aroma: float = 0.0
+## Nilai mutakhir Sweetness (Manis) kopi.
+@export var current_sweetness: float = 0.0
+## Nilai mutakhir Body (Kekentalan) kopi.
+@export var current_body: float = 0.0
+## Nilai mutakhir Flavor (Rasa) kopi.
+@export var current_flavor: float = 0.0
+## Nilai mutakhir Bitterness (Pahit) kopi.
+@export var current_bitterness: float = 0.0
+
+## Persentase cacat pada biji ceri kopi (sensoris).
+@export var current_defect: float = 0.0
+## Persentase kadar air awal pada ceri.
+@export var current_moisture: float = 0.0
+## Potensi kuantitas hasil panen (Kg).
+@export var current_yield_potential: int = 0
 
 var cached_adaptation_rate: float = 1.0
 
@@ -79,3 +105,53 @@ static func get_color_for_score(score: float) -> Color:
 		return Color(0.8, 0.8, 0.2) # Yellow (Safe)
 	else:
 		return Color(0.8, 0.2, 0.2) # Red (Bad)
+func get_age_yield_pct(age: int) -> float:
+	if age < 2: return 0.0
+	elif age == 2: return 0.30
+	elif age == 3: return 0.40
+	elif age == 4: return 0.50
+	elif age == 5: return 0.50
+	elif age == 6: return 0.70
+	elif age == 7: return 0.80
+	elif age == 8: return 0.85
+	elif age == 9: return 0.90
+	elif age == 10: return 0.95
+	elif age <= 15: return 0.90
+	elif age <= 20: return 0.70
+	else: return 0.60
+
+# Initialize tree stats based on terroir match
+func initialize_from_terroir(farm: FarmLocation) -> void:
+	if farm == null or farm.variety_data == null:
+		return
+		
+	var score = calculate_adaptation_rate(farm)
+	
+	# Terroir is temporarily DISABLED per user request. Multiplier is always 100% (1.0).
+	var actual_multiplier = 1.0
+	
+	var v_data = farm.variety_data
+	
+	# Apply multiplier to sensory stats (Phenotype)
+	current_acidity = v_data.base_acidity * actual_multiplier
+	current_aroma = v_data.base_aroma * actual_multiplier
+	current_sweetness = v_data.base_sweetness * actual_multiplier
+	current_body = v_data.base_body * actual_multiplier
+	current_flavor = v_data.base_flavor * actual_multiplier
+	current_bitterness = v_data.base_bitterness * actual_multiplier
+	
+	# Base yields and defects
+	current_moisture = v_data.base_moisture
+	var plant_density: int = planting_density
+	var max_yield_per_plant: float = 10.0
+	var max_yield = farm.surface_area * plant_density * max_yield_per_plant
+	var age_pct = get_age_yield_pct(age_years)
+	var yield_age = max_yield * age_pct
+	current_yield_potential = int(yield_age * (health_pct / 100.0))
+	
+	# Defects and Diseases might INCREASE if the score is low!
+	# E.g., if match is 100%, disease is 0%. If match is 50%, disease is higher.
+	var penalty_factor = 1.0 - actual_multiplier # 0.0 to 0.5
+	
+	disease_rate = penalty_factor * 20.0 # up to 10% disease instantly for bad terroir
+	current_defect = v_data.base_defect_rate + (penalty_factor * 10.0) # up to 5% extra defect

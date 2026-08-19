@@ -5,10 +5,10 @@
 
 [node name="PlacementManager" type="Node" unique_id=1244060309]
 script = ExtResource("1_j5tis")
-float_height = 1.0
-place_duration = 0.5
+float_height = 1.5
+place_duration = 0.4
 
 [node name="GhostVisualizer" type="Node" parent="." unique_id=1157116938]
 script = ExtResource("2_ghost")
 ghost_float_alpha = 1.0
-rotate_duration = 0.15
+ghost_indicator_alpha = 0.4

@@ -11,6 +11,7 @@ extends Control
 @onready var debug_sweetness = $main/PanelContainer/DebugStats/Sweetness
 @onready var debug_aroma = $main/PanelContainer/DebugStats/Aroma
 @onready var debug_flavor = $main/PanelContainer/DebugStats/Flavor
+@onready var debug_bitterness = $main/PanelContainer/DebugStats/Bitterness
 @onready var debug_moisture = $main/PanelContainer/DebugStats/Moisture
 @onready var debug_defect = $main/PanelContainer/DebugStats/Defect
 @onready var debug_yield = $main/PanelContainer/DebugStats/Yield
@@ -41,6 +42,11 @@ func _ready() -> void:
 		
 	_update_all()
 
+	if has_node("/root/EventManager"):
+		var em = get_node("/root/EventManager")
+		em.card_placement_interaction_requested.connect(_on_card_placement_interaction_requested)
+
+
 func _toggle_popup(layer: CanvasLayer) -> void:
 	if layer:
 		layer.visible = !layer.visible
@@ -50,15 +56,14 @@ func _toggle_popup(layer: CanvasLayer) -> void:
 		elif layer == layer_coffee_log and layer_menu_tabs:
 			layer_menu_tabs.visible = false
 
-func _on_stage_interaction_requested(interaction_type: String, tile_data: Dictionary) -> void:
-	if interaction_type == "DRY":
-		if has_node("DryPopup"):
-			get_node("DryPopup").show_popup(tile_data)
-			if btn_end_turn: btn_end_turn.disabled = true
-	elif interaction_type == "HARVEST":
-		if has_node("HarvestResultPopup"):
-			get_node("HarvestResultPopup").show_popup(tile_data)
-			if btn_end_turn: btn_end_turn.disabled = true
+func _on_stage_interaction_requested(interaction_name: String, tile_data: Dictionary) -> void:
+	var card_data = tile_data.get("data")
+	if card_data and card_data.get("custom_result_popup_ui") != null:
+		var popup = card_data.custom_result_popup_ui.instantiate()
+		add_child(popup)
+		if popup.has_method("show_popup"):
+			popup.show_popup(tile_data)
+		if btn_end_turn: btn_end_turn.disabled = true
 
 func _update_all() -> void:
 	_on_turn_changed(TimeManager.turn_in_year, TimeManager.season, TimeManager.year)
@@ -84,9 +89,10 @@ func _on_stats_changed() -> void:
 	if debug_sweetness: debug_sweetness.text = "Sweetness: %.2f" % b.sweetness
 	if debug_aroma: debug_aroma.text = "Aroma: %.2f" % b.aroma
 	if debug_flavor: debug_flavor.text = "Flavor: %.2f" % b.flavor
+	if debug_bitterness: debug_bitterness.text = "Bitterness: %.2f" % b.bitterness
 	if debug_moisture: debug_moisture.text = "Moisture: %.1f%%" % b.moisture
 	if debug_defect: debug_defect.text = "Defect: %.1f%%" % b.defect_rate
-	if debug_yield: debug_yield.text = "Yield: %dkg" % b.cherry_kg
+	if debug_yield: debug_yield.text = "Yield: %.2fkg" % b.cherry_kg
 
 func _on_budget_changed(budget: int) -> void:
 	if btn_money:
@@ -94,3 +100,10 @@ func _on_budget_changed(budget: int) -> void:
 
 func _on_end_turn_pressed() -> void:
 	StageManager.advance_turn()
+
+func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, card_data: Resource) -> void:
+	if card_data.get("custom_popup_ui") != null:
+		var popup = card_data.custom_popup_ui.instantiate()
+		add_child(popup)
+		if popup.has_method("_on_card_placement_interaction_requested"):
+			popup._on_card_placement_interaction_requested(card_name, tile, card_data)

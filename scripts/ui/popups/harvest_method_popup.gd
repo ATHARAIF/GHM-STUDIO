@@ -12,16 +12,36 @@ extends CanvasLayer
 @onready var val_quantity = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2/VQuant
 
 @onready var lbl_farm_name = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/LblFarmName
+@onready var val_surface = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid/VSurface
 @onready var val_plant = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid/VPlant
 @onready var timeline_container = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Timeline
 
 var available_methods: Array[ProcessMethodData] = []
 var selected_method: ProcessMethodData
+var val_cost: Label
 
 var current_tile: Node3D
 var current_card_data: Resource
 
 func _ready() -> void:
+	var grid2 = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2
+	if not grid2.has_node("LCost"):
+		var lcost = Label.new()
+		lcost.name = "LCost"
+		lcost.text = "Cost"
+		lcost.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid2.add_child(lcost)
+		grid2.move_child(lcost, 0)
+		
+		val_cost = Label.new()
+		val_cost.name = "VCost"
+		val_cost.text = "$0"
+		val_cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		grid2.add_child(val_cost)
+		grid2.move_child(val_cost, 1)
+	else:
+		val_cost = grid2.get_node("VCost")
+		
 	$CenterContainer/PanelContainer/VBox/Header/LblTitle.text = "HARVEST METHOD"
 	if StageManager.current_location:
 		lbl_farm_name.text = StageManager.current_location.location_name
@@ -29,31 +49,16 @@ func _ready() -> void:
 	$CenterContainer/PanelContainer/VBox/Split/RightPanel/LblMethod.text = "Select Harvesting Method:"
 	$CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox.hide() # Hide intensity slider
 	
-	_load_methods()
 	_build_method_buttons()
 	
 	btn_confirm.pressed.connect(_on_confirm)
 	btn_close.pressed.connect(_on_cancel)
+
+
 	
-	if has_node("/root/EventManager"):
-		var em = get_node("/root/EventManager")
-		em.card_placement_interaction_requested.connect(_on_card_placement_interaction_requested)
 	
 	UIUtils.setup_input_blocker(self)
 	hide()
-
-func _load_methods() -> void:
-	var path = "res://resources/methods/harvest/"
-	var dir = DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".tres"):
-				var res = load(path + file_name) as ProcessMethodData
-				if res:
-					available_methods.append(res)
-			file_name = dir.get_next()
 
 func _build_method_buttons() -> void:
 	for child in hbox_methods.get_children():
@@ -70,34 +75,48 @@ func _build_method_buttons() -> void:
 		_select_method(available_methods[0])
 
 func _select_method(method: ProcessMethodData) -> void:
-	selected_method = method
+	if selected_method == method:
+		selected_method = null
+	else:
+		selected_method = method
+		
+	btn_confirm.disabled = (selected_method == null)
 	
 	for child in hbox_methods.get_children():
 		if child is Button:
-			if child.text == method.method_name:
-				child.modulate = Color(0.2, 0.8, 0.2)
-			else:
-				child.modulate = Color(1, 1, 1)
+			child.modulate = Color(0.2, 0.8, 0.2) if (selected_method and child.text == selected_method.method_name) else Color(1, 1, 1)
 	
-	val_quality.text = method.ui_qual_text
-	val_quality.modulate = method.ui_qual_color
-	val_ripeness.text = method.ui_rip_text
-	val_ripeness.modulate = method.ui_rip_color
-	val_quantity.text = method.ui_quant_text
-	val_quantity.modulate = method.ui_quant_color
-	
-	val_plant.text = "$%d" % method.override_cost
-	$CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid/LPlant.text = "Cost:"
-
+	if selected_method:
+		val_quality.text = selected_method.ui_qual_text
+		val_quality.modulate = selected_method.ui_qual_color
+		val_ripeness.text = selected_method.ui_rip_text
+		val_ripeness.modulate = selected_method.ui_rip_color
+		val_quantity.text = selected_method.ui_quant_text
+		val_quantity.modulate = selected_method.ui_quant_color
+		val_cost.text = "$%d" % selected_method.override_cost
+	else:
+		val_quality.text = "-"
+		val_quality.modulate = Color.WHITE
+		val_ripeness.text = "-"
+		val_ripeness.modulate = Color.WHITE
+		val_quantity.text = "-"
+		val_quantity.modulate = Color.WHITE
+		val_cost.text = "$0"
 func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, card_data: Resource) -> void:
-	if card_data.interaction_type == "HARVEST":
+	if card_name == "Harvest":
 		current_tile = tile
 		current_card_data = card_data
 		
 		if StageManager.current_location:
 			lbl_farm_name.text = StageManager.current_location.location_name
+			if val_surface: val_surface.text = str(StageManager.current_location.surface_area) + " Ha"
+			if StageManager.current_location.variety_data:
+				val_plant.text = StageManager.current_location.variety_data.variety_name
 		
 		_update_timeline()
+		available_methods = card_data.popup_methods
+		_build_method_buttons()
+		_reset_ui()
 		show()
 
 func _update_timeline() -> void:
@@ -133,9 +152,35 @@ func _on_confirm() -> void:
 	current_card_data = null
 
 func _on_cancel() -> void:
-	hide()
+	queue_free()
 	if has_node("/root/EventManager"):
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_cancelled.emit("Harvest", current_tile, current_card_data)
 	current_tile = null
 	current_card_data = null
+
+
+func _reset_ui() -> void:
+	selected_method = null
+	btn_confirm.disabled = true
+	
+	if val_cost: val_cost.text = "$0"
+	if val_quality:
+		val_quality.text = "-"
+		val_quality.modulate = Color.WHITE
+		if val_quality.has_theme_color_override("font_color"):
+			val_quality.add_theme_color_override("font_color", Color.WHITE)
+	if val_ripeness:
+		val_ripeness.text = "-"
+		val_ripeness.modulate = Color.WHITE
+		if val_ripeness.has_theme_color_override("font_color"):
+			val_ripeness.add_theme_color_override("font_color", Color.WHITE)
+	if val_quantity:
+		val_quantity.text = "-"
+		val_quantity.modulate = Color.WHITE
+		if val_quantity.has_theme_color_override("font_color"):
+			val_quantity.add_theme_color_override("font_color", Color.WHITE)
+			
+	for child in hbox_methods.get_children():
+		if child is Button:
+			child.modulate = Color(1.0, 1.0, 1.0)
