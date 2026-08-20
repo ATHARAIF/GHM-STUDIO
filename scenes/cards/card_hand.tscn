@@ -19,7 +19,7 @@ grow_vertical = 0
 size_flags_stretch_ratio = 0.0
 mouse_filter = 2
 theme = SubResource("Theme_ybjhs")
-theme_override_constants/separation = 54
+theme_override_constants/separation = 42
 alignment = 1
 script = ExtResource("4_hand_script")
 

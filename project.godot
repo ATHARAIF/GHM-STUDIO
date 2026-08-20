@@ -42,7 +42,7 @@ import/blender/enabled=false
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true
-theme/custom_font="uid://dv33rb6fgcmji"
+theme/custom_font="uid://b761j33ito7o5"
 
 [input]
 

@@ -1,10 +1,10 @@
 extends CanvasLayer
 
-@onready var btn_process = $CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/BtnProcess
-@onready var btn_sell = $CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/BtnSell
-@onready var btn_close = $CenterContainer/PanelContainer/VBoxContainer/Header/BtnClose
-@onready var lbl_quality = $CenterContainer/PanelContainer/VBoxContainer/VBoxData/LblQualityValue
-@onready var lbl_quantity = $CenterContainer/PanelContainer/VBoxContainer/VBoxData/LblQuantityValue
+@onready var btn_process = $popup_panel/margin/content/HBoxContainer/process
+@onready var btn_sell = $popup_panel/margin/content/HBoxContainer/sell
+@onready var btn_close = $popup_panel/close
+@onready var lbl_quality = $popup_panel/margin/content/quality/value
+@onready var lbl_quantity = $popup_panel/margin/content/quantity/value
 
 var current_tile_data: Dictionary
 

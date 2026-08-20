@@ -1,33 +1,35 @@
-[gd_scene format=3 uid="uid://djheffwvvtjqr"]
+[gd_scene format=3 uid="uid://bl8rs3n33rpqj"]
 
-[ext_resource type="Script" uid="uid://grgujkywqxst" path="res://scripts/ui/popups/harvest_method_popup.gd" id="1_popup"]
-[ext_resource type="Texture2D" uid="uid://bj814epnafbhv" path="res://assets/ui/panels/panel_background.svg" id="2_nebtd"]
-[ext_resource type="LabelSettings" uid="uid://bd7ro5fbkndri" path="res://themes/panel_title_font.tres" id="3_ybj7r"]
-[ext_resource type="Texture2D" uid="uid://88h2puw740hm" path="res://assets/ui/panels/icons/coffee_bean_icon.svg" id="4_onyti"]
-[ext_resource type="FontFile" uid="uid://bvn0ivc4p8o5l" path="res://assets/font/Fredoka-Bold.ttf" id="5_6rnw4"]
-[ext_resource type="FontFile" uid="uid://ddsl6jq828kej" path="res://assets/font/Fredoka-SemiBold.ttf" id="6_ibovj"]
-[ext_resource type="FontFile" uid="uid://b761j33ito7o5" path="res://assets/font/Fredoka-Medium.ttf" id="7_uf3br"]
-[ext_resource type="Script" uid="uid://dj2hfa37ymon4" path="res://addons/godot_radar_graph/radar_graph.gd" id="8_m82x3"]
-[ext_resource type="Texture2D" uid="uid://cfnckj1d8mr2g" path="res://assets/ui/panels/buttons/btn_sec_normal.svg" id="9_2owok"]
-[ext_resource type="Texture2D" uid="uid://bju3efkdm1wy5" path="res://assets/ui/panels/buttons/btn_sec_active_pressed.svg" id="10_5out1"]
-[ext_resource type="Texture2D" uid="uid://derajmtgjogq3" path="res://assets/ui/panels/buttons/btn_prim_normal.svg" id="13_u0f8k"]
-[ext_resource type="Texture2D" uid="uid://vhu07enw3eo1" path="res://assets/ui/panels/buttons/btn_prim_pressed.svg" id="14_el2kv"]
-[ext_resource type="Texture2D" uid="uid://cbpjfa1a2mdqf" path="res://assets/ui/panels/close_normal.svg" id="15_lyd7i"]
-[ext_resource type="Texture2D" uid="uid://dwhyrn1qg1u8v" path="res://assets/ui/panels/close_pressed.svg" id="16_60fej"]
-[ext_resource type="Texture2D" uid="uid://gsp5b3iwd5ei" path="res://assets/ui/panels/icons/close.svg" id="17_jgcr2"]
+[ext_resource type="Script" uid="uid://ds447iofiwus7" path="res://scripts/ui/popups/roasting_popup.gd" id="1_dva2y"]
+[ext_resource type="Texture2D" uid="uid://bj814epnafbhv" path="res://assets/ui/panels/panel_background.svg" id="2_8pnaq"]
+[ext_resource type="LabelSettings" uid="uid://bd7ro5fbkndri" path="res://themes/panel_title_font.tres" id="3_m2fm1"]
+[ext_resource type="Texture2D" uid="uid://88h2puw740hm" path="res://assets/ui/panels/icons/coffee_bean_icon.svg" id="4_l4dpm"]
+[ext_resource type="FontFile" uid="uid://bvn0ivc4p8o5l" path="res://assets/font/Fredoka-Bold.ttf" id="5_x8ctp"]
+[ext_resource type="FontFile" uid="uid://ddsl6jq828kej" path="res://assets/font/Fredoka-SemiBold.ttf" id="6_4oyu8"]
+[ext_resource type="FontFile" uid="uid://b761j33ito7o5" path="res://assets/font/Fredoka-Medium.ttf" id="7_r4f8h"]
+[ext_resource type="Script" uid="uid://dj2hfa37ymon4" path="res://addons/godot_radar_graph/radar_graph.gd" id="8_vpeit"]
+[ext_resource type="Texture2D" uid="uid://cfnckj1d8mr2g" path="res://assets/ui/panels/buttons/btn_sec_normal.svg" id="9_qrlpp"]
+[ext_resource type="Texture2D" uid="uid://bju3efkdm1wy5" path="res://assets/ui/panels/buttons/btn_sec_active_pressed.svg" id="10_av1sh"]
+[ext_resource type="Texture2D" uid="uid://wbkpvvhnv0ti" path="res://assets/ui/panels/icons/grabber_normal.svg" id="11_raa6a"]
+[ext_resource type="Texture2D" uid="uid://c482flx6eijld" path="res://assets/ui/panels/icons/tick.svg" id="12_fjqeb"]
+[ext_resource type="Texture2D" uid="uid://derajmtgjogq3" path="res://assets/ui/panels/buttons/btn_prim_normal.svg" id="13_n3im3"]
+[ext_resource type="Texture2D" uid="uid://vhu07enw3eo1" path="res://assets/ui/panels/buttons/btn_prim_pressed.svg" id="14_bfc6u"]
+[ext_resource type="Texture2D" uid="uid://cbpjfa1a2mdqf" path="res://assets/ui/panels/close_normal.svg" id="15_haegt"]
+[ext_resource type="Texture2D" uid="uid://dwhyrn1qg1u8v" path="res://assets/ui/panels/close_pressed.svg" id="16_c73pr"]
+[ext_resource type="Texture2D" uid="uid://gsp5b3iwd5ei" path="res://assets/ui/panels/icons/close.svg" id="17_a855v"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mynxr"]
-texture = ExtResource("2_nebtd")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y7qar"]
+texture = ExtResource("2_8pnaq")
 texture_margin_left = 24.0
 texture_margin_top = 24.0
 texture_margin_right = 24.0
 texture_margin_bottom = 26.0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dxuva"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b8l86"]
 load_path = "res://.godot/imported/panel_title.svg-ac8c5db44c55417199d23531192eb2d0.ctex"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m3ovv"]
-texture = SubResource("CompressedTexture2D_dxuva")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_joicg"]
+texture = SubResource("CompressedTexture2D_b8l86")
 texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
@@ -35,34 +37,34 @@ texture_margin_bottom = 26.0
 expand_margin_left = 16.0
 expand_margin_right = 16.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1xfj0"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32ilt"]
 bg_color = Color(0.8862745, 0.84313726, 0.78039217, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="LabelSettings" id="LabelSettings_3tuyx"]
-font = ExtResource("5_6rnw4")
+[sub_resource type="LabelSettings" id="LabelSettings_ewns6"]
+font = ExtResource("5_x8ctp")
 font_size = 32
 font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_sair1"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_44ryx"]
 color = Color(0.24313726, 0.15294118, 0.13725491, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_p1umc"]
-font = ExtResource("6_ibovj")
+[sub_resource type="LabelSettings" id="LabelSettings_effcx"]
+font = ExtResource("6_4oyu8")
 font_size = 24
 font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_gdejq"]
-font = ExtResource("7_uf3br")
+[sub_resource type="LabelSettings" id="LabelSettings_g13fa"]
+font = ExtResource("7_r4f8h")
 font_size = 24
 font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iurx6"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3qv81"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu7a5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8l86"]
 content_margin_left = 12.0
 content_margin_top = 12.0
 content_margin_right = 12.0
@@ -79,70 +81,80 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 anti_aliasing = false
 
-[sub_resource type="Theme" id="Theme_pbxal"]
+[sub_resource type="Theme" id="Theme_5ni7r"]
 default_base_scale = 1.08
 TooltipLabel/colors/font_color = Color(1, 1, 1, 1)
 TooltipLabel/colors/font_outline_color = Color(1, 1, 1, 1)
 TooltipLabel/constants/outline_size = 2
 TooltipLabel/font_sizes/font_size = 24
-TooltipPanel/styles/panel = SubResource("StyleBoxFlat_wu7a5")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_b8l86")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_doa0u"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rua65"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_odqcp"]
-font = ExtResource("6_ibovj")
+[sub_resource type="LabelSettings" id="LabelSettings_rx0mn"]
+font = ExtResource("6_4oyu8")
 font_size = 32
 font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fo4nf"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yhl1l"]
 content_margin_top = 32.0
 content_margin_bottom = 32.0
-texture = ExtResource("9_2owok")
+texture = ExtResource("9_qrlpp")
 texture_margin_left = 32.0
 texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 46.0
 region_rect = Rect2(0, 0, 256, 270)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7wo3h"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aod1c"]
 content_margin_top = 38.0
 content_margin_bottom = 24.0
-texture = ExtResource("10_5out1")
+texture = ExtResource("10_av1sh")
 texture_margin_left = 32.0
 texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 46.0
 region_rect = Rect2(0, 0, 256, 270)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_12or1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mivhw"]
+bg_color = Color(1, 0.8, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_503o0"]
-texture = ExtResource("13_u0f8k")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5b0j"]
+bg_color = Color(1, 0.8, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbrrt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j8dws"]
+texture = ExtResource("13_n3im3")
 texture_margin_left = 32.0
 texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 46.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kt3a2"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vp18c"]
 content_margin_top = 44.0
-texture = ExtResource("14_el2kv")
+texture = ExtResource("14_bfc6u")
 texture_margin_left = 32.0
 texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 46.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6y5q7"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f5htg"]
 content_margin_bottom = 8.0
-texture = ExtResource("15_lyd7i")
+texture = ExtResource("15_haegt")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xpo6t"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3bubf"]
 content_margin_top = 4.0
 content_margin_bottom = 0.0
-texture = ExtResource("16_60fej")
+texture = ExtResource("16_c73pr")
 
-[node name="HarvestMethodPopup" type="CanvasLayer" unique_id=723379850]
+[node name="RoastingPopup" type="CanvasLayer" unique_id=723379850]
 layer = 20
-script = ExtResource("1_popup")
+script = ExtResource("1_dva2y")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=249128086]
 anchors_preset = 15
@@ -173,7 +185,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 28
-text = "HARVEST"
+text = "ROASTING"
 
 [node name="BtnClose" type="Button" parent="CenterContainer/PanelContainer/VBox/Header" unique_id=169708463]
 layout_mode = 2
@@ -248,7 +260,6 @@ text = "Ripeness"
 
 [node name="VRip" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=140845084]
 layout_mode = 2
-text = "++++"
 horizontal_alignment = 2
 
 [node name="LQual" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=549590835]
@@ -258,7 +269,6 @@ text = "Quality"
 
 [node name="VQual" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=1123209970]
 layout_mode = 2
-text = "+++"
 horizontal_alignment = 2
 
 [node name="LQuant" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=1568941827]
@@ -268,7 +278,6 @@ text = "Quantity"
 
 [node name="VQuant" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=130604661]
 layout_mode = 2
-text = "--"
 horizontal_alignment = 2
 
 [node name="RightPanel" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBox/Split" unique_id=1392305758]
@@ -279,7 +288,7 @@ theme_override_constants/separation = 15
 [node name="LblMethod" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=365526664]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "HARVEST METHODS"
+text = "TYPES OF ROASTING"
 
 [node name="HBoxMethods" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=1906985606]
 layout_mode = 2
@@ -288,24 +297,22 @@ alignment = 1
 [node name="BtnSingle" type="Button" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods" unique_id=1907055]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
-text = "Strip Picking"
+text = "Single-Stem"
 
 [node name="BtnMulti" type="Button" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods" unique_id=709754444]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
-text = "Selective Picking"
+text = "Multi-Stem"
 
 [node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=1626436812]
 layout_mode = 2
 
 [node name="LblBuds" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=2031237184]
-visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "NUMBER OF BUDS"
 
 [node name="SliderHBox" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=1210983725]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
@@ -331,7 +338,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 10
 text = "CONFIRM"
 
-[node name="popup_panel" type="PanelContainer" parent="." unique_id=1885835087]
+[node name="popup_panel" type="PanelContainer" parent="." unique_id=1370292190]
 custom_minimum_size = Vector2(990, 640)
 custom_maximum_size = Vector2(990, 640)
 anchors_preset = 15
@@ -341,118 +348,118 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxTexture_mynxr")
+theme_override_styles/panel = SubResource("StyleBoxTexture_y7qar")
 
-[node name="lbl_title" type="Label" parent="popup_panel" unique_id=1999934685]
+[node name="lbl_title" type="Label" parent="popup_panel" unique_id=1333699220]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0, -0.7)
 offset_transform_visual_only = false
-theme_override_styles/normal = SubResource("StyleBoxTexture_m3ovv")
-text = "Harvest"
-label_settings = ExtResource("3_ybj7r")
+theme_override_styles/normal = SubResource("StyleBoxTexture_joicg")
+text = "Roasting"
+label_settings = ExtResource("3_m2fm1")
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="popup_panel" unique_id=1874694604]
+[node name="margin" type="MarginContainer" parent="popup_panel" unique_id=593716982]
 layout_mode = 2
 theme_override_constants/margin_top = 42
 theme_override_constants/margin_bottom = 12
 
-[node name="hbox" type="HBoxContainer" parent="popup_panel/margin" unique_id=343314228]
+[node name="hbox" type="HBoxContainer" parent="popup_panel/margin" unique_id=1955872266]
 layout_mode = 2
 
-[node name="left_side" type="PanelContainer" parent="popup_panel/margin/hbox" unique_id=1218785823]
+[node name="left_side" type="PanelContainer" parent="popup_panel/margin/hbox" unique_id=1920677918]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_1xfj0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_32ilt")
 
-[node name="margin" type="MarginContainer" parent="popup_panel/margin/hbox/left_side" unique_id=944859532]
+[node name="margin" type="MarginContainer" parent="popup_panel/margin/hbox/left_side" unique_id=519432245]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="content" type="VBoxContainer" parent="popup_panel/margin/hbox/left_side/margin" unique_id=780279136]
+[node name="content" type="VBoxContainer" parent="popup_panel/margin/hbox/left_side/margin" unique_id=1985227052]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16
 
-[node name="terroir" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=422600203]
+[node name="terroir" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=432626712]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="icon" type="TextureRect" parent="popup_panel/margin/hbox/left_side/margin/content/terroir" unique_id=773095555]
+[node name="icon" type="TextureRect" parent="popup_panel/margin/hbox/left_side/margin/content/terroir" unique_id=1701422623]
 layout_mode = 2
-texture = ExtResource("4_onyti")
+texture = ExtResource("4_l4dpm")
 expand_mode = 2
 
-[node name="lbl_terroir" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/terroir" unique_id=1313066851]
+[node name="lbl_terroir" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/terroir" unique_id=399146345]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Kintamani"
-label_settings = SubResource("LabelSettings_3tuyx")
+label_settings = SubResource("LabelSettings_ewns6")
 vertical_alignment = 1
 
-[node name="separator" type="HSeparator" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=1054403292]
+[node name="separator" type="HSeparator" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=279489141]
 layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_sair1")
+theme_override_styles/separator = SubResource("StyleBoxLine_44ryx")
 
-[node name="surface" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=998650387]
+[node name="surface" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=438728509]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="lbl_surface" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/surface" unique_id=776423294]
+[node name="lbl_surface" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/surface" unique_id=1397042086]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Surface"
-label_settings = SubResource("LabelSettings_p1umc")
+label_settings = SubResource("LabelSettings_effcx")
 vertical_alignment = 1
 
-[node name="value" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/surface" unique_id=2078656276]
+[node name="value" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/surface" unique_id=1431462143]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "value"
-label_settings = SubResource("LabelSettings_gdejq")
+label_settings = SubResource("LabelSettings_g13fa")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="plant" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=577773036]
+[node name="plant" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=704397444]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="lbl_plant" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/plant" unique_id=34264390]
+[node name="lbl_plant" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/plant" unique_id=2061371567]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Plant"
-label_settings = SubResource("LabelSettings_p1umc")
+label_settings = SubResource("LabelSettings_effcx")
 vertical_alignment = 1
 
-[node name="value" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/plant" unique_id=1573828935]
+[node name="value" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/plant" unique_id=11907842]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "value"
-label_settings = SubResource("LabelSettings_gdejq")
+label_settings = SubResource("LabelSettings_g13fa")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="separator2" type="HSeparator" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=231502329]
+[node name="separator2" type="HSeparator" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=798340359]
 layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_sair1")
+theme_override_styles/separator = SubResource("StyleBoxLine_44ryx")
 
-[node name="chart" type="PanelContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=867370040]
+[node name="chart" type="PanelContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=547279045]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_iurx6")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3qv81")
 
-[node name="radar" type="Control" parent="popup_panel/margin/hbox/left_side/margin/content/chart" unique_id=197306745]
+[node name="radar" type="Control" parent="popup_panel/margin/hbox/left_side/margin/content/chart" unique_id=417904982]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = SubResource("Theme_pbxal")
-script = ExtResource("8_m82x3")
+theme = SubResource("Theme_5ni7r")
+script = ExtResource("8_vpeit")
 radius = 140.0
 key_items = Array[Dictionary]([{
 "title": "Ripeness",
@@ -475,7 +482,7 @@ Vivamus vel tempor lacus. Proin sit amet varius libero, vel placerat felis.",
 max_value = 5.0
 step = 1.0
 rounded = true
-font = ExtResource("7_uf3br")
+font = ExtResource("7_r4f8h")
 font_size = 24
 font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
 title_seperation = 5.0
@@ -501,39 +508,40 @@ items/key_2/title = "Quality"
 items/key_2/tooltip = ""
 metadata/_custom_type_script = "uid://dj2hfa37ymon4"
 
-[node name="right_side" type="PanelContainer" parent="popup_panel/margin/hbox" unique_id=1636597296]
+[node name="right_side" type="PanelContainer" parent="popup_panel/margin/hbox" unique_id=162564846]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_doa0u")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rua65")
 
-[node name="margin" type="MarginContainer" parent="popup_panel/margin/hbox/right_side" unique_id=224203299]
+[node name="margin" type="MarginContainer" parent="popup_panel/margin/hbox/right_side" unique_id=337567792]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="content" type="VBoxContainer" parent="popup_panel/margin/hbox/right_side/margin" unique_id=13620740]
+[node name="content" type="VBoxContainer" parent="popup_panel/margin/hbox/right_side/margin" unique_id=1714900349]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16
 
-[node name="process_type" type="HBoxContainer" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=2064305756]
+[node name="process_type" type="HBoxContainer" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=28628153]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="lbl_process_type" type="Label" parent="popup_panel/margin/hbox/right_side/margin/content/process_type" unique_id=4843562]
+[node name="lbl_process_type" type="Label" parent="popup_panel/margin/hbox/right_side/margin/content/process_type" unique_id=1752774918]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Process type"
-label_settings = SubResource("LabelSettings_odqcp")
+label_settings = SubResource("LabelSettings_rx0mn")
 vertical_alignment = 1
 
-[node name="option" type="HBoxContainer" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=1101200169]
+[node name="option" type="HBoxContainer" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=1428039713]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="opt1" type="Button" parent="popup_panel/margin/hbox/right_side/margin/content/option" unique_id=1731055227]
+[node name="opt1" type="Button" parent="popup_panel/margin/hbox/right_side/margin/content/option" unique_id=1471222488]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -543,17 +551,17 @@ theme_override_colors/font_pressed_color = Color(0.4745098, 0.33333334, 0.282352
 theme_override_colors/font_hover_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
 theme_override_font_sizes/font_size = 16
-theme_override_icons/icon = ExtResource("4_onyti")
-theme_override_styles/normal = SubResource("StyleBoxTexture_fo4nf")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_7wo3h")
-theme_override_styles/hover = SubResource("StyleBoxTexture_fo4nf")
+theme_override_icons/icon = ExtResource("4_l4dpm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_yhl1l")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_aod1c")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yhl1l")
 toggle_mode = true
 button_pressed = true
 text = "Option 1"
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="opt2" type="Button" parent="popup_panel/margin/hbox/right_side/margin/content/option" unique_id=1961953257]
+[node name="opt2" type="Button" parent="popup_panel/margin/hbox/right_side/margin/content/option" unique_id=522982131]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -563,35 +571,81 @@ theme_override_colors/font_pressed_color = Color(0.4745098, 0.33333334, 0.282352
 theme_override_colors/font_hover_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
 theme_override_font_sizes/font_size = 16
-theme_override_icons/icon = ExtResource("4_onyti")
-theme_override_styles/normal = SubResource("StyleBoxTexture_fo4nf")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_7wo3h")
-theme_override_styles/hover = SubResource("StyleBoxTexture_fo4nf")
+theme_override_icons/icon = ExtResource("4_l4dpm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_yhl1l")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_aod1c")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yhl1l")
 toggle_mode = true
 text = "Option 1"
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="HSeparator" type="HSeparator" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=490531220]
+[node name="separator2" type="HSeparator" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=1706014811]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_44ryx")
+
+[node name="num_of_buds" type="HBoxContainer" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=420340106]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="lbl_nob" type="Label" parent="popup_panel/margin/hbox/right_side/margin/content/num_of_buds" unique_id=1600339741]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Number of buds"
+label_settings = SubResource("LabelSettings_rx0mn")
+vertical_alignment = 1
+
+[node name="hbox" type="HBoxContainer" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=389675202]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="slider" type="HSlider" parent="popup_panel/margin/hbox/right_side/margin/content/hbox" unique_id=1251553690]
+custom_minimum_size = Vector2(0, 63.44)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_constants/grabber_offset = 10
+theme_override_constants/tick_offset = 11
+theme_override_icons/grabber = ExtResource("11_raa6a")
+theme_override_icons/grabber_highlight = ExtResource("11_raa6a")
+theme_override_icons/tick = ExtResource("12_fjqeb")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_mivhw")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_f5b0j")
+step = 25.0
+value = 50.0
+rounded = true
+tick_count = 5
+ticks_on_borders = true
+
+[node name="label" type="Label" parent="popup_panel/margin/hbox/right_side/margin/content/hbox" unique_id=1914759609]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+text = "Very high"
+label_settings = SubResource("LabelSettings_g13fa")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=789821342]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/separator = SubResource("StyleBoxEmpty_12or1")
+theme_override_styles/separator = SubResource("StyleBoxEmpty_kbrrt")
 
-[node name="confirm" type="Button" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=1246929705]
+[node name="confirm" type="Button" parent="popup_panel/margin/hbox/right_side/margin/content" unique_id=373914899]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("6_ibovj")
+theme_override_fonts/font = ExtResource("6_4oyu8")
 theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxTexture_503o0")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_kt3a2")
-theme_override_styles/hover = SubResource("StyleBoxTexture_503o0")
+theme_override_styles/normal = SubResource("StyleBoxTexture_j8dws")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_vp18c")
+theme_override_styles/hover = SubResource("StyleBoxTexture_j8dws")
 text = "Confirm"
 
-[node name="close" type="Button" parent="popup_panel" unique_id=968437087]
+[node name="close" type="Button" parent="popup_panel" unique_id=858520718]
 custom_minimum_size = Vector2(64, 74)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -599,9 +653,9 @@ size_flags_vertical = 0
 offset_transform_enabled = true
 offset_transform_position = Vector2(38.22, -49.29)
 offset_transform_visual_only = false
-theme_override_styles/normal = SubResource("StyleBoxTexture_6y5q7")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_xpo6t")
-theme_override_styles/hover = SubResource("StyleBoxTexture_6y5q7")
-icon = ExtResource("17_jgcr2")
+theme_override_styles/normal = SubResource("StyleBoxTexture_f5htg")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3bubf")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f5htg")
+icon = ExtResource("17_a855v")
 icon_alignment = 1
 expand_icon = true

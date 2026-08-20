@@ -17,8 +17,8 @@ extends Control
 
 # Popup Buttons
 @onready var btn_menu = $main/top_bar/MarginContainer/hbox/right/menu
-@onready var btn_setting = $main/header/HBoxContainer2/setting
-@onready var btn_journal = $main/header/HBoxContainer2/journal
+@onready var btn_setting = $main/top_bar/MarginContainer/hbox/right/setting
+@onready var btn_journal = $main/top_bar/MarginContainer/hbox/right/journal
 
 # Popup Layers
 @onready var layer_menu_tabs = $menu_tabs

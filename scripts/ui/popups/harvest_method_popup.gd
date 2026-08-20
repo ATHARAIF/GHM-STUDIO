@@ -4,15 +4,15 @@ extends CanvasLayer
 @onready var slider_intensity = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox/SliderIntensity
 @onready var lbl_intensity_val = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox/LblIntensityVal
 
-@onready var btn_confirm = $CenterContainer/PanelContainer/VBox/Split/RightPanel/BtnConfirm
-@onready var btn_close = $CenterContainer/PanelContainer/VBox/Header/BtnClose
+@onready var btn_confirm = $popup_panel/margin/hbox/right_side/margin/content/confirm
+@onready var btn_close = $popup_panel/close
 
 @onready var val_ripeness = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2/VRip
 @onready var val_quality = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2/VQual
 @onready var val_quantity = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2/VQuant
 
-@onready var lbl_farm_name = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/LblFarmName
-@onready var val_plant = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid/VPlant
+@onready var lbl_farm_name = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_terroir
+@onready var val_plant = $popup_panel/margin/hbox/left_side/margin/content/plant/value
 @onready var timeline_container = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Timeline
 
 var available_methods: Array[ProcessMethodData] = []

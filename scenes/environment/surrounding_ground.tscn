@@ -42,156 +42,156 @@ shadow_mesh = SubResource("ArrayMesh_jlpiy")
 
 [node name="surrounding_ground" unique_id=1246640729 instance=ExtResource("1_cibm7")]
 
-[node name="Cube" parent="." index="0" unique_id=1051605651]
+[node name="Cube" parent="." index="0" unique_id=772827864]
 surface_material_override/0 = SubResource("StandardMaterial3D_jlpiy")
 
-[node name="Plane" parent="." index="1" unique_id=688804619]
+[node name="Plane" parent="." index="1" unique_id=828920073]
 transform = Transform3D(3.1097069, 0, -3.2757292, 0, 4.516711, 0, 3.2757292, 0, 3.1097069, -6.0895195, -0.117293745, 5.3996387)
 mesh = SubResource("ArrayMesh_wowam")
 
-[node name="no_border" parent="." index="2" unique_id=857605487]
+[node name="no_border" parent="." index="2" unique_id=1850467668]
 visible = false
 
-[node name="no_border_001" parent="." index="3" unique_id=2033612291]
+[node name="no_border_001" parent="." index="3" unique_id=798326318]
 visible = false
 
-[node name="no_border_002" parent="." index="4" unique_id=3339698]
+[node name="no_border_002" parent="." index="4" unique_id=1038196530]
 visible = false
 
-[node name="no_border_003" parent="." index="5" unique_id=1068176569]
+[node name="no_border_003" parent="." index="5" unique_id=337727089]
 visible = false
 
-[node name="no_border_004" parent="." index="6" unique_id=272020817]
+[node name="no_border_004" parent="." index="6" unique_id=826818517]
 visible = false
 
-[node name="no_border_005" parent="." index="7" unique_id=1578993589]
+[node name="no_border_005" parent="." index="7" unique_id=2143096698]
 visible = false
 
-[node name="no_border_006" parent="." index="8" unique_id=1705606819]
+[node name="no_border_006" parent="." index="8" unique_id=802974901]
 visible = false
 
-[node name="no_border_007" parent="." index="9" unique_id=289626156]
+[node name="no_border_007" parent="." index="9" unique_id=801493253]
 visible = false
 
-[node name="no_border_008" parent="." index="10" unique_id=2007410996]
+[node name="no_border_008" parent="." index="10" unique_id=1526931106]
 visible = false
 
-[node name="no_border_009" parent="." index="11" unique_id=1692625056]
+[node name="no_border_009" parent="." index="11" unique_id=209817449]
 visible = false
 
-[node name="no_border_010" parent="." index="12" unique_id=789879561]
+[node name="no_border_010" parent="." index="12" unique_id=353016355]
 visible = false
 
-[node name="no_border_011" parent="." index="13" unique_id=1187928306]
+[node name="no_border_011" parent="." index="13" unique_id=838710663]
 visible = false
 
-[node name="no_border_012" parent="." index="14" unique_id=1909810429]
+[node name="no_border_012" parent="." index="14" unique_id=534555874]
 visible = false
 
-[node name="no_border_013" parent="." index="15" unique_id=1009053883]
+[node name="no_border_013" parent="." index="15" unique_id=1007041410]
 visible = false
 
-[node name="no_border_014" parent="." index="16" unique_id=97183240]
+[node name="no_border_014" parent="." index="16" unique_id=1503814563]
 visible = false
 
-[node name="no_border_015" parent="." index="17" unique_id=618080165]
+[node name="no_border_015" parent="." index="17" unique_id=820712717]
 visible = false
 
-[node name="no_border_016" parent="." index="18" unique_id=1505132192]
+[node name="no_border_016" parent="." index="18" unique_id=1254817235]
 visible = false
 
-[node name="no_border_017" parent="." index="19" unique_id=1056898260]
+[node name="no_border_017" parent="." index="19" unique_id=1895958621]
 visible = false
 
-[node name="no_border_018" parent="." index="20" unique_id=884515171]
+[node name="no_border_018" parent="." index="20" unique_id=2046515148]
 visible = false
 
-[node name="no_border_019" parent="." index="21" unique_id=1754526552]
+[node name="no_border_019" parent="." index="21" unique_id=775094739]
 visible = false
 
-[node name="no_border_020" parent="." index="22" unique_id=452293275]
+[node name="no_border_020" parent="." index="22" unique_id=2100693811]
 visible = false
 
-[node name="no_border_021" parent="." index="23" unique_id=1202682465]
+[node name="no_border_021" parent="." index="23" unique_id=1763473338]
 visible = false
 
-[node name="no_border_022" parent="." index="24" unique_id=1429898405]
+[node name="no_border_022" parent="." index="24" unique_id=847755258]
 visible = false
 
-[node name="no_border_023" parent="." index="25" unique_id=1160257066]
+[node name="no_border_023" parent="." index="25" unique_id=710300516]
 visible = false
 
-[node name="no_border_024" parent="." index="26" unique_id=1869813598]
+[node name="no_border_024" parent="." index="26" unique_id=1085273997]
 visible = false
 
-[node name="no_border_025" parent="." index="27" unique_id=971132906]
+[node name="no_border_025" parent="." index="27" unique_id=388489350]
 visible = false
 
-[node name="no_border_026" parent="." index="28" unique_id=1957364771]
+[node name="no_border_026" parent="." index="28" unique_id=772082030]
 visible = false
 
-[node name="no_border_027" parent="." index="29" unique_id=1332157080]
+[node name="no_border_027" parent="." index="29" unique_id=967979087]
 visible = false
 
-[node name="no_border_028" parent="." index="30" unique_id=2018955219]
+[node name="no_border_028" parent="." index="30" unique_id=1192776650]
 visible = false
 
-[node name="no_border_029" parent="." index="31" unique_id=1264548777]
+[node name="no_border_029" parent="." index="31" unique_id=1651097521]
 visible = false
 
-[node name="no_border_030" parent="." index="32" unique_id=1863813965]
+[node name="no_border_030" parent="." index="32" unique_id=1334193426]
 visible = false
 
-[node name="no_border_031" parent="." index="33" unique_id=104583933]
+[node name="no_border_031" parent="." index="33" unique_id=768323972]
 visible = false
 
-[node name="no_border_032" parent="." index="34" unique_id=1069878689]
+[node name="no_border_032" parent="." index="34" unique_id=499356704]
 visible = false
 
-[node name="no_border_033" parent="." index="35" unique_id=2147067096]
+[node name="no_border_033" parent="." index="35" unique_id=1428341005]
 visible = false
 
-[node name="no_border_034" parent="." index="36" unique_id=298681258]
+[node name="no_border_034" parent="." index="36" unique_id=1172188839]
 visible = false
 
-[node name="no_border_035" parent="." index="37" unique_id=266677480]
+[node name="no_border_035" parent="." index="37" unique_id=1922941585]
 visible = false
 
-[node name="no_border_036" parent="." index="38" unique_id=427136957]
+[node name="no_border_036" parent="." index="38" unique_id=630564008]
 visible = false
 
-[node name="no_border_037" parent="." index="39" unique_id=1186226553]
+[node name="no_border_037" parent="." index="39" unique_id=749029556]
 visible = false
 
-[node name="no_border_038" parent="." index="40" unique_id=95507791]
+[node name="no_border_038" parent="." index="40" unique_id=871966808]
 visible = false
 
-[node name="no_border_039" parent="." index="41" unique_id=2010261544]
+[node name="no_border_039" parent="." index="41" unique_id=382348791]
 visible = false
 
-[node name="no_border_040" parent="." index="42" unique_id=1261430620]
+[node name="no_border_040" parent="." index="42" unique_id=1832521914]
 visible = false
 
-[node name="no_border_041" parent="." index="43" unique_id=1242631217]
+[node name="no_border_041" parent="." index="43" unique_id=881546853]
 visible = false
 
-[node name="no_border_042" parent="." index="44" unique_id=45177735]
+[node name="no_border_042" parent="." index="44" unique_id=44256782]
 visible = false
 
-[node name="no_border_043" parent="." index="45" unique_id=1386782575]
+[node name="no_border_043" parent="." index="45" unique_id=1877363784]
 visible = false
 
-[node name="no_border_044" parent="." index="46" unique_id=78843114]
+[node name="no_border_044" parent="." index="46" unique_id=150692116]
 visible = false
 
-[node name="no_border_045" parent="." index="47" unique_id=508811506]
+[node name="no_border_045" parent="." index="47" unique_id=1677643647]
 visible = false
 
-[node name="no_border_046" parent="." index="48" unique_id=1112319121]
+[node name="no_border_046" parent="." index="48" unique_id=2094077325]
 visible = false
 
-[node name="no_border_047" parent="." index="49" unique_id=1429425510]
+[node name="no_border_047" parent="." index="49" unique_id=1534870667]
 visible = false
 
-[node name="no_border_048" parent="." index="50" unique_id=255207322]
+[node name="no_border_048" parent="." index="50" unique_id=820546543]
 visible = false

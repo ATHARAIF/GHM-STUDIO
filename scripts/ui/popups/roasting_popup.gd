@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var hbox_methods = $CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods
 @onready var slider_hbox = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox
+@onready var lbl_buds = $CenterContainer/PanelContainer/VBox/Split/RightPanel/LblBuds
 @onready var slider_intensity = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox/SliderIntensity
 @onready var lbl_intensity_val = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox/LblIntensityVal
 
@@ -13,11 +14,13 @@ extends CanvasLayer
 @onready var val_quantity = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2/VQuant
 
 @onready var lbl_farm_name = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_terroir
+@onready var val_surface = $popup_panel/margin/hbox/left_side/margin/content/surface/value
 @onready var val_plant = $popup_panel/margin/hbox/left_side/margin/content/plant/value
-#@onready var timeline_container = $new_popup_panel/center/vbox/detail/background/vbox/timeline/timeline
+#@onready var timeline_container = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Timeline
 
 var available_methods: Array[ProcessMethodData] = []
 var selected_method: ProcessMethodData
+var val_cost: Label
 
 var mod_acidity: float = 0.0
 var mod_aroma: float = 0.0
@@ -31,11 +34,28 @@ var current_tile: Node3D
 var current_card_data: Resource
 
 func _ready() -> void:
-	$CenterContainer/PanelContainer/VBox/Header/LblTitle.text = "PRUNING"
+	var grid2 = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2
+	if not grid2.has_node("LCost"):
+		var lcost = Label.new()
+		lcost.name = "LCost"
+		lcost.text = "Cost"
+		lcost.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid2.add_child(lcost)
+		grid2.move_child(lcost, 0)
+		
+		val_cost = Label.new()
+		val_cost.name = "VCost"
+		val_cost.text = "$0"
+		val_cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		grid2.add_child(val_cost)
+		grid2.move_child(val_cost, 1)
+	else:
+		val_cost = grid2.get_node("VCost")
+		
+	$CenterContainer/PanelContainer/VBox/Header/LblTitle.text = "ROASTING"
 	if StageManager.current_location:
 		lbl_farm_name.text = StageManager.current_location.location_name
 	
-	_load_methods()
 	_build_method_buttons()
 	
 	slider_intensity.value = 50.0
@@ -43,26 +63,12 @@ func _ready() -> void:
 	
 	btn_confirm.pressed.connect(_on_confirm)
 	btn_close.pressed.connect(_on_cancel)
+
+
 	
-	if has_node("/root/EventManager"):
-		var em = get_node("/root/EventManager")
-		em.card_placement_interaction_requested.connect(_on_card_placement_interaction_requested)
 	
 	UIUtils.setup_input_blocker(self)
 	hide()
-
-func _load_methods() -> void:
-	var path = "res://resources/methods/pruning/"
-	var dir = DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".tres"):
-				var res = load(path + file_name) as ProcessMethodData
-				if res:
-					available_methods.append(res)
-			file_name = dir.get_next()
 
 func _build_method_buttons() -> void:
 	for child in hbox_methods.get_children():
@@ -76,16 +82,35 @@ func _build_method_buttons() -> void:
 		hbox_methods.add_child(btn)
 
 func _select_method(method: ProcessMethodData) -> void:
-	selected_method = method
-	slider_hbox.show()
+	if selected_method == method:
+		selected_method = null
+	else:
+		selected_method = method
+		
+	btn_confirm.disabled = (selected_method == null)
+	if selected_method:
+		slider_hbox.show()
+		val_cost.text = "$%d" % selected_method.override_cost
+		lbl_buds.show()
+	else:
+		slider_hbox.hide()
+		lbl_buds.text = "ROASTING LEVEL"
+	lbl_buds.show()
 	
 	for child in hbox_methods.get_children():
 		if child is Button:
-			if child.text == method.method_name:
-				child.modulate = Color(0.2, 0.8, 0.2)
-			else:
-				child.modulate = Color(1.0, 1.0, 1.0)
-				
+			child.modulate = Color(0.2, 0.8, 0.2) if (selected_method and child.text == selected_method.method_name) else Color(1.0, 1.0, 1.0)
+			
+	if not selected_method:
+		val_quality.text = "-"
+		val_quality.add_theme_color_override("font_color", Color.WHITE)
+		val_ripeness.text = "-"
+		val_ripeness.add_theme_color_override("font_color", Color.WHITE)
+		val_quantity.text = "-"
+		val_quantity.add_theme_color_override("font_color", Color.WHITE)
+		val_cost.text = "$0"
+		return
+		
 	_on_slider_changed(slider_intensity.value)
 
 func _on_slider_changed(val: float) -> void:
@@ -130,7 +155,7 @@ func _on_slider_changed(val: float) -> void:
 
 
 func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, card_data: Resource) -> void:
-	if card_name == "Pruning":
+	if card_name == "Roasting":
 		current_tile = tile
 		current_card_data = card_data
 		show_popup()
@@ -140,17 +165,28 @@ func show_popup() -> void:
 		lbl_farm_name.text = StageManager.current_location.location_name
 		if StageManager.current_location.variety_data:
 			val_plant.text = StageManager.current_location.variety_data.variety_name
+		if val_surface: val_surface.text = str(StageManager.current_location.surface_area) + " Ha"
 	
-	#_update_timeline()
-	selected_method = null
-	slider_hbox.hide()
+	#timeline_container.hide()
 	
-	# Reset button colors
-	for child in hbox_methods.get_children():
-		if child is Button:
-			child.modulate = Color(1.0, 1.0, 1.0)
-			
 	slider_intensity.value = 50.0
+	
+	if current_card_data and current_card_data.popup_methods.size() > 0:
+		available_methods = current_card_data.popup_methods
+		selected_method = available_methods[0]
+	
+	if selected_method:
+		val_cost.text = "$%d" % selected_method.override_cost
+	
+	slider_hbox.show()
+	lbl_buds.text = "ROASTING LEVEL"
+	lbl_buds.show()
+	hbox_methods.get_parent().get_node("LblMethod").hide()
+	hbox_methods.hide()
+	
+	_on_slider_changed(slider_intensity.value)
+	
+	btn_confirm.disabled = false
 	show()
 
 #func _update_timeline() -> void:
@@ -163,12 +199,12 @@ func _on_confirm() -> void:
 	if selected_method == null:
 		return
 		
-	hide()
+	queue_free()
 	if has_node("/root/EventManager") and selected_method != null:
 		var em = get_node("/root/EventManager")
-		em.card_placement_interaction_confirmed.emit("Pruning", current_tile, current_card_data, {
-			"pruning_method": selected_method.method_name,
-			"pruning_intensity": slider_intensity.value,
+		em.card_placement_interaction_confirmed.emit("Roasting", current_tile, current_card_data, {
+			"roasting_method": selected_method.method_name,
+			"roasting_intensity": slider_intensity.value,
 			"mod_acidity": mod_acidity,
 			"mod_aroma": mod_aroma,
 			"mod_sweetness": mod_sweetness,
@@ -181,9 +217,39 @@ func _on_confirm() -> void:
 	current_card_data = null
 
 func _on_cancel() -> void:
-	hide()
+	queue_free()
 	if has_node("/root/EventManager"):
 		var em = get_node("/root/EventManager")
-		em.card_placement_interaction_cancelled.emit("Pruning", current_tile, current_card_data)
+		em.card_placement_interaction_cancelled.emit("Roasting", current_tile, current_card_data)
 	current_tile = null
 	current_card_data = null
+
+
+func _reset_ui() -> void:
+	selected_method = null
+	btn_confirm.disabled = true
+	
+	if val_cost: val_cost.text = "$0"
+	if val_quality:
+		val_quality.text = "-"
+		val_quality.modulate = Color.WHITE
+		if val_quality.has_theme_color_override("font_color"):
+			val_quality.add_theme_color_override("font_color", Color.WHITE)
+	if val_ripeness:
+		val_ripeness.text = "-"
+		val_ripeness.modulate = Color.WHITE
+		if val_ripeness.has_theme_color_override("font_color"):
+			val_ripeness.add_theme_color_override("font_color", Color.WHITE)
+	if val_quantity:
+		val_quantity.text = "-"
+		val_quantity.modulate = Color.WHITE
+		if val_quantity.has_theme_color_override("font_color"):
+			val_quantity.add_theme_color_override("font_color", Color.WHITE)
+			
+	for child in hbox_methods.get_children():
+		if child is Button:
+			child.modulate = Color(1.0, 1.0, 1.0)
+
+	slider_hbox.hide()
+	lbl_buds.text = "ROASTING LEVEL"
+	lbl_buds.show()

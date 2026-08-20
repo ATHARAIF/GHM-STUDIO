@@ -138,8 +138,10 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="Theme" id="Theme_050ja"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0exqo"]
-bg_color = Color(0.9490196, 0.92156863, 0.8901961, 1)
+bg_color = Color(0.9411765, 0.89411765, 0.827451, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
@@ -493,6 +495,7 @@ offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = SubResource("Theme_050ja")
 theme_override_styles/panel = SubResource("StyleBoxFlat_0exqo")
 
 [node name="specs" type="Panel" parent="base/color" unique_id=572800217]
