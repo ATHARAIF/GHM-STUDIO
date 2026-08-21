@@ -22,6 +22,7 @@ var available_methods: Array[ProcessMethodData] = []
 var selected_method: ProcessMethodData
 var val_cost: Label
 
+var mod_health: float = 0.0
 var mod_acidity: float = 0.0
 var mod_aroma: float = 0.0
 var mod_sweetness: float = 0.0
@@ -132,6 +133,7 @@ func _on_slider_changed(val: float) -> void:
 	var level = selected_method.slider_levels[idx]
 	
 	# Extract exactly from the resource! No math needed!
+	mod_health = level.mod_health
 	mod_acidity = level.mod_acidity
 	mod_aroma = level.mod_aroma
 	mod_sweetness = level.mod_sweetness
@@ -163,7 +165,30 @@ func show_popup() -> void:
 	if StageManager.current_location:
 		lbl_farm_name.text = StageManager.current_location.location_name
 		if StageManager.current_location.variety_data:
-			val_plant.text = StageManager.current_location.variety_data.variety_name
+			val_plant.text = StageManager.current_location.variety_data.species_name
+			
+			# Tambah row Variety secara dinamis jika belum ada
+			var grid = val_plant.get_parent()
+			if not grid.has_node("LVariety"):
+				# Cari node LPlant dan ubah namanya jadi Species
+				var lplant = grid.get_node("LPlant")
+				if lplant:
+					lplant.text = "Species"
+					
+				var lvar = Label.new()
+				lvar.name = "LVariety"
+				lvar.text = "Variety"
+				lvar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				grid.add_child(lvar)
+				
+				var vvar = Label.new()
+				vvar.name = "VVariety"
+				vvar.text = StageManager.current_location.variety_data.variety_name
+				vvar.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+				grid.add_child(vvar)
+			else:
+				var vvar = grid.get_node("VVariety")
+				vvar.text = StageManager.current_location.variety_data.variety_name
 		if val_surface: val_surface.text = str(StageManager.current_location.surface_area) + " Ha"
 	
 	_update_timeline()
@@ -200,6 +225,7 @@ func _on_confirm() -> void:
 		em.card_placement_interaction_confirmed.emit("Pruning", current_tile, current_card_data, {
 			"pruning_method": selected_method.method_name,
 			"pruning_intensity": slider_intensity.value,
+			"mod_health": mod_health,
 			"mod_acidity": mod_acidity,
 			"mod_aroma": mod_aroma,
 			"mod_sweetness": mod_sweetness,

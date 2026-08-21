@@ -12,43 +12,47 @@ mod_sweetness = 1.0
 mod_flavor = 2.0
 mod_body = -2.0
 mod_bitterness = -2.0
-mod_quant_pct = -0.14
+mod_quant_pct = -0.12
 
 [sub_resource type="Resource" id="Resource_lvl2"]
 script = ExtResource("2_0hop7")
 level_name = "Light to Medium"
 mod_acidity = 1.0
 mod_aroma = 1.0
-mod_sweetness = 2.0
+mod_sweetness = 1.0
 mod_flavor = 1.0
 mod_body = -1.0
 mod_bitterness = -1.0
-mod_quant_pct = -0.15
+mod_quant_pct = -0.14
 
 [sub_resource type="Resource" id="Resource_lvl3"]
 script = ExtResource("2_0hop7")
-mod_sweetness = 3.0
+mod_acidity = -1.0
+mod_aroma = 1.0
+mod_sweetness = 1.0
+mod_flavor = 1.0
+mod_body = 1.0
+mod_bitterness = 1.0
 mod_quant_pct = -0.16
 
 [sub_resource type="Resource" id="Resource_lvl4"]
 script = ExtResource("2_0hop7")
 level_name = "Medium to Dark"
-mod_acidity = -1.0
+mod_acidity = -2.0
 mod_aroma = -1.0
-mod_sweetness = 1.0
 mod_flavor = -1.0
-mod_body = 1.0
-mod_bitterness = 1.0
+mod_body = 2.0
+mod_bitterness = 2.0
 mod_quant_pct = -0.18
 
 [sub_resource type="Resource" id="Resource_lvl5"]
 script = ExtResource("2_0hop7")
 level_name = "Dark"
-mod_acidity = -2.0
+mod_acidity = -20.0
 mod_aroma = -2.0
 mod_sweetness = -1.0
 mod_flavor = -2.0
-mod_body = 2.0
+mod_body = 3.0
 mod_bitterness = 3.0
 mod_quant_pct = -0.2
 

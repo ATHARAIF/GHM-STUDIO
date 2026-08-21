@@ -47,7 +47,7 @@ func _create_new_batch(year: int) -> void:
 		b.bitterness = tree.current_bitterness
 		b.moisture = tree.current_moisture
 		b.defect_rate = tree.current_defect
-		b.cherry_kg = tree.current_yield_potential
+		b.cherry_kg = 0 # Calculated at Harvest
 	
 	batches[year] = b
 	
@@ -79,8 +79,22 @@ func get_oldest_ready_batch(process_id: String) -> CoffeeBatch:
 				
 	if target_batch:
 		return target_batch
-		
 	return get_active_farm_batch()
+
+func get_ready_batches_for_process(process_id: String, unlock_condition: String = "") -> Array[int]:
+	var ready_years: Array[int] = []
+	for y in batches.keys():
+		var b = batches[y]
+		if b.completed_processes.has("FP04") and not b.completed_processes.has(process_id):
+			if unlock_condition == "" or b.completed_processes.has(unlock_condition):
+				var already_placed = false
+				for tile_dict in active_tiles:
+					if tile_dict.data.process_id == process_id and tile_dict.has("target_batch_year") and tile_dict.target_batch_year == y:
+						already_placed = true
+						break
+				if not already_placed:
+					ready_years.append(y)
+	return ready_years
 	
 func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Dictionary = {}) -> void:
 	if card_data == null:
@@ -176,7 +190,14 @@ func advance_turn() -> void:
 					tile_dict.tile_labels.set_ready_state(true)
 			else:
 				# Apply effects immediately for normal cards
-				var target_b = get_oldest_ready_batch(tile_dict.data.process_id)
+				var target_b: CoffeeBatch = null
+				if tile_dict.has("target_batch_year") and tile_dict.target_batch_year != -1:
+					if batches.has(tile_dict.target_batch_year):
+						target_b = batches[tile_dict.target_batch_year]
+				if target_b == null:
+					target_b = get_oldest_ready_batch(tile_dict.data.process_id)
+				
+				target_b.add_history(tile_dict.data.card_name)
 				target_b.apply_effects(tile_dict)
 				stats_changed.emit()
 				if tile_dict.tile and is_instance_valid(tile_dict.tile):
@@ -185,11 +206,28 @@ func advance_turn() -> void:
 				# Remove from active ticking list
 				active_tiles.remove_at(i)
 				
+	# Cleanup ghost batches (missed harvest)
+	var dead_years = []
+	for y in batches.keys():
+		var b = batches[y]
+		# Only delete if it's from a previous year and missed harvest
+		if y < TimeManager.year and not b.completed_processes.has("FP04"):
+			dead_years.append(y)
+	for dy in dead_years:
+		batches.erase(dy)
+		print("Ghost batch removed for missed harvest in year ", dy)
+
+	_check_stage_progression()
 	turn_changed.emit(TimeManager.turn_in_year, TimeManager.season, TimeManager.year)
+	
+	# Try to fetch current year's batch to ensure it exists
+	get_active_farm_batch()
 
 func apply_missed_penalty(card_data: CardData) -> void:
 	var target_b = get_oldest_ready_batch(card_data.process_id)
 	if target_b:
+		target_b.add_history("[Missed] " + card_data.card_name)
+		target_b.accumulated_yield_modifier *= (1.0 + card_data.penalty_yield)
 		target_b.aroma = clamp(target_b.aroma + card_data.penalty_aroma, 0.0, 100.0)
 		target_b.acidity = clamp(target_b.acidity + card_data.penalty_acidity, 0.0, 100.0)
 		target_b.body = clamp(target_b.body + card_data.penalty_body, 0.0, 100.0)
@@ -198,7 +236,7 @@ func apply_missed_penalty(card_data: CardData) -> void:
 		target_b.bitterness = clamp(target_b.bitterness + card_data.penalty_bitterness, 0.0, 100.0)
 		target_b.moisture = clamp(target_b.moisture + card_data.penalty_moisture, 0.0, 100.0)
 		target_b.defect_rate = clamp(target_b.defect_rate + card_data.penalty_defect, 0.0, 100.0)
-		target_b.cherry_kg = int(clamp(float(target_b.cherry_kg) * (1.0 + card_data.penalty_yield), 0, 5000))
+		# yield penalty is now handled by accumulated_yield_modifier
 		
 	if current_location and current_location.current_tree:
 		current_location.current_tree.health_pct = clamp(current_location.current_tree.health_pct + card_data.penalty_health, 0.0, 100.0)
@@ -224,8 +262,23 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 	var index = active_tiles.find(tile_dict)
 	if index != -1:
 		active_tiles.remove_at(index)
-	var target_b = get_oldest_ready_batch(tile_dict.data.process_id)
+		
+	var target_b: CoffeeBatch = null
+	if tile_dict.has("target_batch_year") and tile_dict.target_batch_year != -1:
+		if batches.has(tile_dict.target_batch_year):
+			target_b = batches[tile_dict.target_batch_year]
+			
+	if target_b == null:
+		target_b = get_oldest_ready_batch(tile_dict.data.process_id)
+		
+	target_b.add_history(tile_dict.data.card_name)
 	target_b.apply_effects(tile_dict)
+	
+	if tile_dict.data.process_id == "FP04":
+		var raw_yield = current_location.current_tree.calculate_harvest_yield()
+		var final_yield = raw_yield * target_b.accumulated_yield_modifier
+		target_b.cherry_kg = int(clamp(final_yield, 0, 5000))
+		
 	if tile_dict.tile and is_instance_valid(tile_dict.tile):
 		PlacementManager.remove_tile_from_grid(tile_dict.tile)
 		
@@ -239,14 +292,12 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 	if process_next:
 		stats_changed.emit()
 	else:
-		# Sell logic: convert yield to budget
-		var income = (target_b.cherry_kg * 10) + (target_b.aroma * 5)
-		budget += income
-		budget_changed.emit(budget)
-
-		# Reset batch as it is sold
-		if batches.has(target_b.batch_year):
-			batches.erase(target_b.batch_year)
+		# Temporarily disabled Sell logic until we reach the packing/selling phase
+		# var income = (target_b.cherry_kg * 10) + (target_b.aroma * 5)
+		# budget += income
+		# budget_changed.emit(budget)
+		# if batches.has(target_b.batch_year):
+		# 	batches.erase(target_b.batch_year)
 			
 		stats_changed.emit()
 
@@ -259,14 +310,17 @@ func _check_stage_progression() -> void:
 		next_stage = 0
 		if not batches.has(TimeManager.year):
 			_create_new_batch(TimeManager.year)
-	elif turn_in_year >= 3 and turn_in_year < 6:
-		next_stage = 1 # Weeding & Pruning window (mapped to 1 so neither is red)
-	elif turn_in_year >= 6 and turn_in_year < 8:
+	
+	if turn_in_year >= 1 and turn_in_year < 8:
+		next_stage = 0 # Planting / Growing
+	elif turn_in_year >= 8 and turn_in_year < 11:
+		next_stage = 1 # Weeding & Pruning window
+	elif turn_in_year >= 11 and turn_in_year < 13:
 		next_stage = 3 # Suckering
-	elif turn_in_year >= 8 and turn_in_year < 13:
+	elif turn_in_year >= 13 and turn_in_year < 16:
 		next_stage = 4 # Harvest
-	elif turn_in_year >= 13:
-		next_stage = 5 # Processing
+	elif turn_in_year >= 16:
+		next_stage = 5 # Processing / Post-Harvest
 	
 	if next_stage != current_stage:
 		current_stage = next_stage

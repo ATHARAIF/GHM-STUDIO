@@ -23,6 +23,9 @@ var is_outside_hand: bool = false
 var active_tween: Tween
 var pending_rotation_steps: int = 0   # dipake pas resume drag dari pickup, biar rotasi kebawa
 
+var target_batch_year: int = -1
+var is_duplicate: bool = false
+
 @onready var lbl_process = $Background/VBox/Header/Margin/LblProcess
 @onready var lbl_target = $Background/VBox/Subheader/Margin/LblTarget
 @onready var lbl_turn = $Background/VBox/Body/BadgeLeft/LblTurn
@@ -70,7 +73,10 @@ func _setup_ui() -> void:
 			if badge_l_style: badge_l_style.bg_color = Color(0.12, 0.40, 0.40)
 			if badge_r_style: badge_r_style.bg_color = Color(0.12, 0.40, 0.40)
 		else:
-			lbl_target.text = ("%s %d" % [var_name, TimeManager.year]).to_upper()
+			var display_year = TimeManager.year
+			if target_batch_year != -1:
+				display_year = target_batch_year
+			lbl_target.text = ("%s %d" % [var_name, display_year]).to_upper()
 			
 			if style: style.bg_color = Color(0.63, 0.13, 0.35) # Magenta for process
 			if sub_style: sub_style.bg_color = Color(0.43, 0.08, 0.20)
@@ -86,6 +92,8 @@ func _setup_ui() -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if card_data and StageManager.budget < card_data.cost:
+			return # Cannot afford
 		_begin_drag(global_position)
 		get_viewport().set_input_as_handled()
 

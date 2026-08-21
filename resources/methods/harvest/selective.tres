@@ -20,5 +20,5 @@ ui_qual_text = "++"
 ui_qual_color = Color(0.4, 0.8, 0.4, 1)
 ui_rip_text = "Perfect"
 ui_rip_color = Color(0.4, 0.8, 0.4, 1)
-ui_quant_text = "85%"
+ui_quant_text = "80%"
 ui_quant_color = Color(0.8, 0.4, 0.4, 1)

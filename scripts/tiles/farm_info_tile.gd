@@ -105,6 +105,7 @@ func _build_ui() -> void:
 	
 	if tree:
 		_add_header("--- PLANTATION ---")
+		_add_row("Coffee Species", var_data.species_name if var_data else "Unknown", Color(0.2, 0.8, 0.8))
 		_add_row("Coffee Variety", var_data.variety_name if var_data else "Unknown", Color(0.2, 0.8, 0.8))
 		_add_row("Tree Age", "%.0f Years" % tree.age_years, Color(0.8, 0.2, 0.2) if tree.age_years < 3 else Color(0.2, 0.8, 0.2))
 		

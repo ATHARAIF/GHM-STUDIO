@@ -1,8 +1,12 @@
 extends Resource
 class_name CoffeeVariety
 
-## Nama lengkap varietas kopi (misal: 'Arabika Kintamani').
-@export var variety_name: String = "Arabika Kintamani"
+
+## Spesies kopi (misal: 'Arabika', 'Robusta').
+@export var species_name: String = "Arabika"
+## Nama varietas kopi (misal: 'Kintamani').
+@export var variety_name: String = "Kintamani"
+
 
 @export_group("Base Stats")
 ## Nilai bawaan (Base) Acidity untuk varietas ini (1-10).
@@ -93,12 +97,14 @@ class_name CoffeeVariety
 ## Kerapatan tanam maksimum yang masih ditoleransi (Pohon/Ha).
 @export var safe_density_max: int = 2500
 
+
 # Kamus Varietas
 static func get_dictionary() -> Dictionary:
 	var dict = {}
 	
 	var kintamani = CoffeeVariety.new()
-	kintamani.variety_name = "Arabika Kintamani"
+	kintamani.species_name = "Arabika"
+	kintamani.variety_name = "Kintamani"
 	kintamani.base_acidity = 0
 	kintamani.base_aroma = 0
 	kintamani.base_sweetness = 3
@@ -116,7 +122,8 @@ static func get_dictionary() -> Dictionary:
 	dict["arabika_kintamani"] = kintamani
 	
 	var robusta = CoffeeVariety.new()
-	robusta.variety_name = "Robusta Dampit"
+	robusta.species_name = "Robusta"
+	robusta.variety_name = "Dampit"
 	robusta.base_acidity = 1
 	robusta.base_aroma = 5
 	robusta.base_sweetness = 2

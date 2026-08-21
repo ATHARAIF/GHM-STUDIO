@@ -201,7 +201,30 @@ func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, c
 			lbl_farm_name.text = StageManager.current_location.location_name
 			if val_surface: val_surface.text = str(StageManager.current_location.surface_area) + " Ha"
 			if StageManager.current_location.variety_data:
-				val_plant.text = StageManager.current_location.variety_data.variety_name
+				val_plant.text = StageManager.current_location.variety_data.species_name
+			
+			# Tambah row Variety secara dinamis jika belum ada
+			var grid = val_plant.get_parent()
+			if not grid.has_node("LVariety"):
+				# Cari node LPlant dan ubah namanya jadi Species
+				var lplant = grid.get_node("LPlant")
+				if lplant:
+					lplant.text = "Species"
+					
+				var lvar = Label.new()
+				lvar.name = "LVariety"
+				lvar.text = "Variety"
+				lvar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				grid.add_child(lvar)
+				
+				var vvar = Label.new()
+				vvar.name = "VVariety"
+				vvar.text = StageManager.current_location.variety_data.variety_name
+				vvar.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+				grid.add_child(vvar)
+			else:
+				var vvar = grid.get_node("VVariety")
+				vvar.text = StageManager.current_location.variety_data.variety_name
 		available_methods = card_data.popup_methods
 		available_tools = card_data.popup_tools
 		_build_buttons()

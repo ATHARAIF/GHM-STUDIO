@@ -4,12 +4,12 @@ signal time_advanced(year: int, season: int, turn_in_season: int, turn_in_year: 
 signal year_changed(year: int)
 signal season_changed(season: int)
 
-enum Season { SPRING, SUMMER, FALL, WINTER }
+enum Season { WINTER, SPRING, SUMMER, FALL }
 
 var year: int = 2025
 var season: int = Season.SPRING
-var turn_in_season: int = 1
-var turn_in_year: int = 1
+var turn_in_season: int = 3
+var turn_in_year: int = 8
 
 func advance_turn() -> void:
 	turn_in_year += 1

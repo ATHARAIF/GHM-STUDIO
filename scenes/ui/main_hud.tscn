@@ -274,11 +274,13 @@ text = "Bitterness: 0"
 label_settings = SubResource("LabelSettings_glx4a")
 
 [node name="Moisture" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1589169424]
+visible = false
 layout_mode = 2
 text = "Moisture: 0%"
 label_settings = SubResource("LabelSettings_glx4a")
 
 [node name="Defect" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1880209882]
+visible = false
 layout_mode = 2
 text = "Defect: 0%"
 label_settings = SubResource("LabelSettings_glx4a")

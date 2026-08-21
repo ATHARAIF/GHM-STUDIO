@@ -105,6 +105,7 @@ static func get_color_for_score(score: float) -> Color:
 		return Color(0.8, 0.8, 0.2) # Yellow (Safe)
 	else:
 		return Color(0.8, 0.2, 0.2) # Red (Bad)
+
 func get_age_yield_pct(age: int) -> float:
 	if age < 2: return 0.0
 	elif age == 2: return 0.30
@@ -133,12 +134,12 @@ func initialize_from_terroir(farm: FarmLocation) -> void:
 	var v_data = farm.variety_data
 	
 	# Apply multiplier to sensory stats (Phenotype)
-	current_acidity = v_data.base_acidity * actual_multiplier
-	current_aroma = v_data.base_aroma * actual_multiplier
-	current_sweetness = v_data.base_sweetness * actual_multiplier
-	current_body = v_data.base_body * actual_multiplier
-	current_flavor = v_data.base_flavor * actual_multiplier
-	current_bitterness = v_data.base_bitterness * actual_multiplier
+	current_acidity = clamp(v_data.base_acidity * actual_multiplier, 0.0, 10.0)
+	current_aroma = clamp(v_data.base_aroma * actual_multiplier, 0.0, 10.0)
+	current_sweetness = clamp(v_data.base_sweetness * actual_multiplier, 0.0, 10.0)
+	current_body = clamp(v_data.base_body * actual_multiplier, 0.0, 10.0)
+	current_flavor = clamp(v_data.base_flavor * actual_multiplier, 0.0, 10.0)
+	current_bitterness = clamp(v_data.base_bitterness * actual_multiplier, 0.0, 10.0)
 	
 	# Base yields and defects
 	current_moisture = v_data.base_moisture
@@ -147,7 +148,7 @@ func initialize_from_terroir(farm: FarmLocation) -> void:
 	var max_yield = farm.surface_area * plant_density * max_yield_per_plant
 	var age_pct = get_age_yield_pct(age_years)
 	var yield_age = max_yield * age_pct
-	current_yield_potential = int(yield_age * (health_pct / 100.0))
+	# current_yield_potential is now calculated dynamically at harvest
 	
 	# Defects and Diseases might INCREASE if the score is low!
 	# E.g., if match is 100%, disease is 0%. If match is 50%, disease is higher.
@@ -155,3 +156,18 @@ func initialize_from_terroir(farm: FarmLocation) -> void:
 	
 	disease_rate = penalty_factor * 20.0 # up to 10% disease instantly for bad terroir
 	current_defect = v_data.base_defect_rate + (penalty_factor * 10.0) # up to 5% extra defect
+
+func calculate_harvest_yield() -> int:
+	var plant_density: int = planting_density
+	var max_yield_per_plant: float = 10.0
+	
+	# Try to find the farm to get surface area
+	var em = Engine.get_main_loop().root.get_node_or_null("StageManager")
+	var surface_area = 1.0 # Default 1 Ha
+	if em and em.current_location:
+		surface_area = em.current_location.surface_area
+		
+	var max_yield = surface_area * plant_density * max_yield_per_plant
+	var age_pct = get_age_yield_pct(age_years)
+	var yield_age = max_yield * age_pct
+	return int(yield_age * (health_pct / 100.0))

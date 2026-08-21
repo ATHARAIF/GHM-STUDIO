@@ -364,6 +364,8 @@ func try_place(mouse_pos: Vector2, tile_scene: PackedScene, card_data: CardData)
 		"card_node": current_card_node,
 		"card_data": card_data
 	}
+	if current_card_node and current_card_node.get("target_batch_year") != null:
+		placement_data[tile]["target_batch_year"] = current_card_node.get("target_batch_year")
 	
 	if card_data != null:
 		print("Card data placement_interaction: ", card_data.get("placement_interaction"))
@@ -377,7 +379,7 @@ func try_place(mouse_pos: Vector2, tile_scene: PackedScene, card_data: CardData)
 				print("EventManager singleton not found!")
 		else:
 			print("No interaction requested, registering tile directly.")
-			StageManager.register_placed_tile(tile, card_data)
+			StageManager.register_placed_tile(tile, card_data, placement_data[tile])
 
 	current_tile_scene = null   # reset, biar pickup detection ("current_tile_scene == null") gak ke-block
 	current_card_node = null
@@ -389,7 +391,8 @@ func _on_interaction_confirmed(card_name: String, tile: Node3D, card_data: Resou
 		var data = placement_data[tile]
 		for key in extra_data:
 			data[key] = extra_data[key]
-		StageManager.register_placed_tile(tile, data["card_data"], extra_data)
+		# Pass data instead of extra_data so target_batch_year is included
+		StageManager.register_placed_tile(tile, data["card_data"], data)
 	if pending_interaction_tile == tile:
 		pending_interaction_tile = null
 
