@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfcdyfqy7trvf"]
+[gd_scene format=3 uid="uid://cfcdyfqy7trvf"]
 
-[ext_resource type="PackedScene" uid="uid://dh5e6j7k8l9m0" path="res://scenes/cards/card_base.tscn" id="1_base"]
-[ext_resource type="PackedScene" uid="uid://crpiafvocy2wl" path="res://scenes/tiles/process/testing_tile.tscn" id="2_tile"]
-
+[ext_resource type="PackedScene" uid="uid://dh5e6j7k8mam0" path="res://scenes/cards/card_base.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://c8a70dhainbdy" path="res://scenes/tiles/process/testing_tile.tscn" id="2_tile"]
 [ext_resource type="Resource" uid="uid://7mrkwcsb1xyo" path="res://resources/cards/bean_testing.tres" id="3_data"]
-[node name="card_testing" instance=ExtResource("1_base")]
-card_data = ExtResource("3_data")
+[ext_resource type="Texture2D" uid="uid://dd7s6gdu1ig3j" path="res://assets/ui/cards/tile_shapes/Type=3x2 L-Shape 1.png" id="4_fs8qw"]
+
+[node name="card_testing" unique_id=240431558 instance=ExtResource("1_base")]
 tile_scene = ExtResource("2_tile")
+card_data = ExtResource("3_data")
+tile_shape_icon = ExtResource("4_fs8qw")

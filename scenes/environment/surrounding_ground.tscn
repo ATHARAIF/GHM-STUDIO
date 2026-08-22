@@ -7,5 +7,155 @@ albedo_color = Color(0.039215688, 0.54901963, 0.22352941, 1)
 
 [node name="surrounding_ground" unique_id=1246640729 instance=ExtResource("1_cibm7")]
 
-[node name="Cube" parent="." index="0" unique_id=1307129943]
+[node name="Cube" parent="." index="0" unique_id=271197495]
 surface_material_override/0 = SubResource("StandardMaterial3D_jlpiy")
+
+[node name="Plane" parent="." index="1" unique_id=390990799]
+transform = Transform3D(3.9991813, 0, 2.0993392, 0, 4.5167108, 0, -2.0993392, 0, 3.9991813, 3.6134026, -0.117293745, 14.1106415)
+
+[node name="no_border" parent="." index="2" unique_id=1149352431]
+visible = false
+
+[node name="no_border_001" parent="." index="3" unique_id=475219677]
+visible = false
+
+[node name="no_border_002" parent="." index="4" unique_id=1439541431]
+visible = false
+
+[node name="no_border_003" parent="." index="5" unique_id=1232944882]
+visible = false
+
+[node name="no_border_004" parent="." index="6" unique_id=579919752]
+visible = false
+
+[node name="no_border_005" parent="." index="7" unique_id=1738737221]
+visible = false
+
+[node name="no_border_006" parent="." index="8" unique_id=1792744012]
+visible = false
+
+[node name="no_border_007" parent="." index="9" unique_id=157886263]
+visible = false
+
+[node name="no_border_008" parent="." index="10" unique_id=218767700]
+visible = false
+
+[node name="no_border_009" parent="." index="11" unique_id=1663757748]
+visible = false
+
+[node name="no_border_010" parent="." index="12" unique_id=446897705]
+visible = false
+
+[node name="no_border_011" parent="." index="13" unique_id=5897373]
+visible = false
+
+[node name="no_border_012" parent="." index="14" unique_id=171013918]
+visible = false
+
+[node name="no_border_013" parent="." index="15" unique_id=281283227]
+visible = false
+
+[node name="no_border_014" parent="." index="16" unique_id=181054613]
+visible = false
+
+[node name="no_border_015" parent="." index="17" unique_id=1681148904]
+visible = false
+
+[node name="no_border_016" parent="." index="18" unique_id=1914228687]
+visible = false
+
+[node name="no_border_017" parent="." index="19" unique_id=2141005122]
+visible = false
+
+[node name="no_border_018" parent="." index="20" unique_id=265556560]
+visible = false
+
+[node name="no_border_019" parent="." index="21" unique_id=2052714184]
+visible = false
+
+[node name="no_border_020" parent="." index="22" unique_id=1906617886]
+visible = false
+
+[node name="no_border_021" parent="." index="23" unique_id=1679866350]
+visible = false
+
+[node name="no_border_022" parent="." index="24" unique_id=1393123408]
+visible = false
+
+[node name="no_border_023" parent="." index="25" unique_id=174914697]
+visible = false
+
+[node name="no_border_024" parent="." index="26" unique_id=2033259161]
+visible = false
+
+[node name="no_border_025" parent="." index="27" unique_id=372769523]
+visible = false
+
+[node name="no_border_026" parent="." index="28" unique_id=174637234]
+visible = false
+
+[node name="no_border_027" parent="." index="29" unique_id=2001505641]
+visible = false
+
+[node name="no_border_028" parent="." index="30" unique_id=1004406208]
+visible = false
+
+[node name="no_border_029" parent="." index="31" unique_id=1710746949]
+visible = false
+
+[node name="no_border_030" parent="." index="32" unique_id=1864497830]
+visible = false
+
+[node name="no_border_031" parent="." index="33" unique_id=934856513]
+visible = false
+
+[node name="no_border_032" parent="." index="34" unique_id=328833602]
+visible = false
+
+[node name="no_border_033" parent="." index="35" unique_id=814127705]
+visible = false
+
+[node name="no_border_034" parent="." index="36" unique_id=808651324]
+visible = false
+
+[node name="no_border_035" parent="." index="37" unique_id=362943922]
+visible = false
+
+[node name="no_border_036" parent="." index="38" unique_id=2058616480]
+visible = false
+
+[node name="no_border_037" parent="." index="39" unique_id=1405033543]
+visible = false
+
+[node name="no_border_038" parent="." index="40" unique_id=1992314456]
+visible = false
+
+[node name="no_border_039" parent="." index="41" unique_id=391189588]
+visible = false
+
+[node name="no_border_040" parent="." index="42" unique_id=1917896747]
+visible = false
+
+[node name="no_border_041" parent="." index="43" unique_id=424180356]
+visible = false
+
+[node name="no_border_042" parent="." index="44" unique_id=496467073]
+visible = false
+
+[node name="no_border_043" parent="." index="45" unique_id=133988847]
+visible = false
+
+[node name="no_border_044" parent="." index="46" unique_id=1458109200]
+visible = false
+
+[node name="no_border_045" parent="." index="47" unique_id=221566246]
+visible = false
+
+[node name="no_border_046" parent="." index="48" unique_id=656042389]
+visible = false
+
+[node name="no_border_047" parent="." index="49" unique_id=1526840045]
+visible = false
+
+[node name="no_border_048" parent="." index="50" unique_id=128067750]
+visible = false

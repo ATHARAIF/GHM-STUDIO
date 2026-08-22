@@ -1,28 +1,25 @@
 extends Control
 
-@onready var btn_calendar = $main/header/HBoxContainer/calendar
-@onready var btn_money = $main/header/HBoxContainer/money
+@onready var btn_calendar = $main/top_bar/MarginContainer/hbox/left/calendar/label
+@onready var btn_money = $main/top_bar/MarginContainer/hbox/left/money/label
 @onready var btn_end_turn = $main/footer/Button
 
-# Temporary Debug Stats
-@onready var debug_panel = $main/PanelContainer/DebugStats
-@onready var debug_body = $main/PanelContainer/DebugStats/Body
-@onready var debug_acidity = $main/PanelContainer/DebugStats/Acidity
-@onready var debug_sweetness = $main/PanelContainer/DebugStats/Sweetness
-@onready var debug_aroma = $main/PanelContainer/DebugStats/Aroma
-@onready var debug_flavor = $main/PanelContainer/DebugStats/Flavor
-@onready var debug_bitterness = $main/PanelContainer/DebugStats/Bitterness
-@onready var debug_moisture = $main/PanelContainer/DebugStats/Moisture
-@onready var debug_defect = $main/PanelContainer/DebugStats/Defect
-@onready var debug_yield = $main/PanelContainer/DebugStats/Yield
+var debug_panel: Control
+var debug_body: Label
+var debug_acidity: Label
+var debug_sweetness: Label
+var debug_aroma: Label
+var debug_flavor: Label
+var debug_bitterness: Label
+var debug_yield: Label
 var debug_yield_mod: Label
 var debug_batch_dropdown: OptionButton
 var selected_debug_batch_year: int = -1
 
 # Popup Buttons
-@onready var btn_menu = $main/header/HBoxContainer2/menu
-@onready var btn_setting = $main/header/HBoxContainer2/setting
-@onready var btn_journal = $main/header/HBoxContainer2/journal
+@onready var btn_menu = $main/top_bar/MarginContainer/hbox/right/menu
+@onready var btn_setting = $main/top_bar/MarginContainer/hbox/right/setting
+@onready var btn_journal = $main/top_bar/MarginContainer/hbox/right/journal
 
 # Popup Layers
 @onready var layer_menu_tabs = $menu_tabs
@@ -35,23 +32,8 @@ func _ready() -> void:
 	StageManager.stats_changed.connect(_on_stats_changed)
 	StageManager.interaction_requested.connect(_on_stage_interaction_requested)
 	
-	if debug_yield:
-		debug_yield_mod = debug_yield.duplicate()
-		debug_yield_mod.name = "YieldMod"
-		debug_yield.get_parent().add_child(debug_yield_mod)
-		debug_yield.get_parent().move_child(debug_yield_mod, debug_yield.get_index())
-		
-	if debug_panel:
-		debug_batch_dropdown = OptionButton.new()
-		debug_batch_dropdown.name = "BatchDropdown"
-		debug_panel.add_child(debug_batch_dropdown)
-		debug_panel.move_child(debug_batch_dropdown, 0)
-		debug_batch_dropdown.item_selected.connect(_on_debug_batch_selected)
-		# Enable clicking
-		debug_panel.mouse_filter = Control.MOUSE_FILTER_PASS
-		if debug_panel.get_parent() is Control:
-			debug_panel.get_parent().mouse_filter = Control.MOUSE_FILTER_PASS
-		
+	_build_debug_panel()
+	
 	if btn_end_turn:
 		btn_end_turn.pressed.connect(_on_end_turn_pressed)
 		
@@ -66,6 +48,40 @@ func _ready() -> void:
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_requested.connect(_on_card_placement_interaction_requested)
 
+func _build_debug_panel() -> void:
+	var container = PanelContainer.new()
+	container.name = "PanelContainer"
+	$main.add_child(container)
+	container.set_anchors_and_offsets_preset(Control.PRESET_CENTER_LEFT)
+	container.offset_left = 20
+	container.mouse_filter = Control.MOUSE_FILTER_PASS
+	
+	debug_panel = VBoxContainer.new()
+	debug_panel.name = "DebugStats"
+	debug_panel.mouse_filter = Control.MOUSE_FILTER_PASS
+	container.add_child(debug_panel)
+	
+	debug_batch_dropdown = OptionButton.new()
+	debug_batch_dropdown.name = "BatchDropdown"
+	debug_batch_dropdown.item_selected.connect(_on_debug_batch_selected)
+	debug_panel.add_child(debug_batch_dropdown)
+	
+	debug_body = Label.new()
+	debug_panel.add_child(debug_body)
+	debug_acidity = Label.new()
+	debug_panel.add_child(debug_acidity)
+	debug_sweetness = Label.new()
+	debug_panel.add_child(debug_sweetness)
+	debug_aroma = Label.new()
+	debug_panel.add_child(debug_aroma)
+	debug_flavor = Label.new()
+	debug_panel.add_child(debug_flavor)
+	debug_bitterness = Label.new()
+	debug_panel.add_child(debug_bitterness)
+	debug_yield = Label.new()
+	debug_panel.add_child(debug_yield)
+	debug_yield_mod = Label.new()
+	debug_panel.add_child(debug_yield_mod)
 
 func _toggle_popup(layer: CanvasLayer) -> void:
 	if layer:
@@ -158,8 +174,6 @@ func _on_stats_changed() -> void:
 		if debug_flavor: debug_flavor.text = "Flavor: %.2f" % b.flavor
 		if debug_bitterness: debug_bitterness.text = "Bitterness: %.2f" % b.bitterness
 		
-	if debug_moisture: debug_moisture.text = "Moisture: %.1f%%" % b.moisture
-	if debug_defect: debug_defect.text = "Defect: %.1f%%" % b.defect_rate
 	if debug_yield: debug_yield.text = "Yield: %.2fkg" % b.cherry_kg
 	if debug_yield_mod: 
 		var hist_str = ", ".join(b.history_log)
@@ -169,7 +183,7 @@ func _on_stats_changed() -> void:
 
 func _on_budget_changed(budget: int) -> void:
 	if btn_money:
-		btn_money.text = "$ %d" % budget
+		btn_money.text = "%d" % budget
 
 func _on_end_turn_pressed() -> void:
 	StageManager.advance_turn()

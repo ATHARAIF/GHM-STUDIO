@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b6uium5s0ij74"]
+
+[ext_resource type="Script" uid="uid://ein7cl8x51x4" path="res://scripts/managers/placement_manager.gd" id="1_j5tis"]
+[ext_resource type="Script" uid="uid://co3mb0ncv6w4a" path="res://scripts/managers/ghost_visualizer.gd" id="2_ghost"]
+
+[node name="PlacementManager" type="Node" unique_id=1244060309]
+script = ExtResource("1_j5tis")
+float_height = 1.0
+place_duration = 0.5
+
+[node name="GhostVisualizer" type="Node" parent="." unique_id=1157116938]
+script = ExtResource("2_ghost")
+ghost_float_alpha = 1.0
+rotate_duration = 0.15

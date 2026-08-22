@@ -92,6 +92,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ouq1h")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3suc6"]
+albedo_color = Color(0, 0.6784314, 1, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvvxj"]
 size = Vector3(129.23358, 1, 122.23395)
 
@@ -522,6 +525,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015738487, 0)
 [node name="surrounding_ground" parent="environtment" unique_id=1246640729 instance=ExtResource("7_wbbc8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
 
+[node name="Plane" parent="environtment/surrounding_ground" index="1" unique_id=390990799]
+transform = Transform3D(3.9991813, 0, 2.0993392, 0, 4.5167108, 0, -2.0993392, 0, 3.9991813, 3.6134026, -0.117293745, 8.991949)
+surface_material_override/0 = SubResource("StandardMaterial3D_3suc6")
+
 [node name="Area3D" type="StaticBody3D" parent="." unique_id=667419275]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.018382907, 6.4369926)
 collision_mask = 2
@@ -630,3 +637,4 @@ transform = Transform3D(-0.62772036, 0, 0.3097857, 0, 0.7, 0, -0.3097857, 0, -0.
 [editable path="tile_grounds/tile_ground96"]
 [editable path="tile_grounds/tile_ground97"]
 [editable path="tile_grounds/tile_ground98"]
+[editable path="environtment/surrounding_ground"]

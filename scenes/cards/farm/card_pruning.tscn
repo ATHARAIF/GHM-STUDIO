@@ -3,7 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://dh5e6j7k8mam0" path="res://scenes/cards/card_base.tscn" id="1_base"]
 [ext_resource type="PackedScene" uid="uid://b7cg6uvvi5ata" path="res://scenes/tiles/farm/pruning_tile.tscn" id="2_tile"]
 [ext_resource type="Resource" uid="uid://c7prpyahc2ia7" path="res://resources/cards/pruning.tres" id="3_data"]
+[ext_resource type="Texture2D" uid="uid://kioqh5ry4lr0" path="res://assets/ui/cards/tile_shapes/Type=3x2 T-Shape.png" id="4_q57c4"]
 
 [node name="card_pruning" unique_id=198216818 instance=ExtResource("1_base")]
 tile_scene = ExtResource("2_tile")
 card_data = ExtResource("3_data")
+card_color = Color(0, 0.5019608, 0.06666667, 1)
+tile_shape_icon = ExtResource("4_q57c4")

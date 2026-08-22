@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dtksybc7vlbcf"]
+
+[ext_resource type="PackedScene" uid="uid://bq2cjit0wcltv" path="res://scenes/cards/farm/card_weeding.tscn" id="1_weed"]
+[ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/farm/card_pruning.tscn" id="2_jdkk6"]
+[ext_resource type="Script" uid="uid://bj1ap4xeolcck" path="res://scripts/cards/card_hand.gd" id="4_hand_script"]
+
+[sub_resource type="Theme" id="Theme_ybjhs"]
+
+[node name="card_hand" type="HBoxContainer" unique_id=2079676402]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -359.0
+offset_right = 3.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+theme = SubResource("Theme_ybjhs")
+theme_override_constants/separation = 54
+alignment = 1
+script = ExtResource("4_hand_script")
+
+[node name="card_weeding" parent="." unique_id=2084383027 instance=ExtResource("1_weed")]
+layout_mode = 2
+
+[node name="card_pruning" parent="." unique_id=351337001 instance=ExtResource("2_jdkk6")]
+layout_mode = 2

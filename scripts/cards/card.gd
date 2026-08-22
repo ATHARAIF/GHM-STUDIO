@@ -26,14 +26,24 @@ var pending_rotation_steps: int = 0   # dipake pas resume drag dari pickup, biar
 var target_batch_year: int = -1
 var is_duplicate: bool = false
 
-@onready var lbl_process = $Background/VBox/Header/Margin/LblProcess
-@onready var lbl_target = $Background/VBox/Subheader/Margin/LblTarget
-@onready var lbl_turn = $Background/VBox/Body/BadgeLeft/LblTurn
-@onready var lbl_cost = $Background/VBox/Body/BadgeRight/LblCost
-@onready var header_panel = $Background/VBox/Header
-@onready var subheader_panel = $Background/VBox/Subheader
-@onready var badge_left = $Background/VBox/Body/BadgeLeft
-@onready var badge_right = $Background/VBox/Body/BadgeRight
+@export_group("Card UI Design")
+@export var card_color: Color = Color(0.85, 0.44, 0.25)
+@export var tile_shape_icon: Texture2D
+@export var requires_sunny_weather: bool = false
+
+@onready var lbl_process = $base/color/process_name/label
+@onready var lbl_target = $base/lahan
+@onready var lbl_turn = $base/color/specs/container/turn/label
+@onready var lbl_cost = $base/color/cost/label
+
+@onready var tex_tile_type = $base/color/specs/container/tile_type
+@onready var tex_weather = $base/color/specs/container/weather
+@onready var tex_illustration = get_node_or_null("base/illustration")
+@onready var btn_info = $base/color/process_name/info_button
+
+@onready var pnl_base = $base
+@onready var pnl_specs = $base/color/specs
+@onready var pnl_color = $base/color
 
 func _ready() -> void:
 	origin_parent = get_parent()
@@ -48,45 +58,45 @@ func _setup_ui() -> void:
 	if lbl_turn:
 		lbl_turn.text = str(card_data.duration)
 	if lbl_cost:
-		lbl_cost.text = "$%d" % card_data.cost
+		lbl_cost.text = "%d" % card_data.cost
 		
-	if lbl_target and header_panel and subheader_panel:
-		var style = header_panel.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
-		var sub_style = subheader_panel.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
-		var badge_l_style = badge_left.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
-		var badge_r_style = badge_right.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+	if tex_tile_type and tile_shape_icon:
+		tex_tile_type.texture = tile_shape_icon
 		
-		var loc = StageManager.current_location
-		var var_name = "Kopi"
-		if loc and loc.variety_data:
-			var_name = loc.variety_data.variety_name
-			
-		# Farm cards start with F, Process start with P or W
+	if tex_weather:
+		if requires_sunny_weather:
+			tex_weather.modulate.a = 1.0
+		else:
+			tex_weather.modulate.a = 0.0
+		
+	var loc = StageManager.current_location
+	var var_name = "Kopi"
+	if loc and loc.variety_data:
+		var_name = loc.variety_data.variety_name
+		
+	if lbl_target:
 		if card_data.process_id.begins_with("F"):
 			if loc:
 				lbl_target.text = loc.location_name.to_upper()
 			else:
 				lbl_target.text = "LAHAN"
-				
-			if style: style.bg_color = Color(0.18, 0.55, 0.55) # Cyan for farm
-			if sub_style: sub_style.bg_color = Color(0.12, 0.40, 0.40)
-			if badge_l_style: badge_l_style.bg_color = Color(0.12, 0.40, 0.40)
-			if badge_r_style: badge_r_style.bg_color = Color(0.12, 0.40, 0.40)
 		else:
 			var display_year = TimeManager.year
 			if target_batch_year != -1:
 				display_year = target_batch_year
 			lbl_target.text = ("%s %d" % [var_name, display_year]).to_upper()
 			
-			if style: style.bg_color = Color(0.63, 0.13, 0.35) # Magenta for process
-			if sub_style: sub_style.bg_color = Color(0.43, 0.08, 0.20)
-			if badge_l_style: badge_l_style.bg_color = Color(0.43, 0.08, 0.20)
-			if badge_r_style: badge_r_style.bg_color = Color(0.43, 0.08, 0.20)
-			
-		header_panel.add_theme_stylebox_override("panel", style)
-		subheader_panel.add_theme_stylebox_override("panel", sub_style)
-		badge_left.add_theme_stylebox_override("panel", badge_l_style)
-		badge_right.add_theme_stylebox_override("panel", badge_r_style)
+	if pnl_base and pnl_base.has_theme_stylebox("panel"):
+		var base_style = pnl_base.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		if base_style: 
+			base_style.bg_color = card_color
+			pnl_base.add_theme_stylebox_override("panel", base_style)
+		
+	if pnl_specs and pnl_specs.has_theme_stylebox("panel"):
+		var specs_style = pnl_specs.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		if specs_style:
+			specs_style.bg_color = card_color
+			pnl_specs.add_theme_stylebox_override("panel", specs_style)
 
 
 

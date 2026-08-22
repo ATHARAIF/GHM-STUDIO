@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://ddyxy0w123abc"]
+
+[ext_resource type="Script" uid="uid://b2nvhpl5frama" path="res://scripts/tiles/farm_info_tile.gd" id="1_abcde"]
+[ext_resource type="PackedScene" uid="uid://dcvt0q2nmlmqr" path="res://assets/3D/tiles/decorations/weeding_decor.glb" id="2_34umb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_info"]
+size = Vector3(7.0913086, 0.2, 2.9951172)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_info"]
+albedo_color = Color(0.4, 0.25, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_info"]
+material = SubResource("StandardMaterial3D_info")
+size = Vector3(7.0966797, 0.2, 3.0097656)
+
+[node name="farm_info_tile" type="Node3D" unique_id=1637197955]
+script = ExtResource("1_abcde")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1834968503]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1483762880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5456543, 0.1, 0.4975586)
+shape = SubResource("BoxShape3D_info")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=717974260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5483398, 0.1, 0.5048828)
+mesh = SubResource("BoxMesh_info")
+
+[node name="PopupUI" type="CanvasLayer" parent="." unique_id=1705760726]
+layer = 10
+
+[node name="ColorRect" type="ColorRect" parent="PopupUI" unique_id=829125577]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="CenterContainer" type="CenterContainer" parent="PopupUI" unique_id=1022741527]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PopupUI/CenterContainer" unique_id=16621847]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupUI/CenterContainer/PanelContainer" unique_id=1227710047]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Header" type="HBoxContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer" unique_id=1786581787]
+layout_mode = 2
+
+[node name="LblLocation" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/Header" unique_id=1358528087]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "LOKASI LAHAN"
+
+[node name="BtnClose" type="Button" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/Header" unique_id=1615416492]
+layout_mode = 2
+text = "   X   "
+
+[node name="Timeline" type="HBoxContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer" unique_id=1415025478]
+layout_mode = 2
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer" unique_id=1044473432]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Lbl1" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=2082984929]
+layout_mode = 2
+text = "Altitude"
+
+[node name="ValAltitude" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=307087747]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.4, 0.2, 1)
+text = "0m"
+horizontal_alignment = 2
+
+[node name="Lbl2" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=955391516]
+layout_mode = 2
+text = "Soil Quality"
+
+[node name="ValSoil" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1385231259]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.4, 0.2, 1)
+text = "0"
+horizontal_alignment = 2
+
+[node name="Lbl3" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=2055614530]
+layout_mode = 2
+text = "Bonus Aroma"
+
+[node name="ValAroma" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=707290035]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
+text = "+0"
+horizontal_alignment = 2
+
+[node name="Lbl4" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=229989838]
+layout_mode = 2
+text = "Bonus Body"
+
+[node name="ValBody" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=2141224573]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
+text = "+0"
+horizontal_alignment = 2
+
+[node name="Lbl5" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=450761754]
+layout_mode = 2
+text = "Bonus Acidity"
+
+[node name="ValAcidity" type="Label" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=928492916]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
+text = "+0"
+horizontal_alignment = 2
+
+[node name="weeding_decor" parent="." unique_id=925047075 instance=ExtResource("2_34umb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5221057, 0.28539312, 0.5337353)
+
+[node name="weeding_decor2" parent="." unique_id=203013379 instance=ExtResource("2_34umb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.525853, 0.28539312, 0.5337353)
+
+[node name="weeding_decor3" parent="." unique_id=943590226 instance=ExtResource("2_34umb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.569211, 0.28539312, 0.5337353)
+
+[node name="weeding_decor4" parent="." unique_id=2036945022 instance=ExtResource("2_34umb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5729585, 0.28539312, 0.5337353)
+
+[node name="weeding_decor5" parent="." unique_id=531999851 instance=ExtResource("2_34umb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5913757, 0.28539312, 0.5337353)
+
+[node name="weeding_decor6" parent="." unique_id=622816301 instance=ExtResource("2_34umb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5951232, 0.28539312, 0.5337353)
+
+[node name="weeding_decor7" parent="." unique_id=1561350825 instance=ExtResource("2_34umb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4021808, 0.28539312, 0.5337353)
+
+[connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]

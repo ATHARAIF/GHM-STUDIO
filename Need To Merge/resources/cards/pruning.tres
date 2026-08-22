@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c7prpyahc2ia7"]
+
+[ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+card_name = "Pruning"
+process_id = "FP02"
+cost = 250
+duration = 2
+placement_interaction = true
+active_start_turn = 3
+active_end_turn = 6
+metadata/_custom_type_script = "uid://uich76k1cing"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dmyxt07gqwe1"]
+
+[ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+card_name = "Weeding"
+process_id = "FP01"
+cost = 300
+duration = 2
+effect_sweetness = 0.5
+effect_flavor = 0.5
+effect_defect = -5.0
+penalty_aroma = -0.5
+penalty_sweetness = -0.5
+penalty_flavor = -0.5
+penalty_bitterness = 0.5
+active_start_turn = 3
+active_end_turn = 6

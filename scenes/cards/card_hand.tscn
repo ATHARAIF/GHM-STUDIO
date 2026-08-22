@@ -13,40 +13,49 @@
 [sub_resource type="Theme" id="Theme_ybjhs"]
 
 [node name="card_hand" type="HBoxContainer" unique_id=803764765]
-custom_minimum_size = Vector2(1152, 160)
-anchors_preset = 12
-anchor_top = 1.0
+custom_minimum_size = Vector2(0, 252)
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -160.0
+anchor_bottom = 0.5
+offset_top = -180.0
+offset_bottom = 72.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 size_flags_stretch_ratio = 0.0
 mouse_filter = 2
 theme = SubResource("Theme_ybjhs")
 alignment = 1
 script = ExtResource("4_hand_script")
 
-[node name="card_weeding" parent="." unique_id=1418713304 instance=ExtResource("1_weed")]
+[node name="card_weeding" parent="." unique_id=1905058637 instance=ExtResource("1_weed")]
+custom_minimum_size = Vector2(185, 252)
 layout_mode = 2
 
-[node name="card_suckering" parent="." unique_id=1641168024 instance=ExtResource("4_x7x6a")]
+[node name="card_pruning" parent="." unique_id=198216818 instance=ExtResource("1_prun")]
+custom_minimum_size = Vector2(185, 252)
 layout_mode = 2
 
-[node name="card_pruning" parent="." unique_id=795219280 instance=ExtResource("1_prun")]
+[node name="card_suckering" parent="." unique_id=1662130710 instance=ExtResource("4_x7x6a")]
+custom_minimum_size = Vector2(185, 252)
 layout_mode = 2
 
-[node name="card_harvest" parent="." unique_id=1342137021 instance=ExtResource("1_harv")]
+[node name="card_harvest" parent="." unique_id=278497024 instance=ExtResource("1_harv")]
+custom_minimum_size = Vector2(185, 252)
 layout_mode = 2
 
-[node name="card_processing" parent="." unique_id=1571066463 instance=ExtResource("1_proc")]
+[node name="card_processing" parent="." unique_id=1810066855 instance=ExtResource("1_proc")]
+custom_minimum_size = Vector2(185, 252)
 layout_mode = 2
 
-[node name="card_roasting" parent="." unique_id=483596952 instance=ExtResource("1_rst")]
+[node name="card_roasting" parent="." unique_id=306222161 instance=ExtResource("1_rst")]
+custom_minimum_size = Vector2(185, 252)
 layout_mode = 2
 
-[node name="card_testing" parent="." unique_id=1036993740 instance=ExtResource("1_test")]
+[node name="card_testing" parent="." unique_id=1254351766 instance=ExtResource("1_test")]
+custom_minimum_size = Vector2(185, 252)
 layout_mode = 2
 
-[node name="card_packing" parent="." unique_id=1168249238 instance=ExtResource("1_pack")]
+[node name="card_packing" parent="." unique_id=1575334899 instance=ExtResource("1_pack")]
+custom_minimum_size = Vector2(185, 252)
 layout_mode = 2
