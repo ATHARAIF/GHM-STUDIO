@@ -341,6 +341,29 @@ font = ExtResource("18_ndglf")
 font_size = 32
 font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybjhs"]
+content_margin_left = 24.0
+content_margin_top = 4.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 0.8, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_dcq2g"]
+font = ExtResource("18_ndglf")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sxlqi"]
+content_margin_left = 24.0
+content_margin_top = 4.0
+content_margin_bottom = 6.0
+bg_color = Color(0.5058824, 0.78039217, 0.5176471, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ckjl0"]
 color = Color(0.24313726, 0.15294118, 0.13725491, 1)
 
@@ -603,6 +626,7 @@ size_flags_vertical = 10
 text = "CONFIRM"
 
 [node name="new_popup_panel(old)" type="PanelContainer" parent="." unique_id=510595229]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1269,9 +1293,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 465.0
-offset_top = 345.0
+offset_top = 328.0
 offset_right = -465.0
-offset_bottom = -295.0
+offset_bottom = -312.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -1331,6 +1355,26 @@ text = "Kintamani"
 label_settings = SubResource("LabelSettings_b8l86")
 vertical_alignment = 1
 
+[node name="lbl_species_1" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/terroir" unique_id=2027287979]
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_position_ratio = Vector2(0, -0.7)
+offset_transform_visual_only = false
+theme_override_styles/normal = SubResource("StyleBoxFlat_ybjhs")
+text = "Arabica"
+label_settings = SubResource("LabelSettings_dcq2g")
+horizontal_alignment = 1
+
+[node name="lbl_species_2" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/terroir" unique_id=979866516]
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_position_ratio = Vector2(0, -0.7)
+offset_transform_visual_only = false
+theme_override_styles/normal = SubResource("StyleBoxFlat_sxlqi")
+text = "Robusta"
+label_settings = SubResource("LabelSettings_dcq2g")
+horizontal_alignment = 1
+
 [node name="separator" type="HSeparator" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=1827164967]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_ckjl0")
@@ -1388,52 +1432,84 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_yjce6")
 script = ExtResource("15_yjce6")
+key_count = 7
 radius = 140.0
 key_items = Array[Dictionary]([{
-"title": "Ripeness",
+"title": "Acidity",
 "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Fusce nisl sapien, cursus sit amet dui sit amet, pharetra egestas tortor.
 Praesent in porta nibh. Pellentesque ac mauris id purus mollis bibendum a sed sem. In at elementum velit, id dictum massa. Phasellus consectetur eros et nibh aliquet pretium.
 Proin imperdiet purus lorem, a euismod neque porttitor quis. Fusce quis cursus urna. Pellentesque gravida lacinia lectus, ac consequat mi.
 Duis ligula leo, bibendum a velit id, dignissim volutpat mi.
 Vivamus vel tempor lacus. Proin sit amet varius libero, vel placerat felis.",
-"value": 4.0
+"value": 2.4000000000000004
 }, {
-"title": "Quantity",
+"title": "Aroma",
+"tooltip": "",
+"value": 3.0
+}, {
+"title": "Flavor",
 "tooltip": "",
 "value": 1.0
 }, {
-"title": "Quality",
+"title": "Body",
 "tooltip": "",
-"value": 2.0
+"value": 0.0
+}, {
+"title": "Bitterness",
+"tooltip": "",
+"value": 0.0
+}, {
+"title": "Typicity",
+"tooltip": "",
+"value": 0.0
+}, {
+"title": "Sweetness",
+"tooltip": "",
+"value": 0.0
 }])
 max_value = 5.0
-step = 1.0
-rounded = true
+step = 0.2
 font = ExtResource("21_m7tg6")
 font_size = 24
 font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
+font_outline_color = Color(0.5529412, 0.43137255, 0.3882353, 1)
 title_seperation = 5.0
-background_color = Color(0, 0, 0, 0.09803922)
-background_outline_color = Color(0, 0, 0, 0.39215687)
+background_color = Color(0.4745098, 0.33333334, 0.28235295, 0.15686275)
+background_outline_color = Color(0.5529412, 0.43137255, 0.3882353, 1)
+background_outline_width = 1.5
 graph_color = Color(0.5058824, 0.78039217, 0.5176471, 1)
+graph_outline_color = Color(0.23636281, 0.4119341, 0.24574506, 1)
+graph_outline_width = 1.5
 show_guides = true
 guide_width = 0.5
 guide_step = 1.0
-items/key_0/value = 4.0
-items/key_0/title = "Ripeness"
+items/key_0/value = 2.4000000000000004
+items/key_0/title = "Acidity"
 items/key_0/tooltip = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Fusce nisl sapien, cursus sit amet dui sit amet, pharetra egestas tortor.
 Praesent in porta nibh. Pellentesque ac mauris id purus mollis bibendum a sed sem. In at elementum velit, id dictum massa. Phasellus consectetur eros et nibh aliquet pretium.
 Proin imperdiet purus lorem, a euismod neque porttitor quis. Fusce quis cursus urna. Pellentesque gravida lacinia lectus, ac consequat mi.
 Duis ligula leo, bibendum a velit id, dignissim volutpat mi.
 Vivamus vel tempor lacus. Proin sit amet varius libero, vel placerat felis."
-items/key_1/value = 1.0
-items/key_1/title = "Quantity"
+items/key_1/value = 3.0
+items/key_1/title = "Aroma"
 items/key_1/tooltip = ""
-items/key_2/value = 2.0
-items/key_2/title = "Quality"
+items/key_2/value = 1.0
+items/key_2/title = "Flavor"
 items/key_2/tooltip = ""
+items/key_3/value = 0.0
+items/key_3/title = "Body"
+items/key_3/tooltip = ""
+items/key_4/value = 0.0
+items/key_4/title = "Bitterness"
+items/key_4/tooltip = ""
+items/key_5/value = 0.0
+items/key_5/title = "Typicity"
+items/key_5/tooltip = ""
+items/key_6/value = 0.0
+items/key_6/title = "Sweetness"
+items/key_6/tooltip = ""
 metadata/_custom_type_script = "uid://dj2hfa37ymon4"
 
 [node name="right_side" type="PanelContainer" parent="popup_panel/margin/hbox" unique_id=766712498]
