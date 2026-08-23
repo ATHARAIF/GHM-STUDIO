@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://bd7ro5fbkndri"]
+
+[ext_resource type="FontFile" uid="uid://bvn0ivc4p8o5l" path="res://assets/font/Fredoka-Bold.ttf" id="1_4to1c"]
+
+[resource]
+font = ExtResource("1_4to1c")
+font_size = 32

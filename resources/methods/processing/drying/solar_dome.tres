@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_script")
-method_name = "Solar Dome (Green House)"
+method_name = "Solar Dome"
 override_cost = 50
 turn_duration = -1
 sort_order = 3

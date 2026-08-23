@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_script")
-method_name = "Patio (Lantai)"
+method_name = "Patio"
 override_cost = 50
 sort_order = 1
 allowed_methods = Array[String](["Natural", "Washed (Wet)", "Honey"])

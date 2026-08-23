@@ -45,6 +45,14 @@ class_name ProcessMethodData
 ## Warna font untuk teks indikator Kuantitas di UI.
 @export var ui_quant_color: Color = Color.WHITE
 
+@export_group("Radar Graph UI")
+## Nilai Kualitas (0-10) untuk ditampilkan di Radar Graph.
+@export var radar_quality: float = 5.0
+## Nilai Kematangan/Ripeness (0-10) untuk ditampilkan di Radar Graph.
+@export var radar_ripeness: float = 5.0
+## Nilai Kuantitas/Yield (0-10) untuk ditampilkan di Radar Graph.
+@export var radar_quantity: float = 5.0
+
 @export_group("Slider Data (Optional)")
 ## Daftar tingkatan efek jika metode ini menggunakan Slider (seperti pada Pruning). Kosongkan jika tidak memakai Slider.
 @export var slider_levels: Array[ProcessMethodLevel] = []

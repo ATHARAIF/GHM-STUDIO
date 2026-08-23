@@ -1,6 +1,190 @@
 [gd_scene format=3 uid="uid://tp26kt3k744s"]
 
 [ext_resource type="Script" uid="uid://dfnc3r4xof5xp" path="res://scripts/ui/popups/processing_popup.gd" id="1_g2o5o"]
+[ext_resource type="Texture2D" uid="uid://bj814epnafbhv" path="res://assets/ui/panels/panel_background.svg" id="2_1jpy4"]
+[ext_resource type="LabelSettings" uid="uid://bd7ro5fbkndri" path="res://themes/panel_title_font.tres" id="3_u7hrn"]
+[ext_resource type="Texture2D" uid="uid://bxq222a05p7t0" path="res://assets/ui/cards/icons/info.png" id="4_e5dt6"]
+[ext_resource type="Texture2D" uid="uid://b1wvjt8v0mxhi" path="res://assets/ui/cards/icons/info_pressed.png" id="5_p2wxa"]
+[ext_resource type="Texture2D" uid="uid://cawh4uab48t1" path="res://assets/ui/cards/icons/info_hover.png" id="6_1espt"]
+[ext_resource type="Texture2D" uid="uid://88h2puw740hm" path="res://assets/ui/panels/icons/coffee_bean_icon.svg" id="7_t48vm"]
+[ext_resource type="FontFile" uid="uid://bvn0ivc4p8o5l" path="res://assets/font/Fredoka-Bold.ttf" id="8_ob1y8"]
+[ext_resource type="FontFile" uid="uid://ddsl6jq828kej" path="res://assets/font/Fredoka-SemiBold.ttf" id="9_c01qe"]
+[ext_resource type="FontFile" uid="uid://b761j33ito7o5" path="res://assets/font/Fredoka-Medium.ttf" id="10_gbmwd"]
+[ext_resource type="PackedScene" uid="uid://6k1jn3ig8u6e" path="res://scenes/ui/popups/radar_widget_hexagon.tscn" id="11_u7qg4"]
+[ext_resource type="Texture2D" uid="uid://c4yenilqdkg8v" path="res://assets/ui/icons/stats/money.svg" id="12_4arv1"]
+[ext_resource type="Texture2D" uid="uid://cfnckj1d8mr2g" path="res://assets/ui/panels/buttons/btn_sec_normal.svg" id="12_4llwy"]
+[ext_resource type="Texture2D" uid="uid://bju3efkdm1wy5" path="res://assets/ui/panels/buttons/btn_sec_active_pressed.svg" id="13_w2dss"]
+[ext_resource type="Texture2D" uid="uid://derajmtgjogq3" path="res://assets/ui/panels/buttons/btn_prim_normal.svg" id="16_vn3uy"]
+[ext_resource type="Texture2D" uid="uid://vhu07enw3eo1" path="res://assets/ui/panels/buttons/btn_prim_pressed.svg" id="17_3si71"]
+[ext_resource type="Texture2D" uid="uid://cbpjfa1a2mdqf" path="res://assets/ui/panels/close_normal.svg" id="18_f2tw2"]
+[ext_resource type="Texture2D" uid="uid://dwhyrn1qg1u8v" path="res://assets/ui/panels/close_pressed.svg" id="19_uu7e4"]
+[ext_resource type="Texture2D" uid="uid://gsp5b3iwd5ei" path="res://assets/ui/panels/icons/close.svg" id="20_51guo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kqcc5"]
+texture = ExtResource("2_1jpy4")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 26.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m7tg6"]
+load_path = "res://.godot/imported/panel_title.svg-ac8c5db44c55417199d23531192eb2d0.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_64kls"]
+texture = SubResource("CompressedTexture2D_m7tg6")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 26.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1787b"]
+texture = ExtResource("4_e5dt6")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_whv8y"]
+texture = ExtResource("5_p2wxa")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y7lhg"]
+texture = ExtResource("6_1espt")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5uinu"]
+bg_color = Color(0.8862745, 0.84313726, 0.78039217, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_4blfy"]
+font = ExtResource("8_ob1y8")
+font_size = 32
+font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kc0gm"]
+content_margin_left = 24.0
+content_margin_top = 4.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 0.8, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_q2coi"]
+font = ExtResource("8_ob1y8")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ygy0"]
+content_margin_left = 24.0
+content_margin_top = 4.0
+content_margin_bottom = 6.0
+bg_color = Color(0.5058824, 0.78039217, 0.5176471, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_n760p"]
+color = Color(0.24313726, 0.15294118, 0.13725491, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q4q5u"]
+font = ExtResource("9_c01qe")
+font_size = 24
+font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_j0cwr"]
+font = ExtResource("10_gbmwd")
+font_size = 24
+font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j6ipi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1jpy4"]
+font = ExtResource("9_c01qe")
+font_size = 24
+font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
+
+[sub_resource type="Theme" id="Theme_u7hrn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5dt6"]
+font = ExtResource("10_gbmwd")
+font_size = 24
+font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g23o1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xwhbg"]
+font = ExtResource("9_c01qe")
+font_size = 32
+font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_425dt"]
+content_margin_top = 32.0
+content_margin_bottom = 32.0
+texture = ExtResource("12_4llwy")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 46.0
+region_rect = Rect2(0, 0, 256, 270)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2hb71"]
+content_margin_top = 38.0
+content_margin_bottom = 24.0
+texture = ExtResource("13_w2dss")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 46.0
+region_rect = Rect2(0, 0, 256, 270)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u7qg4"]
+load_path = "res://.godot/imported/btn_sec_normal.svg-1c8f093a0feec6ef28eb5ad8dabde716.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4arv1"]
+content_margin_top = 32.0
+content_margin_bottom = 32.0
+texture = SubResource("CompressedTexture2D_u7qg4")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 46.0
+region_rect = Rect2(0, 0, 256, 270)
+modulate_color = Color(0.58431375, 0.58431375, 0.58431375, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rhcw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i42hj"]
+texture = ExtResource("16_vn3uy")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 46.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7bkhc"]
+content_margin_top = 44.0
+texture = ExtResource("17_3si71")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 46.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r6487"]
+load_path = "res://.godot/imported/btn_prim_normal.svg-85710af1e2a002f1a56fd47439510ebe.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wsu6a"]
+texture = SubResource("CompressedTexture2D_r6487")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 46.0
+modulate_color = Color(0.58431375, 0.58431375, 0.58431375, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_750q2"]
+content_margin_bottom = 8.0
+texture = ExtResource("18_f2tw2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kenkv"]
+content_margin_top = 4.0
+content_margin_bottom = 0.0
+texture = ExtResource("19_uu7e4")
 
 [node name="ProcessingPopup" type="CanvasLayer" unique_id=1234999111]
 layer = 20
@@ -15,6 +199,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.6)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=2021484841]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -193,3 +378,497 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 10
 text = "CONFIRM"
+
+[node name="popup_panel" type="PanelContainer" parent="." unique_id=494195464]
+custom_minimum_size = Vector2(990, 640)
+custom_maximum_size = Vector2(990, 640)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 465.0
+offset_top = 328.0
+offset_right = -465.0
+offset_bottom = -312.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_kqcc5")
+
+[node name="Control" type="Control" parent="popup_panel" unique_id=581554857]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-20, 10)
+
+[node name="background" type="Label" parent="popup_panel/Control" unique_id=1713867394]
+layout_mode = 0
+offset_left = -96.0
+offset_top = -88.0
+offset_right = 136.0
+offset_bottom = -11.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_64kls")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="title_container" type="HBoxContainer" parent="popup_panel/Control" unique_id=1791601681]
+layout_mode = 0
+offset_left = -76.0
+offset_top = -76.0
+offset_right = 118.0
+offset_bottom = -36.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 6
+
+[node name="lbl_title" type="Label" parent="popup_panel/Control/title_container" unique_id=1358604265]
+layout_mode = 2
+offset_transform_position_ratio = Vector2(0.095, -0.7)
+offset_transform_visual_only = false
+text = "Processing"
+label_settings = ExtResource("3_u7hrn")
+horizontal_alignment = 1
+
+[node name="info_button" type="Button" parent="popup_panel/Control/title_container" unique_id=364009856]
+texture_filter = 6
+custom_minimum_size = Vector2(32, 32)
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+offset_transform_position_ratio = Vector2(-0.3, -1.8)
+theme_override_styles/normal = SubResource("StyleBoxTexture_1787b")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_whv8y")
+theme_override_styles/hover = SubResource("StyleBoxTexture_y7lhg")
+
+[node name="margin" type="MarginContainer" parent="popup_panel" unique_id=956701158]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 12
+
+[node name="hbox" type="HBoxContainer" parent="popup_panel/margin" unique_id=1135870295]
+layout_mode = 2
+
+[node name="left_side" type="PanelContainer" parent="popup_panel/margin/hbox" unique_id=504650645]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_5uinu")
+
+[node name="margin" type="MarginContainer" parent="popup_panel/margin/hbox/left_side" unique_id=466782580]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="content" type="VBoxContainer" parent="popup_panel/margin/hbox/left_side/margin" unique_id=943167023]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="bean" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=953196154]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="icon" type="TextureRect" parent="popup_panel/margin/hbox/left_side/margin/content/bean" unique_id=1668694318]
+layout_mode = 2
+texture = ExtResource("7_t48vm")
+expand_mode = 2
+
+[node name="lbl_variety" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/bean" unique_id=2095244400]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Variety"
+label_settings = SubResource("LabelSettings_4blfy")
+vertical_alignment = 1
+
+[node name="lbl_arabica" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/bean" unique_id=270912357]
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_position_ratio = Vector2(0, -0.7)
+offset_transform_visual_only = false
+theme_override_styles/normal = SubResource("StyleBoxFlat_kc0gm")
+text = "Arabica"
+label_settings = SubResource("LabelSettings_q2coi")
+horizontal_alignment = 1
+
+[node name="lbl_robusta" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/bean" unique_id=932588444]
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_position_ratio = Vector2(0, -0.7)
+offset_transform_visual_only = false
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ygy0")
+text = "Robusta"
+label_settings = SubResource("LabelSettings_q2coi")
+horizontal_alignment = 1
+
+[node name="separator" type="HSeparator" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=1499822542]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_n760p")
+
+[node name="surface" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=1333613822]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="lbl_surface" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/surface" unique_id=269994650]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Surface"
+label_settings = SubResource("LabelSettings_q4q5u")
+vertical_alignment = 1
+
+[node name="value" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/surface" unique_id=6011163]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "value"
+label_settings = SubResource("LabelSettings_j0cwr")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="batch" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=740961383]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="lbl_batch" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/batch" unique_id=1207476518]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Batch"
+label_settings = SubResource("LabelSettings_q4q5u")
+vertical_alignment = 1
+
+[node name="value" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/batch" unique_id=973387936]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "value"
+label_settings = SubResource("LabelSettings_j0cwr")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="separator2" type="HSeparator" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=862596806]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_n760p")
+
+[node name="chart" type="PanelContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=356596080]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_j6ipi")
+
+[node name="radar" parent="popup_panel/margin/hbox/left_side/margin/content/chart" unique_id=956399758 instance=ExtResource("11_u7qg4")]
+layout_mode = 2
+radius = 110.0
+key_items = Array[Dictionary]([{
+"title": "Acidity",
+"tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Fusce nisl sapien, cursus sit amet dui sit amet, pharetra egestas tortor.
+Praesent in porta nibh. Pellentesque ac mauris id purus mollis bibendum a sed sem. In at elementum velit, id dictum massa. Phasellus consectetur eros et nibh aliquet pretium.
+Proin imperdiet purus lorem, a euismod neque porttitor quis. Fusce quis cursus urna. Pellentesque gravida lacinia lectus, ac consequat mi.
+Duis ligula leo, bibendum a velit id, dignissim volutpat mi.
+Vivamus vel tempor lacus. Proin sit amet varius libero, vel placerat felis.",
+"value": 10.0
+}, {
+"title": "Aroma",
+"tooltip": "",
+"value": 5.0
+}, {
+"title": "Sweetness",
+"tooltip": "",
+"value": 1.0
+}, {
+"title": "Body",
+"tooltip": "",
+"value": 2.0
+}, {
+"title": "Flavor",
+"tooltip": "",
+"value": 6.0
+}, {
+"title": "Bitterness",
+"tooltip": "",
+"value": 3.0
+}])
+items/key_0/value = 10.0
+extra_datasets_count = 1
+extra_dataset_0/color = Color(1, 0.8352941, 0.30980393, 0.7058824)
+extra_dataset_0/outline_color = Color(0.9607843, 0.49803922, 0.09019608, 1)
+extra_dataset_0/outline_width = 1.5
+extra_dataset_0/pulse_speed = 1.2
+extra_dataset_0/pulse_min_alpha = 0.4
+extra_dataset_0/key_0/value = 2.0
+extra_dataset_0/key_1/value = 5.0
+extra_dataset_0/key_2/value = 5.0
+extra_dataset_0/key_3/value = 5.0
+extra_dataset_0/key_4/value = 5.0
+extra_dataset_0/key_5/value = 5.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content" unique_id=615879972]
+layout_mode = 2
+
+[node name="cost" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content/VBoxContainer" unique_id=168985649]
+custom_minimum_size = Vector2(437, 30)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="lbl_cost" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/VBoxContainer/cost" unique_id=42138889]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cost"
+label_settings = SubResource("LabelSettings_1jpy4")
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content/VBoxContainer/cost" unique_id=1528440118]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="icon_button" type="TextureButton" parent="popup_panel/margin/hbox/left_side/margin/content/VBoxContainer/cost/HBoxContainer" unique_id=236252766]
+modulate = Color(1, 0.8666667, 0, 1)
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme = SubResource("Theme_u7hrn")
+texture_normal = ExtResource("12_4arv1")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="value" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/VBoxContainer/cost/HBoxContainer" unique_id=1688744270]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "value"
+label_settings = SubResource("LabelSettings_e5dt6")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="turn" type="HBoxContainer" parent="popup_panel/margin/hbox/left_side/margin/content/VBoxContainer" unique_id=1715013297]
+layout_mode = 2
+offset_transform_position = Vector2(0, -15)
+theme_override_constants/separation = 16
+
+[node name="lbl_turn" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/VBoxContainer/turn" unique_id=822468395]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Turn"
+label_settings = SubResource("LabelSettings_q4q5u")
+vertical_alignment = 1
+
+[node name="value" type="Label" parent="popup_panel/margin/hbox/left_side/margin/content/VBoxContainer/turn" unique_id=2035184768]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "value"
+label_settings = SubResource("LabelSettings_j0cwr")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="right_side" type="PanelContainer" parent="popup_panel/margin/hbox" unique_id=752923857]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_g23o1")
+
+[node name="margin" type="MarginContainer" parent="popup_panel/margin/hbox/right_side" unique_id=1002477882]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="method_container" type="VBoxContainer" parent="popup_panel/margin/hbox/right_side/margin" unique_id=800618202]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="process_method" type="HBoxContainer" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=767210916]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="lbl_method_type" type="Label" parent="popup_panel/margin/hbox/right_side/margin/method_container/process_method" unique_id=335338279]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Method"
+label_settings = SubResource("LabelSettings_xwhbg")
+vertical_alignment = 1
+
+[node name="option" type="HBoxContainer" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=834006447]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="opt" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container/option" unique_id=725362241]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_focus_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_icons/icon = ExtResource("7_t48vm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_425dt")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_2hb71")
+theme_override_styles/hover = SubResource("StyleBoxTexture_425dt")
+toggle_mode = true
+button_pressed = true
+text = "Option 1"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="opt2" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container/option" unique_id=1505086231]
+visible = false
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_focus_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_icons/icon = ExtResource("7_t48vm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_425dt")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_2hb71")
+theme_override_styles/hover = SubResource("StyleBoxTexture_425dt")
+toggle_mode = true
+text = "Option 1"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="opt3" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container/option" unique_id=422098403]
+visible = false
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_focus_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_icons/icon = ExtResource("7_t48vm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_425dt")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_2hb71")
+theme_override_styles/hover = SubResource("StyleBoxTexture_425dt")
+toggle_mode = true
+text = "Option 1"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="separator2" type="HSeparator" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=1060692291]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_n760p")
+
+[node name="method_tools" type="VBoxContainer" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=2067339896]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="tools_lbl" type="Label" parent="popup_panel/margin/hbox/right_side/margin/method_container/method_tools" unique_id=469574108]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tools"
+label_settings = SubResource("LabelSettings_xwhbg")
+vertical_alignment = 1
+
+[node name="option2" type="HBoxContainer" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=937116961]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="opt" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container/option2" unique_id=385227454]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_focus_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_icons/icon = ExtResource("7_t48vm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_425dt")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_2hb71")
+theme_override_styles/hover = SubResource("StyleBoxTexture_425dt")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_4arv1")
+toggle_mode = true
+button_pressed = true
+text = "Option 1"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="opt2" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container/option2" unique_id=1903295592]
+visible = false
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_focus_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_icons/icon = ExtResource("7_t48vm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_425dt")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_2hb71")
+theme_override_styles/hover = SubResource("StyleBoxTexture_425dt")
+toggle_mode = true
+text = "Option 1"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="opt3" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container/option2" unique_id=1138244229]
+visible = false
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_focus_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_icons/icon = ExtResource("7_t48vm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_425dt")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_2hb71")
+theme_override_styles/hover = SubResource("StyleBoxTexture_425dt")
+toggle_mode = true
+text = "Option 1"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="HSeparator" type="HSeparator" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=360821062]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_6rhcw")
+
+[node name="confirm" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=1575628173]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("9_c01qe")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_i42hj")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_7bkhc")
+theme_override_styles/hover = SubResource("StyleBoxTexture_7bkhc")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_wsu6a")
+text = "Confirm"
+
+[node name="close" type="Button" parent="popup_panel" unique_id=1158850173]
+custom_minimum_size = Vector2(64, 74)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(38.22, -49.29)
+offset_transform_visual_only = false
+theme_override_styles/normal = SubResource("StyleBoxTexture_750q2")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kenkv")
+theme_override_styles/hover = SubResource("StyleBoxTexture_750q2")
+icon = ExtResource("20_51guo")
+icon_alignment = 1
+expand_icon = true

@@ -3,7 +3,7 @@ class_name CoffeeVariety
 
 
 ## Spesies kopi (misal: 'Arabika', 'Robusta').
-@export var species_name: String = "Arabika"
+@export var species_name: String = "Arabica"
 ## Nama varietas kopi (misal: 'Kintamani').
 @export var variety_name: String = "Kintamani"
 
@@ -103,7 +103,7 @@ static func get_dictionary() -> Dictionary:
 	var dict = {}
 	
 	var kintamani = CoffeeVariety.new()
-	kintamani.species_name = "Arabika"
+	kintamani.species_name = "Arabica"
 	kintamani.variety_name = "Kintamani"
 	kintamani.base_acidity = 0
 	kintamani.base_aroma = 0

@@ -68,10 +68,12 @@ func _update_cards_visibility() -> void:
 					# Deteksi jika baru saja expired
 					if not _is_first_update and was_visible and not is_visible:
 						if active_batch and not active_batch.completed_processes.has(cd.process_id):
-							if has_node("/root/EventManager"):
-								get_node("/root/EventManager").card_expired.emit(cd.process_id)
-							child.visible = false
-							StageManager.apply_missed_penalty(cd)
+							# Pastikan juga tidak sedang aktif di field!
+							if not StageManager.has_method("is_process_active") or not StageManager.is_process_active(cd.process_id):
+								if has_node("/root/EventManager"):
+									get_node("/root/EventManager").card_expired.emit(cd.process_id)
+								child.visible = false
+								StageManager.apply_missed_penalty(cd)
 							
 				CardData.AvailabilityType.EVENT_DRIVEN:
 					is_visible = false

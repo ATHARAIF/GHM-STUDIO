@@ -1,11 +1,11 @@
 extends CanvasLayer
 
-@onready var lbl_quality = $CenterContainer/PanelContainer/VBoxContainer/VBoxData/LblQualityValue
-@onready var lbl_yield = $CenterContainer/PanelContainer/VBoxContainer/VBoxData/LblQuantityValue
-@onready var lbl_defect = $CenterContainer/PanelContainer/VBoxContainer/VBoxData/LblDefect
-@onready var btn_confirm = $CenterContainer/PanelContainer/VBoxContainer/BtnConfirm
-@onready var btn_close = $CenterContainer/PanelContainer/VBoxContainer/Header/BtnClose
-@onready var lbl_title = $CenterContainer/PanelContainer/VBoxContainer/Header/LblTitle
+@onready var lbl_quality = $popup_panel/margin/content/quality/value
+@onready var lbl_yield = $popup_panel/margin/content/yield/value
+@onready var lbl_defect = $popup_panel/margin/content/defect_rate/value
+@onready var btn_confirm = $popup_panel/margin/content/HBoxContainer/to_hopper
+@onready var btn_close = $popup_panel/close
+@onready var lbl_title = $popup_panel/lbl_title
 
 var current_tile_data: Dictionary
 
@@ -48,7 +48,7 @@ func show_popup(tile_data: Dictionary) -> void:
 		preview_yield = int(clamp(raw * cb.accumulated_yield_modifier * card_effect, 0, 5000))
 		
 	lbl_yield.text = "%d Kg" % preview_yield
-	lbl_defect.text = "Defect Rate: %.1f%%" % cb.defect_rate
+	lbl_defect.text = "%.1f%%" % cb.defect_rate
 	
 	show()
 

@@ -5,15 +5,13 @@
 
 [resource]
 script = ExtResource("1_script")
-method_name = "Washed (Wet)"
+method_name = "Washed"
 override_cost = 250
 turn_duration = 5
-sort_order = 2
+sort_order = 3
 mod_acidity = 3.0
 mod_aroma = 1.0
 mod_sweetness = -2.0
 mod_flavor = 3.0
 mod_body = -2.0
 mod_quant_pct = -0.82
-
-mod_bitterness = 0.0

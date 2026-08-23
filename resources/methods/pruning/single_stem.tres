@@ -13,6 +13,9 @@ mod_flavor = -1.0
 mod_body = -2.0
 mod_bitterness = 1.0
 mod_quant_pct = 0.4
+radar_quality = 10.0
+radar_ripeness = 8.0
+radar_quantity = 2.0
 
 [sub_resource type="Resource" id="Resource_lvl2"]
 script = ExtResource("1_lvl")
@@ -22,6 +25,9 @@ mod_acidity = -1.0
 mod_aroma = -1.0
 mod_body = -1.0
 mod_quant_pct = 0.2
+radar_quality = 8.0
+radar_ripeness = 6.0
+radar_quantity = 4.0
 
 [sub_resource type="Resource" id="Resource_lvl3"]
 script = ExtResource("1_lvl")
@@ -30,6 +36,9 @@ mod_health = 1.0
 mod_aroma = 1.0
 mod_sweetness = 1.0
 mod_flavor = 1.0
+radar_quality = 6.0
+radar_ripeness = 4.0
+radar_quantity = 6.0
 
 [sub_resource type="Resource" id="Resource_lvl4"]
 script = ExtResource("1_lvl")
@@ -39,6 +48,9 @@ mod_acidity = 1.0
 mod_aroma = 1.0
 mod_flavor = 1.0
 mod_quant_pct = -0.2
+radar_quality = 4.0
+radar_ripeness = 2.0
+radar_quantity = 8.0
 
 [sub_resource type="Resource" id="Resource_lvl5"]
 script = ExtResource("1_lvl")
@@ -51,6 +63,9 @@ mod_flavor = 2.0
 mod_body = -1.0
 mod_bitterness = 1.0
 mod_quant_pct = -0.3
+radar_quality = 2.0
+radar_ripeness = 0.0
+radar_quantity = 10.0
 
 [resource]
 script = ExtResource("2_dat")

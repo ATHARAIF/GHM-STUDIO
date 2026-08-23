@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_script")
-method_name = "Guardiolo (Mesin)"
+method_name = "Guardiolo"
 override_cost = 50
 turn_duration = -2
 sort_order = 4
-allowed_methods = Array[String](["Washed (Wet)"])
+allowed_methods = Array[String](["Washed"])

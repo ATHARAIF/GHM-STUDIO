@@ -328,3 +328,9 @@ func _check_stage_progression() -> void:
 		
 func is_tile_locked(tile_node: Node3D) -> bool:
 	return tile_node.has_meta("locked") and tile_node.get_meta("locked") == true
+
+func is_process_active(process_id: String) -> bool:
+	for dict in active_tiles:
+		if dict.data and dict.data.process_id == process_id:
+			return true
+	return false
