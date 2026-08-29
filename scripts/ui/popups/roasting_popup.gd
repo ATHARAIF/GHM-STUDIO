@@ -193,3 +193,4 @@ func _on_cancel() -> void:
 		em.card_placement_interaction_cancelled.emit("Roasting", current_tile, current_card_data)
 	current_tile = null
 	current_card_data = null
+

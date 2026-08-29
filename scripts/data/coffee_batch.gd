@@ -38,24 +38,31 @@ func apply_effects(tile_dict: Dictionary) -> void:
 		var tree = em.current_location.current_tree
 		var mod_h = 0.0
 		if tile_dict.has("mod_health"): mod_h = tile_dict["mod_health"]
-		tree.health_pct = clamp(tree.health_pct + card_data.effect_health + mod_h, 0.0, 100.0)
+		tree.health_pct = clamp(tree.health_pct + card_data.base_mod_health + mod_h, 0.0, 100.0)
 		
 	# --- CUSTOM LOGIC (Pruning, Harvest, etc) ---
-	if tile_dict.has("mod_acidity"): acidity += tile_dict["mod_acidity"]
-	if tile_dict.has("mod_aroma"): aroma += tile_dict["mod_aroma"]
-	if tile_dict.has("mod_sweetness"): sweetness += tile_dict["mod_sweetness"]
-	if tile_dict.has("mod_flavor"): flavor += tile_dict["mod_flavor"]
-	if tile_dict.has("mod_body"): body += tile_dict["mod_body"]
-	if tile_dict.has("mod_bitterness"): bitterness += tile_dict["mod_bitterness"]
-	if tile_dict.has("mod_defect"): defect_rate += tile_dict["mod_defect"]
-	if tile_dict.has("mod_quant_pct"): accumulated_yield_modifier *= (1.0 + float(tile_dict["mod_quant_pct"]))
-	# ----------------------------------------
-	aroma = clamp(aroma + card_data.effect_aroma, 0.0, 10.0)
-	acidity = clamp(acidity + card_data.effect_acidity, 0.0, 10.0)
-	body = clamp(body + card_data.effect_body, 0.0, 10.0)
-	sweetness = clamp(sweetness + card_data.effect_sweetness, 0.0, 10.0)
-	flavor = clamp(flavor + card_data.effect_flavor, 0.0, 10.0)
-	bitterness = clamp(bitterness + card_data.effect_bitterness, 0.0, 10.0)
-	moisture = clamp(moisture + card_data.effect_moisture, 0.0, 100.0)
-	defect_rate = clamp(defect_rate + card_data.effect_defect, 0.0, 100.0)
-	accumulated_yield_modifier *= (1.0 + card_data.effect_yield)
+	if tile_dict.has("mod_quant_pct"): 
+		accumulated_yield_modifier *= (1.0 + float(tile_dict["mod_quant_pct"]))
+		
+	# Taste Stats (Max 10.0)
+	var taste_stats = ["aroma", "acidity", "body", "sweetness", "flavor", "bitterness"]
+	for stat in taste_stats:
+		var mod_val = tile_dict.get("mod_" + stat, 0.0)
+		var card_val = card_data.get("base_mod_" + stat)
+		var new_val = get(stat) + mod_val + card_val
+		set(stat, clamp(new_val, 0.0, 10.0))
+		
+	# Percentage Stats (Max 100.0)
+	var pct_stats = ["moisture"]
+	for stat in pct_stats:
+		var mod_val = tile_dict.get("mod_" + stat, 0.0)
+		var card_val = card_data.get("base_mod_" + stat)
+		var new_val = get(stat) + mod_val + card_val
+		set(stat, clamp(new_val, 0.0, 100.0))
+		
+	# Special case for defect (variable name in coffee_batch is defect_rate, but mod name is mod_defect)
+	var mod_def = tile_dict.get("mod_defect", 0.0)
+	var card_def = card_data.base_mod_defect
+	defect_rate = clamp(defect_rate + mod_def + card_def, 0.0, 100.0)
+	
+	accumulated_yield_modifier *= (1.0 + card_data.base_mod_yield)

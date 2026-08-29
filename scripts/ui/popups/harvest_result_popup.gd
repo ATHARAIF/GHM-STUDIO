@@ -42,7 +42,7 @@ func show_popup(tile_data: Dictionary) -> void:
 		var raw = em.current_location.current_tree.calculate_harvest_yield()
 		var card_effect = 1.0
 		if tile_data.has("data") and tile_data["data"] != null:
-			card_effect = 1.0 + tile_data["data"].effect_yield
+			card_effect = 1.0 + tile_data["data"].base_mod_yield
 		if tile_data.has("mod_quant_pct"):
 			card_effect *= (1.0 + float(tile_data["mod_quant_pct"]))
 		preview_yield = int(clamp(raw * cb.accumulated_yield_modifier * card_effect, 0, 5000))
@@ -60,3 +60,4 @@ func _on_confirm() -> void:
 func _on_cancel() -> void:
 	queue_free()
 	get_parent().btn_end_turn.disabled = false
+

@@ -121,7 +121,7 @@ func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Di
 	tile_dict.merge(extra_data)
 	
 	if duration <= 0:
-		if card_data.requires_interaction:
+		if card_data.has_result_popup:
 			tile_dict.ready = true
 			if tile_labels:
 				tile_labels.set_ready_state(true)
@@ -184,7 +184,7 @@ func advance_turn() -> void:
 			tile_dict.tile_labels.set_turn(max(0, tile_dict.remaining_duration))
 			
 		if tile_dict.remaining_duration <= 0:
-			if tile_dict.data.requires_interaction:
+			if tile_dict.data.has_result_popup:
 				tile_dict.ready = true
 				if tile_dict.get("tile_labels") and is_instance_valid(tile_dict.tile_labels):
 					tile_dict.tile_labels.set_ready_state(true)
@@ -227,19 +227,24 @@ func apply_missed_penalty(card_data: CardData) -> void:
 	var target_b = get_oldest_ready_batch(card_data.process_id)
 	if target_b:
 		target_b.add_history("[Missed] " + card_data.card_name)
-		target_b.accumulated_yield_modifier *= (1.0 + card_data.penalty_yield)
-		target_b.aroma = clamp(target_b.aroma + card_data.penalty_aroma, 0.0, 100.0)
-		target_b.acidity = clamp(target_b.acidity + card_data.penalty_acidity, 0.0, 100.0)
-		target_b.body = clamp(target_b.body + card_data.penalty_body, 0.0, 100.0)
-		target_b.sweetness = clamp(target_b.sweetness + card_data.penalty_sweetness, 0.0, 100.0)
-		target_b.flavor = clamp(target_b.flavor + card_data.penalty_flavor, 0.0, 100.0)
-		target_b.bitterness = clamp(target_b.bitterness + card_data.penalty_bitterness, 0.0, 100.0)
-		target_b.moisture = clamp(target_b.moisture + card_data.penalty_moisture, 0.0, 100.0)
-		target_b.defect_rate = clamp(target_b.defect_rate + card_data.penalty_defect, 0.0, 100.0)
-		# yield penalty is now handled by accumulated_yield_modifier
+		target_b.accumulated_yield_modifier *= (1.0 + card_data.penalty_mod_yield)
+		
+		var taste_stats = ["aroma", "acidity", "body", "sweetness", "flavor", "bitterness"]
+		for stat in taste_stats:
+			var current_val = target_b.get(stat)
+			var penalty_val = card_data.get("penalty_mod_" + stat)
+			target_b.set(stat, clamp(current_val + penalty_val, 0.0, 10.0))
+			
+		var pct_stats = ["moisture"]
+		for stat in pct_stats:
+			var current_val = target_b.get(stat)
+			var penalty_val = card_data.get("penalty_mod_" + stat)
+			target_b.set(stat, clamp(current_val + penalty_val, 0.0, 100.0))
+			
+		target_b.defect_rate = clamp(target_b.defect_rate + card_data.penalty_mod_defect, 0.0, 100.0)
 		
 	if current_location and current_location.current_tree:
-		current_location.current_tree.health_pct = clamp(current_location.current_tree.health_pct + card_data.penalty_health, 0.0, 100.0)
+		current_location.current_tree.health_pct = clamp(current_location.current_tree.health_pct + card_data.penalty_mod_health, 0.0, 100.0)
 	
 	print("Penalti diberikan karena gagal menyelesaikan proses: ", card_data.card_name)
 	stats_changed.emit()
@@ -334,3 +339,4 @@ func is_process_active(process_id: String) -> bool:
 		if dict.data and dict.data.process_id == process_id:
 			return true
 	return false
+

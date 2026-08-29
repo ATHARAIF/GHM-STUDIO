@@ -315,3 +315,4 @@ func _reset_ui() -> void:
 		if child is Button:
 			child.disabled = true
 			child.set_pressed_no_signal(false)
+

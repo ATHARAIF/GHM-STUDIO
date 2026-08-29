@@ -368,8 +368,8 @@ func try_place(mouse_pos: Vector2, tile_scene: PackedScene, card_data: CardData)
 		placement_data[tile]["target_batch_year"] = current_card_node.get("target_batch_year")
 	
 	if card_data != null:
-		print("Card data placement_interaction: ", card_data.get("placement_interaction"))
-		if card_data.get("placement_interaction"):
+		print("Card data has_config_popup: ", card_data.get("has_config_popup"))
+		if card_data.get("has_config_popup"):
 			pending_interaction_tile = tile
 			if has_node("/root/EventManager"):
 				print("Emitting interaction request for ", card_data.card_name)
@@ -434,8 +434,8 @@ func _can_place(anchor_coord: Vector2i, shape: Array[Vector2i]) -> bool:
 		if not grid.has(coord):
 			return false          # cell di luar area ground
 		var gt: GroundTile = grid[coord]
-		if gt.is_occupied:
-			return false          # cell udah ketiban tile lain
+		if gt.is_occupied or gt.is_locked:
+			return false          # cell udah ketiban tile lain atau masih terkunci
 	return true
 
 func _get_shape(tile_scene: PackedScene) -> Array[Vector2i]:
@@ -551,3 +551,4 @@ func remove_tile_from_grid(tile: Node3D) -> void:
 	placement_data.erase(tile)
 	tile.queue_free()
 # endregion
+

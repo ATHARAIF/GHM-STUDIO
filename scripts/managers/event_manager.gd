@@ -13,3 +13,4 @@ signal card_placement_interaction_cancelled(card_name: String, tile: Node3D, car
 
 # Emitted when a card expires without being played
 signal card_expired(process_id: String)
+
