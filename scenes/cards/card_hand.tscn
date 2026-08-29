@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c2uke58d1oepu"]
 
 [ext_resource type="PackedScene" uid="uid://dsqncnaefqa5s" path="res://scenes/cards/farm/card_harvest.tscn" id="1_harv"]
-[ext_resource type="PackedScene" uid="uid://ryf10txn2ha2" path="res://scenes/cards/packing/card_packing.tscn" id="1_pack"]
+[ext_resource type="PackedScene" uid="uid://ryf10txn2ha2" path="res://scenes/cards/packaging/card_packaging.tscn" id="1_pack"]
 [ext_resource type="PackedScene" uid="uid://d3e0xdihdqcw4" path="res://scenes/cards/process/card_processing.tscn" id="1_proc"]
 [ext_resource type="PackedScene" uid="uid://cxpaj2nm6brl0" path="res://scenes/cards/farm/card_pruning.tscn" id="1_prun"]
 [ext_resource type="PackedScene" uid="uid://dkjaal8v0syd" path="res://scenes/cards/process/card_roasting.tscn" id="1_rst"]

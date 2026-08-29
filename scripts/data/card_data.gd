@@ -11,9 +11,9 @@ class_name CardData
 @export var duration: int = 1
 
 @export_group("Interaction")
-## Centang jika kartu ini perlu didrag & dilepas (placed) ke kotak spesifik (misal ke Lahan atau ke Roastery).
+## Centang jika kartu ini memunculkan popup/UI interaksi LANGSUNG SAAT ditaruh di atas tile (Drag & Drop). Contoh: Roasting/Processing yang butuh setting sebelum mulai.
 @export var placement_interaction: bool = false
-## Centang jika kartu ini memunculkan popup interaksi saat dimainkan.
+## Centang jika kartu ini memunculkan popup/interaksi SETELAH durasi turn-nya habis di atas tile. (Tile akan berstatus 'Ready' dan harus diklik untuk mengambil hasil/popup lanjutan). Contoh: Panen (Harvest).
 @export var requires_interaction: bool = false
 
 

@@ -164,14 +164,14 @@ bg_color = Color(1, 0.8, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_76e1d"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hly6i"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ibovj"]
 texture = ExtResource("16_dxuva")
 texture_margin_left = 32.0
 texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 46.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lcnmd"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uf3br"]
 content_margin_top = 44.0
 texture = ExtResource("17_m3ovv")
 texture_margin_left = 32.0
@@ -179,11 +179,21 @@ texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 46.0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m7tg6"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b8l86"]
 load_path = "res://.godot/imported/btn_prim_normal.svg-85710af1e2a002f1a56fd47439510ebe.ctex"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bvgse"]
-texture = SubResource("CompressedTexture2D_m7tg6")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m82x3"]
+texture = SubResource("CompressedTexture2D_b8l86")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 46.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h2ks0"]
+load_path = "res://.godot/imported/btn_prim_normal.svg-85710af1e2a002f1a56fd47439510ebe.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2owok"]
+texture = SubResource("CompressedTexture2D_h2ks0")
 texture_margin_left = 32.0
 texture_margin_top = 32.0
 texture_margin_right = 32.0
@@ -232,7 +242,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, 10)
+offset_transform_position = Vector2(0, 20)
+offset_transform_visual_only = false
 
 [node name="background" type="Label" parent="popup_panel/Control" unique_id=1076694932]
 layout_mode = 0
@@ -243,6 +254,7 @@ offset_bottom = -11.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 offset_transform_enabled = true
+offset_transform_visual_only = false
 theme_override_styles/normal = SubResource("StyleBoxTexture_gdejq")
 
 [node name="title_container" type="HBoxContainer" parent="popup_panel/Control" unique_id=1868085225]
@@ -253,6 +265,7 @@ offset_right = 75.0
 offset_bottom = -36.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
+offset_transform_visual_only = false
 theme_override_constants/separation = 6
 
 [node name="lbl_title" type="Label" parent="popup_panel/Control/title_container" unique_id=2140499438]
@@ -570,7 +583,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_76e1d")
 
-[node name="confirm" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=47018442]
+[node name="confirm" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=1345038773]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -579,10 +592,10 @@ theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("9_ioxpn")
 theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxTexture_hly6i")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_lcnmd")
-theme_override_styles/hover = SubResource("StyleBoxTexture_lcnmd")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_bvgse")
+theme_override_styles/normal = SubResource("StyleBoxTexture_ibovj")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_uf3br")
+theme_override_styles/hover = SubResource("StyleBoxTexture_m82x3")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_2owok")
 text = "Confirm"
 
 [node name="close" type="Button" parent="popup_panel" unique_id=596092246]

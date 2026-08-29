@@ -22,20 +22,6 @@ class_name ProcessMethodLevel
 ## Persentase (desimal 0.0-1.0) perubahan pada kuantitas total hasil panen.
 @export var mod_quant_pct: float = 0.0
 
-@export_group("UI Display")
-## Teks indikator Kualitas yang akan muncul di Grid2 UI (misal: '+++' atau '-').
-@export var ui_qual_text: String = ""
-## Warna font untuk teks indikator Kualitas di UI.
-@export var ui_qual_color: Color = Color.WHITE
-## Teks indikator Kematangan (Ripeness) yang akan muncul di Grid2 UI.
-@export var ui_rip_text: String = ""
-## Warna font untuk teks indikator Kematangan di UI.
-@export var ui_rip_color: Color = Color.WHITE
-## Teks indikator Kuantitas yang akan muncul di Grid2 UI.
-@export var ui_quant_text: String = ""
-## Warna font untuk teks indikator Kuantitas di UI.
-@export var ui_quant_color: Color = Color.WHITE
-
 @export_group("Radar Graph UI")
 ## Nilai Kualitas (0-10) untuk ditampilkan di Radar Graph.
 @export var radar_quality: float = 5.0

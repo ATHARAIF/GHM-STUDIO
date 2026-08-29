@@ -151,14 +151,14 @@ modulate_color = Color(0.58431375, 0.58431375, 0.58431375, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rhcw"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i42hj"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1jpy4"]
 texture = ExtResource("16_vn3uy")
 texture_margin_left = 32.0
 texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 46.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7bkhc"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u7hrn"]
 content_margin_top = 44.0
 texture = ExtResource("17_3si71")
 texture_margin_left = 32.0
@@ -166,16 +166,26 @@ texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 46.0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r6487"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e5dt6"]
 load_path = "res://.godot/imported/btn_prim_normal.svg-85710af1e2a002f1a56fd47439510ebe.ctex"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wsu6a"]
-texture = SubResource("CompressedTexture2D_r6487")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p2wxa"]
+texture = SubResource("CompressedTexture2D_e5dt6")
 texture_margin_left = 32.0
 texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 46.0
-modulate_color = Color(0.58431375, 0.58431375, 0.58431375, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1espt"]
+load_path = "res://.godot/imported/btn_prim_normal.svg-85710af1e2a002f1a56fd47439510ebe.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t48vm"]
+texture = SubResource("CompressedTexture2D_1espt")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 46.0
+modulate_color = Color(0.5850618, 0.5850621, 0.58506197, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_750q2"]
 content_margin_bottom = 8.0
@@ -401,6 +411,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 offset_transform_enabled = true
 offset_transform_position = Vector2(-20, 10)
+offset_transform_visual_only = false
 
 [node name="background" type="Label" parent="popup_panel/Control" unique_id=1713867394]
 layout_mode = 0
@@ -843,7 +854,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_6rhcw")
 
-[node name="confirm" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=1575628173]
+[node name="confirm" type="Button" parent="popup_panel/margin/hbox/right_side/margin/method_container" unique_id=1501422287]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -852,10 +863,10 @@ theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("9_c01qe")
 theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxTexture_i42hj")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_7bkhc")
-theme_override_styles/hover = SubResource("StyleBoxTexture_7bkhc")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_wsu6a")
+theme_override_styles/normal = SubResource("StyleBoxTexture_1jpy4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_u7hrn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_p2wxa")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_t48vm")
 text = "Confirm"
 
 [node name="close" type="Button" parent="popup_panel" unique_id=1158850173]
