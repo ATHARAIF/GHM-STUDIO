@@ -6,6 +6,8 @@
 [ext_resource type="Resource" uid="uid://selective123" path="res://resources/methods/harvest/selective.tres" id="2_c03s9"]
 [ext_resource type="PackedScene" uid="uid://b0iehonihftwv" path="res://scenes/ui/popups/harvest_result_popup.tscn" id="2_ia3xb"]
 [ext_resource type="Resource" uid="uid://strip123" path="res://resources/methods/harvest/strip.tres" id="3_d03s9"]
+[ext_resource type="PackedScene" uid="uid://dwhnowe17f8c2" path="res://scenes/tiles/farm/harvest_tile.tscn" id="7_odlgh"]
+[ext_resource type="Texture2D" uid="uid://dh7vpxsmkbso2" path="res://assets/ui/cards/tile_shapes/Type=3x3 Full.png" id="8_dnwnq"]
 
 [resource]
 script = ExtResource("1_script")
@@ -13,6 +15,10 @@ card_name = "Harvest"
 process_id = "FP04"
 cost = 300
 duration = 3
+card_color = Color(0, 0.6901961, 0.11764706, 1)
+tile_shape_icon = ExtResource("8_dnwnq")
+tile_scene = ExtResource("7_odlgh")
+use_methods = true
 has_config_popup = true
 has_result_popup = true
 custom_popup_ui = ExtResource("1_a03s9")

@@ -26,10 +26,9 @@ var pending_rotation_steps: int = 0   # dipake pas resume drag dari pickup, biar
 var target_batch_year: int = -1
 var is_duplicate: bool = false
 
-@export_group("Card UI Design")
-@export var card_color: Color = Color(0.85, 0.44, 0.25)
-@export var tile_shape_icon: Texture2D
-@export var requires_sunny_weather: bool = false
+var card_color: Color = Color(0.85, 0.44, 0.25)
+var tile_shape_icon: Texture2D
+var requires_sunny_weather: bool = false
 
 @onready var lbl_process = $base/color/process_name/label
 @onready var lbl_target = $base/lahan
@@ -48,11 +47,35 @@ var is_duplicate: bool = false
 func _ready() -> void:
 	origin_parent = get_parent()
 	mouse_filter = MOUSE_FILTER_STOP
-	
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+
 	if card_data:
 		_setup_ui()
 
+var hover_tween: Tween
+
+func _on_mouse_entered() -> void:
+	if dragging or is_placed or is_outside_hand: return
+	z_index = 10
+	if hover_tween: hover_tween.kill()
+	hover_tween = create_tween()
+	hover_tween.tween_property($base, "position:y", -10.0, 0.1).set_trans(Tween.TRANS_SINE)
+
+func _on_mouse_exited() -> void:
+	if dragging or is_placed or is_outside_hand: return
+	z_index = 0
+	if hover_tween: hover_tween.kill()
+	hover_tween = create_tween()
+	hover_tween.tween_property($base, "position:y", 0.0, 0.1).set_trans(Tween.TRANS_SINE)
+
 func _setup_ui() -> void:
+	if card_data:
+		tile_scene = card_data.tile_scene
+		tile_shape_icon = card_data.tile_shape_icon
+		requires_sunny_weather = card_data.requires_sunny_weather
+		card_color = card_data.card_color
+
 	if lbl_process:
 		lbl_process.text = card_data.card_name.to_upper()
 	if lbl_turn:
@@ -113,6 +136,8 @@ func _gui_input(event: InputEvent) -> void:
 func resume_drag_at(mouse_pos: Vector2, initial_rotation_steps: int = 0) -> void:
 	pending_rotation_steps = initial_rotation_steps
 	is_placed = false
+	if origin_parent and origin_parent.has_method("set_card_played"):
+		origin_parent.set_card_played(card_data, false)
 	show()
 	modulate.a = 1.0
 	_begin_drag(mouse_pos - size / 2.0)
@@ -150,6 +175,19 @@ func _process(_delta: float) -> void:
 			PlacementManager.rotate_ghost()
 	else:
 		PlacementManager.cancel_ghost()
+		
+		var new_idx = origin_index
+		var siblings = origin_parent.get_children()
+		for i in siblings.size():
+			var sib = siblings[i]
+			if sib == self or not sib.visible or ("is_placed" in sib and sib.is_placed):
+				continue
+			if mouse_pos.x > sib.global_position.x + (sib.size.x * 0.5):
+				new_idx = i
+		
+		if new_idx != origin_index:
+			origin_index = new_idx
+			origin_parent.move_child(self, origin_index)
 
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		_end_drag()
@@ -171,6 +209,9 @@ func _update_visual_state() -> void:
 
 func _end_drag() -> void:
 	dragging = false
+	z_index = 0
+	if hover_tween: hover_tween.kill()
+	$base.position.y = 0.0
 
 	var mouse_pos := get_global_mouse_position()
 	var placed := false
@@ -182,6 +223,8 @@ func _end_drag() -> void:
 		# state [2] -> [3]: card gak di-free, cuma di-hide. Tetep hidup buat di-resume nanti.
 		is_placed = true
 		hide()
+		if origin_parent and origin_parent.has_method("set_card_played"):
+			origin_parent.set_card_played(card_data, true)
 		top_level = false
 		return
 

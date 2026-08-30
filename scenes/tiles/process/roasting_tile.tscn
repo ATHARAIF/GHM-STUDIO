@@ -230,7 +230,6 @@ buffer = PackedFloat32Array(-0.036914732, 0, -0.054237552, 0, 0, 0.020395724, 0,
 [node name="roasting_tile" type="Node3D" unique_id=699342220]
 
 [node name="base_tiles" type="Node3D" parent="." unique_id=1934242032]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="3side_border2" parent="base_tiles" unique_id=1419871748 instance=ExtResource("1_vdr0h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
@@ -279,4 +278,4 @@ grid_size = Vector2i(6, 3)
 spacing = Vector2(0.325, 0.3)
 
 [node name="tile_labels" parent="." unique_id=1850886743 instance=ExtResource("999_tilelbl")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, -0.06298828, -0.043667793)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)

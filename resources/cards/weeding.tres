@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dmyxt07gqwe1"]
 
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://jgswer4eplps" path="res://scenes/tiles/farm/weeding_tile.tscn" id="3_5ckov"]
+[ext_resource type="Texture2D" uid="uid://dd7s6gdu1ig3j" path="res://assets/ui/cards/tile_shapes/Type=3x2 L-Shape 1.png" id="4_qw6v4"]
 
 [resource]
 script = ExtResource("1_script")
@@ -8,6 +10,10 @@ card_name = "Weeding"
 process_id = "FP01"
 cost = 300
 duration = 2
+card_color = Color(0, 0.6901961, 0.11764706, 1)
+tile_shape_icon = ExtResource("4_qw6v4")
+tile_scene = ExtResource("3_5ckov")
+has_expiration_penalty = true
 base_mod_aroma = 1.0
 base_mod_body = 2.0
 base_mod_sweetness = 2.0

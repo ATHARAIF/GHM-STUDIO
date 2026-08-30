@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dtm7y3ev4cqe1"]
 
-[ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_fy7id"]
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://22x5enqrwpc4" path="res://scenes/tiles/farm/suckering_tile.tscn" id="2_fy7id"]
 
 [resource]
 script = ExtResource("1_script")
@@ -9,6 +9,9 @@ card_name = "Suckering"
 process_id = "FP03"
 cost = 300
 duration = 2
+card_color = Color(0, 0.6901961, 0.11764706, 1)
+tile_scene = ExtResource("2_fy7id")
+has_expiration_penalty = true
 base_mod_aroma = 2.0
 base_mod_acidity = 1.0
 base_mod_body = -2.0

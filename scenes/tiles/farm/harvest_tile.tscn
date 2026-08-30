@@ -394,7 +394,6 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 
 mesh = SubResource("ArrayMesh_xk55f")
 
 [node name="decoration" type="Node3D" parent="." unique_id=489955234]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020626113, 0)
 
 [node name="jalur_cangkul" type="Node3D" parent="decoration" unique_id=58360879]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1.9854383)
@@ -425,7 +424,6 @@ grid_size = Vector2i(9, 3)
 spacing = Vector2(0.325, 0.3)
 
 [node name="tile_labels" parent="." unique_id=906784252 instance=ExtResource("999_tilelbl")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, -0.06298828, -0.043667793)
 
 [editable path="base_tiles/corner_border2"]
 [editable path="base_tiles/corner_border3"]

@@ -323,7 +323,7 @@ grid_size = Vector2i(9, 3)
 spacing = Vector2(0.325, 0.3)
 
 [node name="tile_labels" parent="." unique_id=26388659 instance=ExtResource("999_tilelbl")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, -0.06298828, -0.043667793)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 0, -0.034)
 
 [editable path="base_tiles/1side_2corner2"]
 [editable path="base_tiles/3side_border2"]

@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://d3pc72w4pm3x0"]
 
-[ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_b5qwl"]
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
 
 [resource]
@@ -9,7 +8,5 @@ card_name = "Packing"
 process_id = "DP03"
 duration = 2
 availability = 2
-active_start_turn = 6
-active_end_turn = 5
 unlock_condition = "after_testing"
 metadata/_custom_type_script = "uid://uich76k1cing"

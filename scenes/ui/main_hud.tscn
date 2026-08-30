@@ -61,10 +61,7 @@ border_width_bottom = 8
 border_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
-expand_margin_left = 48.0
-expand_margin_top = 8.0
-expand_margin_right = 24.0
-expand_margin_bottom = 8.0
+expand_margin_left = 40.0
 
 [sub_resource type="Theme" id="Theme_quc01"]
 
@@ -528,19 +525,20 @@ text = "Yield: 0kg"
 label_settings = SubResource("LabelSettings_glx4a")
 
 [node name="top_bar" type="PanelContainer" parent="main" unique_id=2085197879]
-custom_minimum_size = Vector2(0, 144)
+custom_minimum_size = Vector2(0, 136)
+custom_maximum_size = Vector2(-1, 136)
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 128.0
+offset_bottom = 156.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_phxny")
 
 [node name="MarginContainer" type="MarginContainer" parent="main/top_bar" unique_id=359189769]
 layout_mode = 2
-theme_override_constants/margin_left = 48
-theme_override_constants/margin_top = 48
-theme_override_constants/margin_right = 48
-theme_override_constants/margin_bottom = 48
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 30
 
 [node name="background2" type="Panel" parent="main/top_bar/MarginContainer" unique_id=1947356785]
 visible = false
@@ -551,7 +549,7 @@ offset_transform_position = Vector2(0, 10.93)
 theme_override_styles/panel = SubResource("StyleBoxFlat_w0i6r")
 
 [node name="background" type="Panel" parent="main/top_bar/MarginContainer" unique_id=1656035952]
-custom_maximum_size = Vector2(650, -1)
+custom_maximum_size = Vector2(520, -1)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yrh06")
 
@@ -560,13 +558,14 @@ layout_mode = 2
 
 [node name="left" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox" unique_id=1003775069]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/separation = 32
 
 [node name="calendar" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=817532456]
 layout_mode = 2
 
 [node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/calendar" unique_id=665503278]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme = SubResource("Theme_quc01")
 texture_normal = ExtResource("3_0yliy")
@@ -574,19 +573,19 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="label" type="Label" parent="main/top_bar/MarginContainer/hbox/left/calendar" unique_id=656702774]
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(220, -1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 20
 text = "1 Autumn 2027"
 
 [node name="fame" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=1796509125]
 layout_mode = 2
 
 [node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/fame" unique_id=1823419540]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme = SubResource("Theme_quc01")
 texture_normal = ExtResource("4_ww3d0")
@@ -598,7 +597,7 @@ custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 20
 text = "50"
 
 [node name="money" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=1008935318]
@@ -606,7 +605,7 @@ layout_mode = 2
 
 [node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/money" unique_id=818412795]
 modulate = Color(1, 0.8666667, 0, 1)
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme = SubResource("Theme_quc01")
 texture_normal = ExtResource("5_6m254")
@@ -618,7 +617,7 @@ custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 20
 text = "99,000,000"
 
 [node name="VSeparator" type="VSeparator" parent="main/top_bar/MarginContainer/hbox" unique_id=178190081]
@@ -628,9 +627,12 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_c7of8")
 
 [node name="right" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox" unique_id=2124493991]
 layout_mode = 2
+size_flags_horizontal = 8
 theme_override_constants/separation = 24
 
 [node name="journal" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=1576408834]
+custom_minimum_size = Vector2(78, 78)
+custom_maximum_size = Vector2(78, 78)
 layout_mode = 2
 theme = SubResource("Theme_0yh2i")
 theme_override_font_sizes/font_size = 32
@@ -639,8 +641,12 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_sf4k2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ehkw3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_x2jeo")
 icon = ExtResource("6_ei7no")
+icon_alignment = 1
+expand_icon = true
 
 [node name="setting" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=47545669]
+custom_minimum_size = Vector2(78, 78)
+custom_maximum_size = Vector2(78, 78)
 layout_mode = 2
 theme = SubResource("Theme_0yh2i")
 theme_override_font_sizes/font_size = 32
@@ -649,8 +655,11 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_sf4k2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ehkw3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_x2jeo")
 icon = ExtResource("7_62l3y")
+expand_icon = true
 
 [node name="menu" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=162328054]
+custom_minimum_size = Vector2(78, 78)
+custom_maximum_size = Vector2(78, 78)
 layout_mode = 2
 theme = SubResource("Theme_0yh2i")
 theme_override_font_sizes/font_size = 32
@@ -659,14 +668,16 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_sf4k2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ehkw3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_x2jeo")
 icon = ExtResource("8_w0i6r")
+expand_icon = true
 
 [node name="footer" type="HBoxContainer" parent="main" unique_id=503426141]
-custom_minimum_size = Vector2(0, 240)
+custom_minimum_size = Vector2(1280, 200)
+custom_maximum_size = Vector2(1280, 200)
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -240.0
+offset_top = -200.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -674,9 +685,11 @@ theme_override_constants/separation = 16
 alignment = 1
 
 [node name="CardPanel" type="PanelContainer" parent="main/footer" unique_id=177724962]
-custom_minimum_size = Vector2(700, 0)
+custom_minimum_size = Vector2(1057, 200)
+custom_maximum_size = Vector2(1057, 200)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 size_flags_stretch_ratio = 15.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6m254")
 
@@ -688,6 +701,8 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
 [node name="card_hand" parent="main/footer/CardPanel/Margin" unique_id=803764765 instance=ExtResource("1_2obvf")]
+custom_minimum_size = Vector2(993, 252)
+custom_maximum_size = Vector2(993, -1)
 layout_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="main/footer" unique_id=1839695945]
@@ -696,7 +711,8 @@ size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_c7of8")
 
 [node name="Button" type="Button" parent="main/footer" unique_id=140520158]
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(120, 120)
+custom_maximum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_vertical = 4
 offset_transform_enabled = true
@@ -710,6 +726,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_phxny")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
 icon = ExtResource("9_ww3d0")
 icon_alignment = 1
+expand_icon = true
 
 [node name="menu_tabs" type="CanvasLayer" parent="." unique_id=813571542]
 visible = false

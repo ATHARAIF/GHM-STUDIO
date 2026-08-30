@@ -551,4 +551,3 @@ func remove_tile_from_grid(tile: Node3D) -> void:
 	placement_data.erase(tile)
 	tile.queue_free()
 # endregion
-

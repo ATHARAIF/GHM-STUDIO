@@ -172,7 +172,6 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 
 mesh = SubResource("ArrayMesh_4swon")
 
 [node name="tile_labels" parent="." unique_id=844450650 instance=ExtResource("4_bl6ek")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, -0.06298828, 0.9563322)
 
 [editable path="base_tiles/corner_border2"]
 [editable path="base_tiles/corner_border3"]

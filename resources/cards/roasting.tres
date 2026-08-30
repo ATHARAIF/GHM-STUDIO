@@ -2,8 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://bl8rs3n33rpqj" path="res://scenes/ui/popups/roasting_popup.tscn" id="1_1t5hx"]
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
-[ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_xhq3r"]
-[ext_resource type="Resource" uid="uid://p1yxpax3eaod" path="res://resources/methods/roasting/roasting_level.tres" id="2_xhq3r"]
+[ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="2_ejtvg"]
+[ext_resource type="Resource" uid="uid://p1yxpax3eaod" path="res://resources/methods/roasting/roasting_level.tres" id="3_1b0m2"]
+[ext_resource type="PackedScene" uid="uid://bx4k7nnxctgta" path="res://scenes/tiles/process/roasting_tile.tscn" id="3_1t5hx"]
+[ext_resource type="Texture2D" uid="uid://d1h2wotg3b5yt" path="res://assets/ui/cards/tile_shapes/Type=3x2 B-Shape.png" id="4_e66rf"]
 
 [resource]
 script = ExtResource("1_script")
@@ -11,9 +13,12 @@ card_name = "Roasting"
 process_id = "DP01"
 cost = 200
 duration = 2
+tile_shape_icon = ExtResource("4_e66rf")
+tile_scene = ExtResource("3_1t5hx")
+use_methods = true
 has_config_popup = true
 custom_popup_ui = ExtResource("1_1t5hx")
-popup_methods = Array[ExtResource("1_xhq3r")]([ExtResource("2_xhq3r")])
+popup_methods = Array[ExtResource("2_ejtvg")]([ExtResource("3_1b0m2")])
 availability = 2
 unlock_condition = "WP01"
 metadata/_custom_type_script = "uid://uich76k1cing"

@@ -32,12 +32,12 @@ expand_margin_right = 16.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ivk4"]
 font = ExtResource("4_3tnri")
-font_size = 24
+font_size = 18
 font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_sijc1"]
 font = ExtResource("5_1e0n1")
-font_size = 24
+font_size = 18
 font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_4fwy0"]
@@ -46,10 +46,10 @@ thickness = 2
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0otn1"]
 texture = ExtResource("6_q1gqe")
-texture_margin_left = 32.0
-texture_margin_top = 32.0
-texture_margin_right = 32.0
-texture_margin_bottom = 46.0
+texture_margin_left = 30.0
+texture_margin_top = 30.0
+texture_margin_right = 30.0
+texture_margin_bottom = 40.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7tcf"]
 content_margin_top = 44.0
@@ -150,14 +150,15 @@ layout_mode = 2
 text = "STORE TO HOPPER"
 
 [node name="popup_panel" type="PanelContainer" parent="." unique_id=481764802]
-custom_maximum_size = Vector2(540, 384.455)
+custom_minimum_size = Vector2(450, 280)
+custom_maximum_size = Vector2(450, 280)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 690.0
-offset_top = 460.0
-offset_right = -690.0
-offset_bottom = -460.0
+offset_left = 390.0
+offset_top = 235.0
+offset_right = -390.0
+offset_bottom = -235.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -263,7 +264,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_3tnri")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxTexture_0otn1")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_f7tcf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_0otn1")

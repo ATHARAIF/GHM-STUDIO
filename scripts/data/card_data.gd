@@ -8,6 +8,12 @@ class_name CardData
 @export var cost: int = 0
 @export var duration: int = 1
 
+@export_group("Card Visual & 3D")
+@export var card_color: Color = Color(0.85, 0.44, 0.25)
+@export var tile_shape_icon: Texture2D
+@export var tile_scene: PackedScene
+@export var requires_sunny_weather: bool = false
+
 @export_group("Feature Toggles")
 @export var use_methods: bool = false:
 	set(val):
@@ -66,6 +72,8 @@ enum AvailabilityType { RECURRING_ANNUAL, ONE_TIME_UNLOCK, EVENT_DRIVEN }
 @export var unlock_year: int = 2025
 @export var unlock_turn: int = 1
 @export var unlock_condition: String = ""
+@export var required_completed_processes: Array[String] = []
+@export var conflicting_active_processes: Array[String] = []
 
 @export_group("Penalty Modifiers (If missed)")
 @export var expiration_turns: int = 3
@@ -103,7 +111,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NONE
 		
 	# Hide Availability Fields
-	if availability != AvailabilityType.RECURRING_ANNUAL and property.name in ["active_start_turn", "active_end_turn"]:
+	if availability != AvailabilityType.RECURRING_ANNUAL and property.name in ["active_start_turn", "active_end_turn", "required_completed_processes", "conflicting_active_processes"]:
 		property.usage = PROPERTY_USAGE_NONE
 	if availability != AvailabilityType.ONE_TIME_UNLOCK and property.name in ["unlock_year", "unlock_turn"]:
 		property.usage = PROPERTY_USAGE_NONE
