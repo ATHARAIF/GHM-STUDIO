@@ -194,4 +194,3 @@ func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, c
 		add_child(popup)
 		if popup.has_method("_on_card_placement_interaction_requested"):
 			popup._on_card_placement_interaction_requested(card_name, tile, card_data)
-

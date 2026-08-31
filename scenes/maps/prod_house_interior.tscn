@@ -1,0 +1,215 @@
+[gd_scene format=3 uid="uid://dolyswl6afpdx"]
+
+[ext_resource type="Script" uid="uid://bdg6gkhx3jreo" path="res://scripts/maps/prod_house_interior.gd" id="1_qdl7o"]
+[ext_resource type="PackedScene" uid="uid://cj3djbtpfddtc" path="res://scenes/tiles/base/tile_ground.tscn" id="2_2tdal"]
+[ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environment/surrounding_ground.tscn" id="3_nltun"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2tdal"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_wpuq4"]
+sky_material = SubResource("ProceduralSkyMaterial_2tdal")
+
+[sub_resource type="Environment" id="Environment_nltun"]
+background_mode = 2
+sky = SubResource("Sky_wpuq4")
+ambient_light_source = 2
+ambient_light_color = Color(0.67481464, 0.67481464, 0.6748146, 1)
+ssao_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6jaw"]
+albedo_color = Color(0, 0.6784314, 1, 1)
+
+[node name="prod_house_interior" type="Node3D" unique_id=765019154]
+script = ExtResource("1_qdl7o")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1209572683]
+environment = SubResource("Environment_nltun")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1576416401]
+transform = Transform3D(-0.91205055, 0.16332258, -0.37615094, -0.08331026, 0.824343, 0.5599268, 0.4015261, 0.5420188, -0.7382361, -6.208373, 4.496863, -7.872581)
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_blur = 0.0
+directional_shadow_mode = 0
+directional_shadow_split_2 = 1.0
+directional_shadow_split_3 = 1.0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 20.0
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=462368230]
+transform = Transform3D(0.71569276, 0.36492097, -0.5954969, 0, 0.85264015, 0.52249855, 0.6984153, -0.37394843, 0.61022836, -5.872, 5.016, 6.179)
+projection = 1
+current = true
+size = 10.351
+far = 30.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=564486959]
+
+[node name="BtnExit" type="Button" parent="CanvasLayer" unique_id=280975469]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back"
+
+[node name="tile_grounds" type="Node3D" parent="." unique_id=1933621358]
+metadata/_edit_lock_ = true
+
+[node name="tile_ground11" parent="tile_grounds" unique_id=477365592 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, -1)
+
+[node name="tile_ground12" parent="tile_grounds" unique_id=566345809 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 0)
+
+[node name="tile_ground13" parent="tile_grounds" unique_id=998125080 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 1)
+
+[node name="tile_ground14" parent="tile_grounds" unique_id=1900227799 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -1)
+
+[node name="tile_ground15" parent="tile_grounds" unique_id=566945111 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="tile_ground16" parent="tile_grounds" unique_id=1522139057 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 1)
+
+[node name="tile_ground17" parent="tile_grounds" unique_id=387934074 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -1)
+
+[node name="tile_ground18" parent="tile_grounds" unique_id=119582654 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 0)
+
+[node name="tile_ground19" parent="tile_grounds" unique_id=867654890 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 1)
+
+[node name="tile_ground52" parent="tile_grounds" unique_id=308753654 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 0)
+
+[node name="tile_ground53" parent="tile_grounds" unique_id=504652977 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 0)
+
+[node name="tile_ground54" parent="tile_grounds" unique_id=784845417 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 0)
+
+[node name="tile_ground55" parent="tile_grounds" unique_id=1159360459 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 0)
+
+[node name="tile_ground59" parent="tile_grounds" unique_id=74310160 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 1)
+
+[node name="tile_ground60" parent="tile_grounds" unique_id=1760215606 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 1)
+
+[node name="tile_ground61" parent="tile_grounds" unique_id=1876763482 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 1)
+
+[node name="tile_ground62" parent="tile_grounds" unique_id=1182833217 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 1)
+
+[node name="tile_ground64" parent="tile_grounds" unique_id=1330492789 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 2)
+
+[node name="tile_ground65" parent="tile_grounds" unique_id=390610501 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 2)
+
+[node name="tile_ground66" parent="tile_grounds" unique_id=32447235 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 2)
+
+[node name="tile_ground67" parent="tile_grounds" unique_id=415617875 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 2)
+
+[node name="tile_ground68" parent="tile_grounds" unique_id=272653459 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 2)
+
+[node name="tile_ground69" parent="tile_grounds" unique_id=354227330 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 2)
+
+[node name="tile_ground70" parent="tile_grounds" unique_id=1213981601 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 2)
+
+[node name="tile_ground71" parent="tile_grounds" unique_id=1567930261 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 3)
+
+[node name="tile_ground72" parent="tile_grounds" unique_id=49624466 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 3)
+
+[node name="tile_ground73" parent="tile_grounds" unique_id=1189808406 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 3)
+
+[node name="tile_ground74" parent="tile_grounds" unique_id=938610389 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 3)
+
+[node name="tile_ground75" parent="tile_grounds" unique_id=664906420 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 3)
+
+[node name="tile_ground76" parent="tile_grounds" unique_id=2100426936 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 3)
+
+[node name="tile_ground77" parent="tile_grounds" unique_id=409614325 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 3)
+
+[node name="tile_ground80" parent="tile_grounds" unique_id=1120835240 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, -1)
+
+[node name="tile_ground81" parent="tile_grounds" unique_id=1917073487 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, -1)
+
+[node name="tile_ground82" parent="tile_grounds" unique_id=1906712370 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, -1)
+
+[node name="tile_ground83" parent="tile_grounds" unique_id=1199907933 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -1)
+
+[node name="tile_ground85" parent="tile_grounds" unique_id=804747071 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -2)
+
+[node name="tile_ground86" parent="tile_grounds" unique_id=1585909247 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, -2)
+
+[node name="tile_ground87" parent="tile_grounds" unique_id=378493086 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, -2)
+
+[node name="tile_ground88" parent="tile_grounds" unique_id=1135943831 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, -2)
+
+[node name="tile_ground89" parent="tile_grounds" unique_id=1331155072 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, -2)
+
+[node name="tile_ground90" parent="tile_grounds" unique_id=1682877332 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -2)
+
+[node name="tile_ground91" parent="tile_grounds" unique_id=279543826 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -2)
+
+[node name="tile_ground92" parent="tile_grounds" unique_id=1195338216 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -3)
+
+[node name="tile_ground93" parent="tile_grounds" unique_id=21857102 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, -3)
+
+[node name="tile_ground94" parent="tile_grounds" unique_id=151816452 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, -3)
+
+[node name="tile_ground95" parent="tile_grounds" unique_id=739844141 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, -3)
+
+[node name="tile_ground96" parent="tile_grounds" unique_id=493770342 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, -3)
+
+[node name="tile_ground97" parent="tile_grounds" unique_id=1795998151 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -3)
+
+[node name="tile_ground98" parent="tile_grounds" unique_id=504452 instance=ExtResource("2_2tdal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -3)
+
+[node name="environtment" type="Node3D" parent="." unique_id=1753237198]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015738487, 0)
+
+[node name="surrounding_ground" parent="environtment" unique_id=1246640729 instance=ExtResource("3_nltun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
+
+[node name="Plane" parent="environtment/surrounding_ground" index="1" unique_id=390990799]
+transform = Transform3D(3.9991813, 0, 2.0993392, 0, 4.5167108, 0, -2.0993392, 0, 3.9991813, 3.6134026, -0.117293745, 8.991949)
+surface_material_override/0 = SubResource("StandardMaterial3D_i6jaw")
+
+[editable path="environtment/surrounding_ground"]

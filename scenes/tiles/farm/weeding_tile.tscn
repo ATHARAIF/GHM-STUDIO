@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="4_yysiy"]
 [ext_resource type="Script" uid="uid://5kv8yfkw8yc8" path="res://scripts/tiles/multi_tree.gd" id="5_i3vu3"]
 [ext_resource type="PackedScene" uid="uid://ds6a03mqx3sm0" path="res://assets/3D/tiles/decorations/coffee_tree.glb" id="6_esk3q"]
-[ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/ui/tile_labels.tscn" id="999_tilelbl"]
+[ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/tiles/tile_labels.tscn" id="999_tilelbl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k5css"]
 resource_name = "color test"
@@ -341,7 +341,7 @@ grid_size = Vector2i(9, 3)
 spacing = Vector2(0.325, 0.3)
 
 [node name="tile_labels" parent="." unique_id=2067421195 instance=ExtResource("999_tilelbl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.993, 0, 0.978)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9995424, 0, 0.98674566)
 
 [editable path="base_tiles/2side_border2"]
 [editable path="base_tiles/3side_border2"]

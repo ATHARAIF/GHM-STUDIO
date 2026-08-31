@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://cx8d4l51bqqe1"]
 
 [ext_resource type="Script" uid="uid://cxmhdsjhnpslk" path="res://scripts/ui/tile_labels.gd" id="1_tilelbl"]
-[ext_resource type="FontFile" uid="uid://dv33rb6fgcmji" path="res://assets/font/SpecialGothicCondensedOne-Regular.ttf" id="2_font"]
+[ext_resource type="FontFile" uid="uid://b761j33ito7o5" path="res://assets/font/Fredoka-Medium.ttf" id="2_kd6bj"]
+[ext_resource type="FontFile" uid="uid://bvn0ivc4p8o5l" path="res://assets/font/Fredoka-Bold.ttf" id="2_sqyxy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkc85"]
 transparency = 1
 albedo_color = Color(0, 0, 0, 0.4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_labels"]
-size = Vector3(0.9, 0.001, 0.9)
+size = Vector3(0.95, 0.001, 0.95)
 
 [node name="tile_labels" type="Node3D" unique_id=844450650]
 script = ExtResource("1_tilelbl")
@@ -22,26 +23,28 @@ gi_mode = 2
 mesh = SubResource("BoxMesh_labels")
 
 [node name="lahan" type="Label3D" parent="." unique_id=540644343]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.13, -0.2)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.10990593, -0.26167983)
 pixel_size = 0.0005
 render_priority = 1
-text = "Farm"
-font = ExtResource("2_font")
-font_size = 600
+text = "Farmland"
+font = ExtResource("2_sqyxy")
+font_size = 380
 uppercase = true
 
 [node name="turn" type="Label3D" parent="." unique_id=1890628001]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.13, 0.15)
-pixel_size = 0.001
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.10990593, 0.15)
+pixel_size = 0.0005
 render_priority = 1
 text = "Turn"
-font_size = 321
+font = ExtResource("2_kd6bj")
+font_size = 700
 
 [node name="interaction_indicator" type="Label3D" parent="." unique_id=103006834]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.13, 0.115127474)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.10990593, 0.16427067)
 visible = false
-pixel_size = 0.001
+pixel_size = 0.0005
+render_priority = 1
 text = "!"
-font = ExtResource("2_font")
-font_size = 500
+font = ExtResource("2_kd6bj")
+font_size = 800
 outline_size = 16

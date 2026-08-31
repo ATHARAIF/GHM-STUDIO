@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bxw1i8idgadat" path="res://assets/3D/tiles/base_tiles/1side_2corner.glb" id="2_sywf6"]
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="4_ac4w6"]
 [ext_resource type="Script" uid="uid://5kv8yfkw8yc8" path="res://scripts/tiles/multi_tree.gd" id="5_5ol47"]
-[ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/ui/tile_labels.tscn" id="999_tilelbl"]
+[ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/tiles/tile_labels.tscn" id="999_tilelbl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8ffs"]
 resource_name = "color test"

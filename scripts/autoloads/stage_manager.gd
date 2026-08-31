@@ -143,6 +143,7 @@ func unregister_placed_tile(tile_node: Node3D) -> void:
 		if active_tiles[i].tile == tile_node:
 			active_tiles.remove_at(i)
 			break
+	stats_changed.emit()
 
 
 
@@ -339,4 +340,67 @@ func is_process_active(process_id: String) -> bool:
 		if dict.data and dict.data.process_id == process_id:
 			return true
 	return false
+
+
+
+# ==========================================
+# SCENE TRANSITION SYSTEM (MULTIPLE ROOMS)
+# ==========================================
+
+var saved_room_states: Dictionary = {}
+
+func save_room_state(room_id: String) -> void:
+	var state: Array[Dictionary] = []
+	for dict in active_tiles:
+		if is_instance_valid(dict.tile):
+			var saved_dict = dict.duplicate()
+			saved_dict["saved_position"] = dict.tile.global_position
+			saved_dict["saved_rotation"] = dict.tile.rotation_degrees
+			saved_dict.erase("tile")
+			saved_dict.erase("label")
+			state.append(saved_dict)
+	
+	saved_room_states[room_id] = state
+	print("Room ", room_id, " state saved! Items: ", state.size())
+	active_tiles.clear()
+
+func restore_room_state(room_id: String) -> void:
+	if not saved_room_states.has(room_id) or saved_room_states[room_id].is_empty():
+		return
+		
+	var state = saved_room_states[room_id]
+	print("Restoring room ", room_id, " state... Items: ", state.size())
+	
+	for saved_dict in state:
+		var cd: CardData = saved_dict.data
+		if not cd or not cd.tile_scene:
+			continue
+			
+		var new_tile = cd.tile_scene.instantiate()
+		get_tree().current_scene.add_child(new_tile)
+		
+		new_tile.global_position = saved_dict["saved_position"]
+		new_tile.rotation_degrees = saved_dict["saved_rotation"]
+		
+		var new_dict = saved_dict.duplicate()
+		new_dict["tile"] = new_tile
+		new_dict.erase("saved_position")
+		new_dict.erase("saved_rotation")
+		
+		var tile_labels = _find_tile_labels(new_tile)
+		if tile_labels:
+			if new_dict.get("ready", false):
+				tile_labels.set_ready_state(true)
+			else:
+				tile_labels.set_turn(new_dict.get("remaining_duration", 0))
+				if current_location:
+					tile_labels.set_lahan_name(current_location.location_name)
+		
+		active_tiles.append(new_dict)
+		
+		if has_node("/root/PlacementManager"):
+			get_node("/root/PlacementManager").reoccupy_grid_for_restored_tile(new_tile, cd)
+
+
+	stats_changed.emit()
 

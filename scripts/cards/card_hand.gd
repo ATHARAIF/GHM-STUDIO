@@ -85,6 +85,8 @@ func _update_cards() -> void:
 					
 				var is_completed = active_batch and active_batch.completed_processes.has(cd.process_id)
 				var is_played_now = played_cards_this_year.has(cd)
+				if StageManager.has_method("is_process_active") and StageManager.is_process_active(cd.process_id):
+					is_played_now = true
 				
 				var req_met = true
 				if active_batch:
@@ -147,6 +149,14 @@ func _update_cards() -> void:
 			else:
 				if existing and not existing.get("is_placed"):
 					existing.queue_free()
+					
+	# Urutkan kartu yang ada di tangan sesuai dengan urutan di card_database
+	var local_index = 0
+	for cd in card_database:
+		var existing = _get_card_instance(cd)
+		if existing and existing.get_parent() == self:
+			move_child(existing, local_index)
+			local_index += 1
 
 	_is_first_update = false
 

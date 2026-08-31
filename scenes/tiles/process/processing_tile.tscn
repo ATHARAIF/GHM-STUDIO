@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cldpacqp8h610" path="res://assets/3D/tiles/base_tiles/corner_border.glb" id="1_motpo"]
 [ext_resource type="PackedScene" uid="uid://0orrrgvbpxpo" path="res://assets/3D/tiles/base_tiles/no_border.glb" id="2_mrevf"]
 [ext_resource type="PackedScene" uid="uid://cnk12vhht73ne" path="res://assets/3D/tiles/base_tiles/1side_border.glb" id="3_uxqqj"]
-[ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/ui/tile_labels.tscn" id="4_bl6ek"]
+[ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/tiles/tile_labels.tscn" id="4_bl6ek"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43pgf"]
 resource_name = "color test"

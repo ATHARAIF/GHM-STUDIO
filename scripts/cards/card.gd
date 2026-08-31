@@ -236,29 +236,39 @@ func _end_drag() -> void:
 	animate_return_from(start_pos)
 
 func animate_return_from(from_pos: Vector2) -> void:
+	dragging = false
+	is_outside_hand = false
+	is_placed = false
+	print("animate_return_from called! from_pos: ", from_pos, " current global: ", global_position)
 	if active_tween:
 		active_tween.kill()
+
+	modulate.a = 0.0  # Sembunyikan selama 2 frame kalkulasi biar ga kedip!
 
 	# matiin top_level dulu biar container ngitung posisi global yang BENER
 	top_level = false
 	origin_parent.queue_sort()
 
-	# nunggu 2 frame: frame pertama buat container ngitung ulang total minimum_size
-	# (penting kalo card ini baru masuk lagi ke container di frame yang sama),
-	# frame kedua buat mastiin posisi child udah beneran final/stabil.
+	# Nunggu 2 frame supaya container HBoxContainer selesai ngitung layout (ALIGN_CENTER).
+	# Frame 1: container memproses queue_sort di idle_time.
+	# Frame 2: posisi global sudah final dan stabil.
 	await get_tree().process_frame
 	await get_tree().process_frame
 
-	var target_pos := global_position   # sekarang valid, karena dihitung pas top_level udah false
+	var target_pos := global_position
+	print("target_pos after layout: ", target_pos)
 
 	top_level = true            # nyalain lagi buat proses tween manual
 	global_position = from_pos
-	modulate.a = 1.0             # langsung keliatan lagi, gak usah di-fade
-
+	modulate.a = 0.0             # Mulai dari transparan untuk efek fade-in
+	
 	active_tween = create_tween()
+	active_tween.set_parallel(true)
 	active_tween.tween_property(self, "global_position", target_pos, return_duration) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-
+	active_tween.tween_property(self, "modulate:a", 1.0, fade_duration) \
+		.set_ease(Tween.EASE_OUT)
+		
+	active_tween.chain().tween_callback(func(): top_level = false)
 	await active_tween.finished
-	top_level = false
 	global_position = target_pos   # re-sync posisi lokal setelah top_level off, biar gak "loncat"

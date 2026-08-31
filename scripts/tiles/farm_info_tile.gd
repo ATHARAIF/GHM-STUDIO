@@ -123,4 +123,3 @@ func _on_static_body_3d_input_event(_camera: Node, event: InputEvent, _event_pos
 		_update_timeline()
 		_build_ui()
 		popup_ui.show()
-

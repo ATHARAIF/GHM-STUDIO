@@ -30,6 +30,7 @@ var current_card_node: Control = null   # referensi LANGSUNG ke node Card asli y
 var pending_interaction_tile: Node3D = null
 var moving_tile: Node3D = null
 var original_move_data: Dictionary = {}
+var drag_dummy_card: Control = null
 
 func _ready() -> void:
 	set_process(false)
@@ -74,10 +75,15 @@ func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 	var data: Dictionary = placement_data[tile]
 	var card_node: Control = data.get("card_node", null)
 
-	if card_node == null or not is_instance_valid(card_node):
-		return   # card aslinya udah gak ada (edge case), jangan diapa-apain
+	# (We no longer abort if card_node is null. The CardHand will auto-spawn it because of stats_changed.emit())
 
 	if instant_cancel:
+		if card_node and is_instance_valid(card_node) and card_node.has_method("set"):
+			card_node.set("is_placed", false)
+			var op = card_node.get("origin_parent")
+			if op and op.has_method("set_card_played") and data.has("card_data"):
+				op.set_card_played(data["card_data"], false)
+				
 		StageManager.unregister_placed_tile(tile)
 		placement_data.erase(tile)
 		for offset in data.shape:
@@ -86,8 +92,7 @@ func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 				grid[c].clear()
 		tile.queue_free()
 		
-		if card_node.has_method("set"):
-			card_node.set("is_placed", false)
+		if card_node and is_instance_valid(card_node) and card_node.has_method("set"):
 			card_node.show()
 			card_node.set("top_level", true)
 			var op = card_node.get("origin_parent")
@@ -99,6 +104,27 @@ func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 				card_node.call("animate_return_from", get_viewport().get_mouse_position() - (card_size / 2.0))
 			else:
 				card_node.call("animate_return_from", get_viewport().get_mouse_position())
+		elif data.has("card_data"):
+			# If restored from memory, card_node is null. Find the newly spawned card and animate it!
+			var card_data = data["card_data"]
+			var ch = null
+			var hands = get_tree().current_scene.find_children("card_hand", "", true, false)
+			for hand in hands:
+				if hand.is_visible_in_tree():
+					ch = hand
+					break
+			if not ch: ch = get_node_or_null("/root/MainHUD/card_hand")
+			if ch:
+				for c in ch.get_children():
+					print("Checking child: ", c.name)
+					if c.get("card_data") == card_data and not c.get("is_placed"):
+						print("FOUND MATCHING CARD! Animating.")
+						var card_size = c.get("size")
+						if card_size:
+							c.call("animate_return_from", get_viewport().get_mouse_position() - (card_size / 2.0))
+						else:
+							c.call("animate_return_from", get_viewport().get_mouse_position())
+						break
 	else:
 		_begin_move_tile(tile, data)
 
@@ -178,6 +204,23 @@ func _begin_move_tile(tile: Node3D, data: Dictionary) -> void:
 	ghost_visual_rotation = float(rotation_steps) * 90.0
 	current_shape = _rotate_shape(current_base_shape, rotation_steps)
 	
+	if data.has("card_data"):
+		var ch = null
+		var hands = get_tree().current_scene.find_children("card_hand", "", true, false)
+		for hand in hands:
+			if hand.is_visible_in_tree():
+				ch = hand
+				break
+		if not ch: ch = get_node_or_null("/root/MainHUD/card_hand")
+		if ch and ch.get("card_scene"):
+			drag_dummy_card = ch.card_scene.instantiate()
+			drag_dummy_card.set("card_data", data["card_data"])
+			drag_dummy_card.top_level = true
+			drag_dummy_card.hide()
+			drag_dummy_card.set_process(false)
+			drag_dummy_card.set_process_unhandled_input(false)
+			ch.add_child(drag_dummy_card)
+	
 	set_process(true)
 
 func _process(delta: float) -> void:
@@ -188,15 +231,39 @@ func _process(delta: float) -> void:
 	var mouse_pos = get_viewport().get_mouse_position()
 	
 	var is_outside_hand = true
-	var card = original_move_data.get("card_node", null)
-	if card and is_instance_valid(card) and card.get_parent():
-		var hand_rect = card.get_parent().get_global_rect()
+	var hand_rect = Rect2()
+	
+	# Find the VISIBLE card_hand, because there might be a hidden one (footer1)
+	var ch = null
+	var hands = get_tree().current_scene.find_children("card_hand", "", true, false)
+	for hand in hands:
+		if hand.is_visible_in_tree():
+			ch = hand
+			break
+			
+	if not ch: ch = get_node_or_null("/root/MainHUD/card_hand")
+	
+	if ch:
+		hand_rect = ch.get_global_rect()
 		is_outside_hand = not hand_rect.has_point(mouse_pos)
 		
 	if is_outside_hand:
 		update_ghost(mouse_pos)
+		if drag_dummy_card:
+			if drag_dummy_card.visible and drag_dummy_card.modulate.a > 0:
+				drag_dummy_card.hide()
+				drag_dummy_card.modulate.a = 0.0
 	else:
 		_clear_ghost()
+		if drag_dummy_card:
+			if not drag_dummy_card.visible or drag_dummy_card.modulate.a == 0.0:
+				drag_dummy_card.show()
+				drag_dummy_card.modulate.a = 0.0
+				var tw = create_tween()
+				tw.tween_property(drag_dummy_card, "modulate:a", 1.0, 0.15)
+			var s = drag_dummy_card.get("size")
+			if s: drag_dummy_card.global_position = mouse_pos - (s / 2.0)
+			else: drag_dummy_card.global_position = mouse_pos
 	
 	if Input.is_action_just_pressed("rotate"):
 		rotate_ghost()
@@ -248,6 +315,9 @@ func _try_place_move(mouse_pos: Vector2) -> void:
 	data["rotation_steps"] = rotation_steps
 	
 	moving_tile = null
+	if drag_dummy_card:
+		drag_dummy_card.queue_free()
+		drag_dummy_card = null
 	original_move_data.clear()
 	current_tile_scene = null
 
@@ -258,6 +328,13 @@ func _cancel_move(skip_clear_ghost: bool = false) -> void:
 	
 	var card = original_move_data.get("card_node", null)
 	
+	if card and is_instance_valid(card):
+		if card.has_method("set"):
+			card.set("is_placed", false)
+			var op = card.get("origin_parent")
+			if op and op.has_method("set_card_played") and original_move_data.has("card_data"):
+				op.set_card_played(original_move_data["card_data"], false)
+	
 	StageManager.unregister_placed_tile(moving_tile)
 	if placement_data.has(moving_tile):
 		placement_data.erase(moving_tile)
@@ -265,7 +342,6 @@ func _cancel_move(skip_clear_ghost: bool = false) -> void:
 	
 	if card and is_instance_valid(card):
 		if card.has_method("set"):
-			card.set("is_placed", false)
 			card.show()
 			card.set("top_level", true)
 			var op = card.get("origin_parent")
@@ -278,8 +354,30 @@ func _cancel_move(skip_clear_ghost: bool = false) -> void:
 				card.call("animate_return_from", mouse_pos - (card_size / 2.0))
 			else:
 				card.call("animate_return_from", mouse_pos)
+	elif original_move_data.has("card_data"):
+		var card_data = original_move_data["card_data"]
+		var ch = null
+		var hands = get_tree().current_scene.find_children("card_hand", "", true, false)
+		for hand in hands:
+			if hand.is_visible_in_tree():
+				ch = hand
+				break
+		if not ch: ch = get_node_or_null("/root/MainHUD/card_hand")
+		if ch:
+			for c in ch.get_children():
+				if c.get("card_data") == card_data and not c.get("is_placed"):
+					var mouse_pos = get_viewport().get_mouse_position()
+					var card_size = c.get("size")
+					if card_size:
+						c.call("animate_return_from", mouse_pos - (card_size / 2.0))
+					else:
+						c.call("animate_return_from", mouse_pos)
+					break
 			
 	moving_tile = null
+	if drag_dummy_card:
+		drag_dummy_card.queue_free()
+		drag_dummy_card = null
 	original_move_data.clear()
 	current_tile_scene = null
 
@@ -417,6 +515,8 @@ func _on_interaction_cancelled(card_name: String, tile: Node3D, card_data: Resou
 				card.show()
 				card.set("top_level", true)
 				var op = card.get("origin_parent")
+				if op and op.has_method("set_card_played") and data.has("card_data"):
+					op.set_card_played(data["card_data"], false)
 				var oi = card.get("origin_index")
 				if op:
 					op.move_child(card, oi)
@@ -551,3 +651,29 @@ func remove_tile_from_grid(tile: Node3D) -> void:
 	placement_data.erase(tile)
 	tile.queue_free()
 # endregion
+
+# ==========================================
+# RESTORE STATE HELPER (Untuk Opsi A)
+# ==========================================
+func reoccupy_grid_for_restored_tile(tile: Node3D, data: CardData) -> void:
+	if not tile or not data: return
+	
+	var anchor_coord := _world_to_grid(tile.global_position)
+	var rot_steps = int(round(tile.rotation_degrees.y / 90.0))
+	var base_shape = _get_shape(data.tile_scene)
+	var shape = _rotate_shape(base_shape, rot_steps)
+	
+	placement_data[tile] = {
+		"scene": data.tile_scene,
+		"base_shape": base_shape.duplicate(),
+		"shape": shape.duplicate(),
+		"anchor": anchor_coord,
+		"rotation_steps": rot_steps,
+		"card_node": null,
+		"card_data": data
+	}
+	
+	for offset in shape:
+		var coord = anchor_coord + offset
+		if grid.has(coord):
+			grid[coord].occupy(tile)

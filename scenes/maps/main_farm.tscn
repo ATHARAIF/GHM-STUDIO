@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://bcehomfgtbuls"]
 
-[ext_resource type="Script" uid="uid://bgl7itmh3ifw" path="res://scripts/tiles/ground.gd" id="1_lmksl"]
+[ext_resource type="Script" uid="uid://bgl7itmh3ifw" path="res://scripts/tiles/main_farm.gd" id="1_lmksl"]
 [ext_resource type="PackedScene" uid="uid://cj3djbtpfddtc" path="res://scenes/tiles/base/tile_ground.tscn" id="2_4a7qg"]
+[ext_resource type="PackedScene" uid="uid://c2l2p1va76vy1" path="res://scenes/objects/bldg_prod_house.tscn" id="5_p8nxr"]
 [ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environment/surrounding_ground.tscn" id="7_wbbc8"]
 [ext_resource type="PackedScene" uid="uid://bdk741fhg4k35" path="res://assets/3D/environtment/tree/tree.glb" id="9_5fh0g"]
 [ext_resource type="PackedScene" uid="uid://c4c5cwiyvnpal" path="res://assets/3D/buildings/warehouse_1.glb" id="13_l53mr"]
 [ext_resource type="PackedScene" uid="uid://dj1s7kk2pyxc5" path="res://assets/3D/buildings/tool_shed_1.glb" id="14_3suc6"]
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="15_juvny"]
 [ext_resource type="PackedScene" uid="uid://cxy720dnitlvc" path="res://scenes/ui/main_hud.tscn" id="15_p5s2n"]
-[ext_resource type="PackedScene" uid="uid://dhlxe0q8f5nqk" path="res://assets/3D/buildings/production_house.glb" id="16_juvny"]
 [ext_resource type="Texture2D" uid="uid://b83ny3br6cx0f" path="res://assets/ui/item_sprites/mukamuel.png" id="16_p5s2n"]
 [ext_resource type="PackedScene" uid="uid://ddyxy0w123abc" path="res://scenes/tiles/farm_info_tile.tscn" id="18_farm"]
 
@@ -16,21 +16,18 @@
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_wpuq4"]
+[sub_resource type="Sky" id="Sky_p8nxr"]
 sky_material = SubResource("ProceduralSkyMaterial_dwf10")
 
 [sub_resource type="Environment" id="Environment_lbc21"]
 background_mode = 2
-sky = SubResource("Sky_wpuq4")
+sky = SubResource("Sky_p8nxr")
 ambient_light_source = 2
 ambient_light_color = Color(0.67481464, 0.67481464, 0.6748146, 1)
 ssao_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3suc6"]
 albedo_color = Color(0, 0.6784314, 1, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vvvxj"]
-size = Vector3(129.23358, 1, 122.23395)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_5gtgg"]
 
@@ -218,21 +215,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
 transform = Transform3D(3.9991813, 0, 2.0993392, 0, 4.5167108, 0, -2.0993392, 0, 3.9991813, 3.6134026, -0.117293745, 8.991949)
 surface_material_override/0 = SubResource("StandardMaterial3D_3suc6")
 
-[node name="Area3D" type="StaticBody3D" parent="." unique_id=667419275]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.018382907, 6.4369926)
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2108103316]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22439575, -0.6092825, -4.1495667)
-shape = SubResource("BoxShape3D_vvvxj")
-
 [node name="FarmInfoTile" parent="." unique_id=1856349914 instance=ExtResource("18_farm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.801547, 0.23734295, -2.470316)
 
 [node name="Building" type="Node3D" parent="." unique_id=974439094]
 
-[node name="production_house" parent="Building" unique_id=447700919 instance=ExtResource("16_juvny")]
-transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, 6.8532724, 0.63073754, 0.11180356)
+[node name="bld_prod_house" parent="Building" unique_id=1015193291 instance=ExtResource("5_p8nxr")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, 5.7, 0.631, 0.112)
 
 [node name="warehouse" parent="Building" unique_id=394532502 instance=ExtResource("13_l53mr")]
 transform = Transform3D(-0.45, 0, 6.794811e-08, 0, 0.45, 0, -6.794811e-08, 0, -0.45, 1.9668131, 0.691283, 5.7898884)

@@ -10,17 +10,17 @@ config_version=5
 
 [application]
 
-config/name="Coffee Sim"
+config/name="Terrafein"
 run/main_scene="uid://bcehomfgtbuls"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-PlacementManager="*res://scenes/placement_manager.tscn"
-StageManager="*res://scripts/managers/stage_manager.gd"
-TimeManager="*res://scripts/managers/time_manager.gd"
-EventManager="*res://scripts/managers/event_manager.gd"
+PlacementManager="*res://scenes/autoloads/placement_manager.tscn"
+StageManager="*res://scripts/autoloads/stage_manager.gd"
+TimeManager="*res://scripts/autoloads/time_manager.gd"
+EventManager="*res://scripts/autoloads/event_manager.gd"
 
 [display]
 
@@ -34,6 +34,10 @@ window/vsync/vsync_mode=0
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 
@@ -53,3 +57,4 @@ rotate={
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 textures/default_filters/use_nearest_mipmap_filter=true
+anti_aliasing/quality/screen_space_aa=2
