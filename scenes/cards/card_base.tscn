@@ -72,7 +72,7 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_script")
 fade_duration = 0.25
-return_duration = 0.4
+return_duration = 0.3
 
 [node name="base" type="Panel" parent="." unique_id=1146826075]
 layout_mode = 0

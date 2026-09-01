@@ -28,7 +28,7 @@ pixel_size = 0.0005
 render_priority = 1
 text = "Farmland"
 font = ExtResource("2_sqyxy")
-font_size = 380
+font_size = 345
 uppercase = true
 
 [node name="turn" type="Label3D" parent="." unique_id=1890628001]

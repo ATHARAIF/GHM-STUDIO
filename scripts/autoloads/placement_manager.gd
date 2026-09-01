@@ -31,6 +31,7 @@ var pending_interaction_tile: Node3D = null
 var moving_tile: Node3D = null
 var original_move_data: Dictionary = {}
 var drag_dummy_card: Control = null
+var grab_offset: Vector2i = Vector2i.ZERO
 
 func _ready() -> void:
 	set_process(false)
@@ -74,6 +75,9 @@ func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 
 	var data: Dictionary = placement_data[tile]
 	var card_node: Control = data.get("card_node", null)
+
+	# Simpan offset berdasarkan ubin mana yang diklik pemain vs titik nol bendanya
+	grab_offset = coord - data.anchor
 
 	# (We no longer abort if card_node is null. The CardHand will auto-spawn it because of stats_changed.emit())
 
@@ -141,6 +145,7 @@ func register_ground_tiles(tiles: Array[GroundTile]) -> void:
 	grid_origin = _find_min_corner(tiles)
 
 	grid.clear()
+	placement_data.clear()
 	for gt in tiles:
 		var coord := _world_to_grid(gt.global_position)
 		gt.grid_coord = coord
@@ -152,6 +157,7 @@ var shape_cache: Dictionary = {}   # PackedScene -> Array[Vector2i], biar gak it
 
 # region Drag & Drop State
 func begin_drag(tile_scene: PackedScene, card_node: Control = null, initial_rotation_steps: int = 0) -> void:
+	grab_offset = Vector2i.ZERO
 	current_tile_scene = tile_scene
 	current_card_node = card_node
 	current_base_shape = _get_shape(tile_scene)
@@ -179,7 +185,9 @@ func rotate_ghost() -> void:
 
 func _rotate_shape(shape: Array[Vector2i], steps: int) -> Array[Vector2i]:
 	var result: Array[Vector2i] = shape.duplicate()
-	for i in steps:
+	# Normalize steps ke range 0-3 (misal -1 jadi 3, -2 jadi 2)
+	var normalized_steps = ((steps % 4) + 4) % 4
+	for i in normalized_steps:
 		var rotated: Array[Vector2i] = []
 		for cell in result:
 			rotated.append(Vector2i(cell.y, -cell.x))   # match arah rotation_degrees.y bawaan Godot
@@ -284,8 +292,26 @@ func _try_place_move(mouse_pos: Vector2) -> void:
 		return
 		
 	var shape := current_shape
-	var anchor_coord := _world_to_grid(world_pos)
+	var raw_coord := _world_to_grid(world_pos)
+	var anchor_coord := raw_coord - grab_offset
 	
+	if not _is_shape_within_bounds(anchor_coord, shape):
+		# Coba cari tile terdekat yang valid secara BORDER
+		var closest_tile = null
+		var min_dist = INF
+		for gt in ground_tiles:
+			if _is_shape_within_bounds(gt.grid_coord, shape):
+				var dist = Vector2(gt.grid_coord.x, gt.grid_coord.y).distance_squared_to(Vector2(anchor_coord.x, anchor_coord.y))
+				if dist < min_dist:
+					min_dist = dist
+					closest_tile = gt
+		
+		if closest_tile:
+			anchor_coord = closest_tile.grid_coord
+		else:
+			_cancel_move(true)
+			return
+			
 	if not _can_place(anchor_coord, shape):
 		_cancel_move(true)
 		return
@@ -397,15 +423,43 @@ func update_ghost(mouse_pos: Vector2) -> void:
 	if world_pos == null:
 		return
 
-	var anchor_coord := _world_to_grid(world_pos)
-	var valid := _can_place(anchor_coord, current_shape)
-
-	var base_pos: Vector3
-	if valid:
-		var anchor_tile: GroundTile = grid[anchor_coord]
-		base_pos = anchor_tile.global_position
+	# Dapatkan koordinat awal berdasarkan mouse, lalu kurangi dengan grab_offset
+	# agar titik pusat benda bergeser sesuai dengan titik pegangan mouse.
+	var raw_coord := _world_to_grid(world_pos)
+	var anchor_coord := raw_coord - grab_offset
+	var base_pos: Vector3 = world_pos
+	
+	# === LOGIKA SNAP CERDAS KE PAPAN ===
+	# Kita harus memastikan SELURUH bagian benda (bukan cuma titik pivotnya)
+	# berada di dalam papan. Jadi kita cari tile terdekat yang 'valid' secara BORDER (bukan occupancy).
+	var within_bounds := _is_shape_within_bounds(anchor_coord, current_shape)
+	
+	if within_bounds:
+		# Jika posisi mouse saat ini valid di dalam papan, langsung snap ke sana
+		base_pos = grid[anchor_coord].global_position
 	else:
-		base_pos = world_pos
+		# Jika posisi mouse membuat benda keluar jalur,
+		# cari tile terdekat di mana benda tersebut BISA muat 100% di dalam papan.
+		var closest_tile = null
+		var min_dist = INF
+		
+		for gt in ground_tiles:
+			if _is_shape_within_bounds(gt.grid_coord, current_shape):
+				# Hitung jarak berdasarkan koordinat grid, bukan posisi global
+				var dist = Vector2(gt.grid_coord.x, gt.grid_coord.y).distance_squared_to(Vector2(anchor_coord.x, anchor_coord.y))
+				if dist < min_dist:
+					min_dist = dist
+					closest_tile = gt
+					
+		if closest_tile:
+			base_pos = closest_tile.global_position
+			anchor_coord = closest_tile.grid_coord
+		else:
+			# Fallback: jika papan terlalu kecil untuk menampung benda ini sama sekali
+			if grid.has(anchor_coord):
+				base_pos = grid[anchor_coord].global_position
+			
+	var valid := _can_place(anchor_coord, current_shape)
 	
 	base_pos.y += ground_top_offset + tile_bottom_offset
 	var indicator_pos = base_pos
@@ -426,7 +480,25 @@ func try_place(mouse_pos: Vector2, tile_scene: PackedScene, card_data: CardData)
 		return false
 
 	var shape := current_shape   # shape yang lagi aktif (udah kena rotate kalau ada)
-	var anchor_coord := _world_to_grid(world_pos)
+	var raw_coord := _world_to_grid(world_pos)
+	var anchor_coord := raw_coord - grab_offset
+	
+	if not _is_shape_within_bounds(anchor_coord, shape):
+		# Coba cari tile terdekat yang valid secara BORDER
+		var closest_tile = null
+		var min_dist = INF
+		for gt in ground_tiles:
+			if _is_shape_within_bounds(gt.grid_coord, shape):
+				var dist = Vector2(gt.grid_coord.x, gt.grid_coord.y).distance_squared_to(Vector2(anchor_coord.x, anchor_coord.y))
+				if dist < min_dist:
+					min_dist = dist
+					closest_tile = gt
+		
+		if closest_tile:
+			anchor_coord = closest_tile.grid_coord
+		else:
+			return false
+			
 	if not _can_place(anchor_coord, shape):
 		return false
 
@@ -538,6 +610,19 @@ func _can_place(anchor_coord: Vector2i, shape: Array[Vector2i]) -> bool:
 			return false          # cell udah ketiban tile lain atau masih terkunci
 	return true
 
+func _is_shape_within_bounds(anchor_coord: Vector2i, shape: Array[Vector2i]) -> bool:
+	for offset in shape:
+		var coord = anchor_coord + offset
+		if not grid.has(coord):
+			return false          # cell di luar area ground
+	return true
+
+func is_cell_valid(coord: Vector2i) -> bool:
+	if not grid.has(coord): return false
+	var gt: GroundTile = grid[coord]
+	if gt.is_occupied or gt.is_locked: return false
+	return true
+
 func _get_shape(tile_scene: PackedScene) -> Array[Vector2i]:
 	if shape_cache.has(tile_scene):
 		return shape_cache[tile_scene]
@@ -568,7 +653,7 @@ func _compute_shape_from_scene(tile_scene: PackedScene) -> Array[Vector2i]:
 
 func _find_base_tile_node(node: Node) -> Node3D:
 	for child in node.get_children():
-		if child.name == "base_tiles" and child is Node3D:
+		if child.name.to_lower() == "base_tiles" and child is Node3D:
 			return child
 		var found := _find_base_tile_node(child)
 		if found:

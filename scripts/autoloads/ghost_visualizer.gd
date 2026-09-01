@@ -82,7 +82,7 @@ func clear_ghost() -> void:
 
 func _find_base_tile_node(node: Node) -> Node3D:
 	for child in node.get_children():
-		if child.name == "base_tiles" and child is Node3D:
+		if child.name.to_lower() == "base_tiles" and child is Node3D:
 			return child
 		var found := _find_base_tile_node(child)
 		if found:

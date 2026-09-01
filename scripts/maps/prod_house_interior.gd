@@ -36,4 +36,3 @@ func _collect_ground_tiles(node: Node, tiles: Array[GroundTile]) -> void:
 		if child is GroundTile:
 			tiles.append(child)
 		_collect_ground_tiles(child, tiles)
-

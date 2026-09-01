@@ -5,9 +5,10 @@
 
 [node name="PlacementManager" type="Node" unique_id=1244060309]
 script = ExtResource("1_62lvg")
-float_height = 1.5
+float_height = 1.3
+place_duration = 0.3
 
 [node name="GhostVisualizer" type="Node" parent="." unique_id=1157116938]
 script = ExtResource("2_2vm3b")
-ghost_float_alpha = 0.4
+ghost_float_alpha = 1.0
 ghost_indicator_alpha = 0.5

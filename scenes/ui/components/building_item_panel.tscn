@@ -1,0 +1,333 @@
+[gd_scene format=3 uid="uid://cba4o8s8ncx4"]
+
+[ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="1_agfhb"]
+[ext_resource type="Script" uid="uid://cpjkugt6jlw6p" path="res://scripts/ui/components/building_item_panel.gd" id="1_q1inm"]
+[ext_resource type="Texture2D" uid="uid://c4yenilqdkg8v" path="res://assets/ui/icons/stats/money.svg" id="3_ey0bp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wom8j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0sdbt"]
+
+[sub_resource type="Theme" id="Theme_dls7u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rkcv6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kkkxp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_glx4a"]
+line_spacing = 0.0
+font_size = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1uxwi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6gt6j"]
+font_size = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_slf7g"]
+
+[node name="building_item_panel" type="PanelContainer" unique_id=1515257976]
+custom_minimum_size = Vector2(188, 0)
+custom_maximum_size = Vector2(-1, 275)
+offset_right = 188.0
+offset_bottom = 275.0
+script = ExtResource("1_q1inm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=473908122]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Illustrasi" type="TextureRect" parent="VBoxContainer" unique_id=189911884]
+custom_minimum_size = Vector2(0, 100)
+custom_maximum_size = Vector2(-1, 100)
+layout_mode = 2
+texture = ExtResource("1_agfhb")
+expand_mode = 1
+
+[node name="Content" type="MarginContainer" parent="VBoxContainer" unique_id=2066572875]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=873357504]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ItemName" type="MarginContainer" parent="VBoxContainer/Content/VBoxContainer" unique_id=1711603333]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="ItemName" type="Label" parent="VBoxContainer/Content/VBoxContainer/ItemName" unique_id=1147615099]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Item Name"
+vertical_alignment = 1
+
+[node name="BtnTab" type="HBoxContainer" parent="VBoxContainer/Content/VBoxContainer" unique_id=236729593]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="BtnBuy" type="Button" parent="VBoxContainer/Content/VBoxContainer/BtnTab" unique_id=1558574252]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "Buy"
+
+[node name="BtnStatus" type="Button" parent="VBoxContainer/Content/VBoxContainer/BtnTab" unique_id=1080965507]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "Status"
+
+[node name="BtnInfo" type="Button" parent="VBoxContainer/Content/VBoxContainer/BtnTab" unique_id=490835851]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "Info"
+
+[node name="BtnData" type="Button" parent="VBoxContainer/Content/VBoxContainer/BtnTab" unique_id=1968905602]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "Data"
+
+[node name="BtnSell" type="Button" parent="VBoxContainer/Content/VBoxContainer/BtnTab" unique_id=1363568059]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "Sell"
+
+[node name="ValueTabContainer" type="TabContainer" parent="VBoxContainer/Content/VBoxContainer" unique_id=496382042]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wom8j")
+current_tab = 1
+tabs_visible = false
+
+[node name="BuyTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=1799693074]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0sdbt")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/BuyTab" unique_id=1300964876]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/BuyTab/MarginContainer" unique_id=1661234141]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/BuyTab/MarginContainer/VBoxContainer" unique_id=361047296]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Price" type="Label" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/BuyTab/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1484334332]
+layout_mode = 2
+text = "Price"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/BuyTab/MarginContainer/VBoxContainer/VBoxContainer" unique_id=81354359]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 1
+
+[node name="icon_button" type="TextureButton" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/BuyTab/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=980222778]
+modulate = Color(1, 0.8666667, 0, 1)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_dls7u")
+texture_normal = ExtResource("3_ey0bp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Value" type="Label" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/BuyTab/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=572807461]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "1000"
+vertical_alignment = 1
+
+[node name="BtnBuy" type="Button" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/BuyTab/MarginContainer/VBoxContainer" unique_id=1933208231]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+text = "Buy"
+
+[node name="StatusTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=1630191571]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rkcv6")
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab" unique_id=2146898420]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer" unique_id=355307260]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer" unique_id=1156090963]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1536119276]
+layout_mode = 2
+text = "Wear"
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1212266597]
+layout_mode = 2
+step = 1.0
+value = 100.0
+rounded = true
+fill_mode = 1
+
+[node name="BtnCleaning" type="Button" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer" unique_id=1769504851]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+text = "Cleaning"
+
+[node name="InfoTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=2039722304]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kkkxp")
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/InfoTab" unique_id=869340292]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/InfoTab/MarginContainer" unique_id=692827661]
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/InfoTab/MarginContainer/VBoxContainer" unique_id=1652132778]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+scroll_hint_mode = 3
+
+[node name="Desc" type="Label" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/InfoTab/MarginContainer/VBoxContainer/Scroll" unique_id=194696972]
+custom_minimum_size = Vector2(156, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Description sad asd as asd as adasdasd  as    dasa da sda  s da sda   asd adasdasdadasdasdadasdasdadasdasdadasdasdadasdasdadasdasdadasdasdadasdasdadasdasd da da da da da da asda asda asda asdaasda"
+label_settings = SubResource("LabelSettings_glx4a")
+autowrap_mode = 3
+
+[node name="DataTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=1319222026]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1uxwi")
+metadata/_tab_index = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/DataTab" unique_id=887080514]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/DataTab/MarginContainer" unique_id=1924916920]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+scroll_hint_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/DataTab/MarginContainer/ScrollContainer" unique_id=483861500]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="Data" type="HBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/DataTab/MarginContainer/ScrollContainer/VBoxContainer" unique_id=691434359]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/DataTab/MarginContainer/ScrollContainer/VBoxContainer/Data" unique_id=1052634890]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Label1"
+label_settings = SubResource("LabelSettings_6gt6j")
+vertical_alignment = 1
+
+[node name="value" type="Label" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/DataTab/MarginContainer/ScrollContainer/VBoxContainer/Data" unique_id=77633078]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Value"
+label_settings = SubResource("LabelSettings_6gt6j")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SellTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=814500399]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_slf7g")
+metadata/_tab_index = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab" unique_id=1159487251]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab/MarginContainer" unique_id=191146763]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab/MarginContainer/VBoxContainer" unique_id=832949256]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Price" type="Label" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab/MarginContainer/VBoxContainer/VBoxContainer" unique_id=305259761]
+layout_mode = 2
+text = "Price"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1738558571]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 1
+
+[node name="icon_button" type="TextureButton" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1440125551]
+modulate = Color(1, 0.8666667, 0, 1)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_dls7u")
+texture_normal = ExtResource("3_ey0bp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Value" type="Label" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1499282098]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "1000"
+vertical_alignment = 1
+
+[node name="BtnSell" type="Button" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab/MarginContainer/VBoxContainer" unique_id=906098]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+text = "Sell"

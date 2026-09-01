@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dv742tmvj668o"]
+
+[ext_resource type="PackedScene" uid="uid://82dnybnms3pg" path="res://scenes/ui/components/top_bar.tscn" id="1_l1chs"]
+[ext_resource type="PackedScene" uid="uid://crievlw0clnes" path="res://scenes/ui/components/building_hud.tscn" id="2_0rs5x"]
+
+[node name="prod_house_hud" type="Control" unique_id=1865318432]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="main" type="CanvasLayer" parent="." unique_id=371244278]
+
+[node name="top_bar" parent="main" unique_id=1277406458 instance=ExtResource("1_l1chs")]
+
+[node name="building_hud" parent="main" unique_id=437774742 instance=ExtResource("2_0rs5x")]

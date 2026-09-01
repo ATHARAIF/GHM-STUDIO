@@ -21,6 +21,8 @@ var origin_parent: Control
 var origin_index: int
 var is_outside_hand: bool = false
 var active_tween: Tween
+var return_dummy: Control
+#var drag_dummy: Control
 var pending_rotation_steps: int = 0   # dipake pas resume drag dari pickup, biar rotasi kebawa
 
 var target_batch_year: int = -1
@@ -147,6 +149,10 @@ func resume_drag_at(mouse_pos: Vector2, initial_rotation_steps: int = 0) -> void
 func _begin_drag(start_screen_pos: Vector2) -> void:
 	if active_tween:
 		active_tween.kill()
+		
+	if is_instance_valid(return_dummy):
+		return_dummy.queue_free()
+		return_dummy = null
 
 	origin_parent = get_parent()
 	origin_index = get_index()
@@ -239,29 +245,32 @@ func animate_return_from(from_pos: Vector2) -> void:
 	dragging = false
 	is_outside_hand = false
 	is_placed = false
-	print("animate_return_from called! from_pos: ", from_pos, " current global: ", global_position)
 	if active_tween:
 		active_tween.kill()
 
-	modulate.a = 0.0  # Sembunyikan selama 2 frame kalkulasi biar ga kedip!
-
-	# matiin top_level dulu biar container ngitung posisi global yang BENER
-	top_level = false
-	origin_parent.queue_sort()
-
-	# Nunggu 2 frame supaya container HBoxContainer selesai ngitung layout (ALIGN_CENTER).
-	# Frame 1: container memproses queue_sort di idle_time.
-	# Frame 2: posisi global sudah final dan stabil.
-	await get_tree().process_frame
-	await get_tree().process_frame
-
-	var target_pos := global_position
-	print("target_pos after layout: ", target_pos)
-
-	top_level = true            # nyalain lagi buat proses tween manual
+	# Langsung lepas dari layout dan posisikan di kursor
+	top_level = true
 	global_position = from_pos
-	modulate.a = 0.0             # Mulai dari transparan untuk efek fade-in
-	
+	modulate.a = 0.0
+
+	# Bikin dummy penjaga tempat agar layout kartu lain TIDAK bergeser/berkedip
+	if is_instance_valid(return_dummy):
+		return_dummy.queue_free()
+	return_dummy = Control.new()
+	var card_size = size if size.x > 0 else custom_minimum_size
+	return_dummy.custom_minimum_size = card_size
+	origin_parent.add_child(return_dummy)
+	origin_parent.move_child(return_dummy, origin_index)
+
+	# Nunggu 2 frame supaya container ngitung posisi dummy dengan sempurna
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	if not is_instance_valid(return_dummy):
+		return # Terinterupsi di tengah jalan
+		
+	var target_pos = return_dummy.global_position
+
 	active_tween = create_tween()
 	active_tween.set_parallel(true)
 	active_tween.tween_property(self, "global_position", target_pos, return_duration) \
@@ -269,6 +278,12 @@ func animate_return_from(from_pos: Vector2) -> void:
 	active_tween.tween_property(self, "modulate:a", 1.0, fade_duration) \
 		.set_ease(Tween.EASE_OUT)
 		
-	active_tween.chain().tween_callback(func(): top_level = false)
+	active_tween.chain().tween_callback(func(): 
+		if is_instance_valid(return_dummy):
+			return_dummy.queue_free()
+			return_dummy = null
+		top_level = false
+	)
+	
 	await active_tween.finished
-	global_position = target_pos   # re-sync posisi lokal setelah top_level off, biar gak "loncat"
+	global_position = target_pos

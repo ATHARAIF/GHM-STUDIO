@@ -356,6 +356,8 @@ func save_room_state(room_id: String) -> void:
 			var saved_dict = dict.duplicate()
 			saved_dict["saved_position"] = dict.tile.global_position
 			saved_dict["saved_rotation"] = dict.tile.rotation_degrees
+			if dict.tile.has_meta("locked"):
+				saved_dict["saved_locked"] = dict.tile.get_meta("locked")
 			saved_dict.erase("tile")
 			saved_dict.erase("label")
 			state.append(saved_dict)
@@ -381,14 +383,18 @@ func restore_room_state(room_id: String) -> void:
 		
 		new_tile.global_position = saved_dict["saved_position"]
 		new_tile.rotation_degrees = saved_dict["saved_rotation"]
+		if saved_dict.has("saved_locked") and saved_dict["saved_locked"]:
+			new_tile.set_meta("locked", true)
 		
 		var new_dict = saved_dict.duplicate()
 		new_dict["tile"] = new_tile
 		new_dict.erase("saved_position")
 		new_dict.erase("saved_rotation")
+		new_dict.erase("saved_locked")
 		
 		var tile_labels = _find_tile_labels(new_tile)
 		if tile_labels:
+			new_dict["tile_labels"] = tile_labels
 			if new_dict.get("ready", false):
 				tile_labels.set_ready_state(true)
 			else:

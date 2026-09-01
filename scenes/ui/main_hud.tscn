@@ -3,140 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://c2uke58d1oepu" path="res://scenes/cards/card_hand.tscn" id="1_2obvf"]
 [ext_resource type="Script" uid="uid://ccgq84p33gpag" path="res://scripts/ui/main_hud.gd" id="1_hudgd"]
 [ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="2_6230l"]
-[ext_resource type="Texture2D" uid="uid://8jbgent5edy1" path="res://assets/ui/icons/stats/calendar.svg" id="3_0yliy"]
-[ext_resource type="Texture2D" uid="uid://cq3g4drr5dfs5" path="res://assets/ui/icons/stats/fame.svg" id="4_ww3d0"]
-[ext_resource type="Texture2D" uid="uid://c4yenilqdkg8v" path="res://assets/ui/icons/stats/money.svg" id="5_6m254"]
-[ext_resource type="Texture2D" uid="uid://b1o7el3rn2th7" path="res://assets/ui/hud/journal.svg" id="6_ei7no"]
-[ext_resource type="Texture2D" uid="uid://dpcwbpo5g7wr6" path="res://assets/ui/hud/setting.svg" id="7_62l3y"]
-[ext_resource type="Texture2D" uid="uid://b8woap0xskoli" path="res://assets/ui/hud/menu.svg" id="8_w0i6r"]
+[ext_resource type="PackedScene" uid="uid://82dnybnms3pg" path="res://scenes/ui/components/top_bar.tscn" id="2_mti1m"]
 [ext_resource type="Texture2D" uid="uid://dnydooatnscro" path="res://assets/ui/hud/next_turn.svg" id="9_ww3d0"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_phxny"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0i6r"]
-content_margin_left = 16.0
-content_margin_top = 32.0
-content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_top = 8
-border_color = Color(0.64, 0.30293334, 0.13439998, 0)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrh06"]
-bg_color = Color(0.9490196, 0.92156863, 0.8901961, 1)
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-expand_margin_left = 40.0
-
-[sub_resource type="Theme" id="Theme_quc01"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7of8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crkyf"]
-bg_color = Color(0.61, 0.61, 0.61, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndglf"]
-content_margin_left = 32.0
-content_margin_right = 32.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_bottom = 8
-border_color = Color(0.6392157, 0.30588236, 0.13333334, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5y718"]
-content_margin_left = 32.0
-content_margin_right = 32.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_bottom = 8
-border_color = Color(0.6392157, 0.30588236, 0.13333334, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8l86"]
-content_margin_left = 32.0
-content_margin_right = 32.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_top = 8
-border_color = Color(0.64, 0.30293334, 0.13439998, 0)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="Theme" id="Theme_0yh2i"]
-Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_hover_color = Color(1, 1, 1, 1)
-Button/styles/disabled = SubResource("StyleBoxFlat_crkyf")
-Button/styles/hover = SubResource("StyleBoxFlat_ndglf")
-Button/styles/normal = SubResource("StyleBoxFlat_5y718")
-Button/styles/pressed = SubResource("StyleBoxFlat_b8l86")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tu3eb"]
-content_margin_left = 16.0
-content_margin_top = 16.0
-content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_bottom = 8
-border_color = Color(0.6392157, 0.30588236, 0.13333334, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sf4k2"]
-content_margin_left = 16.0
-content_margin_top = 32.0
-content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_top = 8
-border_color = Color(0.64, 0.30293334, 0.13439998, 0)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehkw3"]
-content_margin_left = 16.0
-content_margin_top = 16.0
-content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_bottom = 8
-border_color = Color(0.6392157, 0.30588236, 0.13333334, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2jeo"]
-content_margin_left = 16.0
-content_margin_top = 16.0
-content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.61, 0.61, 0.61, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6m254"]
 bg_color = Color(0.12156863, 0.16078432, 0.2, 0)
@@ -211,6 +79,19 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0i6r"]
+content_margin_left = 16.0
+content_margin_top = 32.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
+border_width_top = 8
+border_color = Color(0.64, 0.30293334, 0.13439998, 0)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phxny"]
 content_margin_left = 16.0
 content_margin_top = 16.0
@@ -234,6 +115,8 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7of8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6230l"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -309,153 +192,53 @@ script = ExtResource("1_hudgd")
 
 [node name="main" type="CanvasLayer" parent="." unique_id=2121045524]
 
-[node name="top_bar" type="PanelContainer" parent="main" unique_id=2085197879]
-custom_minimum_size = Vector2(0, 136)
-custom_maximum_size = Vector2(-1, 136)
-anchors_preset = 10
+[node name="top_bar" parent="main" unique_id=1277406458 instance=ExtResource("2_mti1m")]
+
+[node name="CardPanel" type="PanelContainer" parent="main" unique_id=177724962]
+custom_minimum_size = Vector2(1280, 200)
+custom_maximum_size = Vector2(-1, 200)
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
-offset_bottom = 156.0
+anchor_bottom = 1.0
+offset_top = -200.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_phxny")
+grow_vertical = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 15.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6m254")
 
-[node name="MarginContainer" type="MarginContainer" parent="main/top_bar" unique_id=359189769]
+[node name="Margin" type="MarginContainer" parent="main/CardPanel" unique_id=495349738]
 layout_mode = 2
-theme_override_constants/margin_left = 35
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 35
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 65
+theme_override_constants/margin_bottom = 10
 
-[node name="background2" type="Panel" parent="main/top_bar/MarginContainer" unique_id=1947356785]
-visible = false
-custom_maximum_size = Vector2(558.22, -1)
+[node name="card_hand" parent="main/CardPanel/Margin" unique_id=803764765 instance=ExtResource("1_2obvf")]
 layout_mode = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, 10.93)
-theme_override_styles/panel = SubResource("StyleBoxFlat_w0i6r")
+size_flags_horizontal = 1
 
-[node name="background" type="Panel" parent="main/top_bar/MarginContainer" unique_id=1656035952]
-custom_maximum_size = Vector2(520, -1)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_yrh06")
-
-[node name="hbox" type="HBoxContainer" parent="main/top_bar/MarginContainer" unique_id=194314514]
-layout_mode = 2
-
-[node name="left" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox" unique_id=1003775069]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 32
-
-[node name="calendar" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=817532456]
-layout_mode = 2
-
-[node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/calendar" unique_id=665503278]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme = SubResource("Theme_quc01")
-texture_normal = ExtResource("3_0yliy")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="main/top_bar/MarginContainer/hbox/left/calendar" unique_id=656702774]
-custom_minimum_size = Vector2(150, 0)
-custom_maximum_size = Vector2(220, -1)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
-theme_override_font_sizes/font_size = 20
-text = "1 Autumn 2027"
-
-[node name="fame" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=1796509125]
-layout_mode = 2
-
-[node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/fame" unique_id=1823419540]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme = SubResource("Theme_quc01")
-texture_normal = ExtResource("4_ww3d0")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="main/top_bar/MarginContainer/hbox/left/fame" unique_id=1767171988]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
-theme_override_font_sizes/font_size = 20
-text = "50"
-
-[node name="money" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=1008935318]
-layout_mode = 2
-
-[node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/money" unique_id=818412795]
-modulate = Color(1, 0.8666667, 0, 1)
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme = SubResource("Theme_quc01")
-texture_normal = ExtResource("5_6m254")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="main/top_bar/MarginContainer/hbox/left/money" unique_id=1042481326]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
-theme_override_font_sizes/font_size = 20
-text = "99,000,000"
-
-[node name="VSeparator" type="VSeparator" parent="main/top_bar/MarginContainer/hbox" unique_id=178190081]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/separator = SubResource("StyleBoxEmpty_c7of8")
-
-[node name="right" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox" unique_id=2124493991]
+[node name="Button" type="Button" parent="main/CardPanel" unique_id=140520158]
+custom_minimum_size = Vector2(120, 120)
+custom_maximum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_constants/separation = 24
-
-[node name="journal" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=1576408834]
-custom_minimum_size = Vector2(78, 78)
-custom_maximum_size = Vector2(78, 78)
-layout_mode = 2
-theme = SubResource("Theme_0yh2i")
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(-50, 0)
+offset_transform_visual_only = false
+theme = SubResource("Theme_ei7no")
 theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_tu3eb")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_sf4k2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ehkw3")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_x2jeo")
-icon = ExtResource("6_ei7no")
+theme_override_styles/normal = SubResource("StyleBoxFlat_62l3y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w0i6r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_phxny")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
+icon = ExtResource("9_ww3d0")
 icon_alignment = 1
-expand_icon = true
-
-[node name="setting" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=47545669]
-custom_minimum_size = Vector2(78, 78)
-custom_maximum_size = Vector2(78, 78)
-layout_mode = 2
-theme = SubResource("Theme_0yh2i")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_tu3eb")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_sf4k2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ehkw3")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_x2jeo")
-icon = ExtResource("7_62l3y")
-expand_icon = true
-
-[node name="menu" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=162328054]
-custom_minimum_size = Vector2(78, 78)
-custom_maximum_size = Vector2(78, 78)
-layout_mode = 2
-theme = SubResource("Theme_0yh2i")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_tu3eb")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_sf4k2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ehkw3")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_x2jeo")
-icon = ExtResource("8_w0i6r")
-expand_icon = true
 
 [node name="footer" type="HBoxContainer" parent="main" unique_id=503426141]
+visible = false
 custom_minimum_size = Vector2(1280, 200)
 custom_maximum_size = Vector2(1280, 200)
 anchors_preset = 12
@@ -469,49 +252,11 @@ mouse_filter = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="CardPanel" type="PanelContainer" parent="main/footer" unique_id=177724962]
-custom_minimum_size = Vector2(1057, 200)
-custom_maximum_size = Vector2(1057, 200)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-size_flags_stretch_ratio = 15.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_6m254")
-
-[node name="Margin" type="MarginContainer" parent="main/footer/CardPanel" unique_id=495349738]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="card_hand" parent="main/footer/CardPanel/Margin" unique_id=803764765 instance=ExtResource("1_2obvf")]
-custom_minimum_size = Vector2(993, 252)
-custom_maximum_size = Vector2(993, -1)
-layout_mode = 2
-
 [node name="VSeparator" type="VSeparator" parent="main/footer" unique_id=1839695945]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_c7of8")
-
-[node name="Button" type="Button" parent="main/footer" unique_id=140520158]
-custom_minimum_size = Vector2(120, 120)
-custom_maximum_size = Vector2(120, 120)
-layout_mode = 2
-size_flags_vertical = 4
-offset_transform_enabled = true
-offset_transform_position = Vector2(-50, 0)
-offset_transform_visual_only = false
-theme = SubResource("Theme_ei7no")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_62l3y")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_w0i6r")
-theme_override_styles/hover = SubResource("StyleBoxFlat_phxny")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
-icon = ExtResource("9_ww3d0")
-icon_alignment = 1
-expand_icon = true
 
 [node name="menu_tabs" type="CanvasLayer" parent="." unique_id=813571542]
 visible = false

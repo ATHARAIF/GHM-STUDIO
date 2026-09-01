@@ -1,8 +1,6 @@
 extends Control
 
-@onready var btn_calendar = $main/top_bar/MarginContainer/hbox/left/calendar/label
-@onready var btn_money = $main/top_bar/MarginContainer/hbox/left/money/label
-@onready var btn_end_turn = $main/footer/Button
+@onready var btn_end_turn = $main/CardPanel/Button
 
 var debug_panel: Control
 var debug_body: Label
@@ -16,18 +14,12 @@ var debug_yield_mod: Label
 var debug_batch_dropdown: OptionButton
 var selected_debug_batch_year: int = -1
 
-# Popup Buttons
-@onready var btn_menu = $main/top_bar/MarginContainer/hbox/right/menu
-@onready var btn_setting = $main/top_bar/MarginContainer/hbox/right/setting
-@onready var btn_journal = $main/top_bar/MarginContainer/hbox/right/journal
-
 # Popup Layers
 @onready var layer_menu_tabs = $menu_tabs
 @onready var layer_coffee_log = $menu_coffee_log
 
 func _ready() -> void:
 	StageManager.turn_changed.connect(_on_turn_changed)
-	StageManager.budget_changed.connect(_on_budget_changed)
 	
 	StageManager.stats_changed.connect(_on_stats_changed)
 	StageManager.interaction_requested.connect(_on_stage_interaction_requested)
@@ -37,10 +29,10 @@ func _ready() -> void:
 	if btn_end_turn:
 		btn_end_turn.pressed.connect(_on_end_turn_pressed)
 		
-	if btn_menu:
-		btn_menu.pressed.connect(func(): _toggle_popup(layer_menu_tabs))
-	if btn_journal:
-		btn_journal.pressed.connect(func(): _toggle_popup(layer_coffee_log))
+	var top_bar_node = $main/top_bar
+	if top_bar_node:
+		top_bar_node.menu_pressed.connect(func(): _toggle_popup(layer_menu_tabs))
+		top_bar_node.journal_pressed.connect(func(): _toggle_popup(layer_coffee_log))
 		
 	_update_all()
 
@@ -103,19 +95,10 @@ func _on_stage_interaction_requested(interaction_name: String, tile_data: Dictio
 
 func _update_all() -> void:
 	_on_turn_changed(TimeManager.turn_in_year, TimeManager.season, TimeManager.year)
-	_on_budget_changed(StageManager.budget)
 	_on_stats_changed()
 
 func _on_turn_changed(turn_in_year: int, season: int, year: int) -> void:
-	var season_name = ""
-	match season:
-		TimeManager.Season.SPRING: season_name = "Spring"
-		TimeManager.Season.SUMMER: season_name = "Summer"
-		TimeManager.Season.FALL: season_name = "Fall"
-		TimeManager.Season.WINTER: season_name = "Winter"
-		
-	if btn_calendar:
-		btn_calendar.text = "%d %s %d" % [TimeManager.turn_in_season, season_name, year]
+	pass
 
 func _on_debug_batch_selected(index: int) -> void:
 	if index >= 0 and index < debug_batch_dropdown.item_count:
@@ -180,10 +163,6 @@ func _on_stats_changed() -> void:
 		if hist_str.is_empty(): hist_str = "None"
 		debug_yield_mod.text = "Yield Mod: %.1f%% (%s)" % [b.accumulated_yield_modifier * 100.0, hist_str]
 
-
-func _on_budget_changed(budget: int) -> void:
-	if btn_money:
-		btn_money.text = "%d" % budget
 
 func _on_end_turn_pressed() -> void:
 	StageManager.advance_turn()
