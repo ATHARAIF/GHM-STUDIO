@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://djheffwvvtjqr" path="res://scenes/ui/popups/harvest_method_popup.tscn" id="1_a03s9"]
 [ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_b03s9"]
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
-[ext_resource type="Resource" uid="uid://selective123" path="res://resources/methods/harvest/selective.tres" id="2_c03s9"]
+[ext_resource type="Resource" uid="uid://selective123" path="res://resources/cards/methods/harvest/selective.tres" id="2_c03s9"]
 [ext_resource type="PackedScene" uid="uid://b0iehonihftwv" path="res://scenes/ui/popups/harvest_result_popup.tscn" id="2_ia3xb"]
-[ext_resource type="Resource" uid="uid://strip123" path="res://resources/methods/harvest/strip.tres" id="3_d03s9"]
+[ext_resource type="Resource" uid="uid://strip123" path="res://resources/cards/methods/harvest/strip.tres" id="3_d03s9"]
 [ext_resource type="PackedScene" uid="uid://dwhnowe17f8c2" path="res://scenes/tiles/farm/harvest_tile.tscn" id="7_odlgh"]
 [ext_resource type="Texture2D" uid="uid://dh7vpxsmkbso2" path="res://assets/ui/cards/tile_shapes/Type=3x3 Full.png" id="8_dnwnq"]
 

@@ -22,7 +22,7 @@ ssao_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6jaw"]
 albedo_color = Color(0, 0.6784314, 1, 1)
 
-[node name="prod_house_interior" type="Node3D" unique_id=765019154]
+[node name="production_house" type="Node3D" unique_id=765019154]
 script = ExtResource("1_qdl7o")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1209572683]

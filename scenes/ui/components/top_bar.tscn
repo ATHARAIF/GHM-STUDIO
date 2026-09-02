@@ -100,9 +100,9 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sf4k2"]
 content_margin_left = 16.0
-content_margin_top = 32.0
+content_margin_top = 24.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
+content_margin_bottom = 8.0
 bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
 border_width_top = 8
 border_color = Color(0.64, 0.30293334, 0.13439998, 0)
@@ -246,6 +246,7 @@ custom_minimum_size = Vector2(78, 78)
 custom_maximum_size = Vector2(78, 78)
 layout_mode = 2
 theme = SubResource("Theme_0yh2i")
+theme_override_constants/icon_max_width = 46
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_tu3eb")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_sf4k2")
@@ -253,6 +254,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ehkw3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_x2jeo")
 icon = ExtResource("4_u6lht")
 icon_alignment = 1
+expand_icon = true
 
 [node name="setting" type="Button" parent="MarginContainer/hbox/right" unique_id=391665172]
 custom_minimum_size = Vector2(78, 78)
@@ -266,6 +268,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ehkw3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_x2jeo")
 icon = ExtResource("5_d3uep")
 icon_alignment = 1
+expand_icon = true
 
 [node name="menu" type="Button" parent="MarginContainer/hbox/right" unique_id=1294836952]
 custom_minimum_size = Vector2(78, 78)
@@ -279,3 +282,4 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ehkw3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_x2jeo")
 icon = ExtResource("6_akheh")
 icon_alignment = 1
+expand_icon = true

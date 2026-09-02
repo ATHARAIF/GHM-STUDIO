@@ -33,7 +33,9 @@ func _on_btn_back_pressed() -> void:
 	if StageManager.has_method("save_room_state"):
 		StageManager.save_room_state("prod_house")
 		
+	await TransitionManager.fade_out()
 	get_tree().change_scene_to_file(farm_scene_path)
+	TransitionManager.fade_in()
 
 func _on_btn_eye_pressed() -> void:
 	# Toggle hide/unhide

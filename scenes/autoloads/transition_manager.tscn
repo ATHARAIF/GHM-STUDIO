@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c3eap5v3s2w1"]
+
+[ext_resource type="Script" uid="uid://2uxu2tw8ovfb" path="res://scripts/autoloads/transition_manager.gd" id="1_a1b2c"]
+[ext_resource type="Shader" uid="uid://g7rt508bdn4c" path="res://shaders/universal_transition.gdshader" id="2_c3d4e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x1y2z"]
+shader = ExtResource("2_c3d4e")
+shader_parameter/use_sprite_alpha = false
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 3
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/invert = false
+shader_parameter/grid_size = Vector2(2, 2)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/global_x_mirror = false
+shader_parameter/global_y_mirror = false
+shader_parameter/local_x_mirror = true
+shader_parameter/local_y_mirror = true
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/cumulative_stagger_flip = false
+shader_parameter/cumulative_stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 4
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 4
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 0.0
+shader_parameter/progress_bias = Vector2(0, 0)
+
+[node name="TransitionManager" type="CanvasLayer" unique_id=2054607994]
+layer = 100
+script = ExtResource("1_a1b2c")
+current_preset = 0
+transition_duration = 0.7
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=652603460]
+material = SubResource("ShaderMaterial_x1y2z")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

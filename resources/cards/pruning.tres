@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/popups/pruning_popup.tscn" id="1_a03s9"]
 [ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_b03s9"]
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
-[ext_resource type="Resource" uid="uid://c83kndr7g8x1l" path="res://resources/methods/pruning/single_stem.tres" id="2_c03s9"]
+[ext_resource type="Resource" uid="uid://c83kndr7g8x1l" path="res://resources/cards/methods/pruning/single_stem.tres" id="2_c03s9"]
 [ext_resource type="PackedScene" uid="uid://b7cg6uvvi5ata" path="res://scenes/tiles/farm/pruning_tile.tscn" id="5_cpji7"]
 [ext_resource type="Texture2D" uid="uid://kioqh5ry4lr0" path="res://assets/ui/cards/tile_shapes/Type=3x2 T-Shape.png" id="6_dck3y"]
 

@@ -1,7 +1,7 @@
 extends Node3D
 
 # Alamat scene interior yang akan dituju (kosongkan kalau belum buat)
-@export var interior_scene_path: String = "res://scenes/maps/prod_house_interior.tscn"
+@export var interior_scene_path: String = "res://scenes/maps/production_house.tscn"
 
 func _ready() -> void:
 	# Pastikan bangunan Anda punya Area3D bernama "ClickableArea"
@@ -18,8 +18,14 @@ func _on_clickable_area_input_event(camera: Node, event: InputEvent, event_posit
 		if StageManager.has_method("save_room_state"):
 			StageManager.save_room_state("farm")
 			
-		# 2. Pindah scene (Total Scene Change)
 		if not interior_scene_path.is_empty() and ResourceLoader.exists(interior_scene_path):
+			# --- MULAI TRANSISI MENUTUP LAYAR ---
+			await TransitionManager.fade_out()
+			
+			# 2. Pindah scene (Layar dalam keadaan hitam total)
 			get_tree().change_scene_to_file(interior_scene_path)
+			
+			# --- BUKA KEMBALI LAYAR DI SCENE BARU ---
+			TransitionManager.fade_in()
 		else:
 			print("Interior scene belum ada/alamat salah: ", interior_scene_path)

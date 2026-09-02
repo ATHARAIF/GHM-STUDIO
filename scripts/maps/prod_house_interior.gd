@@ -29,7 +29,9 @@ func _on_btn_exit_pressed() -> void:
 		
 	# 2. Pindah scene
 	if not farm_scene_path.is_empty() and ResourceLoader.exists(farm_scene_path):
+		await TransitionManager.fade_out()
 		get_tree().change_scene_to_file(farm_scene_path)
+		TransitionManager.fade_in()
 
 func _collect_ground_tiles(node: Node, tiles: Array[GroundTile]) -> void:
 	for child in node.get_children():

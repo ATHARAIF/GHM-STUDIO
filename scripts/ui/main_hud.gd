@@ -1,6 +1,6 @@
 extends Control
 
-@onready var btn_end_turn = $main/CardPanel/Button
+@onready var btn_next_turn = $main/CardPanel/Button
 
 var debug_panel: Control
 var debug_body: Label
@@ -18,6 +18,27 @@ var selected_debug_batch_year: int = -1
 @onready var layer_menu_tabs = $menu_tabs
 @onready var layer_coffee_log = $menu_coffee_log
 
+@export_group("Next Turn Settings")
+@export var next_turn_hold_duration: float = 0.5
+@export var hold_overlay_color: Color = Color(0.7, 0.35, 0.18, 0.9)
+
+enum NextTurnFillMode {
+	RADIAL_CLOCK_WIPE = 0,
+	BOTTOM_TO_TOP = 1,
+	LEFT_TO_RIGHT = 2,
+	CENTER_EXPAND = 3,
+	TOP_TO_BOTTOM = 4,
+	RIGHT_TO_LEFT = 5,
+	HORIZONTAL_SPLIT = 6,
+	VERTICAL_SPLIT = 7
+}
+@export var next_turn_fill_mode: NextTurnFillMode = NextTurnFillMode.RADIAL_CLOCK_WIPE
+
+# Hold Next Turn Variables
+var is_holding_next_turn: bool = false
+var next_turn_hold_time: float = 0.0
+var has_triggered_turn: bool = false
+
 func _ready() -> void:
 	StageManager.turn_changed.connect(_on_turn_changed)
 	
@@ -26,8 +47,22 @@ func _ready() -> void:
 	
 	_build_debug_panel()
 	
-	if btn_end_turn:
-		btn_end_turn.pressed.connect(_on_end_turn_pressed)
+	if btn_next_turn:
+		btn_next_turn.button_down.connect(func(): is_holding_next_turn = true)
+		btn_next_turn.button_up.connect(func(): is_holding_next_turn = false)
+		
+		# Terapkan shader pintar langsung ke tombol asli!
+		var mat = ShaderMaterial.new()
+		var shader_file = load("res://shaders/btn_nextturn_effect.gdshader")
+		if shader_file == null:
+			printerr("GAWAT: SHADER GAGAL DIMUAT! PASTIKAN FILE btn_nextturn_effect.gdshader ADA DI FOLDER shaders DAN DIAKUI OLEH GODOT!")
+		else:
+			print("SHADER BERHASIL DIMUAT!")
+			
+		mat.shader = shader_file
+		mat.set_shader_parameter("progress", 0.0)
+		mat.set_shader_parameter("tint_color", hold_overlay_color)
+		btn_next_turn.material = mat
 		
 	var top_bar_node = $main/top_bar
 	if top_bar_node:
@@ -39,6 +74,62 @@ func _ready() -> void:
 	if has_node("/root/EventManager"):
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_requested.connect(_on_card_placement_interaction_requested)
+
+func _process(delta: float) -> void:
+	if btn_next_turn and not btn_next_turn.disabled:
+		var is_holding = is_holding_next_turn or Input.is_action_pressed("next_turn")
+		
+		# Simulasi tombol ditekan (mengubah tampilan ke 'pressed' style)
+		var current_state = "pressed" if is_holding else "normal"
+		
+		# Ambil style normal yang asli (yang diset di editor) jika belum disimpan
+		if not btn_next_turn.has_meta("original_normal_style"):
+			var og_style = btn_next_turn.get_theme_stylebox("normal")
+			btn_next_turn.set_meta("original_normal_style", og_style)
+			
+		if is_holding:
+			# Paksa style normal menjadi style pressed
+			btn_next_turn.add_theme_stylebox_override("normal", btn_next_turn.get_theme_stylebox("pressed"))
+		else:
+			# Kembalikan style normal ke aslinya
+			if btn_next_turn.has_meta("original_normal_style"):
+				btn_next_turn.add_theme_stylebox_override("normal", btn_next_turn.get_meta("original_normal_style"))
+				
+		# --- SINKRONISASI SHADER ---
+		if btn_next_turn.material:
+			var mat: ShaderMaterial = btn_next_turn.material
+			# Beritahu shader ukurannya
+			mat.set_shader_parameter("button_size", btn_next_turn.size)
+			mat.set_shader_parameter("fill_mode", next_turn_fill_mode)
+		# -----------------------------------------------------------
+			
+		if is_holding and not has_triggered_turn:
+			next_turn_hold_time += delta
+			var progress = clamp(next_turn_hold_time / next_turn_hold_duration, 0.0, 1.0)
+			
+			if btn_next_turn.material:
+				btn_next_turn.material.set_shader_parameter("progress", progress)
+			
+			# Jika hold sudah penuh, picu Next Turn!
+			if next_turn_hold_time >= next_turn_hold_duration:
+				has_triggered_turn = true  # Kunci agar tidak spam!
+				next_turn_hold_time = 0.0   # Reset waktu
+				if btn_next_turn.material: btn_next_turn.material.set_shader_parameter("progress", 0.0)
+				_on_next_turn_pressed()
+		
+		elif not is_holding:
+			has_triggered_turn = false # Buka kunci setelah dilepas
+			
+			# Jika dilepas sebelum penuh, reset mundur dengan cepat (selalu butuh ~0.25 detik untuk kembali ke 0)
+			if next_turn_hold_time > 0:
+				var reset_speed = next_turn_hold_duration / 0.25
+				next_turn_hold_time -= reset_speed * delta
+				if next_turn_hold_time < 0:
+					next_turn_hold_time = 0.0
+					
+				var progress = clamp(next_turn_hold_time / next_turn_hold_duration, 0.0, 1.0)
+				if btn_next_turn.material:
+					btn_next_turn.material.set_shader_parameter("progress", progress)
 
 func _build_debug_panel() -> void:
 	var container = PanelContainer.new()
@@ -91,7 +182,7 @@ func _on_stage_interaction_requested(interaction_name: String, tile_data: Dictio
 		add_child(popup)
 		if popup.has_method("show_popup"):
 			popup.show_popup(tile_data)
-		if btn_end_turn: btn_end_turn.disabled = true
+		if btn_next_turn: btn_next_turn.disabled = true
 
 func _update_all() -> void:
 	_on_turn_changed(TimeManager.turn_in_year, TimeManager.season, TimeManager.year)
@@ -164,8 +255,15 @@ func _on_stats_changed() -> void:
 		debug_yield_mod.text = "Yield Mod: %.1f%% (%s)" % [b.accumulated_yield_modifier * 100.0, hist_str]
 
 
-func _on_end_turn_pressed() -> void:
+func _on_next_turn_pressed() -> void:
+	# 1. Tutup layar pakai transisi
+	await TransitionManager.fade_out()
+	
+	# 2. Majukan turn di belakang layar yang sedang gelap
 	StageManager.advance_turn()
+	
+	# 3. Buka lagi layarnya
+	TransitionManager.fade_in()
 
 func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, card_data: Resource) -> void:
 	if card_data.get("custom_popup_ui") != null:
