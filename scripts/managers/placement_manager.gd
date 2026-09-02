@@ -5,6 +5,15 @@ extends Node
 @export var float_height: float = 0.4
 @export var place_duration: float = 0.35
 
+@export_group("Shine Effect")
+
+#NEW ===========================================================================================================
+@export var shine_material: ShaderMaterial   # drag ShaderMaterial yg pake 3d_item_highlighter.gdshader ke sini
+@export var shine_duration_override: float = 0.0   # 0 = auto-hitung dari uniform shader (shine_width, shine_speed, cycle_interval)
+@export_range(1, 10) var shine_repeat_count: int = 1   # berapa kali sapuan shine muncul (dipake kalau shine_duration_override == 0)
+@export_range(0.0, 1.0) var shine_trigger_ratio: float = 0.55   # kapan shine mulai, relatif ke place_duration (0 = pas mulai jatuh, 1 = pas landing)
+# ===========================================================================================================
+
 @onready var ghost_visualizer = $GhostVisualizer
 
 var camera: Camera3D
@@ -234,7 +243,12 @@ func _try_place_move(mouse_pos: Vector2) -> void:
 	var tw := create_tween()
 	tw.set_trans(Tween.TRANS_BOUNCE)
 	tw.set_ease(Tween.EASE_OUT)
+	
+	#NEW ===========================================================================================================
+	tw.set_parallel(true)
 	tw.tween_property(moving_tile, "global_position", final_pos, place_duration)
+	tw.tween_callback(_play_shine_effect.bind(moving_tile)).set_delay(place_duration * shine_trigger_ratio)
+	# ===========================================================================================================
 	
 	for offset in shape:
 		var coord = anchor_coord + offset
@@ -346,7 +360,12 @@ func try_place(mouse_pos: Vector2, tile_scene: PackedScene, card_data: CardData)
 	var tw := create_tween()
 	tw.set_trans(Tween.TRANS_BOUNCE)
 	tw.set_ease(Tween.EASE_OUT)
+	
+	#NEW ===========================================================================================================
+	tw.set_parallel(true)
 	tw.tween_property(tile, "global_position", final_pos, place_duration)
+	tw.tween_callback(_play_shine_effect.bind(tile)).set_delay(place_duration * shine_trigger_ratio)
+	# ===========================================================================================================
 
 	for offset in shape:
 		var coord = anchor_coord + offset
@@ -527,6 +546,69 @@ func _get_ground_position(mouse_pos: Vector2):
 
 # region Ghost Visual Rendering
 # Delegated to ghost_visualizer.gd
+# endregion
+
+#NEW ===========================================================================================================
+# region Shine Effect (one-shot, dipicu setelah bounce selesai)
+func _play_shine_effect(tile: Node3D) -> void:
+	if shine_material == null or not is_instance_valid(tile):
+		return
+
+	var meshes: Array[MeshInstance3D] = []
+	_collect_mesh_instances(tile, meshes)
+	if meshes.is_empty():
+		return
+
+	# duplicate() biar tiap tile punya instance material sendiri (aman kalau ada beberapa
+	# tile kena efek bersamaan / mau di-tweak per-tile suatu saat nanti)
+	var mat := shine_material.duplicate() as ShaderMaterial
+
+	# arah sapuan (harus sama kaya yg dihitung shader dari x/y/z_direction)
+	var dir_raw = mat.get_shader_parameter("x_direction")
+	var dir_x: float = dir_raw if dir_raw != null else 0.0
+	dir_raw = mat.get_shader_parameter("y_direction")
+	var dir_y: float = dir_raw if dir_raw != null else 0.0
+	dir_raw = mat.get_shader_parameter("z_direction")
+	var dir_z: float = dir_raw if dir_raw != null else 1.0
+	var shine_dir := Vector3(dir_x, dir_y, dir_z).normalized()
+
+	# TIME di shader itu jam global yg jalan terus dari engine start, dan projection-nya
+	# pake world position -> tanpa dua offset ini, fase sapuan bakal beda-beda tiap kali
+	# (waktu trigger yg gak sinkron) DAN tiap tile ditaro di grid cell yg beda-beda.
+	# time_offset nge-reset komponen waktu, position_offset nge-cancel komponen posisi grid,
+	# jadi yg tersisa cuma pola relatif si mesh -> konsisten & tetep 1 sapuan yg nyambung
+	# antar sub-mesh (karena masih world-space, cuma origin-nya di-geser).
+	mat.set_shader_parameter("time_offset", -(Time.get_ticks_msec() / 1000.0))
+	mat.set_shader_parameter("position_offset", -tile.global_position.dot(shine_dir))
+
+	for mi in meshes:
+		mi.material_overlay = mat
+
+	var duration := shine_duration_override
+	if duration <= 0.0:
+		var shine_speed_raw = mat.get_shader_parameter("shine_speed")
+		var shine_width_raw = mat.get_shader_parameter("shine_width")
+		var cycle_interval_raw = mat.get_shader_parameter("cycle_interval")
+		var shine_speed: float = shine_speed_raw if shine_speed_raw != null else 1.0
+		var shine_width: float = shine_width_raw if shine_width_raw != null else 1.0
+		var cycle_interval: float = cycle_interval_raw if cycle_interval_raw != null else 1.0
+		# 1 periode penuh = 1x sapuan kilap lewat; dikaliin shine_repeat_count biar
+		# jumlah sapuan bisa diatur langsung TANPA bikin dia kepotong di tengah sapuan
+		duration = (shine_width + cycle_interval) / max(shine_speed, 0.001) * shine_repeat_count
+
+	await get_tree().create_timer(duration).timeout
+
+	if is_instance_valid(tile):
+		for mi in meshes:
+			if is_instance_valid(mi):
+				mi.material_overlay = null
+
+func _collect_mesh_instances(node: Node, out: Array[MeshInstance3D]) -> void:
+	for child in node.get_children():
+		if child is MeshInstance3D:
+			out.append(child)
+		_collect_mesh_instances(child, out)
+# ===========================================================================================================
 # endregion
 
 # region Cleanup
