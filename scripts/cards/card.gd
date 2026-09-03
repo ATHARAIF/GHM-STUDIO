@@ -15,13 +15,13 @@ class_name Card
 # [2] DRAGGING - lagi ditarik user, entah dari hand atau dari hasil pickup ground (dragging=true)
 # [3] PLACED   - udah jadi tile di ground, card-nya di-hide tapi TETEP HIDUP (bukan di-free)
 
-var dragging: bool = false
 var is_placed: bool = false
+var is_disabled: bool = false
+var dragging: bool = false
 var origin_parent: Control
 var origin_index: int
 var is_outside_hand: bool = false
 var active_tween: Tween
-var return_dummy: Control
 #var drag_dummy: Control
 var pending_rotation_steps: int = 0   # dipake pas resume drag dari pickup, biar rotasi kebawa
 
@@ -58,14 +58,14 @@ func _ready() -> void:
 var hover_tween: Tween
 
 func _on_mouse_entered() -> void:
-	if dragging or is_placed or is_outside_hand: return
+	if dragging or is_placed or is_outside_hand or is_disabled: return
 	z_index = 10
 	if hover_tween: hover_tween.kill()
 	hover_tween = create_tween()
-	hover_tween.tween_property($base, "position:y", -10.0, 0.1).set_trans(Tween.TRANS_SINE)
+	hover_tween.tween_property($base, "position:y", -20.0, 0.1).set_trans(Tween.TRANS_SINE)
 
 func _on_mouse_exited() -> void:
-	if dragging or is_placed or is_outside_hand: return
+	if dragging or is_placed or is_outside_hand or is_disabled: return
 	z_index = 0
 	if hover_tween: hover_tween.kill()
 	hover_tween = create_tween()
@@ -111,21 +111,21 @@ func _setup_ui() -> void:
 				display_year = target_batch_year
 			lbl_target.text = ("%s %d" % [var_name, display_year]).to_upper()
 			
-	if pnl_base and pnl_base.has_theme_stylebox("panel"):
-		var base_style = pnl_base.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
-		if base_style: 
-			base_style.bg_color = card_color
-			pnl_base.add_theme_stylebox_override("panel", base_style)
-		
-	if pnl_specs and pnl_specs.has_theme_stylebox("panel"):
-		var specs_style = pnl_specs.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
-		if specs_style:
-			specs_style.bg_color = card_color
-			pnl_specs.add_theme_stylebox_override("panel", specs_style)
+	if pnl_color and pnl_color.has_theme_stylebox("panel"):
+		var color_style = pnl_color.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		if color_style: 
+			color_style.bg_color = card_color
+			pnl_color.add_theme_stylebox_override("panel", color_style)
 
-
+func set_disabled(disabled: bool) -> void:
+	is_disabled = disabled
+	if is_disabled:
+		modulate = Color(0.5, 0.5, 0.5, 0.8) # Gray and slightly transparent
+	else:
+		modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 func _gui_input(event: InputEvent) -> void:
+	if is_disabled: return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if card_data and StageManager.budget < card_data.cost:
 			return # Cannot afford
@@ -149,10 +149,6 @@ func resume_drag_at(mouse_pos: Vector2, initial_rotation_steps: int = 0) -> void
 func _begin_drag(start_screen_pos: Vector2) -> void:
 	if active_tween:
 		active_tween.kill()
-		
-	if is_instance_valid(return_dummy):
-		return_dummy.queue_free()
-		return_dummy = null
 
 	origin_parent = get_parent()
 	origin_index = get_index()
@@ -248,42 +244,15 @@ func animate_return_from(from_pos: Vector2) -> void:
 	if active_tween:
 		active_tween.kill()
 
-	# Langsung lepas dari layout dan posisikan di kursor
-	top_level = true
-	global_position = from_pos
-	modulate.a = 0.0
-
-	# Bikin dummy penjaga tempat agar layout kartu lain TIDAK bergeser/berkedip
-	if is_instance_valid(return_dummy):
-		return_dummy.queue_free()
-	return_dummy = Control.new()
-	var card_size = size if size.x > 0 else custom_minimum_size
-	return_dummy.custom_minimum_size = card_size
-	origin_parent.add_child(return_dummy)
-	origin_parent.move_child(return_dummy, origin_index)
-
-	# Nunggu 2 frame supaya container ngitung posisi dummy dengan sempurna
-	await get_tree().process_frame
-	await get_tree().process_frame
-
-	if not is_instance_valid(return_dummy):
-		return # Terinterupsi di tengah jalan
-		
-	var target_pos = return_dummy.global_position
-
-	active_tween = create_tween()
-	active_tween.set_parallel(true)
-	active_tween.tween_property(self, "global_position", target_pos, return_duration) \
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	active_tween.tween_property(self, "modulate:a", 1.0, fade_duration) \
-		.set_ease(Tween.EASE_OUT)
-		
-	active_tween.chain().tween_callback(func(): 
-		if is_instance_valid(return_dummy):
-			return_dummy.queue_free()
-			return_dummy = null
-		top_level = false
-	)
+	# Langsung lepas dari layout top_level dan kembalikan ke parent
+	top_level = false
 	
-	await active_tween.finished
-	global_position = target_pos
+	# Konversi posisi global (dari kursor) ke koordinat lokal parent agar lerp di parent mulus
+	if origin_parent:
+		position = origin_parent.get_global_transform().affine_inverse() * from_pos
+	else:
+		global_position = from_pos
+
+	# Fade in animasi saja, perpindahan posisi akan otomatis diurus oleh _process di card_hand
+	active_tween = create_tween()
+	active_tween.tween_property(self, "modulate:a", 1.0, fade_duration).set_ease(Tween.EASE_OUT)

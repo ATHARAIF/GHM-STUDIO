@@ -189,7 +189,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_hudgd")
-next_turn_hold_duration = 0.6
 hold_overlay_color = Color(0.6392157, 0.30588236, 0.13333334, 0.6666667)
 next_turn_fill_mode = 1
 
@@ -209,6 +208,9 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 4
 size_flags_stretch_ratio = 15.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -30)
+offset_transform_visual_only = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_6m254")
 
 [node name="Margin" type="MarginContainer" parent="main/CardPanel" unique_id=495349738]
@@ -229,7 +231,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(-50, 0)
+offset_transform_position = Vector2(-50, 20)
 offset_transform_visual_only = false
 theme = SubResource("Theme_ei7no")
 theme_override_font_sizes/font_size = 32

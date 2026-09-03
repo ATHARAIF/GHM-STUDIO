@@ -7,6 +7,7 @@ script = ExtResource("1_script")
 card_name = "Packing"
 process_id = "DP03"
 duration = 2
+has_config_popup = true
 availability = 2
 unlock_condition = "after_testing"
 metadata/_custom_type_script = "uid://uich76k1cing"

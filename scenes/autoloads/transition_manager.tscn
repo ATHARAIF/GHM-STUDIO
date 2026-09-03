@@ -35,7 +35,7 @@ shader_parameter/progress_bias = Vector2(0, 0)
 layer = 100
 script = ExtResource("1_a1b2c")
 current_preset = 0
-transition_duration = 0.7
+transition_duration = 0.6
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=652603460]
 material = SubResource("ShaderMaterial_x1y2z")

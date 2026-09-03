@@ -55,9 +55,11 @@ func show_popup(tile_data: Dictionary) -> void:
 func _on_confirm() -> void:
 	StageManager.resolve_interaction(current_tile_data, true)
 	queue_free()
-	get_parent().btn_end_turn.disabled = false
+	if get_parent() and "btn_next_turn" in get_parent():
+		get_parent().btn_next_turn.disabled = false
 
 func _on_cancel() -> void:
+	StageManager.resolve_interaction(current_tile_data, false)
 	queue_free()
-	get_parent().btn_end_turn.disabled = false
-
+	if get_parent() and "btn_next_turn" in get_parent():
+		get_parent().btn_next_turn.disabled = false

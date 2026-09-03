@@ -130,13 +130,16 @@ func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Di
 			var target_b = get_oldest_ready_batch(card_data.process_id)
 			if target_b:
 				target_b.apply_effects(tile_dict)
-			stats_changed.emit()
+			call_deferred("emit_signal", "stats_changed")
 			if tile_node and is_instance_valid(tile_node):
 				PlacementManager.remove_tile_from_grid(tile_node)
 			return # Do not append to active_tiles if instantly resolved
 			
 	active_tiles.append(tile_dict)
-
+	
+	# Emit agar UI/kartu di tangan langsung update (misal men-disable kartu yang konflik)
+	# Gunakan call_deferred supaya script card.gd punya waktu untuk men-set is_placed = true!
+	call_deferred("emit_signal", "stats_changed")
 
 func unregister_placed_tile(tile_node: Node3D) -> void:
 	for i in range(active_tiles.size() - 1, -1, -1):
@@ -409,4 +412,3 @@ func restore_room_state(room_id: String) -> void:
 
 
 	stats_changed.emit()
-

@@ -74,6 +74,7 @@ enum AvailabilityType { RECURRING_ANNUAL, ONE_TIME_UNLOCK, EVENT_DRIVEN }
 @export var unlock_condition: String = ""
 @export var required_completed_processes: Array[String] = []
 @export var conflicting_active_processes: Array[String] = []
+@export var invalid_if_processes_completed: Array[String] = []
 
 @export_group("Penalty Modifiers (If missed)")
 @export var expiration_turns: int = 3

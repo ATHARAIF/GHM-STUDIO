@@ -247,7 +247,7 @@ func _update_ui() -> void:
 			radar_graph.set_extra_item_value(0, 5, 0.0)
 
 func _on_confirm() -> void:
-	hide()
+	queue_free()
 	if not selected_method or not selected_tool: return
 		
 	var extra_data = {

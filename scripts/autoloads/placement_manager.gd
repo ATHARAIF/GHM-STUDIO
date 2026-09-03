@@ -80,7 +80,10 @@ func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 		return   # sudah dikunci oleh StageManager (sudah end turn)
 
 	var data: Dictionary = placement_data[tile]
-	var card_node: Control = data.get("card_node", null)
+	var raw_node = data.get("card_node")
+	var card_node: Control = null
+	if is_instance_valid(raw_node):
+		card_node = raw_node as Control
 
 	# Simpan offset berdasarkan ubin mana yang diklik pemain vs titik nol bendanya
 	grab_offset = coord - data.anchor
@@ -268,7 +271,7 @@ func _process(delta: float) -> void:
 				drag_dummy_card.hide()
 				drag_dummy_card.modulate.a = 0.0
 	else:
-		_clear_ghost()
+		ghost_visualizer.fade_out_and_clear()
 		if drag_dummy_card:
 			if not drag_dummy_card.visible or drag_dummy_card.modulate.a == 0.0:
 				drag_dummy_card.show()
@@ -357,7 +360,7 @@ func _try_place_move(mouse_pos: Vector2) -> void:
 
 func _cancel_move(skip_clear_ghost: bool = false) -> void:
 	if not skip_clear_ghost:
-		_clear_ghost()
+		ghost_visualizer.fade_out_and_clear()
 	set_process(false)
 	
 	var card = original_move_data.get("card_node", null)
@@ -416,12 +419,12 @@ func _cancel_move(skip_clear_ghost: bool = false) -> void:
 	current_tile_scene = null
 
 func end_drag() -> void:
-	_clear_ghost()
+	ghost_visualizer.fade_out_and_clear()
 	current_tile_scene = null
 	current_card_node = null
 
 func cancel_ghost() -> void:
-	_clear_ghost()
+	ghost_visualizer.fade_out_and_clear()
 
 func update_ghost(mouse_pos: Vector2) -> void:
 	if camera == null or current_tile_scene == null:

@@ -75,9 +75,22 @@ func _ready() -> void:
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_requested.connect(_on_card_placement_interaction_requested)
 
+func _has_active_popup() -> bool:
+	if layer_menu_tabs and layer_menu_tabs.visible: return true
+	if layer_coffee_log and layer_coffee_log.visible: return true
+	for c in get_children():
+		if c is CanvasLayer and c.has_node("popup_panel"):
+			return true
+	return false
+
 func _process(delta: float) -> void:
 	if btn_next_turn and not btn_next_turn.disabled:
-		var is_holding = is_holding_next_turn or Input.is_action_pressed("next_turn")
+		var has_popup = _has_active_popup()
+		var is_holding = false
+		
+		# Jangan proses input jika ada popup yang sedang terbuka
+		if not has_popup:
+			is_holding = is_holding_next_turn or Input.is_action_pressed("next_turn")
 		
 		# Simulasi tombol ditekan (mengubah tampilan ke 'pressed' style)
 		var current_state = "pressed" if is_holding else "normal"

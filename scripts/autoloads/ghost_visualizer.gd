@@ -80,6 +80,32 @@ func clear_ghost() -> void:
 	ghost_indicator_rotate_tween = null
 	current_tile_scene = null
 
+func fade_out_and_clear(duration: float = 0.15) -> void:
+	var old_float = ghost_float
+	var old_indicator = ghost_indicator
+	
+	ghost_float = null
+	ghost_indicator = null
+	ghost_float_rotate_tween = null
+	ghost_indicator_rotate_tween = null
+	current_tile_scene = null
+	
+	if old_float:
+		var tw = create_tween()
+		tw.tween_method(func(val): _apply_native_transparency(old_float, val), ghost_float_alpha, 0.0, duration)
+		tw.tween_callback(old_float.queue_free)
+	
+	if old_indicator:
+		var tw = create_tween()
+		tw.tween_method(func(val):
+			for child in old_indicator.find_children("*", "MeshInstance3D", true, false):
+				if child.has_meta("shadow_mat"):
+					var mat = child.get_meta("shadow_mat")
+					var c = mat.albedo_color
+					mat.albedo_color = Color(c.r, c.g, c.b, val)
+			, ghost_indicator_alpha, 0.0, duration)
+		tw.tween_callback(old_indicator.queue_free)
+
 func _find_base_tile_node(node: Node) -> Node3D:
 	for child in node.get_children():
 		if child.name.to_lower() == "base_tiles" and child is Node3D:
