@@ -174,6 +174,24 @@ signal title_clicked(button: MouseButton, index: int)
 
 var _encompassing_rect: Rect2
 var _title_rect_cache: Array[Rect2] = []
+var extra_datasets: Array = []
+var extra_datasets_count: int = 0:
+	set(v):
+		extra_datasets_count = v
+		extra_datasets.resize(v)
+		for i in range(v):
+			if typeof(extra_datasets[i]) != TYPE_DICTIONARY:
+				extra_datasets[i] = {"color": Color(0, 1, 0, 0.5), "outline_color": Color(0, 0.5, 0, 0.8), "outline_width": 1.5, "pulse_speed": 0.0, "pulse_min_alpha": 0.2, "values": []}
+			var vals = extra_datasets[i]["values"]
+			if typeof(vals) != TYPE_ARRAY:
+				extra_datasets[i]["values"] = []
+				vals = extra_datasets[i]["values"]
+			vals.resize(key_count)
+			for j in range(key_count):
+				if typeof(vals[j]) != TYPE_FLOAT and typeof(vals[j]) != TYPE_INT:
+					vals[j] = 0.0
+		notify_property_list_changed()
+		queue_redraw()
 var _encompassing_offset := Vector2()
 var radius_v2: Vector2:
 	get:
@@ -230,6 +248,20 @@ func get_item_tooltip(index: int) -> String:
 	return key_items[index].get_or_add("tooltip", "")
 
 
+func set_extra_item_value(dataset_index: int, item_index: int, value: float) -> void:
+	if dataset_index >= 0 and dataset_index < extra_datasets_count:
+		if item_index >= 0 and item_index < key_count:
+			if rounded:
+				extra_datasets[dataset_index]["values"][item_index] = clampf(roundf(snappedf(value, step)), min_value, max_value)
+			else:
+				extra_datasets[dataset_index]["values"][item_index] = clampf(snappedf(value, step), min_value, max_value)
+			queue_redraw()
+
+func set_extra_color(dataset_index: int, color: Color) -> void:
+	if dataset_index >= 0 and dataset_index < extra_datasets_count:
+		extra_datasets[dataset_index]["color"] = color
+		queue_redraw()
+
 func get_title_index(at_position: Vector2) -> int:
 	for index in range(key_count):
 		var rect := _title_rect_cache[index]
@@ -267,6 +299,19 @@ func _init() -> void:
 	key_items.resize(key_count)
 	# This is a hacky fix becuase drawing can get messed up without this.
 	item_rect_changed.connect(func(): _cache(); queue_redraw())
+
+var _pulse_time: float = 0.0
+
+func _process(delta: float) -> void:
+	var needs_redraw = false
+	for ds in extra_datasets:
+		if ds.get("pulse_speed", 0.0) > 0.0:
+			needs_redraw = true
+			break
+	if needs_redraw:
+		_pulse_time += delta
+		queue_redraw()
+
 
 
 
@@ -401,10 +446,82 @@ func _get_property_list() -> Array[Dictionary]:
 			"hint": PROPERTY_HINT_MULTILINE_TEXT,
 		})
 
+	
+	properties.append({
+		"name": "Extra Datasets",
+		"type": TYPE_NIL,
+		"usage": PROPERTY_USAGE_GROUP
+	})
+	properties.append({
+		"name": "extra_datasets_count",
+		"type": TYPE_INT,
+		"usage": PROPERTY_USAGE_DEFAULT
+	})
+	for i in range(extra_datasets_count):
+		properties.append({
+			"name": "extra_dataset_%d/color" % i,
+			"type": TYPE_COLOR,
+			"usage": PROPERTY_USAGE_DEFAULT
+		})
+		properties.append({
+			"name": "extra_dataset_%d/outline_color" % i,
+			"type": TYPE_COLOR,
+			"usage": PROPERTY_USAGE_DEFAULT
+		})
+		properties.append({
+			"name": "extra_dataset_%d/outline_width" % i,
+			"type": TYPE_FLOAT,
+			"usage": PROPERTY_USAGE_DEFAULT
+		})
+		properties.append({
+			"name": "extra_dataset_%d/pulse_speed" % i,
+			"type": TYPE_FLOAT,
+			"usage": PROPERTY_USAGE_DEFAULT,
+			"hint": PROPERTY_HINT_RANGE,
+			"hint_string": "0.0,10.0,0.1"
+		})
+		properties.append({
+			"name": "extra_dataset_%d/pulse_min_alpha" % i,
+			"type": TYPE_FLOAT,
+			"usage": PROPERTY_USAGE_DEFAULT,
+			"hint": PROPERTY_HINT_RANGE,
+			"hint_string": "0.0,1.0,0.01"
+		})
+		for j in range(key_count):
+			properties.append({
+				"name": "extra_dataset_%d/key_%d/value" % [i, j],
+				"type": TYPE_FLOAT,
+				"usage": PROPERTY_USAGE_DEFAULT
+			})
+
 	return properties
 
 
 func _get(property: StringName) -> Variant:
+	if property == "extra_datasets_count":
+		return extra_datasets_count
+	if property.begins_with("extra_dataset_"):
+		var parts = property.split("/")
+		var ds_idx = parts[0].trim_prefix("extra_dataset_").to_int()
+		if parts[1] == "color":
+			if ds_idx < extra_datasets.size():
+				return extra_datasets[ds_idx].get("color", Color(0, 1, 0, 0.5))
+		elif parts[1] == "outline_color":
+			if ds_idx < extra_datasets.size():
+				return extra_datasets[ds_idx].get("outline_color", Color(0, 0.5, 0, 0.8))
+		elif parts[1] == "outline_width":
+			if ds_idx < extra_datasets.size():
+				return extra_datasets[ds_idx].get("outline_width", 1.5)
+		elif parts[1] == "pulse_speed":
+			if ds_idx < extra_datasets.size():
+				return extra_datasets[ds_idx].get("pulse_speed", 0.0)
+		elif parts[1] == "pulse_min_alpha":
+			if ds_idx < extra_datasets.size():
+				return extra_datasets[ds_idx].get("pulse_min_alpha", 0.2)
+		elif parts[1].begins_with("key_"):
+			var k_idx = parts[1].trim_prefix("key_").to_int()
+			if ds_idx < extra_datasets.size() and k_idx < extra_datasets[ds_idx]["values"].size():
+				return extra_datasets[ds_idx]["values"][k_idx]
 	if property.begins_with("items/key_"):
 		var index := property.get_slice("_", 1).to_int()
 
@@ -419,6 +536,40 @@ func _get(property: StringName) -> Variant:
 
 
 func _set(property: StringName, value: Variant) -> bool:
+	if property == "extra_datasets_count":
+		extra_datasets_count = value
+		return true
+	if property.begins_with("extra_dataset_"):
+		var parts = property.split("/")
+		var ds_idx = parts[0].trim_prefix("extra_dataset_").to_int()
+		if parts[1] == "color":
+			if ds_idx < extra_datasets.size():
+				extra_datasets[ds_idx]["color"] = value
+				queue_redraw()
+			return true
+		elif parts[1] == "outline_color":
+			if ds_idx < extra_datasets.size():
+				extra_datasets[ds_idx]["outline_color"] = value
+				queue_redraw()
+			return true
+		elif parts[1] == "outline_width":
+			if ds_idx < extra_datasets.size():
+				extra_datasets[ds_idx]["outline_width"] = value
+				queue_redraw()
+			return true
+		elif parts[1] == "pulse_speed":
+			if ds_idx < extra_datasets.size():
+				extra_datasets[ds_idx]["pulse_speed"] = value
+			return true
+		elif parts[1] == "pulse_min_alpha":
+			if ds_idx < extra_datasets.size():
+				extra_datasets[ds_idx]["pulse_min_alpha"] = value
+			return true
+		elif parts[1].begins_with("key_"):
+			var k_idx = parts[1].trim_prefix("key_").to_int()
+			if ds_idx < extra_datasets.size() and k_idx < extra_datasets[ds_idx]["values"].size():
+				set_extra_item_value(ds_idx, k_idx, value)
+			return true
 	if property.begins_with("items/key_"):
 		var index := property.get_slice("_", 1).to_int()
 
@@ -559,6 +710,39 @@ func _rg_draw_graph() -> void:
 		points.append(radius_v2.lerp(target, value / max_value))
 
 	draw_polygon(points, [graph_color])
+
+	# Draw extra datasets
+	for ds in extra_datasets:
+		var ext_points := PackedVector2Array()
+		var vals = ds.get("values", [])
+		var clr: Color = ds.get("color", Color(0, 1, 0, 0.5))
+		var speed: float = ds.get("pulse_speed", 0.0)
+		if speed > 0.0:
+			var min_a = ds.get("pulse_min_alpha", 0.2)
+			var max_a = clr.a
+			var wave = (sin(_pulse_time * speed * PI) + 1.0) / 2.0 # 0.0 to 1.0
+			clr.a = lerp(min_a, max_a, wave)
+		for index in range(key_count):
+			var v: float = 0.0
+			if index < vals.size():
+				v = vals[index]
+			var t := _get_polygon_point(index)
+			ext_points.append(radius_v2.lerp(t, v / max_value))
+		draw_polygon(ext_points, [clr])
+		
+		# Draw outline
+		var out_clr: Color = ds.get("outline_color", Color(0, 0, 0, 0))
+		if speed > 0.0:
+			var min_a_out = ds.get("pulse_min_alpha", 0.2)
+			var max_a_out = out_clr.a
+			var wave_out = (sin(_pulse_time * speed * PI) + 1.0) / 2.0
+			out_clr.a = lerp(min_a_out, max_a_out, wave_out)
+			
+		var out_w = ds.get("outline_width", 1.5)
+		if out_w > 0 and out_clr.a > 0:
+			var out_points = ext_points.duplicate()
+			out_points.append(out_points[0])
+			draw_polyline(out_points, out_clr, out_w)
 
 
 func _rg_draw_graph_outline() -> void:

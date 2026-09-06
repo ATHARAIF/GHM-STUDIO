@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="4_awqfr"]
 [ext_resource type="Script" uid="uid://5kv8yfkw8yc8" path="res://scripts/tiles/multi_tree.gd" id="5_tqrw5"]
 [ext_resource type="PackedScene" uid="uid://ds6a03mqx3sm0" path="res://assets/3D/tiles/decorations/coffee_tree.glb" id="6_b3ucn"]
-[ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/ui/tile_labels.tscn" id="999_tilelbl"]
+[ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/tiles/tile_labels.tscn" id="999_tilelbl"]
 
 [sub_resource type="Animation" id="Animation_3xcip"]
 length = 0.001
@@ -292,4 +292,4 @@ grid_size = Vector2i(9, 3)
 spacing = Vector2(0.325, 0.3)
 
 [node name="tile_labels" parent="." unique_id=344741940 instance=ExtResource("999_tilelbl")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, -0.06298828, 0.9563322)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.973)

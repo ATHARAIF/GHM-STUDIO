@@ -7,8 +7,8 @@ uniform float shine_speed : hint_range(0, 25) = 1.0;
 uniform float shine_width : hint_range(0, 2) = 1.0;
 uniform float cycle_interval : hint_range(0, 100) = 1.0;
 uniform float angle_fade : hint_range(0, 1) = 1.0;
-uniform float time_offset = 0.0;      // di-set dari script tiap trigger: nge-reset komponen WAKTU, biar fase sapuan gak nyambung ke jam global
-uniform float position_offset = 0.0;  // di-set dari script tiap trigger: nge-cancel komponen POSISI GRID, biar pola sapuan gak beda-beda tergantung tile ditaro di cell mana
+uniform float local_time = 0.0;      // di-set dari script menggunakan Tween agar 100% tersinkron
+uniform float position_offset = 0.0;  // nge-cancel komponen POSISI GRID
 
 group_uniforms HighlightDirection;
 uniform float x_direction : hint_range(-1, 1) = 0.0;
@@ -16,7 +16,7 @@ uniform float y_direction : hint_range(-1, 1) = 0.0;
 uniform float z_direction : hint_range(-1, 1) = 1.0;
 
 float sawtooth(float x) {
-	float t = TIME + time_offset;
+	float t = local_time;
 	return 2.0 * ( (x + shine_speed * t) / (shine_width + cycle_interval) - floor( 0.5 + (x + shine_speed * t) / (shine_width + cycle_interval) ) );
 }
 

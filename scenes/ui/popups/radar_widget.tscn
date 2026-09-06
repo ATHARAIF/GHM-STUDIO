@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://dehofmfbhqm8m"]
+
+[ext_resource type="Script" uid="uid://dj2hfa37ymon4" path="res://addons/godot_radar_graph/radar_graph.gd" id="1_nkpwe"]
+[ext_resource type="FontFile" uid="uid://b761j33ito7o5" path="res://assets/font/Fredoka-Medium.ttf" id="2_7hpw1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2ks0"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_2w6iy"]
+default_base_scale = 1.08
+TooltipLabel/colors/font_color = Color(1, 1, 1, 1)
+TooltipLabel/colors/font_outline_color = Color(1, 1, 1, 1)
+TooltipLabel/constants/outline_size = 2
+TooltipLabel/font_sizes/font_size = 24
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_h2ks0")
+
+[node name="radar" type="Control" unique_id=956399758]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 418.48712
+offset_bottom = 305.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_2w6iy")
+script = ExtResource("1_nkpwe")
+radius = 135.0
+key_items = Array[Dictionary]([{
+"title": "Ripeness
+",
+"tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Fusce nisl sapien, cursus sit amet dui sit amet, pharetra egestas tortor.
+Praesent in porta nibh. Pellentesque ac mauris id purus mollis bibendum a sed sem. In at elementum velit, id dictum massa. Phasellus consectetur eros et nibh aliquet pretium.
+Proin imperdiet purus lorem, a euismod neque porttitor quis. Fusce quis cursus urna. Pellentesque gravida lacinia lectus, ac consequat mi.
+Duis ligula leo, bibendum a velit id, dignissim volutpat mi.
+Vivamus vel tempor lacus. Proin sit amet varius libero, vel placerat felis.",
+"value": 2.4000000000000004
+}, {
+"title": "Quantity",
+"tooltip": "",
+"value": 3.0
+}, {
+"title": "Quality",
+"tooltip": "",
+"value": 1.0
+}])
+max_value = 10.0
+font = ExtResource("2_7hpw1")
+font_size = 24
+font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
+font_outline_color = Color(0.5529412, 0.43137255, 0.3882353, 1)
+title_seperation = 5.0
+background_color = Color(0.4745098, 0.33333334, 0.28235295, 0.15686275)
+background_outline_color = Color(0.5529412, 0.43137255, 0.3882353, 1)
+background_outline_width = 3.0
+graph_color = Color(0.5058824, 0.78039217, 0.5176471, 1)
+graph_outline_color = Color(0.23636281, 0.4119341, 0.24574506, 1)
+graph_outline_width = 1.5
+show_guides = true
+guide_color = Color(0.36964208, 0.278331, 0.24590254, 1)
+guide_width = 1.2
+guide_step = 2.0
+items/key_0/value = 2.4000000000000004
+items/key_0/title = "Ripeness
+"
+items/key_0/tooltip = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Fusce nisl sapien, cursus sit amet dui sit amet, pharetra egestas tortor.
+Praesent in porta nibh. Pellentesque ac mauris id purus mollis bibendum a sed sem. In at elementum velit, id dictum massa. Phasellus consectetur eros et nibh aliquet pretium.
+Proin imperdiet purus lorem, a euismod neque porttitor quis. Fusce quis cursus urna. Pellentesque gravida lacinia lectus, ac consequat mi.
+Duis ligula leo, bibendum a velit id, dignissim volutpat mi.
+Vivamus vel tempor lacus. Proin sit amet varius libero, vel placerat felis."
+items/key_1/value = 3.0
+items/key_1/title = "Quantity"
+items/key_1/tooltip = ""
+items/key_2/value = 1.0
+items/key_2/title = "Quality"
+items/key_2/tooltip = ""
+metadata/_custom_type_script = "uid://dj2hfa37ymon4"

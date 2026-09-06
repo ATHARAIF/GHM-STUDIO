@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var lbl_defect = $popup_panel/margin/content/defect_rate/value
 @onready var btn_confirm = $popup_panel/margin/content/HBoxContainer/to_hopper
 @onready var btn_close = $popup_panel/close
-@onready var lbl_title = $CenterContainer/PanelContainer/VBoxContainer/Header/LblTitle
+@onready var lbl_title = $popup_panel/lbl_title
 
 var current_tile_data: Dictionary
 
@@ -17,7 +17,6 @@ func _ready() -> void:
 		
 	btn_confirm.text = "STORE TO HOPPER"
 	
-	hide()
 
 func show_popup(tile_data: Dictionary) -> void:
 	current_tile_data = tile_data
@@ -37,16 +36,30 @@ func show_popup(tile_data: Dictionary) -> void:
 	lbl_quality.text = q_text
 	lbl_quality.modulate = q_color
 	
-	lbl_yield.text = "%d Kg" % cb.cherry_kg
-	lbl_defect.text = "Defect Rate: %.1f%%" % cb.defect_rate
+	var preview_yield = 0
+	var em = Engine.get_main_loop().root.get_node_or_null("StageManager")
+	if em and em.current_location and em.current_location.current_tree:
+		var raw = em.current_location.current_tree.calculate_harvest_yield()
+		var card_effect = 1.0
+		if tile_data.has("data") and tile_data["data"] != null:
+			card_effect = 1.0 + tile_data["data"].base_mod_yield
+		if tile_data.has("mod_quant_pct"):
+			card_effect *= (1.0 + float(tile_data["mod_quant_pct"]))
+		preview_yield = int(clamp(raw * cb.accumulated_yield_modifier * card_effect, 0, 5000))
+		
+	lbl_yield.text = "%d Kg" % preview_yield
+	lbl_defect.text = "%.1f%%" % cb.defect_rate
 	
 	show()
 
 func _on_confirm() -> void:
 	StageManager.resolve_interaction(current_tile_data, true)
-	hide()
-	get_parent().btn_end_turn.disabled = false
+	queue_free()
+	if get_parent() and "btn_next_turn" in get_parent():
+		get_parent().btn_next_turn.disabled = false
 
 func _on_cancel() -> void:
-	hide()
-	get_parent().btn_end_turn.disabled = false
+	StageManager.resolve_interaction(current_tile_data, false)
+	queue_free()
+	if get_parent() and "btn_next_turn" in get_parent():
+		get_parent().btn_next_turn.disabled = false

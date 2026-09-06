@@ -6,11 +6,15 @@ extends Node3D
 @onready var label_indicator = $interaction_indicator
 
 @export_group("Colors")
+## Warna latar belakang (Background) label teks saat kartu sedang diproses/menunggu.
 @export var default_bg_color: Color = Color(0.0, 0.0, 0.0, 0.4)
+## Warna latar belakang (Background) label teks saat kartu berstatus READY (Siap panen/lanjut).
 @export var ready_bg_color: Color = Color(0.1, 0.8, 0.7, 0.6)
 
 @export_group("Animation")
+## Kecepatan animasi berkedip (Pulse) pada warna label saat status READY.
 @export var pulse_speed: float = 4.0
+## Tinggi animasi loncat-loncat (Bounce) pada label teks (meter).
 @export var bounce_height: float = 0.1
 
 var label_data: Dictionary = {}

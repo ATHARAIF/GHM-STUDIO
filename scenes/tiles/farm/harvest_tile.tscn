@@ -2,17 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://cldpacqp8h610" path="res://assets/3D/tiles/base_tiles/corner_border.glb" id="1_suf1s"]
 [ext_resource type="PackedScene" uid="uid://0orrrgvbpxpo" path="res://assets/3D/tiles/base_tiles/no_border.glb" id="2_43pgf"]
+[ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="3_qcmwn"]
 [ext_resource type="PackedScene" uid="uid://cnk12vhht73ne" path="res://assets/3D/tiles/base_tiles/1side_border.glb" id="3_utltn"]
-[ext_resource type="Script" uid="uid://5kv8yfkw8yc8" path="res://scripts/tiles/MultiTree.gd" id="4_utltn"]
+[ext_resource type="Script" uid="uid://5kv8yfkw8yc8" path="res://scripts/tiles/multi_tree.gd" id="4_utltn"]
 [ext_resource type="PackedScene" uid="uid://ds6a03mqx3sm0" path="res://assets/3D/tiles/decorations/coffee_tree.glb" id="5_we4im"]
-[ext_resource type="PackedScene" uid="uid://vuvopa6dsyav" path="res://assets/3D/tiles/decorations/harvest_decor.glb" id="6_f04fk"]
+[ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/tiles/tile_labels.tscn" id="999_tilelbl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43pgf"]
 resource_name = "color test"
 cull_mode = 2
-albedo_color = Color(0.93333334, 0.64705884, 0.27450982, 1)
+albedo_color = Color(0, 0.54901963, 0, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ceb03"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_lltmw"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.060000002, -0.5, 1, 0.120000005, 1),
 "format": 34896613377,
@@ -42,7 +43,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAAAAA////////AAD//wAA//8AAP////8AAAAA//8AAP////9U1QAAAAAAAFTVAAD//wAAVNUAAAAA//9U1f////////+/AAAAAP///78AAP//////v///AAD///+//////wAA//8AAP///////wAA//8AAP////////////8AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAFTV//8AAP//VNX///////9U1f//AAAAAFTV/7//v/+//7//v/+//7//v1TVVNVU1VTVVNVU1VTVVNX//////////////////////3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3+qKqoqqiqqKqoqqiqqKqoq")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_ceb03")
+shadow_mesh = SubResource("ArrayMesh_lltmw")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_utltn"]
 resource_name = "1side_border_Cube_016"
@@ -60,7 +61,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAAAAA////////AAD//wAA//8AAP////8AAAAA//8AAP////9U1QAAAAAAAFTVAAD//wAAVNUAAAAA//9U1f////////+/AAAAAP///78AAP//////v///AAD///+//////wAA//8AAP///////wAA//8AAP////////////8AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAFTV//8AAP//VNX///////9U1f//AAAAAFTV/7//v/+//7//v/+//7//v1TVVNVU1VTVVNVU1VTVVNX//////////////////////3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3+qKqoqqiqqKqoqqiqqKqoq")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_ceb03")
+shadow_mesh = SubResource("ArrayMesh_lltmw")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_we4im"]
 resource_name = "1side_border_Cube_016"
@@ -78,7 +79,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAAAAA////////AAD//wAA//8AAP////8AAAAA//8AAP////9U1QAAAAAAAFTVAAD//wAAVNUAAAAA//9U1f////////+/AAAAAP///78AAP//////v///AAD///+//////wAA//8AAP///////wAA//8AAP////////////8AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAFTV//8AAP//VNX///////9U1f//AAAAAFTV/7//v/+//7//v/+//7//v1TVVNVU1VTVVNVU1VTVVNX//////////////////////3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3+qKqoqqiqqKqoqqiqqKqoq")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_ceb03")
+shadow_mesh = SubResource("ArrayMesh_lltmw")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pwq35"]
 resource_name = "1side_border_Cube_016"
@@ -96,7 +97,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAAAAA////////AAD//wAA//8AAP////8AAAAA//8AAP////9U1QAAAAAAAFTVAAD//wAAVNUAAAAA//9U1f////////+/AAAAAP///78AAP//////v///AAD///+//////wAA//8AAP///////wAA//8AAP////////////8AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAFTV//8AAP//VNX///////9U1f//AAAAAFTV/7//v/+//7//v/+//7//v1TVVNVU1VTVVNVU1VTVVNX//////////////////////3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3+qKqoqqiqqKqoqqiqqKqoq")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_ceb03")
+shadow_mesh = SubResource("ArrayMesh_lltmw")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_xk55f"]
 resource_name = "1side_border_Cube_016"
@@ -114,7 +115,93 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAAAAA////////AAD//wAA//8AAP////8AAAAA//8AAP////9U1QAAAAAAAFTVAAD//wAAVNUAAAAA//9U1f////////+/AAAAAP///78AAP//////v///AAD///+//////wAA//8AAP///////wAA//8AAP////////////8AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAFTV//8AAP//VNX///////9U1f//AAAAAFTV/7//v/+//7//v/+//7//v1TVVNVU1VTVVNVU1VTVVNX//////////////////////3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3+qKqoqqiqqKqoqqiqqKqoq")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_ceb03")
+shadow_mesh = SubResource("ArrayMesh_lltmw")
+
+[sub_resource type="Animation" id="Animation_3xcip"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.2080615, 0.22484756, -1.1714532)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.29999998, 0.29999998, 0.29999998)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0.35168707)]
+}
+
+[sub_resource type="Animation" id="Animation_snrbu"]
+resource_name = "cangkul"
+length = 4.5666666
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.1, 1.5, 1.7, 2.6666667, 2.8666668, 3.266667, 3.4666667, 4.5666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.2080615, 0.22484756, -1.1714532), Vector3(-0.415, 0.225, -1.171), Vector3(-0.415, 0.3, -1.171), Vector3(-0.33035558, 0.3, -1.171), Vector3(-0.33, 0.225, -1.171), Vector3(0.583, 0.225, -1.171), Vector3(0.583, 0.3, -1.171), Vector3(0.6915167, 0.3, -1.171), Vector3(0.692, 0.225, -1.171), Vector3(1.4160178, 0.225, -1.171)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 4.266667, 4.5666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.29999998, 0.29999998, 0.29999998), Vector3(0.3, 0.3, 0.3), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.1, 1.49, 1.6, 2.65, 2.88, 3.26, 3.3666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.35168707), Vector3(0, 0, 0.35168707), Vector3(0, 0, -0.87266463), Vector3(0, 0, -0.87266463), Vector3(0, 0, 0.3525565), Vector3(0, 0, 0.35226634), Vector3(0, 0, -0.87266463), Vector3(0, 0, -0.87266463), Vector3(0, 0, 0.3525565)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_skilt"]
+_data = {
+&"RESET": SubResource("Animation_3xcip"),
+&"cangkul": SubResource("Animation_snrbu")
+}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7c56"]
 resource_name = "dirt"
@@ -243,7 +330,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8gf4j")
 
-[sub_resource type="MultiMesh" id="MultiMesh_f04fk"]
+[sub_resource type="MultiMesh" id="MultiMesh_lltmw"]
 transform_format = 1
 instance_count = 27
 mesh = SubResource("ArrayMesh_7b6nj")
@@ -251,82 +338,99 @@ buffer = PackedFloat32Array(-0.036914732, 0, -0.054237552, 0, 0, 0.020395724, 0,
 
 [node name="harvest_tile" type="Node3D" unique_id=699342220]
 
-[node name="base_tile" type="Node3D" parent="." unique_id=706541822]
+[node name="base_tiles" type="Node3D" parent="." unique_id=706541822]
 
-[node name="corner_border2" parent="base_tile" unique_id=231021662 instance=ExtResource("1_suf1s")]
+[node name="corner_border2" parent="base_tiles" unique_id=231021662 instance=ExtResource("1_suf1s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 
-[node name="corner_border" parent="base_tile/corner_border2" index="0" unique_id=1428358411]
+[node name="corner_border" parent="base_tiles/corner_border2" index="0" unique_id=259422383]
 mesh = SubResource("ArrayMesh_qcmwn")
 
-[node name="corner_border3" parent="base_tile" unique_id=1260972546 instance=ExtResource("1_suf1s")]
+[node name="corner_border3" parent="base_tiles" unique_id=1260972546 instance=ExtResource("1_suf1s")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, 0, 1)
 
-[node name="corner_border" parent="base_tile/corner_border3" index="0" unique_id=1428358411]
+[node name="corner_border" parent="base_tiles/corner_border3" index="0" unique_id=259422383]
 mesh = SubResource("ArrayMesh_utltn")
 
-[node name="corner_border4" parent="base_tile" unique_id=1330424589 instance=ExtResource("1_suf1s")]
+[node name="corner_border4" parent="base_tiles" unique_id=1330424589 instance=ExtResource("1_suf1s")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1, 0, 1)
 
-[node name="corner_border" parent="base_tile/corner_border4" index="0" unique_id=1428358411]
+[node name="corner_border" parent="base_tiles/corner_border4" index="0" unique_id=259422383]
 mesh = SubResource("ArrayMesh_we4im")
 
-[node name="corner_border5" parent="base_tile" unique_id=88316142 instance=ExtResource("1_suf1s")]
+[node name="corner_border5" parent="base_tiles" unique_id=88316142 instance=ExtResource("1_suf1s")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 0, -1)
 
-[node name="corner_border" parent="base_tile/corner_border5" index="0" unique_id=1428358411]
+[node name="corner_border" parent="base_tiles/corner_border5" index="0" unique_id=259422383]
 mesh = SubResource("ArrayMesh_qcmwn")
 
-[node name="no_border2" parent="base_tile" unique_id=1899927144 instance=ExtResource("2_43pgf")]
+[node name="no_border2" parent="base_tiles" unique_id=1899927144 instance=ExtResource("2_43pgf")]
 
-[node name="no_border" parent="base_tile/no_border2" index="0" unique_id=819013069]
+[node name="no_border" parent="base_tiles/no_border2" index="0" unique_id=2106633132]
 mesh = SubResource("ArrayMesh_pwq35")
 
-[node name="1side_border2" parent="base_tile" unique_id=605663851 instance=ExtResource("3_utltn")]
+[node name="1side_border2" parent="base_tiles" unique_id=605663851 instance=ExtResource("3_utltn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="1side_border" parent="base_tile/1side_border2" index="0" unique_id=899103081]
+[node name="1side_border" parent="base_tiles/1side_border2" index="0" unique_id=1749094167]
 mesh = SubResource("ArrayMesh_qcmwn")
 
-[node name="1side_border3" parent="base_tile" unique_id=1383426372 instance=ExtResource("3_utltn")]
+[node name="1side_border3" parent="base_tiles" unique_id=1383426372 instance=ExtResource("3_utltn")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 1)
 
-[node name="1side_border" parent="base_tile/1side_border3" index="0" unique_id=899103081]
+[node name="1side_border" parent="base_tiles/1side_border3" index="0" unique_id=1749094167]
 mesh = SubResource("ArrayMesh_utltn")
 
-[node name="1side_border4" parent="base_tile" unique_id=431656727 instance=ExtResource("3_utltn")]
+[node name="1side_border4" parent="base_tiles" unique_id=431656727 instance=ExtResource("3_utltn")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, 0, 0)
 
-[node name="1side_border" parent="base_tile/1side_border4" index="0" unique_id=899103081]
+[node name="1side_border" parent="base_tiles/1side_border4" index="0" unique_id=1749094167]
 mesh = SubResource("ArrayMesh_utltn")
 
-[node name="1side_border5" parent="base_tile" unique_id=474597567 instance=ExtResource("3_utltn")]
+[node name="1side_border5" parent="base_tiles" unique_id=474597567 instance=ExtResource("3_utltn")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 0, 0)
 
-[node name="1side_border" parent="base_tile/1side_border5" index="0" unique_id=899103081]
+[node name="1side_border" parent="base_tiles/1side_border5" index="0" unique_id=1749094167]
 mesh = SubResource("ArrayMesh_xk55f")
 
 [node name="decoration" type="Node3D" parent="." unique_id=489955234]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020626113, 0)
+
+[node name="jalur_cangkul" type="Node3D" parent="decoration" unique_id=58360879]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1.9854383)
+
+[node name="cangkul" parent="decoration/jalur_cangkul" unique_id=843398065 instance=ExtResource("3_qcmwn")]
+transform = Transform3D(0.28163785, -0.103344634, 0, 0.103344634, 0.28163785, 0, 0, 0, 0.29999998, -1.2080615, 0.22484756, -1.1714532)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="decoration/jalur_cangkul/cangkul" unique_id=1553512751]
+libraries/ = SubResource("AnimationLibrary_skilt")
+autoplay = &"cangkul"
+
+[node name="jalur_cangkul2" type="Node3D" parent="decoration" unique_id=1339441840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.033166528)
+
+[node name="cangkul" parent="decoration/jalur_cangkul2" unique_id=1979538296 instance=ExtResource("3_qcmwn")]
+transform = Transform3D(0.28163785, -0.103344634, 0, 0.103344634, 0.28163785, 0, 0, 0, 0.29999998, -1.2080615, 0.22484756, -1.1714532)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="decoration/jalur_cangkul2/cangkul" unique_id=471813851]
+libraries/ = SubResource("AnimationLibrary_skilt")
+autoplay = &"cangkul"
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="decoration" unique_id=305733650]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2812912, 0.09617047, -1.2942908)
-visible = false
-multimesh = SubResource("MultiMesh_f04fk")
+multimesh = SubResource("MultiMesh_lltmw")
 script = ExtResource("4_utltn")
 glb_file = ExtResource("5_we4im")
 grid_size = Vector2i(9, 3)
 spacing = Vector2(0.325, 0.3)
 
-[node name="harvest_decor" parent="." unique_id=1022004594 instance=ExtResource("6_f04fk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022, 0)
+[node name="tile_labels" parent="." unique_id=906784252 instance=ExtResource("999_tilelbl")]
 
-[editable path="base_tile/corner_border2"]
-[editable path="base_tile/corner_border3"]
-[editable path="base_tile/corner_border4"]
-[editable path="base_tile/corner_border5"]
-[editable path="base_tile/no_border2"]
-[editable path="base_tile/1side_border2"]
-[editable path="base_tile/1side_border3"]
-[editable path="base_tile/1side_border4"]
-[editable path="base_tile/1side_border5"]
+[editable path="base_tiles/corner_border2"]
+[editable path="base_tiles/corner_border3"]
+[editable path="base_tiles/corner_border4"]
+[editable path="base_tiles/corner_border5"]
+[editable path="base_tiles/no_border2"]
+[editable path="base_tiles/1side_border2"]
+[editable path="base_tiles/1side_border3"]
+[editable path="base_tiles/1side_border4"]
+[editable path="base_tiles/1side_border5"]

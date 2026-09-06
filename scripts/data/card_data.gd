@@ -1,72 +1,129 @@
+@tool
 extends Resource
 class_name CardData
 
+@export_group("Card Core Settings")
 @export var card_name: String = ""
 @export var process_id: String = ""
 @export var cost: int = 0
 @export var duration: int = 1
 
-@export_group("Effects")
-@export var effect_aroma: float = 0.0
-@export var effect_acidity: float = 0.0
-@export var effect_body: float = 0.0
-@export var effect_sweetness: float = 0.0
-@export var effect_flavor: float = 0.0
-@export var effect_bitterness: float = 0.0
-@export var effect_complexity: float = 0.0
-@export var effect_aftertaste: float = 0.0
-@export var effect_moisture: float = 0.0
-@export var effect_defect: float = 0.0
-@export var effect_yield: int = 0
-#@export var effect_growth_rate: int = 0
+@export_group("Card Visual & 3D")
+@export var card_color: Color = Color(0.85, 0.44, 0.25)
+@export var tile_shape_icon: Texture2D
+@export var tile_scene: PackedScene
+@export var requires_sunny_weather: bool = false
 
-@export_group("Penalty Effects (If missed)")
-@export var penalty_aroma: float = 0.0
-@export var penalty_acidity: float = 0.0
-@export var penalty_body: float = 0.0
-@export var penalty_sweetness: float = 0.0
-@export var penalty_flavor: float = 0.0
-@export var penalty_bitterness: float = 0.0
-@export var penalty_complexity: float = 0.0
-@export var penalty_aftertaste: float = 0.0
-@export var penalty_moisture: float = 0.0
-@export var penalty_defect: float = 0.0
-@export var penalty_yield: int = 0
+@export_group("Feature Toggles")
+@export var use_methods: bool = false:
+	set(val):
+		use_methods = val
+		notify_property_list_changed()
+		
+@export var use_tools: bool = false:
+	set(val):
+		use_tools = val
+		notify_property_list_changed()
 
-@export_group("Interaction")
-@export var placement_interaction: bool = false
-@export var requires_interaction: bool = false
-@export var interaction_type: String = "" # e.g., "HARVEST"
+@export var has_config_popup: bool = false:
+	set(val):
+		has_config_popup = val
+		notify_property_list_changed()
+		
+@export var has_result_popup: bool = false:
+	set(val):
+		has_result_popup = val
+		notify_property_list_changed()
+		
+@export var has_expiration_penalty: bool = false:
+	set(val):
+		has_expiration_penalty = val
+		notify_property_list_changed()
 
+@export_group("Interactive Popups")
+@export var custom_popup_ui: PackedScene
+@export var custom_result_popup_ui: PackedScene
+
+@export_group("Method & Tools Expansion")
+@export var popup_methods: Array[ProcessMethodData] = []
+@export var popup_tools: Array[ProcessMethodData] = []
+
+@export_group("Base Modifiers")
+@export var base_mod_aroma: float = 0.0
+@export var base_mod_acidity: float = 0.0
+@export var base_mod_body: float = 0.0
+@export var base_mod_sweetness: float = 0.0
+@export var base_mod_flavor: float = 0.0
+@export var base_mod_bitterness: float = 0.0
+@export var base_mod_moisture: float = 0.0
+@export var base_mod_defect: float = 0.0
+@export var base_mod_yield: float = 0.0
+@export var base_mod_health: float = 0.0
 
 @export_group("Availability")
 enum AvailabilityType { RECURRING_ANNUAL, ONE_TIME_UNLOCK, EVENT_DRIVEN }
-@export var availability: AvailabilityType = AvailabilityType.RECURRING_ANNUAL
-
-
-#RECURRING_ANNUAL
-#
-#Fungsi: Kartu muncul rutin setiap tahun pada jendela waktu tertentu (diatur oleh Active Start Turn sampai Active End Turn).
-#Aturan: Jika waktu sudah habis dan kartu belum dimainkan, kartu tersebut akan hangus dan Sistem Penalti akan aktif.
-#Dipakai oleh: Kartu Perawatan Lahan (Weeding, Pruning, Suckering) & Harvest.
+@export var availability: AvailabilityType = AvailabilityType.RECURRING_ANNUAL:
+	set(val):
+		availability = val
+		notify_property_list_changed()
 
 @export var active_start_turn: int = 1
 @export var active_end_turn: int = 20
-
-
-#ONE_TIME_UNLOCK
-#
-#Fungsi: Kartu disembunyikan sampai Tahun & Turn tertentu tercapai, lalu terbuka secara permanen.
-#Dipakai oleh: Biasanya untuk kartu-kartu perkenalan fitur baru (tutorial) atau upgrade mesin di masa depan.
 @export var unlock_year: int = 2025
 @export var unlock_turn: int = 1
-
-#EVENT_DRIVEN (Baru saja saya terapkan!)
-#
-#Fungsi: Kartu disembunyikan sampai syarat event tertentu (Unlock Condition) terpenuhi. Begitu syaratnya terpenuhi, kartu ini akan terus muncul dan TIDAK dibatasi oleh waktu (tidak akan pernah hangus/terlewat).
-#Penerapan: Saya sudah menyetel kartu pasca-panen ke tipe ini.
-#Kartu Cleaning sekarang mencari syarat "FP04" (Selesai Harvest).
-#Kartu Dry mencari syarat "WP01" (Selesai Cleaning).
-#Kartu Roasting mencari syarat "WP02" (Selesai Dry).
-#Efek: Berkat ini, kartu pasca-panen akan muncul berantai secara otomatis setelah panen beres, dan Anda bisa santai mengerjakannya tanpa diburu target batas Turn!
 @export var unlock_condition: String = ""
+@export var required_completed_processes: Array[String] = []
+@export var conflicting_active_processes: Array[String] = []
+@export var invalid_if_processes_completed: Array[String] = []
+
+@export_group("Penalty Modifiers (If missed)")
+@export var expiration_turns: int = 3
+@export var penalty_mod_aroma: float = 0.0
+@export var penalty_mod_acidity: float = 0.0
+@export var penalty_mod_body: float = 0.0
+@export var penalty_mod_sweetness: float = 0.0
+@export var penalty_mod_flavor: float = 0.0
+@export var penalty_mod_bitterness: float = 0.0
+@export var penalty_mod_moisture: float = 0.0
+@export var penalty_mod_defect: float = 0.0
+@export var penalty_mod_yield: float = 0.0
+@export var penalty_mod_health: float = 0.0
+
+func _validate_property(property: Dictionary) -> void:
+	# Hide Empty Group Headers
+	if property.usage & PROPERTY_USAGE_GROUP:
+		if property.name == "Method & Tools Expansion" and not (use_methods or use_tools):
+			property.usage = PROPERTY_USAGE_NONE
+		if property.name == "Interactive Popups" and not (has_config_popup or has_result_popup):
+			property.usage = PROPERTY_USAGE_NONE
+		if property.name == "Penalty Modifiers (If missed)" and not has_expiration_penalty:
+			property.usage = PROPERTY_USAGE_NONE
+
+	# Hide Method & Tools Expansion
+	if property.name == "popup_methods" and not use_methods:
+		property.usage = PROPERTY_USAGE_NONE
+	if property.name == "popup_tools" and not use_tools:
+		property.usage = PROPERTY_USAGE_NONE
+		
+	# Hide Interactive Popups
+	if property.name == "custom_popup_ui" and not has_config_popup:
+		property.usage = PROPERTY_USAGE_NONE
+	if property.name == "custom_result_popup_ui" and not has_result_popup:
+		property.usage = PROPERTY_USAGE_NONE
+		
+	# Hide Availability Fields
+	if availability != AvailabilityType.RECURRING_ANNUAL and property.name in ["active_start_turn", "active_end_turn", "required_completed_processes", "conflicting_active_processes"]:
+		property.usage = PROPERTY_USAGE_NONE
+	if availability != AvailabilityType.ONE_TIME_UNLOCK and property.name in ["unlock_year", "unlock_turn"]:
+		property.usage = PROPERTY_USAGE_NONE
+	if availability != AvailabilityType.EVENT_DRIVEN and property.name == "unlock_condition":
+		property.usage = PROPERTY_USAGE_NONE
+		
+	# Hide Expiration & Penalties
+	var penalty_vars = ["expiration_turns", "penalty_mod_aroma", "penalty_mod_acidity", "penalty_mod_body", "penalty_mod_sweetness", "penalty_mod_flavor", "penalty_mod_bitterness", "penalty_mod_moisture", "penalty_mod_defect", "penalty_mod_yield", "penalty_mod_health"]
+	if not has_expiration_penalty and property.name in penalty_vars:
+		property.usage = PROPERTY_USAGE_NONE
+		
+	# Expiration Turns is only for EVENT_DRIVEN / ONE_TIME_UNLOCK (Relative timer)
+	if availability == AvailabilityType.RECURRING_ANNUAL and property.name == "expiration_turns":
+		property.usage = PROPERTY_USAGE_NONE

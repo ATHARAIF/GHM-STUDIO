@@ -3,28 +3,33 @@ extends MultiMeshInstance3D
 
 # --- SETTING DI INSPECTOR ---
 
+## File Model 3D (.glb / .tscn) dari satu pohon yang akan digandakan.
 @export var glb_file: PackedScene :
 	set(value):
 		glb_file = value
 		_generate_grid()
 
+## Jumlah grid/pohon (X dan Y) yang akan ditanam dalam area ini (misal: 10x5 pohon).
 @export var grid_size: Vector2i = Vector2i(10, 5) :
 	set(value):
 		grid_size = value
 		_generate_grid()
 
+## Jarak renggang antar pohon pada sumbu X dan Z.
 @export var spacing: Vector2 = Vector2(1.2, 1.2) :
 	set(value):
 		spacing = value
 		_generate_grid()
 
 # Default scale udah diset ke 0.08 sesuai kebutuhan
+## Ukuran skala (Scale) 3D dari masing-masing pohon.
 @export var custom_scale: Vector3 = Vector3(0.08, 0.08, 0.08) :
 	set(value):
 		custom_scale = value
 		_generate_grid()
 
 # Rotasi dalam bentuk derajat (degrees) biar gampang ngisinya
+## Rotasi bawaan (Rotation) 3D dari masing-masing pohon (dalam derajat).
 @export var custom_rotation: Vector3 = Vector3(0, 0, 0) :
 	set(value):
 		custom_rotation = value
@@ -32,6 +37,7 @@ extends MultiMeshInstance3D
 
 # --- TAMBAHAN FITUR RANDOM ---
 @export_group("Randomization")
+## Centang untuk mengacak arah rotasi pohon secara otomatis agar terlihat natural.
 @export var enable_random_rotation: bool = false :
 	set(value):
 		enable_random_rotation = value
@@ -39,6 +45,7 @@ extends MultiMeshInstance3D
 
 # Range seberapa jauh objek boleh muter acak (dalam derajat)
 # Misal Y diisi 180, nanti tiap objek bakal punya rotasi Y acak antara -180 sampai 180
+## Batas rotasi acak maksimum (dalam derajat) jika fitur acak diaktifkan.
 @export var random_rotation_range: Vector3 = Vector3(0, 180, 0) :
 	set(value):
 		random_rotation_range = value

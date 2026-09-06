@@ -1,6 +1,11 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c7prpyahc2ia7"]
 
+[ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/popups/pruning_popup.tscn" id="1_a03s9"]
+[ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_b03s9"]
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+[ext_resource type="Resource" uid="uid://c83kndr7g8x1l" path="res://resources/cards/methods/pruning/single_stem.tres" id="2_c03s9"]
+[ext_resource type="PackedScene" uid="uid://b7cg6uvvi5ata" path="res://scenes/tiles/farm/pruning_tile.tscn" id="5_cpji7"]
+[ext_resource type="Texture2D" uid="uid://kioqh5ry4lr0" path="res://assets/ui/cards/tile_shapes/Type=3x2 T-Shape.png" id="6_dck3y"]
 
 [resource]
 script = ExtResource("1_script")
@@ -8,7 +13,15 @@ card_name = "Pruning"
 process_id = "FP02"
 cost = 250
 duration = 2
-placement_interaction = true
-active_start_turn = 3
-active_end_turn = 6
+card_color = Color(0, 0.78431374, 0.7019608, 1)
+tile_shape_icon = ExtResource("6_dck3y")
+tile_scene = ExtResource("5_cpji7")
+use_methods = true
+has_config_popup = true
+has_expiration_penalty = true
+custom_popup_ui = ExtResource("1_a03s9")
+popup_methods = Array[ExtResource("1_b03s9")]([ExtResource("2_c03s9")])
+active_start_turn = 8
+active_end_turn = 11
+invalid_if_processes_completed = Array[String](["FP04"])
 metadata/_custom_type_script = "uid://uich76k1cing"

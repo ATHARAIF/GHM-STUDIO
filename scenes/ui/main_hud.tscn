@@ -1,62 +1,40 @@
 [gd_scene format=3 uid="uid://cxy720dnitlvc"]
 
-[ext_resource type="PackedScene" uid="uid://dtksybc7vlbcf" path="res://scenes/cards/card_hand.tscn" id="1_2obvf"]
+[ext_resource type="PackedScene" uid="uid://c2uke58d1oepu" path="res://scenes/cards/card_hand.tscn" id="1_2obvf"]
 [ext_resource type="Script" uid="uid://ccgq84p33gpag" path="res://scripts/ui/main_hud.gd" id="1_hudgd"]
-[ext_resource type="FontFile" uid="uid://dv33rb6fgcmji" path="res://assets/font/SpecialGothicCondensedOne-Regular.ttf" id="2_0yliy"]
-[ext_resource type="Texture2D" uid="uid://8jbgent5edy1" path="res://assets/ui/icons/stats/calendar.svg" id="2_62l3y"]
 [ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="2_6230l"]
-[ext_resource type="Texture2D" uid="uid://drwd4ixsq2116" path="res://assets/ui/buttons/button.png" id="2_d282s"]
-[ext_resource type="Texture2D" uid="uid://c4yenilqdkg8v" path="res://assets/ui/icons/stats/money.svg" id="3_6m254"]
-[ext_resource type="Texture2D" uid="uid://cq3g4drr5dfs5" path="res://assets/ui/icons/stats/fame.svg" id="3_ei7no"]
-[ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/popups/pruning_popup.tscn" id="4_jciqr"]
-[ext_resource type="PackedScene" uid="uid://ddyxy0w123abf" path="res://scenes/ui/popups/dry_popup.tscn" id="5_dry"]
-[ext_resource type="Texture2D" uid="uid://dpcwbpo5g7wr6" path="res://assets/ui/hud/setting.svg" id="6_8npfc"]
-[ext_resource type="PackedScene" uid="uid://djheffwvvtjqr" path="res://scenes/ui/popups/harvest_method_popup.tscn" id="6_harvm"]
-[ext_resource type="Texture2D" uid="uid://b1o7el3rn2th7" path="res://assets/ui/hud/journal.svg" id="6_w0i6r"]
-[ext_resource type="PackedScene" uid="uid://b0iehonihftwv" path="res://scenes/ui/popups/harvest_result_popup.tscn" id="7_harvr"]
-[ext_resource type="Texture2D" uid="uid://b8woap0xskoli" path="res://assets/ui/hud/menu.svg" id="7_yrh06"]
-[ext_resource type="Texture2D" uid="uid://dnydooatnscro" path="res://assets/ui/hud/next_turn.svg" id="11_8npfc"]
+[ext_resource type="PackedScene" uid="uid://82dnybnms3pg" path="res://scenes/ui/components/top_bar.tscn" id="2_mti1m"]
+[ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="5_w0i6r"]
+[ext_resource type="Texture2D" uid="uid://ihmcjim1yn12" path="res://assets/ui/icons/Seting.png" id="6_phxny"]
+[ext_resource type="Script" uid="uid://b4xb04obxw8fb" path="res://themes/scripts/button_utility_anim.gd" id="7_8npfc"]
+[ext_resource type="Texture2D" uid="uid://ikg0asxmiwoj" path="res://assets/ui/icons/Fame.png" id="8_yrh06"]
+[ext_resource type="Texture2D" uid="uid://bdove5h4l2qds" path="res://assets/ui/icons/Money.png" id="9_quc01"]
+[ext_resource type="Texture2D" uid="uid://dnydooatnscro" path="res://assets/ui/hud/next_turn.svg" id="9_ww3d0"]
+[ext_resource type="Texture2D" uid="uid://b5o2gl8ws12qt" path="res://assets/ui/icons/Journal.png" id="10_c7of8"]
+[ext_resource type="Texture2D" uid="uid://18hnbec3jlp" path="res://assets/ui/icons/Menu.png" id="11_0yh2i"]
+[ext_resource type="Texture2D" uid="uid://bp1ggnl1u1gcf" path="res://assets/ui/ui_atlas.png" id="12_tu3eb"]
+[ext_resource type="Texture2D" uid="uid://l2ipisxhp2rc" path="res://assets/ui/icons/Next.png" id="13_sf4k2"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_62l3y"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6m254"]
+bg_color = Color(0.12156863, 0.16078432, 0.2, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0i6r"]
-bg_color = Color(0.9490196, 0.92156863, 0.8901961, 1)
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 22
-border_color = Color(0.6392157, 0.30588236, 0.13333334, 1)
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-expand_margin_left = 48.0
-expand_margin_top = 8.0
-expand_margin_right = 24.0
-expand_margin_bottom = 8.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62l3y"]
-bg_color = Color(0.9490196, 0.92156863, 0.8901961, 1)
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-expand_margin_left = 48.0
-expand_margin_top = 8.0
-expand_margin_right = 24.0
-expand_margin_bottom = 8.0
-
-[sub_resource type="Theme" id="Theme_ybjhs"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ww3d0"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crkyf"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgxqa"]
 bg_color = Color(0.61, 0.61, 0.61, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndglf"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhju8"]
 content_margin_left = 32.0
 content_margin_right = 32.0
 bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
@@ -67,7 +45,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5y718"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60tlk"]
 content_margin_left = 32.0
 content_margin_right = 32.0
 bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
@@ -78,7 +56,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8l86"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5b4bs"]
 content_margin_left = 32.0
 content_margin_right = 32.0
 bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
@@ -89,15 +67,15 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="Theme" id="Theme_w0i6r"]
+[sub_resource type="Theme" id="Theme_ei7no"]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
-Button/styles/disabled = SubResource("StyleBoxFlat_crkyf")
-Button/styles/hover = SubResource("StyleBoxFlat_ndglf")
-Button/styles/normal = SubResource("StyleBoxFlat_5y718")
-Button/styles/pressed = SubResource("StyleBoxFlat_b8l86")
+Button/styles/disabled = SubResource("StyleBoxFlat_kgxqa")
+Button/styles/hover = SubResource("StyleBoxFlat_yhju8")
+Button/styles/normal = SubResource("StyleBoxFlat_60tlk")
+Button/styles/pressed = SubResource("StyleBoxFlat_5b4bs")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phxny"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62l3y"]
 content_margin_left = 16.0
 content_margin_top = 16.0
 content_margin_right = 16.0
@@ -110,11 +88,11 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8npfc"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mti1m"]
 content_margin_left = 16.0
-content_margin_top = 32.0
+content_margin_top = 24.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
+content_margin_bottom = 8.0
 bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
 border_width_top = 8
 border_color = Color(0.64, 0.30293334, 0.13439998, 0)
@@ -123,7 +101,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrh06"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phxny"]
 content_margin_left = 16.0
 content_margin_top = 16.0
 content_margin_right = 16.0
@@ -147,18 +125,14 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lmxrk"]
-texture = ExtResource("2_d282s")
-texture_margin_left = 3.0
-texture_margin_top = 3.0
-texture_margin_right = 3.0
-texture_margin_bottom = 3.0
-expand_margin_left = 10.0
-expand_margin_top = 4.0
-expand_margin_right = 10.0
-expand_margin_bottom = 4.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybjhs"]
+bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_footer_floating"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7of8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ehkw3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2jeo"]
 bg_color = Color(0.12156863, 0.16078432, 0.2, 0)
 border_width_left = 2
 border_width_top = 2
@@ -170,8 +144,44 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="LabelSettings" id="LabelSettings_glx4a"]
-font_size = 17
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f2iq0"]
+content_margin_top = 15.0
+content_margin_right = 16.0
+content_margin_bottom = 17.0
+texture = ExtResource("12_tu3eb")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(0, 0, 55, 56)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_to61q"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ni41"]
+content_margin_top = 18.0
+content_margin_right = 16.0
+content_margin_bottom = 14.0
+texture = SubResource("CompressedTexture2D_to61q")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(114, 0, 55, 56)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xxbg1"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f8tiq"]
+content_margin_top = 15.0
+content_margin_right = 16.0
+content_margin_bottom = 17.0
+texture = SubResource("CompressedTexture2D_xxbg1")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(57, 0, 55, 56)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6230l"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -235,7 +245,7 @@ cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 
-[node name="overlays" type="Control" unique_id=1895636831]
+[node name="main_hud" type="Control" unique_id=1895636831]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -244,331 +254,239 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_hudgd")
+hold_overlay_color = Color(0.6392157, 0.30588236, 0.13333334, 0.6666667)
+next_turn_fill_mode = 1
 
 [node name="main" type="CanvasLayer" parent="." unique_id=2121045524]
 
-[node name="top_bar" type="PanelContainer" parent="main" unique_id=2015037588]
-custom_minimum_size = Vector2(0, 144)
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 128.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_62l3y")
+[node name="top_bar" parent="main" unique_id=1277406458 instance=ExtResource("2_mti1m")]
 
-[node name="MarginContainer" type="MarginContainer" parent="main/top_bar" unique_id=1681176630]
-layout_mode = 2
-theme_override_constants/margin_left = 48
-theme_override_constants/margin_top = 48
-theme_override_constants/margin_right = 48
-theme_override_constants/margin_bottom = 48
-
-[node name="background2" type="Panel" parent="main/top_bar/MarginContainer" unique_id=1836154682]
-custom_maximum_size = Vector2(558.22, -1)
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, 10.93)
-theme_override_styles/panel = SubResource("StyleBoxFlat_w0i6r")
-
-[node name="background" type="Panel" parent="main/top_bar/MarginContainer" unique_id=1999121067]
-custom_maximum_size = Vector2(558.22, -1)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_62l3y")
-
-[node name="hbox" type="HBoxContainer" parent="main/top_bar/MarginContainer" unique_id=1280108781]
-layout_mode = 2
-
-[node name="left" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox" unique_id=1833482248]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="calendar" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=785687431]
-layout_mode = 2
-
-[node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/calendar" unique_id=312933003]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-theme = SubResource("Theme_ybjhs")
-texture_normal = ExtResource("2_62l3y")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="main/top_bar/MarginContainer/hbox/left/calendar" unique_id=1140470906]
-custom_minimum_size = Vector2(160, 0)
-custom_maximum_size = Vector2(160, -1)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
-theme_override_font_sizes/font_size = 32
-text = "1 Autumn 2027"
-
-[node name="fame" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=1342661558]
-layout_mode = 2
-
-[node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/fame" unique_id=903975016]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-theme = SubResource("Theme_ybjhs")
-texture_normal = ExtResource("3_ei7no")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="main/top_bar/MarginContainer/hbox/left/fame" unique_id=1508862405]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
-theme_override_font_sizes/font_size = 32
-text = "50"
-
-[node name="money" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox/left" unique_id=353505207]
-layout_mode = 2
-
-[node name="icon_button" type="TextureButton" parent="main/top_bar/MarginContainer/hbox/left/money" unique_id=2050730404]
-modulate = Color(1, 0.8666667, 0, 1)
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-theme = SubResource("Theme_ybjhs")
-texture_normal = ExtResource("3_6m254")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="main/top_bar/MarginContainer/hbox/left/money" unique_id=651418384]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.23529412, 0.23137255, 0.22745098, 1)
-theme_override_font_sizes/font_size = 32
-text = "99,000,000"
-
-[node name="VSeparator" type="VSeparator" parent="main/top_bar/MarginContainer/hbox" unique_id=553869786]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/separator = SubResource("StyleBoxEmpty_ww3d0")
-
-[node name="right" type="HBoxContainer" parent="main/top_bar/MarginContainer/hbox" unique_id=228461792]
-layout_mode = 2
-theme_override_constants/separation = 24
-
-[node name="journal" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=1240284569]
-layout_mode = 2
-theme = SubResource("Theme_w0i6r")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_phxny")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8npfc")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yrh06")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
-icon = ExtResource("6_w0i6r")
-
-[node name="setting" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=762216103]
-layout_mode = 2
-theme = SubResource("Theme_w0i6r")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_phxny")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8npfc")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yrh06")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
-icon = ExtResource("6_8npfc")
-
-[node name="menu" type="Button" parent="main/top_bar/MarginContainer/hbox/right" unique_id=338788324]
-layout_mode = 2
-theme = SubResource("Theme_w0i6r")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_phxny")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8npfc")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yrh06")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
-icon = ExtResource("7_yrh06")
-
-[node name="header" type="ColorRect" parent="main" unique_id=866420312]
-visible = false
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 60.0
-grow_horizontal = 2
-color = Color(0.96, 0.90176, 0.82559997, 0)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="main/header" unique_id=726116962]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 29.0
-offset_top = -20.0
-offset_right = 392.0
-offset_bottom = 20.0
-grow_vertical = 2
-theme_override_constants/separation = 19
-alignment = 1
-
-[node name="calendar" type="Button" parent="main/header/HBoxContainer" unique_id=1604833920]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("2_0yliy")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxTexture_lmxrk")
-text = "📅 04 SPRING"
-
-[node name="fame" type="Button" parent="main/header/HBoxContainer" unique_id=501780795]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-text = "👑 10"
-
-[node name="money" type="Button" parent="main/header/HBoxContainer" unique_id=640228457]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-text = "🪙 100.000"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="main/header" unique_id=1916833963]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -343.0
-offset_top = -20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
-alignment = 1
-
-[node name="journal" type="Button" parent="main/header/HBoxContainer2" unique_id=684940315]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-text = "📖JOURNAL"
-
-[node name="setting" type="Button" parent="main/header/HBoxContainer2" unique_id=989173619]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-text = "⚙️SETTING
-"
-
-[node name="menu" type="Button" parent="main/header/HBoxContainer2" unique_id=1075578230]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-text = "Ⓜ️MENU"
-
-[node name="effect" type="Button" parent="main/header" unique_id=727160163]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -208.0
-offset_top = 48.0
-offset_right = 211.0
-offset_bottom = 84.0
-grow_horizontal = 2
-text = "🌧️ RAINING : ALL BEANS ARE WET!"
-
-[node name="footer" type="HBoxContainer" parent="main" unique_id=2031305487]
-custom_minimum_size = Vector2(0, 240)
+[node name="CardPanel" type="PanelContainer" parent="main" unique_id=177724962]
+custom_minimum_size = Vector2(1280, 200)
+custom_maximum_size = Vector2(-1, 200)
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -364.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 15.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -30)
+offset_transform_visual_only = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_6m254")
+
+[node name="Margin" type="MarginContainer" parent="main/CardPanel" unique_id=495349738]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 65
+theme_override_constants/margin_bottom = 10
+
+[node name="card_hand" parent="main/CardPanel/Margin" unique_id=803764765 instance=ExtResource("1_2obvf")]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="Button" type="Button" parent="main/CardPanel" unique_id=140520158]
+custom_minimum_size = Vector2(120, 120)
+custom_maximum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(-50, 20)
+offset_transform_visual_only = false
+theme = SubResource("Theme_ei7no")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_62l3y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mti1m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_phxny")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
+icon = ExtResource("9_ww3d0")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="main/CardPanel/Button" unique_id=27729894]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 106.0
+offset_right = 88.0
+offset_bottom = 129.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ybjhs")
+text = "HOLD"
+horizontal_alignment = 1
+
+[node name="footer" type="HBoxContainer" parent="main" unique_id=503426141]
+visible = false
+custom_minimum_size = Vector2(1280, 200)
+custom_maximum_size = Vector2(1280, 200)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="CardPanel" type="PanelContainer" parent="main/footer" unique_id=987654321]
-custom_minimum_size = Vector2(700, 0)
+[node name="VSeparator" type="VSeparator" parent="main/footer" unique_id=1839695945]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_footer_floating")
+theme_override_styles/separator = SubResource("StyleBoxEmpty_c7of8")
 
-[node name="Margin" type="MarginContainer" parent="main/footer/CardPanel" unique_id=123456789]
+[node name="main_hud" type="Control" parent="main" unique_id=1724372202]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_w0i6r")
+
+[node name="MarginContainer" type="MarginContainer" parent="main/main_hud" unique_id=1830627401]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="header" type="HBoxContainer" parent="main/main_hud/MarginContainer" unique_id=920752856]
 layout_mode = 2
-theme_override_constants/margin_left = 20
+size_flags_vertical = 0
+
+[node name="status" type="HBoxContainer" parent="main/main_hud/MarginContainer/header" unique_id=710975243]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="calendar" type="Button" parent="main/main_hud/MarginContainer/header/status" unique_id=367662172]
+custom_minimum_size = Vector2(168, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"button_status"
+theme_override_constants/h_separation = 23
+text = "6 AUTUMN 2077	"
+icon = ExtResource("6_phxny")
+alignment = 0
+expand_icon = true
+script = ExtResource("7_8npfc")
+
+[node name="fame" type="Button" parent="main/main_hud/MarginContainer/header/status" unique_id=587732213]
+custom_minimum_size = Vector2(168, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"button_status"
+theme_override_constants/h_separation = 23
+text = "Level 100"
+icon = ExtResource("8_yrh06")
+alignment = 0
+expand_icon = true
+script = ExtResource("7_8npfc")
+
+[node name="money" type="HBoxContainer" parent="main/main_hud/MarginContainer/header/status" unique_id=476909645]
+layout_mode = 2
+
+[node name="balance" type="Button" parent="main/main_hud/MarginContainer/header/status/money" unique_id=742613178]
+custom_minimum_size = Vector2(168, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"button_status"
+theme_override_constants/h_separation = 23
+text = "1,000,000"
+icon = ExtResource("9_quc01")
+alignment = 0
+expand_icon = true
+script = ExtResource("7_8npfc")
+
+[node name="Label" type="Label" parent="main/main_hud/MarginContainer/header/status/money" unique_id=778643705]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="main/main_hud/MarginContainer/header" unique_id=1841738384]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ehkw3")
+
+[node name="utility" type="HBoxContainer" parent="main/main_hud/MarginContainer/header" unique_id=1068831677]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="setting" type="Button" parent="main/main_hud/MarginContainer/header/utility" unique_id=1021493356]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_type_variation = &"button_utility"
+icon = ExtResource("6_phxny")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_8npfc")
+
+[node name="journal" type="Button" parent="main/main_hud/MarginContainer/header/utility" unique_id=887184403]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_type_variation = &"button_utility"
+icon = ExtResource("10_c7of8")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_8npfc")
+
+[node name="menu" type="Button" parent="main/main_hud/MarginContainer/header/utility" unique_id=1544106122]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_type_variation = &"button_utility"
+icon = ExtResource("11_0yh2i")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_8npfc")
+
+[node name="CardPanel" type="PanelContainer" parent="main/main_hud/MarginContainer" unique_id=2072311752]
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 8
+size_flags_stretch_ratio = 15.0
+offset_transform_enabled = true
+offset_transform_visual_only = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_x2jeo")
+
+[node name="Margin" type="MarginContainer" parent="main/main_hud/MarginContainer/CardPanel" unique_id=560620114]
+layout_mode = 2
+theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_right = 65
 theme_override_constants/margin_bottom = 10
 
-[node name="card_hand" parent="main/footer/CardPanel" unique_id=2079676402 instance=ExtResource("1_2obvf")]
+[node name="card_hand" parent="main/main_hud/MarginContainer/CardPanel/Margin" unique_id=1895987582 instance=ExtResource("1_2obvf")]
 layout_mode = 2
+size_flags_horizontal = 1
 
-[node name="Button" type="Button" parent="main/footer" unique_id=444878943]
-custom_minimum_size = Vector2(128, 128)
+[node name="next_turn" type="Button" parent="main/main_hud/MarginContainer/CardPanel" unique_id=1875962851]
+custom_minimum_size = Vector2(136, 56)
 layout_mode = 2
-size_flags_vertical = 4
-offset_transform_enabled = true
-offset_transform_position = Vector2(-90, 45)
-offset_transform_visual_only = false
-theme = SubResource("Theme_w0i6r")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_phxny")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8npfc")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yrh06")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
-icon = ExtResource("11_8npfc")
-icon_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="main" unique_id=290367956]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -150.0
-offset_right = 165.0
-offset_bottom = 70.0
-grow_vertical = 2
-
-[node name="DebugStats" type="VBoxContainer" parent="main/PanelContainer" unique_id=883771430]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Body" type="Label" parent="main/PanelContainer/DebugStats" unique_id=398006823]
-layout_mode = 2
-text = "Body: 0"
-label_settings = SubResource("LabelSettings_glx4a")
-
-[node name="Acidity" type="Label" parent="main/PanelContainer/DebugStats" unique_id=971912744]
-layout_mode = 2
-text = "Acidity: 0"
-label_settings = SubResource("LabelSettings_glx4a")
-
-[node name="Sweetness" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1951031391]
-layout_mode = 2
-text = "Sweetness: 0"
-label_settings = SubResource("LabelSettings_glx4a")
-
-[node name="Aroma" type="Label" parent="main/PanelContainer/DebugStats" unique_id=28017356]
-layout_mode = 2
-text = "Aroma: 0"
-label_settings = SubResource("LabelSettings_glx4a")
-
-[node name="Flavor" type="Label" parent="main/PanelContainer/DebugStats" unique_id=391158666]
-layout_mode = 2
-text = "Flavor: 0"
-label_settings = SubResource("LabelSettings_glx4a")
-
-[node name="Moisture" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1589169424]
-layout_mode = 2
-text = "Moisture: 0%"
-label_settings = SubResource("LabelSettings_glx4a")
-
-[node name="Defect" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1880209882]
-layout_mode = 2
-text = "Defect: 0%"
-label_settings = SubResource("LabelSettings_glx4a")
-
-[node name="Yield" type="Label" parent="main/PanelContainer/DebugStats" unique_id=570867853]
-layout_mode = 2
-text = "Yield: 0kg"
-label_settings = SubResource("LabelSettings_glx4a")
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_type_variation = &"button_utility"
+theme_override_styles/normal = SubResource("StyleBoxTexture_f2iq0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6ni41")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f8tiq")
+text = "NEXT TURN"
+icon = ExtResource("13_sf4k2")
+icon_alignment = 2
+expand_icon = true
 
 [node name="menu_tabs" type="CanvasLayer" parent="." unique_id=813571542]
 visible = false
@@ -832,15 +750,3 @@ text = "					Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum D
 					Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet "
 fit_content = true
 horizontal_alignment = 3
-
-[node name="PruningPopup" parent="." unique_id=723379850 instance=ExtResource("4_jciqr")]
-visible = false
-
-[node name="DryPopup" parent="." unique_id=825059901 instance=ExtResource("5_dry")]
-visible = false
-
-[node name="HarvestMethodPopup" parent="." unique_id=1563793212 instance=ExtResource("6_harvm")]
-visible = false
-
-[node name="HarvestResultPopup" parent="." unique_id=1722398812 instance=ExtResource("7_harvr")]
-visible = false

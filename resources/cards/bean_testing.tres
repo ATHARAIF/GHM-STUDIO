@@ -6,8 +6,7 @@
 script = ExtResource("1_script")
 card_name = "Bean Testing"
 process_id = "DP02"
-requires_interaction = true
-interaction_type = "TESTING"
+has_result_popup = true
 availability = 2
 unlock_condition = "after_roasting"
 metadata/_custom_type_script = "uid://uich76k1cing"

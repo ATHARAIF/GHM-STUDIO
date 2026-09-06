@@ -32,23 +32,24 @@ expand_margin_right = 16.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ivk4"]
 font = ExtResource("4_3tnri")
-font_size = 24
+font_size = 18
 font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_sijc1"]
 font = ExtResource("5_1e0n1")
-font_size = 24
+font_size = 18
 font_color = Color(0.4745098, 0.33333334, 0.28235295, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_4fwy0"]
 color = Color(0.24313726, 0.15294118, 0.13725491, 1)
+thickness = 2
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0otn1"]
 texture = ExtResource("6_q1gqe")
-texture_margin_left = 32.0
-texture_margin_top = 32.0
-texture_margin_right = 32.0
-texture_margin_bottom = 46.0
+texture_margin_left = 30.0
+texture_margin_top = 30.0
+texture_margin_right = 30.0
+texture_margin_bottom = 40.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7tcf"]
 content_margin_top = 44.0
@@ -80,6 +81,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.6)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1591585059]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -126,7 +128,7 @@ horizontal_alignment = 1
 
 [node name="LblYield" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=581023594]
 layout_mode = 2
-text = "Quantity"
+text = "Yield"
 horizontal_alignment = 1
 
 [node name="LblQuantityValue" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=1318724539]
@@ -137,6 +139,7 @@ text = "0 kg"
 horizontal_alignment = 1
 
 [node name="LblDefect" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=987654321]
+visible = false
 layout_mode = 2
 text = "Defect Rate: 0%"
 horizontal_alignment = 1
@@ -146,22 +149,23 @@ custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 text = "STORE TO HOPPER"
 
-[node name="popup_panel" type="PanelContainer" parent="." unique_id=112398520]
-custom_maximum_size = Vector2(540, 384.455)
+[node name="popup_panel" type="PanelContainer" parent="." unique_id=481764802]
+custom_minimum_size = Vector2(450, 280)
+custom_maximum_size = Vector2(450, 280)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 690.0
-offset_top = 460.0
-offset_right = -690.0
-offset_bottom = -460.0
+offset_left = 390.0
+offset_top = 235.0
+offset_right = -390.0
+offset_bottom = -235.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_1ujdb")
 
-[node name="lbl_title" type="Label" parent="popup_panel" unique_id=690528262]
+[node name="lbl_title" type="Label" parent="popup_panel" unique_id=614120192]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -173,29 +177,29 @@ text = "Harvest Result"
 label_settings = ExtResource("3_2ld4g")
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="popup_panel" unique_id=1014310019]
+[node name="margin" type="MarginContainer" parent="popup_panel" unique_id=190438826]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 42
 theme_override_constants/margin_right = 16
 
-[node name="content" type="VBoxContainer" parent="popup_panel/margin" unique_id=621135986]
+[node name="content" type="VBoxContainer" parent="popup_panel/margin" unique_id=3558511]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16
 
-[node name="quality" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=1193107329]
+[node name="quality" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=1551834829]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="lbl_quality" type="Label" parent="popup_panel/margin/content/quality" unique_id=137218999]
+[node name="lbl_quality" type="Label" parent="popup_panel/margin/content/quality" unique_id=180474679]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quality"
 label_settings = SubResource("LabelSettings_6ivk4")
 vertical_alignment = 1
 
-[node name="value" type="Label" parent="popup_panel/margin/content/quality" unique_id=1004042469]
+[node name="value" type="Label" parent="popup_panel/margin/content/quality" unique_id=2072759699]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "value"
@@ -203,18 +207,18 @@ label_settings = SubResource("LabelSettings_sijc1")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="yield" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=55972206]
+[node name="yield" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=1220809893]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="lbl_yield" type="Label" parent="popup_panel/margin/content/yield" unique_id=824527442]
+[node name="lbl_yield" type="Label" parent="popup_panel/margin/content/yield" unique_id=1500613433]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Yield"
 label_settings = SubResource("LabelSettings_6ivk4")
 vertical_alignment = 1
 
-[node name="value" type="Label" parent="popup_panel/margin/content/yield" unique_id=217538693]
+[node name="value" type="Label" parent="popup_panel/margin/content/yield" unique_id=2142227055]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "value"
@@ -222,18 +226,19 @@ label_settings = SubResource("LabelSettings_sijc1")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="defect_rate" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=1272990861]
+[node name="defect_rate" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=232588731]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="lbl_defect" type="Label" parent="popup_panel/margin/content/defect_rate" unique_id=558522325]
+[node name="lbl_defect" type="Label" parent="popup_panel/margin/content/defect_rate" unique_id=1449587333]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Defect rate"
 label_settings = SubResource("LabelSettings_6ivk4")
 vertical_alignment = 1
 
-[node name="value" type="Label" parent="popup_panel/margin/content/defect_rate" unique_id=1462402519]
+[node name="value" type="Label" parent="popup_panel/margin/content/defect_rate" unique_id=727068521]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "value"
@@ -241,17 +246,17 @@ label_settings = SubResource("LabelSettings_sijc1")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="separator2" type="HSeparator" parent="popup_panel/margin/content" unique_id=1761599177]
+[node name="separator2" type="HSeparator" parent="popup_panel/margin/content" unique_id=125198319]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_4fwy0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=1494538000]
+[node name="HBoxContainer" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=1342710278]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 6
 alignment = 1
 
-[node name="to_hopper" type="Button" parent="popup_panel/margin/content/HBoxContainer" unique_id=1508325851]
+[node name="to_hopper" type="Button" parent="popup_panel/margin/content/HBoxContainer" unique_id=335915021]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
@@ -259,13 +264,13 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_3tnri")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxTexture_0otn1")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_f7tcf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_0otn1")
 text = "Store to hopper"
 
-[node name="close" type="Button" parent="popup_panel" unique_id=1904548]
+[node name="close" type="Button" parent="popup_panel" unique_id=2110944415]
 custom_minimum_size = Vector2(64, 74)
 layout_mode = 2
 size_flags_horizontal = 8

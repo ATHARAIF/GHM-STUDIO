@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c2l2p1va76vy1"]
+
+[ext_resource type="PackedScene" uid="uid://dhlxe0q8f5nqk" path="res://assets/3D/buildings/production_house.glb" id="1_7r1nj"]
+[ext_resource type="Script" uid="uid://dhrxuhwglxqte" path="res://scripts/objects/bldg_prod_house.gd" id="1_dqj1g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_glx4a"]
+size = Vector3(5.5, 2.75, 4.5)
+
+[node name="bld_prod_house" type="Node3D" unique_id=1015193291]
+script = ExtResource("1_dqj1g")
+
+[node name="production_house" parent="." unique_id=1930268118 instance=ExtResource("1_7r1nj")]
+
+[node name="ClickableArea" type="Area3D" parent="." unique_id=1352141181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7560437, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickableArea" unique_id=1293430264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0056152344, 0.31213093, 0.5018616)
+shape = SubResource("BoxShape3D_glx4a")

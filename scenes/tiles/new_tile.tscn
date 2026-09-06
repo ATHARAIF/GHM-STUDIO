@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://bylh8ygcw5yd2"]
-
-[ext_resource type="PackedScene" uid="uid://dg70qkuxssj3b" path="res://assets/3D/tiles/base_tiles/tile_test_1.glb" id="1_3gvev"]
-
-[node name="new_tile" type="Node3D" unique_id=343877511]
-
-[node name="tile_test_1" parent="." unique_id=781666063 instance=ExtResource("1_3gvev")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)

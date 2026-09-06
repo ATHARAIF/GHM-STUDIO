@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://d3e0xdihdqcw4"]
-
-[ext_resource type="PackedScene" uid="uid://dh5e6j7k8mam0" path="res://scenes/cards/card_base.tscn" id="1_efyj7"]
-[ext_resource type="PackedScene" uid="uid://bh8hu8aw67wbf" path="res://scenes/tiles/process/cleaning_tile.tscn" id="2_v0qcw"]
-
-[node name="card_processing" unique_id=1810066855 instance=ExtResource("1_efyj7")]
-tile_scene = ExtResource("2_v0qcw")

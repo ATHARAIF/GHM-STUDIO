@@ -1,0 +1,257 @@
+[gd_scene format=3 uid="uid://crievlw0clnes"]
+
+[ext_resource type="Script" uid="uid://dsrs3tuntflxo" path="res://scripts/ui/components/building_hud.gd" id="1_0sdbt"]
+[ext_resource type="LabelSettings" uid="uid://bd7ro5fbkndri" path="res://themes/panel_title_font.tres" id="1_617po"]
+[ext_resource type="PackedScene" uid="uid://cba4o8s8ncx4" path="res://scenes/ui/components/building_item_panel.tscn" id="3_0sdbt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q2qv8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0rs5x"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0sdbt"]
+bg_color = Color(0, 0, 0, 0.42745098)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0rs5x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3vasv"]
+
+[node name="building_hud" type="Panel" unique_id=437774742]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_q2qv8")
+script = ExtResource("1_0sdbt")
+
+[node name="footer" type="Panel" parent="." unique_id=1463262184]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0rs5x")
+
+[node name="LabelItemContainer" type="PanelContainer" parent="footer" unique_id=540407957]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.2
+anchor_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="footer/LabelItemContainer" unique_id=1528649013]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 10
+
+[node name="LabelBox" type="HBoxContainer" parent="footer/LabelItemContainer/MarginContainer" unique_id=447509048]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="footer/LabelItemContainer/MarginContainer/LabelBox" unique_id=243708895]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Inventory/Shop"
+label_settings = ExtResource("1_617po")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnOptionBox" type="HBoxContainer" parent="footer/LabelItemContainer/MarginContainer/LabelBox" unique_id=509835069]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="footer/LabelItemContainer/MarginContainer/LabelBox/BtnOptionBox" unique_id=912257222]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0sdbt")
+text = "Tools"
+
+[node name="Button2" type="Button" parent="footer/LabelItemContainer/MarginContainer/LabelBox/BtnOptionBox" unique_id=1357888965]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0sdbt")
+text = "Tools"
+
+[node name="Button3" type="Button" parent="footer/LabelItemContainer/MarginContainer/LabelBox/BtnOptionBox" unique_id=1008030182]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0sdbt")
+text = "Tools"
+
+[node name="Button4" type="Button" parent="footer/LabelItemContainer/MarginContainer/LabelBox/BtnOptionBox" unique_id=850645375]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0sdbt")
+text = "Tools"
+
+[node name="Button5" type="Button" parent="footer/LabelItemContainer/MarginContainer/LabelBox/BtnOptionBox" unique_id=1225026363]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0sdbt")
+text = "Tools"
+
+[node name="ItemContainer" type="PanelContainer" parent="footer" unique_id=697645910]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginItem" type="MarginContainer" parent="footer/ItemContainer" unique_id=282037559]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 10
+
+[node name="ItemContainer" type="ScrollContainer" parent="footer/ItemContainer/MarginItem" unique_id=417123742]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemContainer" type="HBoxContainer" parent="footer/ItemContainer/MarginItem/ItemContainer" unique_id=680401573]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="building_item_panel" parent="footer/ItemContainer/MarginItem/ItemContainer/ItemContainer" unique_id=1515257976 instance=ExtResource("3_0sdbt")]
+layout_mode = 2
+
+[node name="LeftBtn" type="PanelContainer" parent="footer" unique_id=1810674680]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 150.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0rs5x")
+
+[node name="MarginLeft" type="MarginContainer" parent="footer/LeftBtn" unique_id=411483627]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 22
+
+[node name="Left" type="VBoxContainer" parent="footer/LeftBtn/MarginLeft" unique_id=1010273666]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BtnBack" type="Button" parent="footer/LeftBtn/MarginLeft/Left" unique_id=613993693]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back"
+
+[node name="BtnEye" type="Button" parent="footer/LeftBtn/MarginLeft/Left" unique_id=1833621834]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Eye"
+
+[node name="RightBtn" type="PanelContainer" parent="footer" unique_id=109984949]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -132.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3vasv")
+
+[node name="MarginRight" type="MarginContainer" parent="footer/RightBtn" unique_id=1203949654]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 22
+
+[node name="Right" type="VBoxContainer" parent="footer/RightBtn/MarginRight" unique_id=313856430]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BtnInven" type="Button" parent="footer/RightBtn/MarginRight/Right" unique_id=1342984385]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Inventory"
+
+[node name="BtnShop" type="Button" parent="footer/RightBtn/MarginRight/Right" unique_id=1634061897]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Shop"
+
+[node name="upgrade" type="Panel" parent="." unique_id=1080805997]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.30400002
+anchor_bottom = 0.37100002
+offset_left = 8.0
+offset_top = 0.11997986
+offset_right = 208.0
+offset_bottom = -0.120025635
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="upgrade" unique_id=632476171]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 7
+
+[node name="HBoxContainer" type="HBoxContainer" parent="upgrade/MarginContainer" unique_id=1880116988]
+layout_mode = 2
+
+[node name="lblLevel" type="Label" parent="upgrade/MarginContainer/HBoxContainer" unique_id=5390739]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Level"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="value" type="Label" parent="upgrade/MarginContainer/HBoxContainer" unique_id=272141339]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.1
+text = "1"
+vertical_alignment = 1
+
+[node name="BtnContainer" type="HBoxContainer" parent="upgrade/MarginContainer/HBoxContainer" unique_id=1636447470]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Button" type="Button" parent="upgrade/MarginContainer/HBoxContainer/BtnContainer" unique_id=466366216]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Upgrade"

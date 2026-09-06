@@ -1,0 +1,266 @@
+[gd_scene format=3 uid="uid://bcehomfgtbuls"]
+
+[ext_resource type="Script" uid="uid://bgl7itmh3ifw" path="res://scripts/tiles/main_farm.gd" id="1_lmksl"]
+[ext_resource type="PackedScene" uid="uid://cj3djbtpfddtc" path="res://scenes/tiles/base/tile_ground.tscn" id="2_4a7qg"]
+[ext_resource type="PackedScene" uid="uid://c2l2p1va76vy1" path="res://scenes/objects/bldg_prod_house.tscn" id="5_p8nxr"]
+[ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environment/surrounding_ground.tscn" id="7_wbbc8"]
+[ext_resource type="PackedScene" uid="uid://bdk741fhg4k35" path="res://assets/3D/environtment/tree/tree.glb" id="9_5fh0g"]
+[ext_resource type="PackedScene" uid="uid://c4c5cwiyvnpal" path="res://assets/3D/buildings/warehouse_1.glb" id="13_l53mr"]
+[ext_resource type="PackedScene" uid="uid://dj1s7kk2pyxc5" path="res://assets/3D/buildings/tool_shed_1.glb" id="14_3suc6"]
+[ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="15_juvny"]
+[ext_resource type="PackedScene" uid="uid://cxy720dnitlvc" path="res://scenes/ui/main_hud.tscn" id="15_p5s2n"]
+[ext_resource type="Texture2D" uid="uid://b83ny3br6cx0f" path="res://assets/ui/item_sprites/mukamuel.png" id="16_p5s2n"]
+[ext_resource type="PackedScene" uid="uid://ddyxy0w123abc" path="res://scenes/tiles/farm_info_tile.tscn" id="18_farm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dwf10"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_p8nxr"]
+sky_material = SubResource("ProceduralSkyMaterial_dwf10")
+
+[sub_resource type="Environment" id="Environment_lbc21"]
+background_mode = 2
+sky = SubResource("Sky_p8nxr")
+ambient_light_source = 2
+ambient_light_color = Color(0.67481464, 0.67481464, 0.6748146, 1)
+ssao_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3suc6"]
+albedo_color = Color(0, 0.6784314, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5gtgg"]
+
+[node name="ground" type="Node3D" unique_id=1641503286]
+script = ExtResource("1_lmksl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1708000246]
+environment = SubResource("Environment_lbc21")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=184307939]
+transform = Transform3D(-0.91205055, 0.16332261, -0.37615097, -0.08331026, 0.824343, 0.55992687, 0.4015261, 0.5420188, -0.7382362, -6.208373, 4.496863, -7.872581)
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_blur = 0.0
+directional_shadow_mode = 0
+directional_shadow_split_2 = 1.0
+directional_shadow_split_3 = 1.0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 20.0
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1644767472]
+transform = Transform3D(0.71569276, 0.36492097, -0.5954969, 0, 0.85264015, 0.52249855, 0.6984153, -0.37394843, 0.61022836, -5.872, 5.016, 6.179)
+projection = 1
+current = true
+size = 10.351
+far = 30.0
+
+[node name="tile_grounds" type="Node3D" parent="." unique_id=865124454]
+metadata/_edit_lock_ = true
+
+[node name="tile_ground11" parent="tile_grounds" unique_id=1652196520 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, -1)
+
+[node name="tile_ground12" parent="tile_grounds" unique_id=139279169 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 0)
+
+[node name="tile_ground13" parent="tile_grounds" unique_id=961909321 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 1)
+
+[node name="tile_ground14" parent="tile_grounds" unique_id=974510068 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -1)
+
+[node name="tile_ground15" parent="tile_grounds" unique_id=1474943789 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="tile_ground16" parent="tile_grounds" unique_id=1010187868 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 1)
+
+[node name="tile_ground17" parent="tile_grounds" unique_id=1662640217 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -1)
+
+[node name="tile_ground18" parent="tile_grounds" unique_id=274527066 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 0)
+
+[node name="tile_ground19" parent="tile_grounds" unique_id=278295728 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 1)
+
+[node name="tile_ground52" parent="tile_grounds" unique_id=2052176509 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 0)
+
+[node name="tile_ground53" parent="tile_grounds" unique_id=1483518040 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 0)
+
+[node name="tile_ground54" parent="tile_grounds" unique_id=233449050 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 0)
+
+[node name="tile_ground55" parent="tile_grounds" unique_id=696832363 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 0)
+
+[node name="tile_ground59" parent="tile_grounds" unique_id=893448684 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 1)
+
+[node name="tile_ground60" parent="tile_grounds" unique_id=1622250333 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 1)
+
+[node name="tile_ground61" parent="tile_grounds" unique_id=1163920806 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 1)
+
+[node name="tile_ground62" parent="tile_grounds" unique_id=2136798460 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 1)
+
+[node name="tile_ground64" parent="tile_grounds" unique_id=1363902265 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 2)
+
+[node name="tile_ground65" parent="tile_grounds" unique_id=296228805 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 2)
+
+[node name="tile_ground66" parent="tile_grounds" unique_id=1584942153 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 2)
+
+[node name="tile_ground67" parent="tile_grounds" unique_id=900909005 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 2)
+
+[node name="tile_ground68" parent="tile_grounds" unique_id=1472444681 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 2)
+
+[node name="tile_ground69" parent="tile_grounds" unique_id=1103138574 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 2)
+
+[node name="tile_ground70" parent="tile_grounds" unique_id=335768498 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 2)
+
+[node name="tile_ground71" parent="tile_grounds" unique_id=1215152802 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 3)
+
+[node name="tile_ground72" parent="tile_grounds" unique_id=1932211147 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 3)
+
+[node name="tile_ground73" parent="tile_grounds" unique_id=1853013671 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 3)
+
+[node name="tile_ground74" parent="tile_grounds" unique_id=691186701 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 3)
+
+[node name="tile_ground75" parent="tile_grounds" unique_id=1640798880 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 3)
+
+[node name="tile_ground76" parent="tile_grounds" unique_id=677379805 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 3)
+
+[node name="tile_ground77" parent="tile_grounds" unique_id=429655447 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 3)
+
+[node name="tile_ground80" parent="tile_grounds" unique_id=158540564 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, -1)
+
+[node name="tile_ground81" parent="tile_grounds" unique_id=1535705995 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, -1)
+
+[node name="tile_ground82" parent="tile_grounds" unique_id=1016589502 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, -1)
+
+[node name="tile_ground83" parent="tile_grounds" unique_id=291167767 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -1)
+
+[node name="tile_ground85" parent="tile_grounds" unique_id=1433100181 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -2)
+
+[node name="tile_ground86" parent="tile_grounds" unique_id=2051277699 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, -2)
+
+[node name="tile_ground87" parent="tile_grounds" unique_id=1906641763 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, -2)
+
+[node name="tile_ground88" parent="tile_grounds" unique_id=1675552582 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, -2)
+
+[node name="tile_ground89" parent="tile_grounds" unique_id=576604985 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, -2)
+
+[node name="tile_ground90" parent="tile_grounds" unique_id=499887962 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -2)
+
+[node name="tile_ground91" parent="tile_grounds" unique_id=1992768261 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -2)
+
+[node name="tile_ground92" parent="tile_grounds" unique_id=422451495 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -3)
+
+[node name="tile_ground93" parent="tile_grounds" unique_id=2091497314 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, -3)
+
+[node name="tile_ground94" parent="tile_grounds" unique_id=534101998 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, -3)
+
+[node name="tile_ground95" parent="tile_grounds" unique_id=876372003 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, -3)
+
+[node name="tile_ground96" parent="tile_grounds" unique_id=930326706 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, -3)
+
+[node name="tile_ground97" parent="tile_grounds" unique_id=995146321 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -3)
+
+[node name="tile_ground98" parent="tile_grounds" unique_id=2097120897 instance=ExtResource("2_4a7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -3)
+
+[node name="environtment" type="Node3D" parent="." unique_id=1341241664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015738487, 0)
+
+[node name="surrounding_ground" parent="environtment" unique_id=1246640729 instance=ExtResource("7_wbbc8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
+
+[node name="Plane" parent="environtment/surrounding_ground" index="1" unique_id=396562370]
+transform = Transform3D(3.9991813, 0, 2.0993392, 0, 4.5167108, 0, -2.0993392, 0, 3.9991813, 3.6134026, -0.117293745, 8.991949)
+surface_material_override/0 = SubResource("StandardMaterial3D_3suc6")
+
+[node name="FarmInfoTile" parent="." unique_id=1856349914 instance=ExtResource("18_farm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.801547, 0.23734295, -2.470316)
+
+[node name="Building" type="Node3D" parent="." unique_id=974439094]
+
+[node name="bld_prod_house" parent="Building" unique_id=1015193291 instance=ExtResource("5_p8nxr")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, 5.7, 0.631, 0.112)
+
+[node name="warehouse" parent="Building" unique_id=394532502 instance=ExtResource("13_l53mr")]
+transform = Transform3D(-0.45, 0, 6.794811e-08, 0, 0.45, 0, -6.794811e-08, 0, -0.45, 1.9668131, 0.691283, 5.7898884)
+
+[node name="tools_shed" parent="Building" unique_id=1737704632 instance=ExtResource("14_3suc6")]
+transform = Transform3D(0.060777232, 0, -0.49629238, 0, 0.5, 0, 0.49629238, 0, 0.060777232, 0.21877465, 0.2703983, -4.727638)
+
+[node name="player" type="MeshInstance3D" parent="Building/tools_shed" unique_id=1143777819]
+transform = Transform3D(0.10616478, 0, -0.28058693, 0, 0.3, 0, 0.28058693, 0, 0.10616478, -0.25187397, 0.1927265, -0.48531032)
+mesh = SubResource("CapsuleMesh_5gtgg")
+
+[node name="cangkul" parent="Building/tools_shed/player" unique_id=843398065 instance=ExtResource("15_juvny")]
+transform = Transform3D(0.86870503, 1.2123376, 1.3325124, -1.2739325, 1.4593935, -0.4972607, -1.2737539, -0.6327789, 1.4061091, -0.3084793, -0.078562975, -0.43156624)
+
+[node name="Sprite3D" type="Sprite3D" parent="Building/tools_shed/player" unique_id=312910031]
+transform = Transform3D(0.10606601, 0, -0.10606602, 0, 0.15, 0, 0.10606602, 0, 0.10606601, 0.33825684, 0.38494205, -0.37294197)
+texture = ExtResource("16_p5s2n")
+
+[node name="Tree" type="Node3D" parent="." unique_id=29535850]
+
+[node name="tree" parent="Tree" unique_id=1089535370 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.6856338, 0, 0.14108974, 0, 0.7, 0, -0.14108974, 0, -0.6856338, 0.31064606, 0.25996682, -7.0106587)
+
+[node name="tree2" parent="Tree" unique_id=1300836432 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.51975393, 0, -0.4688878, 0, 0.7, 0, 0.4688878, 0, -0.51975393, 0.7565496, 0.2599667, -6.697145)
+
+[node name="tree3" parent="Tree" unique_id=1305049494 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(0.3368115, 0, -0.6136432, 0, 0.7, 0, 0.6136432, 0, 0.3368115, 1.1742048, 0.25996658, -6.963652)
+
+[node name="tree4" parent="Tree" unique_id=1519145716 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.6954276, 0, 0.079877295, 0, 0.7, 0, -0.079877295, 0, -0.6954276, 1.4562097, 0.2599667, -6.8164)
+
+[node name="tree5" parent="Tree" unique_id=197109037 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.51975393, 0, -0.4688878, 0, 0.7, 0, 0.4688878, 0, -0.51975393, 1.9817346, 0.25996682, -6.4133315)
+
+[node name="tree6" parent="Tree" unique_id=1355694667 instance=ExtResource("9_5fh0g")]
+transform = Transform3D(-0.62772036, 0, 0.3097857, 0, 0.7, 0, -0.3097857, 0, -0.62772036, 2.015376, 0.2599667, -5.9937882)
+
+[node name="main_hud" parent="." unique_id=1895636831 instance=ExtResource("15_p5s2n")]
+next_turn_hold_duration = 0.0
+
+[editable path="environtment/surrounding_ground"]

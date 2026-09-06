@@ -1,9 +1,13 @@
 extends Control
 class_name Card
 
+## Scene 3D (Tile) yang akan di-spawn/dimunculkan saat kartu ini dijatuhkan ke lahan.
 @export var tile_scene: PackedScene
+## Data Resource (.tres) yang menyimpan informasi nama, biaya, efek, dan aturan kartu ini.
 @export var card_data: CardData
+## Durasi animasi memudar (fade out) saat kartu dimainkan (detik).
 @export var fade_duration: float = 0.15
+## Durasi animasi kartu kembali ke tangan jika batal ditaruh (detik).
 @export var return_duration: float = 0.25
 
 # ===== STATE =====
@@ -11,74 +15,120 @@ class_name Card
 # [2] DRAGGING - lagi ditarik user, entah dari hand atau dari hasil pickup ground (dragging=true)
 # [3] PLACED   - udah jadi tile di ground, card-nya di-hide tapi TETEP HIDUP (bukan di-free)
 
-var dragging: bool = false
 var is_placed: bool = false
+var is_disabled: bool = false
+var dragging: bool = false
 var origin_parent: Control
 var origin_index: int
 var is_outside_hand: bool = false
 var active_tween: Tween
+#var drag_dummy: Control
 var pending_rotation_steps: int = 0   # dipake pas resume drag dari pickup, biar rotasi kebawa
 
-@onready var lbl_process = $Background/VBox/Header/Margin/LblProcess
-@onready var lbl_target = $Background/VBox/Subheader/Margin/LblTarget
-@onready var lbl_turn = $Background/VBox/Body/BadgeLeft/LblTurn
-@onready var header_panel = $Background/VBox/Header
-@onready var subheader_panel = $Background/VBox/Subheader
-@onready var badge_left = $Background/VBox/Body/BadgeLeft
-@onready var badge_right = $Background/VBox/Body/BadgeRight
+var target_batch_year: int = -1
+var is_duplicate: bool = false
+
+var card_color: Color = Color(0.85, 0.44, 0.25)
+var tile_shape_icon: Texture2D
+var requires_sunny_weather: bool = false
+
+@onready var lbl_process = $base/color/process_name/label
+@onready var lbl_target = $base/lahan
+@onready var lbl_turn = $base/color/specs/container/turn/label
+@onready var lbl_cost = $base/color/cost/label
+
+@onready var tex_tile_type = $base/color/specs/container/tile_type
+@onready var tex_weather = $base/color/specs/container/weather
+@onready var tex_illustration = get_node_or_null("base/illustration")
+@onready var btn_info = $base/color/process_name/info_button
+
+@onready var pnl_base = $base
+@onready var pnl_specs = $base/color/specs
+@onready var pnl_color = $base/color
 
 func _ready() -> void:
 	origin_parent = get_parent()
 	mouse_filter = MOUSE_FILTER_STOP
-	
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+
 	if card_data:
 		_setup_ui()
 
+var hover_tween: Tween
+
+func _on_mouse_entered() -> void:
+	if dragging or is_placed or is_outside_hand or is_disabled: return
+	z_index = 10
+	if hover_tween: hover_tween.kill()
+	hover_tween = create_tween()
+	hover_tween.tween_property($base, "position:y", -20.0, 0.1).set_trans(Tween.TRANS_SINE)
+
+func _on_mouse_exited() -> void:
+	if dragging or is_placed or is_outside_hand or is_disabled: return
+	z_index = 0
+	if hover_tween: hover_tween.kill()
+	hover_tween = create_tween()
+	hover_tween.tween_property($base, "position:y", 0.0, 0.1).set_trans(Tween.TRANS_SINE)
+
 func _setup_ui() -> void:
+	if card_data:
+		tile_scene = card_data.tile_scene
+		tile_shape_icon = card_data.tile_shape_icon
+		requires_sunny_weather = card_data.requires_sunny_weather
+		card_color = card_data.card_color
+
 	if lbl_process:
 		lbl_process.text = card_data.card_name.to_upper()
 	if lbl_turn:
 		lbl_turn.text = str(card_data.duration)
+	if lbl_cost:
+		lbl_cost.text = "%d" % card_data.cost
 		
-	if lbl_target and header_panel and subheader_panel:
-		var style = header_panel.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
-		var sub_style = subheader_panel.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
-		var badge_l_style = badge_left.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
-		var badge_r_style = badge_right.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+	if tex_tile_type and tile_shape_icon:
+		tex_tile_type.texture = tile_shape_icon
 		
-		var loc = StageManager.current_location
-		var var_name = "Kopi"
-		if loc and loc.variety_data:
-			var_name = loc.variety_data.variety_name
-			
-		# Farm cards start with F, Process start with P or W
+	if tex_weather:
+		if requires_sunny_weather:
+			tex_weather.modulate.a = 1.0
+		else:
+			tex_weather.modulate.a = 0.0
+		
+	var loc = StageManager.current_location
+	var var_name = "Kopi"
+	if loc and loc.variety_data:
+		var_name = loc.variety_data.variety_name
+		
+	if lbl_target:
 		if card_data.process_id.begins_with("F"):
 			if loc:
 				lbl_target.text = loc.location_name.to_upper()
 			else:
 				lbl_target.text = "LAHAN"
-				
-			if style: style.bg_color = Color(0.18, 0.55, 0.55) # Cyan for farm
-			if sub_style: sub_style.bg_color = Color(0.12, 0.40, 0.40)
-			if badge_l_style: badge_l_style.bg_color = Color(0.12, 0.40, 0.40)
-			if badge_r_style: badge_r_style.bg_color = Color(0.12, 0.40, 0.40)
 		else:
-			lbl_target.text = ("%s %d" % [var_name, TimeManager.year]).to_upper()
+			var display_year = TimeManager.year
+			if target_batch_year != -1:
+				display_year = target_batch_year
+			lbl_target.text = ("%s %d" % [var_name, display_year]).to_upper()
 			
-			if style: style.bg_color = Color(0.63, 0.13, 0.35) # Magenta for process
-			if sub_style: sub_style.bg_color = Color(0.43, 0.08, 0.20)
-			if badge_l_style: badge_l_style.bg_color = Color(0.43, 0.08, 0.20)
-			if badge_r_style: badge_r_style.bg_color = Color(0.43, 0.08, 0.20)
-			
-		header_panel.add_theme_stylebox_override("panel", style)
-		subheader_panel.add_theme_stylebox_override("panel", sub_style)
-		badge_left.add_theme_stylebox_override("panel", badge_l_style)
-		badge_right.add_theme_stylebox_override("panel", badge_r_style)
+	if pnl_color and pnl_color.has_theme_stylebox("panel"):
+		var color_style = pnl_color.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		if color_style: 
+			color_style.bg_color = card_color
+			pnl_color.add_theme_stylebox_override("panel", color_style)
 
-
+func set_disabled(disabled: bool) -> void:
+	is_disabled = disabled
+	if is_disabled:
+		modulate = Color(0.5, 0.5, 0.5, 0.8) # Gray and slightly transparent
+	else:
+		modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 func _gui_input(event: InputEvent) -> void:
+	if is_disabled: return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if card_data and StageManager.budget < card_data.cost:
+			return # Cannot afford
 		_begin_drag(global_position)
 		get_viewport().set_input_as_handled()
 
@@ -88,6 +138,8 @@ func _gui_input(event: InputEvent) -> void:
 func resume_drag_at(mouse_pos: Vector2, initial_rotation_steps: int = 0) -> void:
 	pending_rotation_steps = initial_rotation_steps
 	is_placed = false
+	if origin_parent and origin_parent.has_method("set_card_played"):
+		origin_parent.set_card_played(card_data, false)
 	show()
 	modulate.a = 1.0
 	_begin_drag(mouse_pos - size / 2.0)
@@ -125,6 +177,19 @@ func _process(_delta: float) -> void:
 			PlacementManager.rotate_ghost()
 	else:
 		PlacementManager.cancel_ghost()
+		
+		var new_idx = origin_index
+		var siblings = origin_parent.get_children()
+		for i in siblings.size():
+			var sib = siblings[i]
+			if sib == self or not sib.visible or ("is_placed" in sib and sib.is_placed):
+				continue
+			if mouse_pos.x > sib.global_position.x + (sib.size.x * 0.5):
+				new_idx = i
+		
+		if new_idx != origin_index:
+			origin_index = new_idx
+			origin_parent.move_child(self, origin_index)
 
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		_end_drag()
@@ -146,6 +211,9 @@ func _update_visual_state() -> void:
 
 func _end_drag() -> void:
 	dragging = false
+	z_index = 0
+	if hover_tween: hover_tween.kill()
+	$base.position.y = 0.0
 
 	var mouse_pos := get_global_mouse_position()
 	var placed := false
@@ -157,6 +225,8 @@ func _end_drag() -> void:
 		# state [2] -> [3]: card gak di-free, cuma di-hide. Tetep hidup buat di-resume nanti.
 		is_placed = true
 		hide()
+		if origin_parent and origin_parent.has_method("set_card_played"):
+			origin_parent.set_card_played(card_data, true)
 		top_level = false
 		return
 
@@ -168,29 +238,21 @@ func _end_drag() -> void:
 	animate_return_from(start_pos)
 
 func animate_return_from(from_pos: Vector2) -> void:
+	dragging = false
+	is_outside_hand = false
+	is_placed = false
 	if active_tween:
 		active_tween.kill()
 
-	# matiin top_level dulu biar container ngitung posisi global yang BENER
+	# Langsung lepas dari layout top_level dan kembalikan ke parent
 	top_level = false
-	origin_parent.queue_sort()
+	
+	# Konversi posisi global (dari kursor) ke koordinat lokal parent agar lerp di parent mulus
+	if origin_parent:
+		position = origin_parent.get_global_transform().affine_inverse() * from_pos
+	else:
+		global_position = from_pos
 
-	# nunggu 2 frame: frame pertama buat container ngitung ulang total minimum_size
-	# (penting kalo card ini baru masuk lagi ke container di frame yang sama),
-	# frame kedua buat mastiin posisi child udah beneran final/stabil.
-	await get_tree().process_frame
-	await get_tree().process_frame
-
-	var target_pos := global_position   # sekarang valid, karena dihitung pas top_level udah false
-
-	top_level = true            # nyalain lagi buat proses tween manual
-	global_position = from_pos
-	modulate.a = 1.0             # langsung keliatan lagi, gak usah di-fade
-
+	# Fade in animasi saja, perpindahan posisi akan otomatis diurus oleh _process di card_hand
 	active_tween = create_tween()
-	active_tween.tween_property(self, "global_position", target_pos, return_duration) \
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-
-	await active_tween.finished
-	top_level = false
-	global_position = target_pos   # re-sync posisi lokal setelah top_level off, biar gak "loncat"
+	active_tween.tween_property(self, "modulate:a", 1.0, fade_duration).set_ease(Tween.EASE_OUT)

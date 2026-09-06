@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b6uium5s0ij74"]
+
+[ext_resource type="Script" uid="uid://ein7cl8x51x4" path="res://scripts/autoloads/placement_manager.gd" id="1_62lvg"]
+[ext_resource type="Script" uid="uid://co3mb0ncv6w4a" path="res://scripts/autoloads/ghost_visualizer.gd" id="2_2vm3b"]
+[ext_resource type="Material" uid="uid://cclhqnd4ffnnd" path="res://shaders/shine_overlay.tres" id="3_shine"]
+
+[node name="PlacementManager" type="Node" unique_id=1244060309]
+script = ExtResource("1_62lvg")
+float_height = 1.3
+place_duration = 0.4
+shine_material = ExtResource("3_shine")
+shine_duration_override = 0.67
+
+[node name="GhostVisualizer" type="Node" parent="." unique_id=1157116938]
+script = ExtResource("2_2vm3b")
+ghost_float_alpha = 1.0
+ghost_indicator_alpha = 0.5

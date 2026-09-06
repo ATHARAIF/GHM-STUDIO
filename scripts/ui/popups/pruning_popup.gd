@@ -1,24 +1,26 @@
 extends CanvasLayer
 
-@onready var hbox_methods = $CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods
-@onready var slider_hbox = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox
-@onready var slider_intensity = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox/SliderIntensity
-@onready var lbl_intensity_val = $CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox/LblIntensityVal
+@onready var hbox_methods = $popup_panel/margin/hbox/right_side/margin/method_container/option
+@onready var slider_container = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container
+@onready var slider_intensity = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container/slider
+@onready var lbl_intensity_val = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container/label
 
-@onready var btn_confirm = $popup_panel/margin/hbox/right_side/margin/content/confirm
+@onready var btn_confirm = $popup_panel/margin/hbox/right_side/margin/method_container/confirm
 @onready var btn_close = $popup_panel/close
-
-@onready var val_ripeness = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2/VRip
-@onready var val_quality = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2/VQual
-@onready var val_quantity = $CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2/VQuant
+@onready var btn_info = $popup_panel/Control/title_container/info_button
 
 @onready var lbl_farm_name = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_terroir
-@onready var val_plant = $popup_panel/margin/hbox/left_side/margin/content/plant/value
-#@onready var timeline_container = $new_popup_panel/center/vbox/detail/background/vbox/timeline/timeline
+@onready var lbl_arabica = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_arabica
+@onready var lbl_robusta = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_robusta
+@onready var val_variety = $popup_panel/margin/hbox/left_side/margin/content/variety/value
+
+@onready var radar_graph = $popup_panel/margin/hbox/left_side/margin/content/chart/radar
 
 var available_methods: Array[ProcessMethodData] = []
 var selected_method: ProcessMethodData
+var val_cost: Label
 
+var mod_health: float = 0.0
 var mod_acidity: float = 0.0
 var mod_aroma: float = 0.0
 var mod_sweetness: float = 0.0
@@ -29,13 +31,16 @@ var mod_quant_pct: float = 0.0
 
 var current_tile: Node3D
 var current_card_data: Resource
+var method_btn_template: Button
 
 func _ready() -> void:
-	$CenterContainer/PanelContainer/VBox/Header/LblTitle.text = "PRUNING"
+	if hbox_methods and hbox_methods.has_node("opt"):
+		method_btn_template = hbox_methods.get_node("opt").duplicate()
+		
+	# lbl_title.text = "PRUNING" # If needed
 	if StageManager.current_location:
 		lbl_farm_name.text = StageManager.current_location.location_name
 	
-	_load_methods()
 	_build_method_buttons()
 	
 	slider_intensity.value = 50.0
@@ -43,49 +48,61 @@ func _ready() -> void:
 	
 	btn_confirm.pressed.connect(_on_confirm)
 	btn_close.pressed.connect(_on_cancel)
+
+
 	
-	if has_node("/root/EventManager"):
-		var em = get_node("/root/EventManager")
-		em.card_placement_interaction_requested.connect(_on_card_placement_interaction_requested)
 	
 	UIUtils.setup_input_blocker(self)
 	hide()
-
-func _load_methods() -> void:
-	var path = "res://resources/methods/pruning/"
-	var dir = DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".tres"):
-				var res = load(path + file_name) as ProcessMethodData
-				if res:
-					available_methods.append(res)
-			file_name = dir.get_next()
 
 func _build_method_buttons() -> void:
 	for child in hbox_methods.get_children():
 		child.queue_free()
 		
+	if not method_btn_template:
+		return
+		
+	available_methods.sort_custom(func(a, b): return a.sort_order < b.sort_order)
 	for method in available_methods:
-		var btn = Button.new()
+		var btn = method_btn_template.duplicate()
+		btn.show()
+		
+		# Set text directly onto the button, since the new design doesn't use child labels
 		btn.text = method.method_name
-		btn.custom_minimum_size = Vector2(150, 100)
+		
+		# Jika ada icon di method data, set di sini
+		# var icon = btn.get_node_or_null("info/icon")
+		# if icon and method.method_icon: icon.texture = method.method_icon
+		
 		btn.pressed.connect(func(): _select_method(method))
 		hbox_methods.add_child(btn)
 
 func _select_method(method: ProcessMethodData) -> void:
-	selected_method = method
-	slider_hbox.show()
+	if selected_method == method:
+		selected_method = null
+	else:
+		selected_method = method
+		
+	btn_confirm.disabled = (selected_method == null)
+	if selected_method:
+		slider_container.show()
+		_on_slider_changed(slider_intensity.value)
+	else:
+		slider_container.hide()
+		if radar_graph:
+			radar_graph.set_item_value(0, 0.0)
+			radar_graph.set_item_value(1, 0.0)
+			radar_graph.set_item_value(2, 0.0)
 	
 	for child in hbox_methods.get_children():
 		if child is Button:
-			if child.text == method.method_name:
-				child.modulate = Color(0.2, 0.8, 0.2)
-			else:
-				child.modulate = Color(1.0, 1.0, 1.0)
-				
+			var is_selected = (selected_method and child.text == selected_method.method_name)
+			child.set_pressed_no_signal(is_selected)
+			
+	if not selected_method:
+		# TODO: Reset RadarGraph later
+		return
+		
 	_on_slider_changed(slider_intensity.value)
 
 func _on_slider_changed(val: float) -> void:
@@ -108,6 +125,7 @@ func _on_slider_changed(val: float) -> void:
 	var level = selected_method.slider_levels[idx]
 	
 	# Extract exactly from the resource! No math needed!
+	mod_health = level.mod_health
 	mod_acidity = level.mod_acidity
 	mod_aroma = level.mod_aroma
 	mod_sweetness = level.mod_sweetness
@@ -119,14 +137,12 @@ func _on_slider_changed(val: float) -> void:
 	# UI Visuals
 	lbl_intensity_val.text = level.level_name
 	
-	val_ripeness.text = level.ui_rip_text
-	val_ripeness.add_theme_color_override("font_color", level.ui_rip_color)
+	if radar_graph:
+		radar_graph.set_item_value(0, level.radar_ripeness)
+		radar_graph.set_item_value(1, level.radar_quantity)
+		radar_graph.set_item_value(2, level.radar_quality)
 	
-	val_quality.text = level.ui_qual_text
-	val_quality.add_theme_color_override("font_color", level.ui_qual_color)
-	
-	val_quantity.text = level.ui_quant_text
-	val_quantity.add_theme_color_override("font_color", level.ui_quant_color)
+	# TODO: Update RadarGraph with level.ui_rip_text, etc.
 
 
 func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, card_data: Resource) -> void:
@@ -138,37 +154,53 @@ func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, c
 func show_popup() -> void:
 	if StageManager.current_location:
 		lbl_farm_name.text = StageManager.current_location.location_name
+		
+		lbl_arabica.hide()
+		lbl_robusta.hide()
+		
 		if StageManager.current_location.variety_data:
-			val_plant.text = StageManager.current_location.variety_data.variety_name
+			if StageManager.current_location.variety_data.species_name.to_lower() == "arabica":
+				lbl_arabica.show()
+			elif StageManager.current_location.variety_data.species_name.to_lower() == "robusta":
+				lbl_robusta.show()
+			
+			if val_variety: val_variety.text = StageManager.current_location.variety_data.variety_name
 	
-	#_update_timeline()
 	selected_method = null
-	slider_hbox.hide()
+	slider_container.hide()
+	
+	if radar_graph:
+		radar_graph.set_item_value(0, 0.0)
+		radar_graph.set_item_value(1, 0.0)
+		radar_graph.set_item_value(2, 0.0)
 	
 	# Reset button colors
 	for child in hbox_methods.get_children():
 		if child is Button:
-			child.modulate = Color(1.0, 1.0, 1.0)
+			child.set_pressed_no_signal(false)
 			
 	slider_intensity.value = 50.0
+	
+	if current_card_data:
+		available_methods = current_card_data.popup_methods
+	_build_method_buttons()
+	
+	_reset_ui()
 	show()
 
-#func _update_timeline() -> void:
-#	var pending_id = ""
-#	if current_card_data and current_card_data.get("process_id"):
-#		pending_id = current_card_data.process_id
-#	UIUtils.build_farm_timeline(timeline_container, 16, 16, 10, 2, pending_id)
+
 
 func _on_confirm() -> void:
 	if selected_method == null:
 		return
 		
-	hide()
+	queue_free()
 	if has_node("/root/EventManager") and selected_method != null:
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_confirmed.emit("Pruning", current_tile, current_card_data, {
 			"pruning_method": selected_method.method_name,
 			"pruning_intensity": slider_intensity.value,
+			"mod_health": mod_health,
 			"mod_acidity": mod_acidity,
 			"mod_aroma": mod_aroma,
 			"mod_sweetness": mod_sweetness,
@@ -181,9 +213,23 @@ func _on_confirm() -> void:
 	current_card_data = null
 
 func _on_cancel() -> void:
-	hide()
+	queue_free()
 	if has_node("/root/EventManager"):
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_cancelled.emit("Pruning", current_tile, current_card_data)
 	current_tile = null
 	current_card_data = null
+
+
+func _reset_ui() -> void:
+	selected_method = null
+	btn_confirm.disabled = true
+	
+	# TODO: Reset RadarGraph later
+	
+	for child in hbox_methods.get_children():
+		if child is Button:
+			child.set_pressed_no_signal(false)
+
+	slider_container.hide()
+

@@ -12,7 +12,7 @@ static func _on_input_blocker_gui_input(event: InputEvent, popup_node: Node) -> 
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
 		popup_node.get_viewport().set_input_as_handled()
 
-static func build_farm_timeline(timeline_container: Container, circle_size: int = 48, line_len: int = 32, font_size: int = 24, line_height: int = 2, pending_process_id: String = "") -> void:
+static func build_farm_timeline(timeline_container: Container, circle_size: int = 16, line_len: int = 16, font_size: int = 10, line_height: int = 2, pending_process_id: String = "") -> void:
 	if not timeline_container: return
 	
 	for child in timeline_container.get_children():
@@ -20,14 +20,9 @@ static func build_farm_timeline(timeline_container: Container, circle_size: int 
 		
 	var stages = ["Planting", "Weeding", "Pruning", "Suckering", "Harvest"]
 	var process_map = ["FP00", "FP01", "FP02", "FP03", "FP04"]
+	var end_turns = [0, 11, 11, 13, 16]
 	
-	var c_stage = StageManager.current_stage
-	var mapped_current_stage = 0
-	if c_stage == 0: mapped_current_stage = 0
-	elif c_stage == 1: mapped_current_stage = 1
-	elif c_stage == 2: mapped_current_stage = 2
-	elif c_stage == 3: mapped_current_stage = 3
-	elif c_stage >= 4: mapped_current_stage = 4
+	var curr_turn = TimeManager.turn_in_year
 	
 	# Buat 5 stage dot
 	for i in range(5):
@@ -63,7 +58,7 @@ static func build_farm_timeline(timeline_container: Container, circle_size: int 
 			circle.color = Color(0.2, 0.8, 0.2) # Hijau (Selesai)
 		elif is_processing:
 			circle.color = Color(1.0, 0.8, 0.0) # Kuning (Sekarang)
-		elif i < mapped_current_stage:
+		elif curr_turn > end_turns[i]:
 			circle.color = Color(0.8, 0.2, 0.2) # Merah (Terlewati)
 		else:
 			circle.color = Color(0.4, 0.4, 0.4) # Abu-abu (Belum)

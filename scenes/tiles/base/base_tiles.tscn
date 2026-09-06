@@ -60,7 +60,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 [node name="tile_ground" parent="." unique_id=1025587759 instance=ExtResource("14_524co")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.005, -4)
 
-[node name="ground" parent="tile_ground" index="0" unique_id=79565428]
+[node name="ground" parent="tile_ground" index="0" unique_id=423765082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023077752, 0)
 
 [node name="1side_1corner_1" parent="." unique_id=955035052 instance=ExtResource("15_4ipuy")]
