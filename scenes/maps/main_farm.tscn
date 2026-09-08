@@ -206,7 +206,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -3)
 
 [node name="environtment" type="Node3D" parent="." unique_id=1341241664]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015738487, 0)
 
 [node name="surrounding_ground" parent="environtment" unique_id=1246640729 instance=ExtResource("7_wbbc8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)

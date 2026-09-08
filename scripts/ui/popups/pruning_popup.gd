@@ -232,4 +232,3 @@ func _reset_ui() -> void:
 			child.set_pressed_no_signal(false)
 
 	slider_container.hide()
-

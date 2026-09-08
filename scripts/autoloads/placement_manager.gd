@@ -26,6 +26,7 @@ var ground_tiles: Array[GroundTile] = []
 var grid: Dictionary = {}          # Vector2i -> GroundTile
 var cell_size: float = 2.0
 var grid_origin: Vector3 = Vector3.ZERO
+var highlighted_farm_tiles: Array[Node3D] = []
 
 var ground_top_offset: float = 0.0
 var tile_bottom_offset: float = 0.0
@@ -56,20 +57,36 @@ func _unhandled_input(event: InputEvent) -> void:
 				_try_pickup(event.position, true)
 
 func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
-	var world_pos = _get_ground_position(mouse_pos)
-	if world_pos == null:
-		return
+	print("TRY_PICKUP DIPANGGIL DI POSISI MOUSE: ", mouse_pos)
+	var tile: Node3D = null
+	
+	if camera:
+		var origin := camera.project_ray_origin(mouse_pos)
+		var dir := camera.project_ray_normal(mouse_pos)
+		var space_state = camera.get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(origin, origin + dir * 1000.0)
+		query.collide_with_areas = true
+		var result = space_state.intersect_ray(query)
+		if result:
+			print("Physics raycast hit: ", result.collider.name)
+			var node = result.collider
+			while node != null:
+				if placement_data.has(node):
+					tile = node
+					print("Found valid machine tile via physics: ", tile.name)
+					break
+				node = node.get_parent()
 
-	var coord := _world_to_grid(world_pos)
-	if not grid.has(coord):
-		return
-
-	var gt: GroundTile = grid[coord]
-	if not gt.is_occupied:
-		return
-
-	var tile: Node3D = gt.placed_tile
-	if not placement_data.has(tile):
+	if tile == null:
+		var world_pos = _get_ground_position(mouse_pos)
+		if world_pos == null: return
+		var coord := _world_to_grid(world_pos)
+		if not grid.has(coord): return
+		var gt: GroundTile = grid[coord]
+		if not gt.is_occupied: return
+		tile = gt.placed_tile
+		
+	if not tile or not placement_data.has(tile):
 		return   # data gak ketemu, aman-in aja gak diapa-apain
 		
 	if StageManager.is_tile_ready_for_interaction(tile):
@@ -80,17 +97,29 @@ func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 		return   # sudah dikunci oleh StageManager (sudah end turn)
 
 	var data: Dictionary = placement_data[tile]
+	
 	var raw_node = data.get("card_node")
 	var card_node: Control = null
 	if is_instance_valid(raw_node):
 		card_node = raw_node as Control
 
 	# Simpan offset berdasarkan ubin mana yang diklik pemain vs titik nol bendanya
-	grab_offset = coord - data.anchor
+	var click_coord = data.anchor
+	var world_pos = _get_ground_position(mouse_pos)
+	if world_pos != null:
+		var c = _world_to_grid(world_pos)
+		if grid.has(c) and grid[c].is_occupied and grid[c].placed_tile == tile:
+			click_coord = c
+			
+	grab_offset = click_coord - data.anchor
 
 	# (We no longer abort if card_node is null. The CardHand will auto-spawn it because of stats_changed.emit())
 
 	if instant_cancel:
+		if data.get("card_data") is ItemData:
+			print("Mesin tidak bisa dikembalikan ke tangan dengan klik kanan!")
+			return
+			
 		if card_node and is_instance_valid(card_node) and card_node.has_method("set"):
 			card_node.set("is_placed", false)
 			var op = card_node.get("origin_parent")
@@ -149,7 +178,7 @@ func register_ground_tiles(tiles: Array[GroundTile]) -> void:
 	if tiles.is_empty():
 		return
 
-	ground_top_offset = _get_half_height(tiles[0])
+	ground_top_offset = _get_top_y(tiles[0])
 	cell_size = _detect_cell_size(tiles)
 	grid_origin = _find_min_corner(tiles)
 
@@ -174,7 +203,7 @@ func begin_drag(tile_scene: PackedScene, card_node: Control = null, initial_rota
 	ghost_visual_rotation = float(initial_rotation_steps) * 90.0
 	current_shape = _rotate_shape(current_base_shape, rotation_steps)
 	var temp = tile_scene.instantiate()
-	tile_bottom_offset = _get_half_height(temp)
+	tile_bottom_offset = _get_bottom_y(temp)
 	temp.free()
 
 func rotate_ghost() -> void:
@@ -205,8 +234,10 @@ func _rotate_shape(shape: Array[Vector2i], steps: int) -> Array[Vector2i]:
 
 
 func _begin_move_tile(tile: Node3D, data: Dictionary) -> void:
+	toggle_farm_highlight(true)
 	moving_tile = tile
 	original_move_data = data.duplicate()
+	tile_bottom_offset = _get_bottom_y(tile)
 	
 	for offset in data.shape:
 		var c: Vector2i = data.anchor + offset
@@ -221,7 +252,7 @@ func _begin_move_tile(tile: Node3D, data: Dictionary) -> void:
 	ghost_visual_rotation = float(rotation_steps) * 90.0
 	current_shape = _rotate_shape(current_base_shape, rotation_steps)
 	
-	if data.has("card_data"):
+	if data.get("card_data") is CardData:
 		var ch = null
 		var hands = get_tree().current_scene.find_children("card_hand", "", true, false)
 		for hand in hands:
@@ -327,7 +358,7 @@ func _try_place_move(mouse_pos: Vector2) -> void:
 		
 	var anchor_tile: GroundTile = grid[anchor_coord]
 	var final_pos = anchor_tile.global_position
-	final_pos.y += ground_top_offset + tile_bottom_offset
+	final_pos.y += ground_top_offset - tile_bottom_offset
 	moving_tile.rotation_degrees.y = rotation_steps * 90.0
 	
 	var start_pos = final_pos
@@ -351,10 +382,19 @@ func _try_place_move(mouse_pos: Vector2) -> void:
 	data["shape"] = shape.duplicate()
 	data["rotation_steps"] = rotation_steps
 	
+	var item_data = data.get("card_data")
+	if item_data is ItemData:
+		for m_id in FactoryManager.placed_machines:
+			if FactoryManager.placed_machines[m_id]["data"] == item_data:
+				FactoryManager.placed_machines[m_id]["position"] = final_pos
+				break
+	
 	moving_tile = null
 	if drag_dummy_card:
 		drag_dummy_card.queue_free()
 		drag_dummy_card = null
+	if not original_move_data.is_empty():
+		toggle_farm_highlight(false)
 	original_move_data.clear()
 	current_tile_scene = null
 
@@ -372,10 +412,37 @@ func _cancel_move(skip_clear_ghost: bool = false) -> void:
 			if op and op.has_method("set_card_played") and original_move_data.has("card_data"):
 				op.set_card_played(original_move_data["card_data"], false)
 	
-	StageManager.unregister_placed_tile(moving_tile)
-	if placement_data.has(moving_tile):
-		placement_data.erase(moving_tile)
-	moving_tile.queue_free()
+	var is_item = original_move_data.get("card_data") is ItemData
+	
+	var temp_tile = moving_tile
+	moving_tile = null
+	
+	if drag_dummy_card:
+		drag_dummy_card.queue_free()
+		drag_dummy_card = null
+		
+	if not is_item:
+		if temp_tile:
+			StageManager.unregister_placed_tile(temp_tile)
+			if placement_data.has(temp_tile):
+				placement_data.erase(temp_tile)
+			temp_tile.queue_free()
+	else:
+		if temp_tile:
+			# Kembalikan mesin ke posisi semula
+			var anchor = original_move_data["anchor"]
+			for offset in original_move_data["shape"]:
+				var c = anchor + offset
+				if grid.has(c):
+					grid[c].occupy(temp_tile)
+			temp_tile.show()
+			
+			var final_pos = grid[anchor].global_position
+			final_pos.y += ground_top_offset - tile_bottom_offset
+			temp_tile.global_position = final_pos
+			temp_tile.rotation_degrees.y = original_move_data["rotation_steps"] * 90.0
+		
+		# Jangan di queue_free(), biarkan dia di placement_data
 	
 	if card and is_instance_valid(card):
 		if card.has_method("set"):
@@ -411,10 +478,8 @@ func _cancel_move(skip_clear_ghost: bool = false) -> void:
 						c.call("animate_return_from", mouse_pos)
 					break
 			
-	moving_tile = null
-	if drag_dummy_card:
-		drag_dummy_card.queue_free()
-		drag_dummy_card = null
+	if not original_move_data.is_empty():
+		toggle_farm_highlight(false)
 	original_move_data.clear()
 	current_tile_scene = null
 
@@ -472,7 +537,7 @@ func update_ghost(mouse_pos: Vector2) -> void:
 			
 	var valid := _can_place(anchor_coord, current_shape)
 	
-	base_pos.y += ground_top_offset + tile_bottom_offset
+	base_pos.y += ground_top_offset - tile_bottom_offset
 	var indicator_pos = base_pos
 	
 	var float_pos := base_pos
@@ -518,7 +583,7 @@ func try_place(mouse_pos: Vector2, tile_scene: PackedScene, card_data: CardData)
 	get_tree().current_scene.add_child(tile)
 
 	var final_pos = anchor_tile.global_position
-	final_pos.y += ground_top_offset + tile_bottom_offset
+	final_pos.y += ground_top_offset - tile_bottom_offset
 	tile.rotation_degrees.y = rotation_steps * 90.0
 
 	var start_pos = final_pos
@@ -576,7 +641,7 @@ func _on_interaction_confirmed(card_name: String, tile: Node3D, card_data: Resou
 		# Animasi Bounce & Shine setelah konfirmasi popup
 		var anchor_tile = grid[data["anchor"]]
 		var final_pos = anchor_tile.global_position
-		final_pos.y += ground_top_offset + tile_bottom_offset
+		final_pos.y += ground_top_offset - tile_bottom_offset
 		
 		var tw := create_tween()
 		tw.set_trans(Tween.TRANS_BOUNCE)
@@ -722,15 +787,61 @@ func _find_min_corner(tiles: Array[GroundTile]) -> Vector3:
 		min_pos.z = min(min_pos.z, gt.global_position.z)
 	return min_pos
 
-func _get_half_height(node: Node) -> float:
-	for child in node.get_children():
-		if child is MeshInstance3D and child.mesh:
-			var aabb: AABB = child.mesh.get_aabb()
-			return aabb.size.y / 2.0
-		var result = _get_half_height(child)
-		if result > 0.0:
-			return result
-	return 0.0
+func _get_local_transform_to(node: Node3D, root: Node3D) -> Transform3D:
+	var t = node.transform
+	var p = node.get_parent()
+	while p and p is Node3D and node != root and p != root:
+		t = p.transform * t
+		p = p.get_parent()
+	if node == root:
+		return Transform3D()
+	return t
+
+func _get_top_y(root: Node3D) -> float:
+	var max_y = -INF
+	var meshes = []
+	var target = root
+	if root.has_node("base_tiles"): target = root.get_node("base_tiles")
+	elif root.has_node("tile_ground"): target = root.get_node("tile_ground")
+	
+	_find_all_meshes(target, meshes)
+	if meshes.is_empty(): return 0.0
+	for m in meshes:
+		var aabb = m.mesh.get_aabb()
+		var local_t = _get_local_transform_to(m, root)
+		for i in 8:
+			var p = aabb.get_endpoint(i)
+			var local_p = local_t * p
+			if local_p.y > max_y: max_y = local_p.y
+	return max_y
+
+func _get_bottom_y(root: Node3D) -> float:
+	var min_y = INF
+	var meshes = []
+	var target = root
+	if root.has_node("base_tiles"): target = root.get_node("base_tiles")
+	elif root.has_node("tile_ground"): target = root.get_node("tile_ground")
+	
+	_find_all_meshes(target, meshes)
+	if meshes.is_empty(): return 0.0
+	for m in meshes:
+		var aabb = m.mesh.get_aabb()
+		var local_t = _get_local_transform_to(m, root)
+		for i in 8:
+			var p = aabb.get_endpoint(i)
+			var local_p = local_t * p
+			if local_p.y < min_y: min_y = local_p.y
+	return min_y
+
+func _find_all_meshes(node: Node, arr: Array) -> void:
+	if node is Node3D and not node.visible:
+		return
+	if node is MeshInstance3D and node.mesh:
+		arr.append(node)
+	
+	# We must use find_children with owned=false to get internal GLTF meshes
+	for child in node.get_children(true):
+		_find_all_meshes(child, arr)
 
 func _get_ground_position(mouse_pos: Vector2):
 	var origin := camera.project_ray_origin(mouse_pos)
@@ -765,7 +876,7 @@ func remove_tile_from_grid(tile: Node3D) -> void:
 # ==========================================
 # RESTORE STATE HELPER (Untuk Opsi A)
 # ==========================================
-func reoccupy_grid_for_restored_tile(tile: Node3D, data: CardData) -> void:
+func reoccupy_grid_for_restored_tile(tile: Node3D, data: Resource) -> void:
 	if not tile or not data: return
 	
 	var anchor_coord := _world_to_grid(tile.global_position)
@@ -846,4 +957,30 @@ func _collect_mesh_instances(node: Node, out: Array[GeometryInstance3D]) -> void
 		if child is GeometryInstance3D:
 			out.append(child)
 		_collect_mesh_instances(child, out)
+
+var _farm_highlight_refs: int = 0
+
+func toggle_farm_highlight(enable: bool) -> void:
+	if enable:
+		_farm_highlight_refs += 1
+		if _farm_highlight_refs == 1:
+			var tiles = get_tree().current_scene.find_children("*FarmInfoTile*", "", true, false)
+			for t in tiles:
+				if SilhouetteHighlight:
+					SilhouetteHighlight.apply_highlight(t, true)
+				if not highlighted_farm_tiles.has(t):
+					highlighted_farm_tiles.append(t)
+	else:
+		_farm_highlight_refs = max(0, _farm_highlight_refs - 1)
+		if _farm_highlight_refs == 0:
+			var tiles = get_tree().current_scene.find_children("*FarmInfoTile*", "", true, false)
+			for t in tiles:
+				if SilhouetteHighlight:
+					SilhouetteHighlight.apply_highlight(t, false)
+			highlighted_farm_tiles.clear()
+
+func reset_farm_highlight() -> void:
+	_farm_highlight_refs = 0
+	highlighted_farm_tiles.clear()
+
 # endregion

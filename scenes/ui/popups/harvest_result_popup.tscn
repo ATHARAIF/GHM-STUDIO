@@ -7,9 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b761j33ito7o5" path="res://assets/font/Fredoka-Medium.ttf" id="5_1e0n1"]
 [ext_resource type="Texture2D" uid="uid://derajmtgjogq3" path="res://assets/ui/panels/buttons/btn_prim_normal.svg" id="6_q1gqe"]
 [ext_resource type="Texture2D" uid="uid://vhu07enw3eo1" path="res://assets/ui/panels/buttons/btn_prim_pressed.svg" id="7_4ok7i"]
-[ext_resource type="Texture2D" uid="uid://cbpjfa1a2mdqf" path="res://assets/ui/panels/close_normal.svg" id="8_yon2f"]
-[ext_resource type="Texture2D" uid="uid://dwhyrn1qg1u8v" path="res://assets/ui/panels/close_pressed.svg" id="9_8lg36"]
-[ext_resource type="Texture2D" uid="uid://gsp5b3iwd5ei" path="res://assets/ui/panels/icons/close.svg" id="10_1lmxm"]
+[ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="8_hdu64"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1ujdb"]
 texture = ExtResource("2_36dd3")
@@ -46,10 +44,10 @@ thickness = 2
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0otn1"]
 texture = ExtResource("6_q1gqe")
-texture_margin_left = 30.0
-texture_margin_top = 30.0
-texture_margin_right = 30.0
-texture_margin_bottom = 40.0
+texture_margin_left = 25.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 35.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7tcf"]
 content_margin_top = 44.0
@@ -59,14 +57,58 @@ texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 46.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eycvf"]
-content_margin_bottom = 8.0
-texture = ExtResource("8_yon2f")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_36dd3"]
+load_path = "res://.godot/imported/panel_background.svg-c6246b3ae68407962577bea8b0d9c234.ctex"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ep0cj"]
-content_margin_top = 4.0
-content_margin_bottom = 0.0
-texture = ExtResource("9_8lg36")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ld4g"]
+content_margin_left = 30.0
+content_margin_top = 50.0
+content_margin_right = 30.0
+content_margin_bottom = 30.0
+texture = SubResource("CompressedTexture2D_36dd3")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 26.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_3tnri"]
+font = ExtResource("4_3tnri")
+font_size = 24
+font_color = Color(0.24313726, 0.15294118, 0.13725491, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hdu64"]
+load_path = "res://.godot/imported/btn_prim_normal.svg-85710af1e2a002f1a56fd47439510ebe.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5diib"]
+texture = SubResource("CompressedTexture2D_hdu64")
+texture_margin_left = 25.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 35.0
+modulate_color = Color(1, 0.73333335, 0.15686275, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2ld4g"]
+load_path = "res://.godot/imported/btn_prim_pressed.svg-f10af7f759c63a16c18662ae4c3b856e.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3tnri"]
+content_margin_top = 44.0
+texture = SubResource("CompressedTexture2D_2ld4g")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 46.0
+modulate_color = Color(1, 0.73333335, 0.15686275, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1e0n1"]
+load_path = "res://.godot/imported/btn_prim_normal.svg-85710af1e2a002f1a56fd47439510ebe.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q1gqe"]
+texture = SubResource("CompressedTexture2D_1e0n1")
+texture_margin_left = 25.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 35.0
+modulate_color = Color(1, 0.73333335, 0.15686275, 1)
 
 [node name="HarvestResultPopup" type="CanvasLayer" unique_id=1231566695]
 layer = 20
@@ -80,92 +122,33 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6)
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1591585059]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=979941571]
-custom_minimum_size = Vector2(500, 300)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=335529605]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Header" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1350941717]
-layout_mode = 2
-
-[node name="LblTitle" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Header" unique_id=306863197]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 28
-text = "HARVEST RESULT"
-horizontal_alignment = 1
-
-[node name="BtnClose" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Header" unique_id=361270422]
-layout_mode = 2
-text = "   X   "
-
-[node name="VBoxData" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=290737826]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="LblQuality" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=2085832908]
-layout_mode = 2
-text = "Quality"
-horizontal_alignment = 1
-
-[node name="LblQualityValue" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=964207463]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
-theme_override_font_sizes/font_size = 24
-text = "Good"
-horizontal_alignment = 1
-
-[node name="LblYield" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=581023594]
-layout_mode = 2
-text = "Yield"
-horizontal_alignment = 1
-
-[node name="LblQuantityValue" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=1318724539]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.8, 0.4, 1)
-theme_override_font_sizes/font_size = 24
-text = "0 kg"
-horizontal_alignment = 1
-
-[node name="LblDefect" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxData" unique_id=987654321]
-visible = false
-layout_mode = 2
-text = "Defect Rate: 0%"
-horizontal_alignment = 1
-
-[node name="BtnConfirm" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=636878321]
-custom_minimum_size = Vector2(150, 40)
-layout_mode = 2
-text = "STORE TO HOPPER"
-
-[node name="popup_panel" type="PanelContainer" parent="." unique_id=481764802]
-custom_minimum_size = Vector2(450, 280)
-custom_maximum_size = Vector2(450, 280)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 390.0
-offset_top = 235.0
-offset_right = -390.0
-offset_bottom = -235.0
+[node name="TabContainer" type="TabContainer" parent="." unique_id=408257912]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -140.0
+offset_right = 225.0
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxTexture_1ujdb")
+current_tab = 1
+tabs_visible = false
 
-[node name="lbl_title" type="Label" parent="popup_panel" unique_id=614120192]
+[node name="result_panel" type="PanelContainer" parent="TabContainer" unique_id=481764802]
+visible = false
+custom_minimum_size = Vector2(450, 280)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_1ujdb")
+metadata/_tab_index = 0
+
+[node name="lbl_title" type="Label" parent="TabContainer/result_panel" unique_id=614120192]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -177,29 +160,29 @@ text = "Harvest Result"
 label_settings = ExtResource("3_2ld4g")
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="popup_panel" unique_id=190438826]
+[node name="margin" type="MarginContainer" parent="TabContainer/result_panel" unique_id=190438826]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 42
 theme_override_constants/margin_right = 16
 
-[node name="content" type="VBoxContainer" parent="popup_panel/margin" unique_id=3558511]
+[node name="content" type="VBoxContainer" parent="TabContainer/result_panel/margin" unique_id=3558511]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16
 
-[node name="quality" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=1551834829]
+[node name="quality" type="HBoxContainer" parent="TabContainer/result_panel/margin/content" unique_id=1551834829]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="lbl_quality" type="Label" parent="popup_panel/margin/content/quality" unique_id=180474679]
+[node name="lbl_quality" type="Label" parent="TabContainer/result_panel/margin/content/quality" unique_id=180474679]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quality"
 label_settings = SubResource("LabelSettings_6ivk4")
 vertical_alignment = 1
 
-[node name="value" type="Label" parent="popup_panel/margin/content/quality" unique_id=2072759699]
+[node name="value" type="Label" parent="TabContainer/result_panel/margin/content/quality" unique_id=2072759699]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "value"
@@ -207,18 +190,18 @@ label_settings = SubResource("LabelSettings_sijc1")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="yield" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=1220809893]
+[node name="yield" type="HBoxContainer" parent="TabContainer/result_panel/margin/content" unique_id=1220809893]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="lbl_yield" type="Label" parent="popup_panel/margin/content/yield" unique_id=1500613433]
+[node name="lbl_yield" type="Label" parent="TabContainer/result_panel/margin/content/yield" unique_id=1500613433]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Yield"
 label_settings = SubResource("LabelSettings_6ivk4")
 vertical_alignment = 1
 
-[node name="value" type="Label" parent="popup_panel/margin/content/yield" unique_id=2142227055]
+[node name="value" type="Label" parent="TabContainer/result_panel/margin/content/yield" unique_id=2142227055]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "value"
@@ -226,39 +209,13 @@ label_settings = SubResource("LabelSettings_sijc1")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="defect_rate" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=232588731]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="lbl_defect" type="Label" parent="popup_panel/margin/content/defect_rate" unique_id=1449587333]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Defect rate"
-label_settings = SubResource("LabelSettings_6ivk4")
-vertical_alignment = 1
-
-[node name="value" type="Label" parent="popup_panel/margin/content/defect_rate" unique_id=727068521]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "value"
-label_settings = SubResource("LabelSettings_sijc1")
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="separator2" type="HSeparator" parent="popup_panel/margin/content" unique_id=125198319]
+[node name="separator2" type="HSeparator" parent="TabContainer/result_panel/margin/content" unique_id=125198319]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_4fwy0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="popup_panel/margin/content" unique_id=1342710278]
+[node name="manage_harvest" type="Button" parent="TabContainer/result_panel/margin/content" unique_id=335915021]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
-alignment = 1
-
-[node name="to_hopper" type="Button" parent="popup_panel/margin/content/HBoxContainer" unique_id=335915021]
-layout_mode = 2
-size_flags_horizontal = 10
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
@@ -268,19 +225,236 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxTexture_0otn1")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_f7tcf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_0otn1")
-text = "Store to hopper"
+text = "Manage Harvest"
 
-[node name="close" type="Button" parent="popup_panel" unique_id=2110944415]
-custom_minimum_size = Vector2(64, 74)
+[node name="storage_selection" type="PanelContainer" parent="TabContainer" unique_id=934466452]
+custom_minimum_size = Vector2(750, 500)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_2ld4g")
+metadata/_tab_index = 1
+
+[node name="lbl_title" type="Label" parent="TabContainer/storage_selection" unique_id=1193944967]
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 0
 offset_transform_enabled = true
-offset_transform_position = Vector2(38.22, -49.29)
+offset_transform_position = Vector2(0, -95)
 offset_transform_visual_only = false
-theme_override_styles/normal = SubResource("StyleBoxTexture_eycvf")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_ep0cj")
-theme_override_styles/hover = SubResource("StyleBoxTexture_eycvf")
-icon = ExtResource("10_1lmxm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_ohebf")
+text = "Storage Selection"
+label_settings = ExtResource("3_2ld4g")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/storage_selection" unique_id=1917695984]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="content" type="VBoxContainer" parent="TabContainer/storage_selection/HBoxContainer" unique_id=1760311048]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="batch_variety" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content" unique_id=1149212650]
+layout_mode = 2
+text = "Kintamani 2025"
+label_settings = SubResource("LabelSettings_3tnri")
+
+[node name="quantity" type="HBoxContainer" parent="TabContainer/storage_selection/HBoxContainer/content" unique_id=381785103]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="lbl_quantity" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content/quantity" unique_id=1019259102]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quantity"
+label_settings = SubResource("LabelSettings_6ivk4")
+vertical_alignment = 1
+
+[node name="value" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content/quantity" unique_id=1226270151]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "value"
+label_settings = SubResource("LabelSettings_sijc1")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="quantity_stored" type="HBoxContainer" parent="TabContainer/storage_selection/HBoxContainer/content" unique_id=1052079010]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="lbl_quantity_stored" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content/quantity_stored" unique_id=743335731]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quantity Stored"
+label_settings = SubResource("LabelSettings_6ivk4")
+vertical_alignment = 1
+
+[node name="value" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content/quantity_stored" unique_id=845950379]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "value"
+label_settings = SubResource("LabelSettings_sijc1")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="quantity_sell" type="HBoxContainer" parent="TabContainer/storage_selection/HBoxContainer/content" unique_id=2110926210]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="lbl_quantity_sell" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content/quantity_sell" unique_id=889245219]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quantity to Sell"
+label_settings = SubResource("LabelSettings_6ivk4")
+vertical_alignment = 1
+
+[node name="value" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content/quantity_sell" unique_id=1023890521]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "value"
+label_settings = SubResource("LabelSettings_sijc1")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="selling_price" type="HBoxContainer" parent="TabContainer/storage_selection/HBoxContainer/content" unique_id=111291971]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="lbl_selling_price" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content/selling_price" unique_id=2048394041]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Selling Price"
+label_settings = SubResource("LabelSettings_6ivk4")
+vertical_alignment = 1
+
+[node name="value" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content/selling_price" unique_id=1875302427]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "value"
+label_settings = SubResource("LabelSettings_sijc1")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="income" type="HBoxContainer" parent="TabContainer/storage_selection/HBoxContainer/content" unique_id=937466751]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="lbl_income" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content/income" unique_id=640503879]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Income for Sell"
+label_settings = SubResource("LabelSettings_6ivk4")
+vertical_alignment = 1
+
+[node name="value" type="Label" parent="TabContainer/storage_selection/HBoxContainer/content/income" unique_id=151587946]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "value"
+label_settings = SubResource("LabelSettings_sijc1")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="storage_list" type="VBoxContainer" parent="TabContainer/storage_selection/HBoxContainer" unique_id=1605540056]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="lbl" type="Label" parent="TabContainer/storage_selection/HBoxContainer/storage_list" unique_id=1596665009]
+layout_mode = 2
+text = "Storage List"
+label_settings = SubResource("LabelSettings_3tnri")
+
+[node name="list" type="ScrollContainer" parent="TabContainer/storage_selection/HBoxContainer/storage_list" unique_id=518763116]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list" unique_id=705351810]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="storage" type="PanelContainer" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer" unique_id=622360399]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage" unique_id=306914620]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="illustration" type="TextureRect" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage/HBoxContainer" unique_id=917601291]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("8_hdu64")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage/HBoxContainer" unique_id=1967747088]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage/HBoxContainer/MarginContainer" unique_id=1485395751]
+layout_mode = 2
+
+[node name="name" type="Label" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1738314272]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Storage Name"
+
+[node name="capacity" type="Label" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage/HBoxContainer/MarginContainer/VBoxContainer" unique_id=346662887]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "4000 Kg"
+
+[node name="available" type="Label" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage/HBoxContainer/MarginContainer/VBoxContainer" unique_id=2030613596]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Not In Use"
+
+[node name="checbox" type="PanelContainer" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage/HBoxContainer" unique_id=1456462681]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage/HBoxContainer/checbox" unique_id=460897799]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
 icon_alignment = 1
-expand_icon = true
+
+[node name="button" type="HBoxContainer" parent="TabContainer/storage_selection/HBoxContainer/storage_list" unique_id=589871960]
+layout_mode = 2
+
+[node name="back" type="Button" parent="TabContainer/storage_selection/HBoxContainer/storage_list/button" unique_id=293068032]
+custom_minimum_size = Vector2(120, 80)
+custom_maximum_size = Vector2(-1, 90)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_3tnri")
+theme_override_styles/normal = SubResource("StyleBoxTexture_5diib")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3tnri")
+theme_override_styles/hover = SubResource("StyleBoxTexture_q1gqe")
+text = "Back"
+
+[node name="confirm" type="Button" parent="TabContainer/storage_selection/HBoxContainer/storage_list/button" unique_id=1678491006]
+custom_minimum_size = Vector2(120, 80)
+custom_maximum_size = Vector2(-1, 90)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_3tnri")
+theme_override_styles/normal = SubResource("StyleBoxTexture_0otn1")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_f7tcf")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0otn1")
+text = "Assign and Sell"

@@ -22,12 +22,13 @@ StageManager="*res://scripts/autoloads/stage_manager.gd"
 TimeManager="*res://scripts/autoloads/time_manager.gd"
 EventManager="*res://scripts/autoloads/event_manager.gd"
 TransitionManager="*res://scenes/autoloads/transition_manager.tscn"
+FactoryManager="*uid://bc0df2d5e733o"
+SilhouetteHighlight="*res://scenes/autoloads/silhouette_highlight.tscn"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
@@ -39,6 +40,7 @@ import/blender/enabled=false
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true
+theme/custom_font="uid://bc2yt828criij"
 
 [input]
 

@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dolyswl6afpdx"]
+[gd_scene format=3 uid="uid://b8c7m5dp6l0k0"]
 
-[ext_resource type="Script" uid="uid://bdg6gkhx3jreo" path="res://scripts/maps/prod_house_interior.gd" id="1_qdl7o"]
+[ext_resource type="Script" uid="uid://bdg6gkhx3jreo" path="res://scripts/maps/production_house.gd" id="1_qdl7o"]
 [ext_resource type="PackedScene" uid="uid://cj3djbtpfddtc" path="res://scenes/tiles/base/tile_ground.tscn" id="2_2tdal"]
 [ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environment/surrounding_ground.tscn" id="3_nltun"]
 [ext_resource type="PackedScene" uid="uid://dv742tmvj668o" path="res://scenes/ui/prod_house_hud.tscn" id="4_i6jaw"]
@@ -22,6 +22,9 @@ ssao_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6jaw"]
 albedo_color = Color(0, 0.6784314, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwpir"]
+albedo_color = Color(0.039215688, 0.54901963, 0.22352941, 1)
+
 [node name="production_house" type="Node3D" unique_id=765019154]
 script = ExtResource("1_qdl7o")
 
@@ -39,14 +42,15 @@ directional_shadow_split_3 = 1.0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 20.0
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=462368230]
-transform = Transform3D(0.71569276, 0.36492097, -0.5954969, 0, 0.85264015, 0.52249855, 0.6984153, -0.37394843, 0.61022836, -5.872, 5.016, 6.179)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=566753624]
+transform = Transform3D(0.71569276, 0.36492097, -0.59549695, 0, 0.8526402, 0.5224986, 0.6984153, -0.37394848, 0.6102284, -5.872, 5.016, 6.179)
 projection = 1
 current = true
 size = 10.351
 far = 30.0
 
 [node name="tile_grounds" type="Node3D" parent="." unique_id=1933621358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.135, 0)
 metadata/_edit_lock_ = true
 
 [node name="tile_ground11" parent="tile_grounds" unique_id=477365592 instance=ExtResource("2_2tdal")]
@@ -234,7 +238,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -3)
 is_locked = true
 
 [node name="environtment" type="Node3D" parent="." unique_id=1753237198]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015738487, 0)
 metadata/_edit_lock_ = true
 
 [node name="surrounding_ground" parent="environtment" unique_id=1246640729 instance=ExtResource("3_nltun")]
@@ -244,14 +247,201 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
 transform = Transform3D(3.9991813, 0, 2.0993392, 0, 4.5167108, 0, -2.0993392, 0, 3.9991813, 3.6134026, -0.117293745, 8.991949)
 surface_material_override/0 = SubResource("StandardMaterial3D_i6jaw")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=564486959]
-layer = 2
-visible = false
+[node name="no_border" parent="environtment/surrounding_ground" index="2" unique_id=1149352431]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
 
-[node name="BtnExit" type="Button" parent="CanvasLayer" unique_id=280975469]
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Back"
+[node name="no_border_001" parent="environtment/surrounding_ground" index="3" unique_id=475219677]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_002" parent="environtment/surrounding_ground" index="4" unique_id=1439541431]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_003" parent="environtment/surrounding_ground" index="5" unique_id=1232944882]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_004" parent="environtment/surrounding_ground" index="6" unique_id=579919752]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_005" parent="environtment/surrounding_ground" index="7" unique_id=1738737221]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_006" parent="environtment/surrounding_ground" index="8" unique_id=1792744012]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_007" parent="environtment/surrounding_ground" index="9" unique_id=157886263]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_008" parent="environtment/surrounding_ground" index="10" unique_id=218767700]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_009" parent="environtment/surrounding_ground" index="11" unique_id=1663757748]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_010" parent="environtment/surrounding_ground" index="12" unique_id=446897705]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_011" parent="environtment/surrounding_ground" index="13" unique_id=5897373]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_012" parent="environtment/surrounding_ground" index="14" unique_id=171013918]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_013" parent="environtment/surrounding_ground" index="15" unique_id=281283227]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_014" parent="environtment/surrounding_ground" index="16" unique_id=181054613]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_015" parent="environtment/surrounding_ground" index="17" unique_id=1681148904]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_016" parent="environtment/surrounding_ground" index="18" unique_id=1914228687]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_017" parent="environtment/surrounding_ground" index="19" unique_id=2141005122]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_018" parent="environtment/surrounding_ground" index="20" unique_id=265556560]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_019" parent="environtment/surrounding_ground" index="21" unique_id=2052714184]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_020" parent="environtment/surrounding_ground" index="22" unique_id=1906617886]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_021" parent="environtment/surrounding_ground" index="23" unique_id=1679866350]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_022" parent="environtment/surrounding_ground" index="24" unique_id=1393123408]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_023" parent="environtment/surrounding_ground" index="25" unique_id=174914697]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_024" parent="environtment/surrounding_ground" index="26" unique_id=2033259161]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_025" parent="environtment/surrounding_ground" index="27" unique_id=372769523]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_026" parent="environtment/surrounding_ground" index="28" unique_id=174637234]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_027" parent="environtment/surrounding_ground" index="29" unique_id=2001505641]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_028" parent="environtment/surrounding_ground" index="30" unique_id=1004406208]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_029" parent="environtment/surrounding_ground" index="31" unique_id=1710746949]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_030" parent="environtment/surrounding_ground" index="32" unique_id=1864497830]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_031" parent="environtment/surrounding_ground" index="33" unique_id=934856513]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_032" parent="environtment/surrounding_ground" index="34" unique_id=328833602]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_033" parent="environtment/surrounding_ground" index="35" unique_id=814127705]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_034" parent="environtment/surrounding_ground" index="36" unique_id=808651324]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_035" parent="environtment/surrounding_ground" index="37" unique_id=362943922]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_036" parent="environtment/surrounding_ground" index="38" unique_id=2058616480]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_037" parent="environtment/surrounding_ground" index="39" unique_id=1405033543]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_038" parent="environtment/surrounding_ground" index="40" unique_id=1992314456]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_039" parent="environtment/surrounding_ground" index="41" unique_id=391189588]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_040" parent="environtment/surrounding_ground" index="42" unique_id=1917896747]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_041" parent="environtment/surrounding_ground" index="43" unique_id=424180356]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_042" parent="environtment/surrounding_ground" index="44" unique_id=496467073]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_043" parent="environtment/surrounding_ground" index="45" unique_id=133988847]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_044" parent="environtment/surrounding_ground" index="46" unique_id=1458109200]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_045" parent="environtment/surrounding_ground" index="47" unique_id=221566246]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_046" parent="environtment/surrounding_ground" index="48" unique_id=656042389]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_047" parent="environtment/surrounding_ground" index="49" unique_id=1526840045]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
+
+[node name="no_border_048" parent="environtment/surrounding_ground" index="50" unique_id=128067750]
+visible = true
+surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
 
 [node name="prod_house_hud" parent="." unique_id=1865318432 instance=ExtResource("4_i6jaw")]
 

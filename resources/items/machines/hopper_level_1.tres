@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bk3jfqhilashx"]
+
+[ext_resource type="Script" uid="uid://c0hkq7kibybm4" path="res://scripts/data/item_data.gd" id="1_itemdata"]
+[ext_resource type="PackedScene" uid="uid://dncfuyup5b1ul" path="res://scenes/tiles/items/hopper_tile.tscn" id="2_hoppertile"]
+
+[resource]
+script = ExtResource("1_itemdata")
+item_name = "Hopper"
+item_id = "hopper_01"
+tile_scene = ExtResource("2_hoppertile")

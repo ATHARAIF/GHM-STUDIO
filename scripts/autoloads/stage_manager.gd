@@ -48,7 +48,10 @@ func _create_new_batch(year: int) -> void:
 		b.moisture = tree.current_moisture
 		b.defect_rate = tree.current_defect
 		b.cherry_kg = 0 # Calculated at Harvest
-	
+		if current_location.variety_data:
+			b.species_name = current_location.variety_data.species_name
+			b.variety_name = current_location.variety_data.variety_name
+			
 	batches[year] = b
 	
 func get_active_farm_batch() -> CoffeeBatch:
@@ -71,6 +74,8 @@ func get_oldest_ready_batch(process_id: String) -> CoffeeBatch:
 	var target_batch: CoffeeBatch = null
 	for y in batches.keys():
 		var b = batches[y]
+		if b.has_meta("sold_out") and b.get_meta("sold_out") == true:
+			continue
 		# Asumsikan kalau mau diproses lebih lanjut, minimal sudah lewat FP04 (Harvest)
 		if b.completed_processes.has("FP04") and not b.completed_processes.has(process_id):
 			if y < oldest_year:
@@ -85,6 +90,8 @@ func get_ready_batches_for_process(process_id: String, unlock_condition: String 
 	var ready_years: Array[int] = []
 	for y in batches.keys():
 		var b = batches[y]
+		if b.has_meta("sold_out") and b.get_meta("sold_out") == true:
+			continue
 		if b.completed_processes.has("FP04") and not b.completed_processes.has(process_id):
 			if unlock_condition == "" or b.completed_processes.has(unlock_condition):
 				var already_placed = false
@@ -340,7 +347,7 @@ func is_tile_locked(tile_node: Node3D) -> bool:
 
 func is_process_active(process_id: String) -> bool:
 	for dict in active_tiles:
-		if dict.data and dict.data.process_id == process_id:
+		if dict.data and "process_id" in dict.data and dict.data.process_id == process_id:
 			return true
 	return false
 

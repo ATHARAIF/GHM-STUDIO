@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 @onready var btn_next_turn = $main/CardPanel/Button
 
@@ -79,7 +79,7 @@ func _has_active_popup() -> bool:
 	if layer_menu_tabs and layer_menu_tabs.visible: return true
 	if layer_coffee_log and layer_coffee_log.visible: return true
 	for c in get_children():
-		if c is CanvasLayer and c.has_node("popup_panel"):
+		if c is CanvasLayer and (c.has_node("popup_panel") or c.has_node("TabContainer")):
 			return true
 	return false
 
@@ -195,7 +195,10 @@ func _on_stage_interaction_requested(interaction_name: String, tile_data: Dictio
 		add_child(popup)
 		if popup.has_method("show_popup"):
 			popup.show_popup(tile_data)
-		if btn_next_turn: btn_next_turn.disabled = true
+			
+		if btn_next_turn: 
+			btn_next_turn.disabled = true
+			popup.tree_exited.connect(func(): if btn_next_turn: btn_next_turn.disabled = false)
 
 func _update_all() -> void:
 	_on_turn_changed(TimeManager.turn_in_year, TimeManager.season, TimeManager.year)
@@ -284,3 +287,7 @@ func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, c
 		add_child(popup)
 		if popup.has_method("_on_card_placement_interaction_requested"):
 			popup._on_card_placement_interaction_requested(card_name, tile, card_data)
+			
+		if btn_next_turn:
+			btn_next_turn.disabled = true
+			popup.tree_exited.connect(func(): if btn_next_turn: btn_next_turn.disabled = false)

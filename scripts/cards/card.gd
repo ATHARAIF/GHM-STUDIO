@@ -46,30 +46,69 @@ var requires_sunny_weather: bool = false
 @onready var pnl_specs = $base/color/specs
 @onready var pnl_color = $base/color
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		if _current_hover_state and card_data and card_data.process_id.begins_with("FP"):
+			# Gunakan call_deferred agar aman jika PlacementManager sedang sibuk
+			PlacementManager.call_deferred("toggle_farm_highlight", false)
+
 func _ready() -> void:
 	origin_parent = get_parent()
 	mouse_filter = MOUSE_FILTER_STOP
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
+	mouse_entered.connect(func(): _set_hover(true, false))
+	mouse_exited.connect(func(): _set_hover(false, false))
+	
+	btn_info.mouse_entered.connect(func(): _set_hover(true, true))
+	btn_info.mouse_exited.connect(func(): _set_hover(false, true))
 
 	if card_data:
 		_setup_ui()
 
 var hover_tween: Tween
+var _is_hovering_card: bool = false
+var _is_hovering_btn: bool = false
+var _hover_update_pending: bool = false
+var _current_hover_state: bool = false
 
-func _on_mouse_entered() -> void:
-	if dragging or is_placed or is_outside_hand or is_disabled: return
-	z_index = 10
-	if hover_tween: hover_tween.kill()
-	hover_tween = create_tween()
-	hover_tween.tween_property($base, "position:y", -20.0, 0.1).set_trans(Tween.TRANS_SINE)
+func _set_hover(state: bool, is_btn: bool) -> void:
+	if is_btn:
+		_is_hovering_btn = state
+	else:
+		_is_hovering_card = state
+		
+	if not _hover_update_pending:
+		_hover_update_pending = true
+		call_deferred("_update_hover_state")
 
-func _on_mouse_exited() -> void:
-	if dragging or is_placed or is_outside_hand or is_disabled: return
-	z_index = 0
-	if hover_tween: hover_tween.kill()
-	hover_tween = create_tween()
-	hover_tween.tween_property($base, "position:y", 0.0, 0.1).set_trans(Tween.TRANS_SINE)
+func _update_hover_state() -> void:
+	if not is_instance_valid(self) or is_queued_for_deletion(): return
+	_hover_update_pending = false
+	var should_hover = _is_hovering_card or _is_hovering_btn
+	if should_hover != _current_hover_state:
+		_current_hover_state = should_hover
+		_apply_hover(should_hover)
+
+func _apply_hover(is_hovered: bool) -> void:
+	if is_hovered:
+		if card_data and card_data.process_id.begins_with("FP"):
+			PlacementManager.toggle_farm_highlight(true)
+			
+		if dragging or is_placed or is_outside_hand or is_disabled: return
+		z_index = 10
+		if hover_tween: hover_tween.kill()
+		hover_tween = create_tween().set_parallel(true)
+		hover_tween.tween_property($base, "scale", Vector2(0.55, 0.55), 0.1).set_trans(Tween.TRANS_SINE)
+		hover_tween.tween_property($base, "modulate", Color(1.2, 1.2, 1.2, 1.0), 0.1)
+	else:
+		if card_data and card_data.process_id.begins_with("FP"):
+			PlacementManager.toggle_farm_highlight(false)
+			
+		if dragging or is_placed or is_outside_hand or is_disabled: return
+		z_index = 0
+		if hover_tween: hover_tween.kill()
+		hover_tween = create_tween().set_parallel(true)
+		hover_tween.tween_property($base, "scale", Vector2(0.5, 0.5), 0.1).set_trans(Tween.TRANS_SINE)
+		hover_tween.tween_property($base, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.1)
 
 func _setup_ui() -> void:
 	if card_data:
@@ -225,6 +264,8 @@ func _end_drag() -> void:
 		# state [2] -> [3]: card gak di-free, cuma di-hide. Tetep hidup buat di-resume nanti.
 		is_placed = true
 		hide()
+		_set_hover(false, false)
+		_set_hover(false, true)
 		if origin_parent and origin_parent.has_method("set_card_played"):
 			origin_parent.set_card_played(card_data, true)
 		top_level = false

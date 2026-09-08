@@ -27,6 +27,7 @@ mesh = SubResource("BoxMesh_info")
 
 [node name="PopupUI" type="CanvasLayer" parent="." unique_id=1705760726]
 layer = 10
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="PopupUI" unique_id=829125577]
 anchors_preset = 15
@@ -68,7 +69,7 @@ text = "   X   "
 layout_mode = 2
 alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupUI/CenterContainer/PanelContainer/VBoxContainer" unique_id=1226981238]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 

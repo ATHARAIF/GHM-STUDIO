@@ -32,9 +32,13 @@ extends PanelContainer
 @onready var sell_price = $VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/Value
 @onready var btn_action_sell = $VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab/MarginContainer/VBoxContainer/BtnSell
 
+var current_data: Dictionary
 func _ready() -> void:
 	# 1. Pastikan tab bawaan Godot mati
 	tab_container.tabs_visible = false
+	
+	# Mulai mendeteksi hover via process
+	set_process(true)
 	
 	# 2. Hubungkan Custom Button ke TabContainer
 	# Urutan indeks (0-4) bergantung pada urutan Tab di dalam ValueTabContainer di Scene Tree Anda.
@@ -50,13 +54,54 @@ func _ready() -> void:
 	if btn_tab_sell:
 		btn_tab_sell.pressed.connect(func(): tab_container.current_tab = tab_container.get_node("SellTab").get_index())
 
+var is_hovering: bool = false
+
+func _process(delta: float) -> void:
+	if not is_visible_in_tree():
+		if is_hovering:
+			is_hovering = false
+			_set_machine_highlight(false)
+		return
+		
+	var mouse_pos = get_global_mouse_position()
+	var rect = get_global_rect()
+	var now_hovering = rect.has_point(mouse_pos)
+	
+	if now_hovering != is_hovering:
+		is_hovering = now_hovering
+		_set_machine_highlight(is_hovering)
+
+func _set_machine_highlight(enable: bool) -> void:
+	if current_data.has("machine_id"):
+		var m_id = current_data["machine_id"]
+		if FactoryManager.placed_machines.has(m_id):
+			var node = FactoryManager.placed_machines[m_id].get("node")
+			if is_instance_valid(node):
+				SilhouetteHighlight.apply_highlight(node, enable)
+
 # Fungsi ini dipanggil dari building_hud.gd saat memunculkan panel
 func setup_panel(data: Dictionary, mode: String) -> void:
+	current_data = data
+	
 	# Isi data teks dasar
 	if item_name: item_name.text = data.get("name", "Unknown Item")
 	if lbl_desc: lbl_desc.text = data.get("desc", "Tanpa deskripsi")
 	if buy_price: buy_price.text = str(data.get("buy_price", 0))
 	if sell_price: sell_price.text = str(data.get("sell_price", 0))
+	
+	# Populate specs (Data Tab)
+	if data_name and data_value and data.has("specs"):
+		var spec_dict = data["specs"]
+		var keys_str = ""
+		var vals_str = ""
+		for key in spec_dict.keys():
+			keys_str += str(key) + "\n"
+			vals_str += str(spec_dict[key]) + "\n"
+		data_name.text = keys_str.strip_edges()
+		data_value.text = vals_str.strip_edges()
+	else:
+		if data_name: data_name.text = "No Data"
+		if data_value: data_value.text = "-"
 	
 	# Reset tombol (Tampilkan semua dulu)
 	if btn_tab_buy: btn_tab_buy.show()

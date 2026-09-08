@@ -3,6 +3,7 @@ extends Node3D
 func _ready() -> void:
 	PlacementManager.register_camera($Camera3D)
 	PlacementManager.register_ground_tiles(_get_ground_tiles())
+	PlacementManager.reset_farm_highlight()
 	
 	if StageManager.has_method("restore_room_state"):
 		StageManager.restore_room_state("farm")

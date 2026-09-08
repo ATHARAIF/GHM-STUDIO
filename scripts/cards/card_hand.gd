@@ -136,6 +136,8 @@ func _update_cards() -> void:
 				var is_played_now = played_cards_this_year.has(cd)
 				if StageManager.has_method("is_process_active") and StageManager.is_process_active(cd.process_id):
 					is_played_now = true
+					
+				print("Card Update [", cd.card_name, "] is_completed:", is_completed, " is_played_now:", is_played_now)
 				
 				var req_met = true
 				if active_batch:

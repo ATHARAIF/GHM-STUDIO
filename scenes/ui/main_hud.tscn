@@ -180,17 +180,9 @@ cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 
-[node name="main_hud" type="Control" unique_id=1895636831]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="main_hud" type="CanvasLayer" unique_id=265467276]
 script = ExtResource("1_hudgd")
 hold_overlay_color = Color(0.6392157, 0.30588236, 0.13333334, 0.6666667)
-next_turn_fill_mode = 1
 
 [node name="main" type="CanvasLayer" parent="." unique_id=2121045524]
 
