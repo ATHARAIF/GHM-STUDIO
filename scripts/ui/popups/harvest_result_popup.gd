@@ -2,27 +2,28 @@ extends CanvasLayer
 @onready var tab_container = $TabContainer
 
 #result panel
-@onready var lbl_result = $TabContainer/result_panel/lbl_title
-@onready var lbl_quality = $TabContainer/result_panel/margin/content/quality/value
-@onready var lbl_yield = $TabContainer/result_panel/margin/content/yield/value
-@onready var btn_manage = $TabContainer/result_panel/margin/content/manage_harvest
+@onready var lbl_result = $TabContainer/result/panel/panel_label
+@onready var lbl_quality = $TabContainer/result/panel/content/bean_detail/left/bean_data/quality/value
+@onready var lbl_yield = $TabContainer/result/panel/content/bean_detail/left/bean_data/yield/value
+@onready var btn_manage = $TabContainer/result/panel/content/confirmation/confirm
 
 #storage_selection
-@onready var lbl_str_select = $TabContainer/storage_selection/lbl_title
-@onready var batch_variety = $TabContainer/storage_selection/HBoxContainer/content/batch_variety
-@onready var lbl_qty = $TabContainer/storage_selection/HBoxContainer/content/quantity/value
-@onready var lbl_qty_stored = $TabContainer/storage_selection/HBoxContainer/content/quantity_stored/value
-@onready var lbl_qty_sell = $TabContainer/storage_selection/HBoxContainer/content/quantity_sell/value
-@onready var lbl_selling_price = $TabContainer/storage_selection/HBoxContainer/content/selling_price/value
-@onready var lbl_income = $TabContainer/storage_selection/HBoxContainer/content/income/value
+@onready var lbl_str_select = $TabContainer/storage_selection/panel/panel_label
+@onready var batch_variety = $TabContainer/storage_selection/panel/content/left/variety_batch
+@onready var lbl_qty = $TabContainer/storage_selection/panel/content/left/data/quantity/value
+@onready var lbl_qty_stored = $TabContainer/storage_selection/panel/content/left/data/quantity_stored/value
+@onready var lbl_qty_sell = $TabContainer/storage_selection/panel/content/left/data/quantity_sell/value
+@onready var lbl_selling_price = $TabContainer/storage_selection/panel/content/left/data/selling_price/value
+@onready var lbl_income = $TabContainer/storage_selection/panel/content/left/data/income/value
 #storage_selection - storage list
-@onready var illustration = $TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage/HBoxContainer/illustration
+@onready var illustration = $TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage/HBoxContainer/illustration
 
 # --- STORAGE SELECTION (LIST & BUTTONS) ---
-@onready var storage_list_container = $TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer
-@onready var storage_template = $TabContainer/storage_selection/HBoxContainer/storage_list/list/VBoxContainer/storage
-@onready var btn_back = $TabContainer/storage_selection/HBoxContainer/storage_list/button/back
-@onready var btn_confirm = $TabContainer/storage_selection/HBoxContainer/storage_list/button/confirm
+@onready var storage_list_container = $TabContainer/storage_selection/panel/content/right/list/VBoxContainer
+@onready var storage_template = $TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage
+
+@onready var btn_back = $TabContainer/storage_selection/panel/content/left/back
+@onready var btn_confirm = $TabContainer/storage_selection/panel/content/right/confirmation/confirm
 
 var current_tile_data: Dictionary
 var total_harvest_kg: int = 0

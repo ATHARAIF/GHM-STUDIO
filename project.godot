@@ -29,6 +29,7 @@ SilhouetteHighlight="*res://scenes/autoloads/silhouette_highlight.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/vsync/vsync_mode=0

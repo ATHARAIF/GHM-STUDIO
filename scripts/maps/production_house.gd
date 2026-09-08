@@ -78,7 +78,7 @@ func _apply_factory_level() -> void:
 	}
 	var current_bound = bounds.get(lvl, bounds[1])
 	
-	var lvl_label_path = "prod_house_hud/main/building_hud/upgrade/MarginContainer/HBoxContainer/value"
+	var lvl_label_path = "prod_house_hud/prod_house_hud/building_hud/upgrade/MarginContainer/HBoxContainer/value"
 	if has_node(lvl_label_path):
 		get_node(lvl_label_path).text = str(lvl)
 	

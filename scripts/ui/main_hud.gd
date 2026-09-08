@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var btn_next_turn = $main/CardPanel/Button
+@onready var btn_next_turn = $main_hud/MarginContainer/CardPanel/next_turn
 
 var debug_panel: Control
 var debug_body: Label
@@ -64,7 +64,7 @@ func _ready() -> void:
 		mat.set_shader_parameter("tint_color", hold_overlay_color)
 		btn_next_turn.material = mat
 		
-	var top_bar_node = $main/top_bar
+	var top_bar_node = $main_hud/MarginContainer/header
 	if top_bar_node:
 		top_bar_node.menu_pressed.connect(func(): _toggle_popup(layer_menu_tabs))
 		top_bar_node.journal_pressed.connect(func(): _toggle_popup(layer_coffee_log))
@@ -79,8 +79,11 @@ func _has_active_popup() -> bool:
 	if layer_menu_tabs and layer_menu_tabs.visible: return true
 	if layer_coffee_log and layer_coffee_log.visible: return true
 	for c in get_children():
-		if c is CanvasLayer and (c.has_node("popup_panel") or c.has_node("TabContainer")):
+		if c is CanvasLayer and c.has_node("CenterContainer"):
 			return true
+		if c is CanvasLayer and c.has_node("TabContainer"):
+			return true
+		
 	return false
 
 func _process(delta: float) -> void:
@@ -147,7 +150,7 @@ func _process(delta: float) -> void:
 func _build_debug_panel() -> void:
 	var container = PanelContainer.new()
 	container.name = "PanelContainer"
-	$main.add_child(container)
+	$main_hud.add_child(container)
 	container.set_anchors_and_offsets_preset(Control.PRESET_CENTER_LEFT)
 	container.offset_left = 20
 	container.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -195,10 +198,7 @@ func _on_stage_interaction_requested(interaction_name: String, tile_data: Dictio
 		add_child(popup)
 		if popup.has_method("show_popup"):
 			popup.show_popup(tile_data)
-			
-		if btn_next_turn: 
-			btn_next_turn.disabled = true
-			popup.tree_exited.connect(func(): if btn_next_turn: btn_next_turn.disabled = false)
+		if btn_next_turn: btn_next_turn.disabled = false
 
 func _update_all() -> void:
 	_on_turn_changed(TimeManager.turn_in_year, TimeManager.season, TimeManager.year)
@@ -287,7 +287,3 @@ func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, c
 		add_child(popup)
 		if popup.has_method("_on_card_placement_interaction_requested"):
 			popup._on_card_placement_interaction_requested(card_name, tile, card_data)
-			
-		if btn_next_turn:
-			btn_next_turn.disabled = true
-			popup.tree_exited.connect(func(): if btn_next_turn: btn_next_turn.disabled = false)

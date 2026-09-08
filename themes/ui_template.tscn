@@ -43,28 +43,28 @@ texture_margin_right = 4.0
 texture_margin_bottom = 9.0
 region_rect = Rect2(0, 0, 55, 56)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l1err"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tlh67"]
 load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1vl3g"]
 content_margin_top = 18.0
 content_margin_right = 16.0
 content_margin_bottom = 14.0
-texture = SubResource("CompressedTexture2D_l1err")
+texture = SubResource("CompressedTexture2D_tlh67")
 texture_margin_left = 4.0
 texture_margin_top = 7.0
 texture_margin_right = 4.0
 texture_margin_bottom = 9.0
 region_rect = Rect2(114, 0, 55, 56)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o7cgi"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nxrsh"]
 load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1dpm5"]
 content_margin_top = 15.0
 content_margin_right = 16.0
 content_margin_bottom = 17.0
-texture = SubResource("CompressedTexture2D_o7cgi")
+texture = SubResource("CompressedTexture2D_nxrsh")
 texture_margin_left = 4.0
 texture_margin_top = 7.0
 texture_margin_right = 4.0
@@ -106,7 +106,7 @@ bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_vvvxj"]
 color = Color(1, 1, 1, 0.39215687)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvylg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0jewy"]
 content_margin_left = 12.0
 content_margin_top = 12.0
 content_margin_right = 12.0
@@ -129,11 +129,11 @@ TooltipLabel/colors/font_color = Color(1, 1, 1, 1)
 TooltipLabel/colors/font_outline_color = Color(1, 1, 1, 1)
 TooltipLabel/constants/outline_size = 2
 TooltipLabel/font_sizes/font_size = 24
-TooltipPanel/styles/panel = SubResource("StyleBoxFlat_pvylg")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_0jewy")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ybjhs"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qa7hf"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_acjja"]
 load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c5mu7"]
@@ -141,14 +141,14 @@ content_margin_left = 13.0
 content_margin_top = 15.0
 content_margin_right = 13.0
 content_margin_bottom = 17.0
-texture = SubResource("CompressedTexture2D_qa7hf")
+texture = SubResource("CompressedTexture2D_acjja")
 texture_margin_left = 4.0
 texture_margin_top = 7.0
 texture_margin_right = 4.0
 texture_margin_bottom = 9.0
 region_rect = Rect2(171, 0, 55, 56)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l5g8p"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jgkso"]
 load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sd4l1"]
@@ -156,7 +156,7 @@ content_margin_left = 13.0
 content_margin_top = 18.0
 content_margin_right = 13.0
 content_margin_bottom = 14.0
-texture = SubResource("CompressedTexture2D_l5g8p")
+texture = SubResource("CompressedTexture2D_jgkso")
 texture_margin_left = 4.0
 texture_margin_top = 7.0
 texture_margin_right = 4.0
@@ -168,7 +168,7 @@ content_margin_left = 13.0
 content_margin_top = 15.0
 content_margin_right = 13.0
 content_margin_bottom = 17.0
-texture = SubResource("CompressedTexture2D_qa7hf")
+texture = SubResource("CompressedTexture2D_acjja")
 texture_margin_left = 4.0
 texture_margin_top = 7.0
 texture_margin_right = 4.0
@@ -396,6 +396,7 @@ grow_vertical = 2
 theme = ExtResource("1_3fff4")
 
 [node name="main_hud" type="Control" parent="." unique_id=2096244796]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -543,7 +544,6 @@ icon_alignment = 2
 expand_icon = true
 
 [node name="popup_panel" type="Control" parent="." unique_id=1682850865]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1023,25 +1023,6 @@ theme_override_styles/separator = SubResource("StyleBoxLine_vvvxj")
 layout_mode = 2
 theme = SubResource("Theme_sd4l1")
 radius = 78.0
-key_items = Array[Dictionary]([{
-"title": "stat1
-",
-"tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Fusce nisl sapien, cursus sit amet dui sit amet, pharetra egestas tortor.
-Praesent in porta nibh. Pellentesque ac mauris id purus mollis bibendum a sed sem. In at elementum velit, id dictum massa. Phasellus consectetur eros et nibh aliquet pretium.
-Proin imperdiet purus lorem, a euismod neque porttitor quis. Fusce quis cursus urna. Pellentesque gravida lacinia lectus, ac consequat mi.
-Duis ligula leo, bibendum a velit id, dignissim volutpat mi.
-Vivamus vel tempor lacus. Proin sit amet varius libero, vel placerat felis.",
-"value": 2.4000000000000004
-}, {
-"title": "stat2",
-"tooltip": "",
-"value": 3.0
-}, {
-"title": "stat3",
-"tooltip": "",
-"value": 1.0
-}])
 font = ExtResource("10_1dpm5")
 font_size = 12
 font_color = Color(1, 1, 1, 1)
@@ -1055,10 +1036,6 @@ graph_outline_color = Color(0.20392157, 0.78039217, 0.34901962, 1)
 graph_outline_width = 0.5
 guide_color = Color(1, 1, 1, 0.44313726)
 guide_width = 0.5
-items/key_0/title = "stat1
-"
-items/key_1/title = "stat2"
-items/key_2/title = "stat3"
 extra_datasets_count = 0
 
 [node name="Label" type="Label" parent="popup_panel/CenterContainer/panel/content/bean_detail/right/chart" unique_id=108472191]

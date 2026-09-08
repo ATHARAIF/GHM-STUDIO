@@ -3,10 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://c2uke58d1oepu" path="res://scenes/cards/card_hand.tscn" id="1_2obvf"]
 [ext_resource type="Script" uid="uid://ccgq84p33gpag" path="res://scripts/ui/main_hud.gd" id="1_hudgd"]
 [ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="2_6230l"]
-[ext_resource type="PackedScene" uid="uid://82dnybnms3pg" path="res://scenes/ui/components/top_bar.tscn" id="2_mti1m"]
-[ext_resource type="Texture2D" uid="uid://dnydooatnscro" path="res://assets/ui/hud/next_turn.svg" id="9_ww3d0"]
+[ext_resource type="PackedScene" uid="uid://docyv7a3s7tss" path="res://scenes/ui/components/header.tscn" id="3_yh5fs"]
+[ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="6_w0i6r"]
+[ext_resource type="Texture2D" uid="uid://bp1ggnl1u1gcf" path="res://assets/ui/ui_atlas.png" id="12_c7of8"]
+[ext_resource type="Texture2D" uid="uid://l2ipisxhp2rc" path="res://assets/ui/icons/Next.png" id="13_0yh2i"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6m254"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8npfc"]
 bg_color = Color(0.12156863, 0.16078432, 0.2, 0)
 border_width_left = 2
 border_width_top = 2
@@ -18,105 +20,44 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgxqa"]
-bg_color = Color(0.61, 0.61, 0.61, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhju8"]
-content_margin_left = 32.0
-content_margin_right = 32.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_bottom = 8
-border_color = Color(0.6392157, 0.30588236, 0.13333334, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60tlk"]
-content_margin_left = 32.0
-content_margin_right = 32.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_bottom = 8
-border_color = Color(0.6392157, 0.30588236, 0.13333334, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5b4bs"]
-content_margin_left = 32.0
-content_margin_right = 32.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_top = 8
-border_color = Color(0.64, 0.30293334, 0.13439998, 0)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="Theme" id="Theme_ei7no"]
-Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_hover_color = Color(1, 1, 1, 1)
-Button/styles/disabled = SubResource("StyleBoxFlat_kgxqa")
-Button/styles/hover = SubResource("StyleBoxFlat_yhju8")
-Button/styles/normal = SubResource("StyleBoxFlat_60tlk")
-Button/styles/pressed = SubResource("StyleBoxFlat_5b4bs")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62l3y"]
-content_margin_left = 16.0
-content_margin_top = 16.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yrh06"]
+content_margin_top = 15.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_bottom = 8
-border_color = Color(0.6392157, 0.30588236, 0.13333334, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+content_margin_bottom = 17.0
+texture = ExtResource("12_c7of8")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(0, 0, 55, 56)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mti1m"]
-content_margin_left = 16.0
-content_margin_top = 24.0
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yh5fs"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_quc01"]
+content_margin_top = 18.0
 content_margin_right = 16.0
-content_margin_bottom = 8.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_top = 8
-border_color = Color(0.64, 0.30293334, 0.13439998, 0)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+content_margin_bottom = 14.0
+texture = SubResource("CompressedTexture2D_yh5fs")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(114, 0, 55, 56)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phxny"]
-content_margin_left = 16.0
-content_margin_top = 16.0
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d282s"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7of8"]
+content_margin_top = 15.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
-border_width_bottom = 8
-border_color = Color(0.6392157, 0.30588236, 0.13333334, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_quc01"]
-content_margin_left = 16.0
-content_margin_top = 16.0
-content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.61, 0.61, 0.61, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7of8"]
+content_margin_bottom = 17.0
+texture = SubResource("CompressedTexture2D_d282s")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(57, 0, 55, 56)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6230l"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -180,83 +121,71 @@ cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 
-[node name="main_hud" type="CanvasLayer" unique_id=265467276]
+[node name="main_hud" type="CanvasLayer" unique_id=1969541750]
 script = ExtResource("1_hudgd")
-hold_overlay_color = Color(0.6392157, 0.30588236, 0.13333334, 0.6666667)
+hold_overlay_color = Color(0, 0.56078434, 0.5803922, 0.5764706)
 
-[node name="main" type="CanvasLayer" parent="." unique_id=2121045524]
-
-[node name="top_bar" parent="main" unique_id=1277406458 instance=ExtResource("2_mti1m")]
-
-[node name="CardPanel" type="PanelContainer" parent="main" unique_id=177724962]
-custom_minimum_size = Vector2(1280, 200)
-custom_maximum_size = Vector2(-1, 200)
-anchors_preset = 12
-anchor_top = 1.0
+[node name="main_hud" type="Control" parent="." unique_id=2015919038]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -200.0
 grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 4
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("6_w0i6r")
+
+[node name="MarginContainer" type="MarginContainer" parent="main_hud" unique_id=1119417447]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="header" parent="main_hud/MarginContainer" unique_id=552095148 instance=ExtResource("3_yh5fs")]
+layout_mode = 2
+
+[node name="CardPanel" type="PanelContainer" parent="main_hud/MarginContainer" unique_id=1538310477]
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 8
 size_flags_stretch_ratio = 15.0
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, -30)
 offset_transform_visual_only = false
-theme_override_styles/panel = SubResource("StyleBoxFlat_6m254")
+theme_override_styles/panel = SubResource("StyleBoxFlat_8npfc")
 
-[node name="Margin" type="MarginContainer" parent="main/CardPanel" unique_id=495349738]
+[node name="Margin" type="MarginContainer" parent="main_hud/MarginContainer/CardPanel" unique_id=1561000182]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 65
 theme_override_constants/margin_bottom = 10
 
-[node name="card_hand" parent="main/CardPanel/Margin" unique_id=803764765 instance=ExtResource("1_2obvf")]
+[node name="card_hand" parent="main_hud/MarginContainer/CardPanel/Margin" unique_id=183433005 instance=ExtResource("1_2obvf")]
 layout_mode = 2
 size_flags_horizontal = 1
 
-[node name="Button" type="Button" parent="main/CardPanel" unique_id=140520158]
-custom_minimum_size = Vector2(120, 120)
-custom_maximum_size = Vector2(120, 120)
+[node name="next_turn" type="Button" parent="main_hud/MarginContainer/CardPanel" unique_id=139218385]
+custom_minimum_size = Vector2(136, 56)
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 4
-offset_transform_enabled = true
-offset_transform_position = Vector2(-50, 20)
-offset_transform_visual_only = false
-theme = SubResource("Theme_ei7no")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_62l3y")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_mti1m")
-theme_override_styles/hover = SubResource("StyleBoxFlat_phxny")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_quc01")
-icon = ExtResource("9_ww3d0")
-icon_alignment = 1
+size_flags_vertical = 8
+theme_type_variation = &"button_utility"
+theme_override_styles/normal = SubResource("StyleBoxTexture_yrh06")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_quc01")
+theme_override_styles/hover = SubResource("StyleBoxTexture_c7of8")
+text = "NEXT TURN"
+icon = ExtResource("13_0yh2i")
+icon_alignment = 2
 expand_icon = true
 
-[node name="footer" type="HBoxContainer" parent="main" unique_id=503426141]
-visible = false
-custom_minimum_size = Vector2(1280, 200)
-custom_maximum_size = Vector2(1280, 200)
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -200.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="VSeparator" type="VSeparator" parent="main/footer" unique_id=1839695945]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/separator = SubResource("StyleBoxEmpty_c7of8")
-
 [node name="menu_tabs" type="CanvasLayer" parent="." unique_id=813571542]
+layer = 2
 visible = false
 
 [node name="background" type="ColorRect" parent="menu_tabs" unique_id=1763953984]
@@ -334,6 +263,7 @@ custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
 [node name="menu_coffee_log" type="CanvasLayer" parent="." unique_id=348317728]
+layer = 2
 visible = false
 
 [node name="container" type="VBoxContainer" parent="menu_coffee_log" unique_id=1133760874]

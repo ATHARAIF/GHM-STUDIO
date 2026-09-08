@@ -14,6 +14,45 @@ bg_color = Color(0.20392157, 0.78039217, 0.34901962, 1)
 corner_radius_top_left = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j8bgu"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i14v0"]
+content_margin_top = 15.0
+content_margin_bottom = 17.0
+texture = SubResource("CompressedTexture2D_j8bgu")
+texture_margin_left = 4.0
+texture_margin_top = 2.0
+texture_margin_right = 4.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(57, 0, 55, 56)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dv04h"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_awtby"]
+content_margin_top = 5.0
+content_margin_bottom = 8.0
+texture = SubResource("CompressedTexture2D_dv04h")
+texture_margin_left = 4.0
+texture_margin_top = 2.0
+texture_margin_right = 4.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 55, 56)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xpwjo"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mbqy0"]
+content_margin_top = 18.0
+content_margin_bottom = 14.0
+texture = SubResource("CompressedTexture2D_xpwjo")
+texture_margin_left = 4.0
+texture_margin_top = 2.0
+texture_margin_right = 4.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(114, 0, 55, 56)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qa7hf"]
 load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
 
@@ -49,6 +88,19 @@ texture_margin_top = 7.0
 texture_margin_right = 4.0
 texture_margin_bottom = 9.0
 region_rect = Rect2(228, 0, 55, 56)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ntpv8"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nefmk"]
+content_margin_bottom = 7.0
+texture = SubResource("CompressedTexture2D_ntpv8")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(171, 116, 55, 56)
+modulate_color = Color(0.39181864, 0.39181864, 0.3918185, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j8bgu"]
 content_margin_bottom = 7.0
@@ -217,7 +269,12 @@ region_rect = Rect2(114, 0, 55, 56)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ckjl0"]
 content_margin_left = 4.0
 content_margin_right = 4.0
-bg_color = Color(0.78039217, 0.4627451, 0.4627451, 1)
+bg_color = Color(0.8826555, 0.7049008, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3sl16"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.3882353, 0.77254903, 0.4, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybjhs"]
 content_margin_left = 8.0
@@ -265,6 +322,10 @@ HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_rnfg8")
 VScrollBar/styles/grabber = SubResource("StyleBoxTexture_sd4l1")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_sd4l1")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_sd4l1")
+button_back/base_type = &"Button"
+button_back/styles/hover = SubResource("StyleBoxTexture_i14v0")
+button_back/styles/normal = SubResource("StyleBoxTexture_awtby")
+button_back/styles/pressed = SubResource("StyleBoxTexture_mbqy0")
 button_close_panel/base_type = &"Button"
 button_close_panel/styles/hover = SubResource("StyleBoxTexture_jkgan")
 button_close_panel/styles/normal = SubResource("StyleBoxTexture_to61q")
@@ -273,6 +334,7 @@ button_confirm/base_type = &"Button"
 button_confirm/colors/font_color = Color(1, 1, 1, 1)
 button_confirm/colors/font_hover_color = Color(1, 1, 1, 1)
 button_confirm/colors/font_pressed_color = Color(1, 1, 1, 1)
+button_confirm/styles/disabled = SubResource("StyleBoxTexture_nefmk")
 button_confirm/styles/hover = SubResource("StyleBoxTexture_j8bgu")
 button_confirm/styles/normal = SubResource("StyleBoxTexture_rnfg8")
 button_confirm/styles/pressed = SubResource("StyleBoxTexture_thhn4")
@@ -313,9 +375,12 @@ button_utility/base_type = &"Button"
 button_utility/styles/hover = SubResource("StyleBoxTexture_gfhtu")
 button_utility/styles/normal = SubResource("StyleBoxTexture_ybjhs")
 button_utility/styles/pressed = SubResource("StyleBoxTexture_l5g8p")
-label_species/base_type = &"Label"
-label_species/fonts/font = ExtResource("2_gfhtu")
-label_species/styles/normal = SubResource("StyleBoxFlat_ckjl0")
+label_arabica/base_type = &"Label"
+label_arabica/fonts/font = ExtResource("2_gfhtu")
+label_arabica/styles/normal = SubResource("StyleBoxFlat_ckjl0")
+label_robusta/base_type = &"Label"
+label_robusta/fonts/font = ExtResource("2_gfhtu")
+label_robusta/styles/normal = SubResource("StyleBoxFlat_3sl16")
 label_terroir/base_type = &"Label"
 label_terroir/colors/font_color = Color(0.24313726, 0.24313726, 0.24313726, 1)
 label_terroir/font_sizes/font_size = 24

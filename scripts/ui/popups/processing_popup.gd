@@ -1,25 +1,26 @@
 extends CanvasLayer
 
-@onready var lbl_title = $popup_panel/Control/title_container/lbl_title
-@onready var btn_info = $popup_panel/Control/title_container/info_button
-@onready var btn_close = $popup_panel/close
+@onready var lbl_title = $CenterContainer/panel/panel_label
+#@onready var btn_info = $popup_panel/Control/title_container/info_button
+@onready var btn_close = $CenterContainer/panel/close
 
 # Left side
 
-@onready var lbl_variety = $popup_panel/margin/hbox/left_side/margin/content/bean/lbl_variety
-@onready var lbl_arabica = $popup_panel/margin/hbox/left_side/margin/content/bean/lbl_arabica
-@onready var lbl_robusta = $popup_panel/margin/hbox/left_side/margin/content/bean/lbl_robusta
-@onready var lbl_batch_value = $popup_panel/margin/hbox/left_side/margin/content/batch/value
-@onready var radar_graph = $popup_panel/margin/hbox/left_side/margin/content/chart/radar
-@onready var val_cost = $popup_panel/margin/hbox/left_side/margin/content/VBoxContainer/cost/HBoxContainer/value
-@onready var val_turn = $popup_panel/margin/hbox/left_side/margin/content/VBoxContainer/turn/value
-@onready var cont_cost = $popup_panel/margin/hbox/left_side/margin/content/VBoxContainer/cost/HBoxContainer
-@onready var cont_turn = $popup_panel/margin/hbox/left_side/margin/content/VBoxContainer/turn/value
+@onready var lbl_variety = $CenterContainer/panel/content/bean_name/variety
+@onready var lbl_arabica = $CenterContainer/panel/content/bean_name/arabica
+@onready var lbl_robusta = $CenterContainer/panel/content/bean_name/robusta
+@onready var lbl_batch_value = $CenterContainer/panel/content/bean_detail/left/bean_data/data1/value
+
+@onready var val_cost = $CenterContainer/panel/content/bean_detail/left/cost_turn/cost/HBoxContainer/value
+@onready var val_turn = $CenterContainer/panel/content/bean_detail/left/cost_turn/turn/value
+@onready var cont_cost = $CenterContainer/panel/content/bean_detail/left/cost_turn/cost/HBoxContainer
+@onready var cont_turn = $CenterContainer/panel/content/bean_detail/left/cost_turn/turn/value
 
 # Right side
-@onready var hbox_methods = $popup_panel/margin/hbox/right_side/margin/method_container/option
-@onready var hbox_tools = $popup_panel/margin/hbox/right_side/margin/method_container/option2
-@onready var btn_confirm = $popup_panel/margin/hbox/right_side/margin/method_container/confirm
+@onready var radar_graph = $CenterContainer/panel/content/bean_detail/right/chart/radar
+@onready var hbox_methods = $CenterContainer/panel/content/bean_detail/left/methods/toggle_buttons
+@onready var hbox_tools = $CenterContainer/panel/content/bean_detail/left/tools/toggle_buttons
+@onready var btn_confirm = $CenterContainer/panel/content/confirmation/confirm
 
 var method_btn_template: Button
 var tool_btn_template: Button
@@ -315,4 +316,3 @@ func _reset_ui() -> void:
 		if child is Button:
 			child.disabled = true
 			child.set_pressed_no_signal(false)
-

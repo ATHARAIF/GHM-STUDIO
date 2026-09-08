@@ -1,20 +1,36 @@
 extends CanvasLayer
 
-@onready var hbox_methods = $popup_panel/margin/hbox/right_side/margin/method_container/option
-@onready var slider_container = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container
-@onready var slider_intensity = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container/slider
-@onready var lbl_intensity_val = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container/label
+#@onready var hbox_methods = $popup_panel/margin/hbox/right_side/margin/method_container/option
+#@onready var slider_container = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container
+#@onready var slider_intensity = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container/slider
+#@onready var lbl_intensity_val = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container/label
+#
+#@onready var btn_confirm = $popup_panel/margin/hbox/right_side/margin/method_container/confirm
+#@onready var btn_close = $popup_panel/close
+#@onready var btn_info = $popup_panel/Control/title_container/info_button
+#
+#@onready var lbl_farm_name = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_terroir
+#@onready var lbl_arabica = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_arabica
+#@onready var lbl_robusta = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_robusta
+#@onready var val_variety = $popup_panel/margin/hbox/left_side/margin/content/variety/value
+#
+#@onready var radar_graph = $popup_panel/margin/hbox/left_side/margin/content/chart/radar
 
-@onready var btn_confirm = $popup_panel/margin/hbox/right_side/margin/method_container/confirm
-@onready var btn_close = $popup_panel/close
-@onready var btn_info = $popup_panel/Control/title_container/info_button
+@onready var hbox_methods = $CenterContainer/panel/content/bean_detail/left/toggle/toggle_buttons
+@onready var slider_container = $CenterContainer/panel/content/bean_detail/left/slider
+@onready var slider_intensity = $CenterContainer/panel/content/bean_detail/left/slider/container/slider
+@onready var lbl_intensity_val = $CenterContainer/panel/content/bean_detail/left/slider/container/value
 
-@onready var lbl_farm_name = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_terroir
-@onready var lbl_arabica = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_arabica
-@onready var lbl_robusta = $popup_panel/margin/hbox/left_side/margin/content/terroir/lbl_robusta
-@onready var val_variety = $popup_panel/margin/hbox/left_side/margin/content/variety/value
+@onready var btn_confirm = $CenterContainer/panel/content/confirmation/confirm
+@onready var btn_close = $CenterContainer/panel/close
 
-@onready var radar_graph = $popup_panel/margin/hbox/left_side/margin/content/chart/radar
+@onready var lbl_farm_name = $CenterContainer/panel/content/bean_name/terroir
+@onready var lbl_arabica = $CenterContainer/panel/content/bean_name/arabica
+@onready var lbl_robusta = $CenterContainer/panel/content/bean_name/robusta
+
+@onready var val_variety = $CenterContainer/panel/content/bean_detail/left/bean_data/data1/value
+
+@onready var radar_graph = $CenterContainer/panel/content/bean_detail/left/chart/radar
 
 var available_methods: Array[ProcessMethodData] = []
 var selected_method: ProcessMethodData
@@ -48,8 +64,6 @@ func _ready() -> void:
 	
 	btn_confirm.pressed.connect(_on_confirm)
 	btn_close.pressed.connect(_on_cancel)
-
-
 	
 	
 	UIUtils.setup_input_blocker(self)

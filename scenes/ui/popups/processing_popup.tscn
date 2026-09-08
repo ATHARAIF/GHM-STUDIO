@@ -19,6 +19,12 @@
 [ext_resource type="Texture2D" uid="uid://cbpjfa1a2mdqf" path="res://assets/ui/panels/close_normal.svg" id="18_f2tw2"]
 [ext_resource type="Texture2D" uid="uid://dwhyrn1qg1u8v" path="res://assets/ui/panels/close_pressed.svg" id="19_uu7e4"]
 [ext_resource type="Texture2D" uid="uid://gsp5b3iwd5ei" path="res://assets/ui/panels/icons/close.svg" id="20_51guo"]
+[ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="20_t48vm"]
+[ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="21_ob1y8"]
+[ext_resource type="FontFile" uid="uid://blxtbq7avsy75" path="res://assets/font/LondrinaSolid-Light.ttf" id="22_c01qe"]
+[ext_resource type="Texture2D" uid="uid://bdove5h4l2qds" path="res://assets/ui/icons/Money.png" id="22_ob1y8"]
+[ext_resource type="FontFile" uid="uid://bc2yt828criij" path="res://assets/font/LondrinaSolid-Regular.ttf" id="24_ed05q"]
+[ext_resource type="Texture2D" uid="uid://ci6jejy2uc0so" path="res://assets/ui/icons/Close_panel_popup.png" id="25_4llwy"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kqcc5"]
 texture = ExtResource("2_1jpy4")
@@ -196,6 +202,87 @@ content_margin_top = 4.0
 content_margin_bottom = 0.0
 texture = ExtResource("19_uu7e4")
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_w2dss"]
+allow_unpress = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1sff"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yowqi"]
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.53333336, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn3uy"]
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_3si71"]
+
+[sub_resource type="Theme" id="Theme_c01qe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2tw2"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 0.0
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_uu7e4"]
+color = Color(1, 1, 1, 0.39215687)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqcc5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t48vm"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5uinu"]
+content_margin_left = 13.0
+content_margin_top = 15.0
+content_margin_right = 13.0
+content_margin_bottom = 17.0
+texture = SubResource("CompressedTexture2D_t48vm")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(171, 0, 55, 56)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ob1y8"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4blfy"]
+content_margin_left = 13.0
+content_margin_top = 18.0
+content_margin_right = 13.0
+content_margin_bottom = 14.0
+texture = SubResource("CompressedTexture2D_ob1y8")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(228, 0, 55, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kc0gm"]
+content_margin_left = 13.0
+content_margin_top = 15.0
+content_margin_right = 13.0
+content_margin_bottom = 17.0
+texture = SubResource("CompressedTexture2D_t48vm")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(171, 0, 55, 56)
+
 [node name="ProcessingPopup" type="CanvasLayer" unique_id=1234999111]
 layer = 20
 script = ExtResource("1_g2o5o")
@@ -208,188 +295,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6)
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2021484841]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=576354012]
-custom_minimum_size = Vector2(800, 450)
-layout_mode = 2
-
-[node name="VBox" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=1442502777]
-layout_mode = 2
-
-[node name="Header" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBox" unique_id=416930357]
-layout_mode = 2
-
-[node name="LblTitle" type="Label" parent="CenterContainer/PanelContainer/VBox/Header" unique_id=1946184773]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 28
-text = "HARVEST"
-
-[node name="BtnClose" type="Button" parent="CenterContainer/PanelContainer/VBox/Header" unique_id=169708463]
-layout_mode = 2
-text = "   X   "
-
-[node name="Split" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBox" unique_id=1420160620]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 20
-
-[node name="LeftPanel" type="PanelContainer" parent="CenterContainer/PanelContainer/VBox/Split" unique_id=374323947]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Margin" type="MarginContainer" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel" unique_id=1748748368]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin" unique_id=1504585781]
-layout_mode = 2
-
-[node name="LblFarmName" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox" unique_id=975636140]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Nama lahan"
-
-[node name="Timeline" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox" unique_id=1239411031]
-layout_mode = 2
-alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox" unique_id=1356118092]
-layout_mode = 2
-
-[node name="Grid" type="GridContainer" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox" unique_id=414062482]
-layout_mode = 2
-columns = 2
-
-[node name="LSurface" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid" unique_id=354522738]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Surface"
-
-[node name="VSurface" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid" unique_id=796090386]
-layout_mode = 2
-text = "2.5 acres"
-horizontal_alignment = 2
-
-[node name="LPlant" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid" unique_id=1693278718]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Plant"
-
-[node name="VPlant" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid" unique_id=491768722]
-layout_mode = 2
-text = "Plant"
-horizontal_alignment = 2
-
-[node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox" unique_id=1218934017]
-layout_mode = 2
-
-[node name="Grid2" type="GridContainer" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox" unique_id=1547876387]
-visible = false
-layout_mode = 2
-columns = 2
-
-[node name="LRip" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=980013939]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Ripeness"
-
-[node name="VRip" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=140845084]
-layout_mode = 2
-text = "++++"
-horizontal_alignment = 2
-
-[node name="LQual" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=549590835]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Quality"
-
-[node name="VQual" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=1123209970]
-layout_mode = 2
-text = "+++"
-horizontal_alignment = 2
-
-[node name="LQuant" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=1568941827]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Quantity"
-
-[node name="VQuant" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/LeftPanel/Margin/VBox/Grid2" unique_id=130604661]
-layout_mode = 2
-text = "--"
-horizontal_alignment = 2
-
-[node name="RightPanel" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBox/Split" unique_id=1392305758]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 15
-
-[node name="LblMethod" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=365526664]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "HARVEST METHODS"
-
-[node name="HBoxMethods" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=1906985606]
-layout_mode = 2
-alignment = 1
-
-[node name="BtnSingle" type="Button" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods" unique_id=1907055]
-custom_minimum_size = Vector2(150, 100)
-layout_mode = 2
-text = "Strip Picking"
-
-[node name="BtnMulti" type="Button" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel/HBoxMethods" unique_id=709754444]
-custom_minimum_size = Vector2(150, 100)
-layout_mode = 2
-text = "Selective Picking"
-
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=1626436812]
-layout_mode = 2
-
-[node name="LblBuds" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=2031237184]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "NUMBER OF BUDS"
-
-[node name="SliderHBox" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=1210983725]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 15
-alignment = 1
-
-[node name="SliderIntensity" type="HSlider" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox" unique_id=1933638238]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-step = 25.0
-value = 50.0
-tick_count = 5
-
-[node name="LblIntensityVal" type="Label" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel/SliderHBox" unique_id=345113048]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-text = "Medium"
-horizontal_alignment = 1
-
-[node name="BtnConfirm" type="Button" parent="CenterContainer/PanelContainer/VBox/Split/RightPanel" unique_id=1171324060]
-custom_minimum_size = Vector2(150, 40)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 10
-text = "CONFIRM"
-
 [node name="popup_panel" type="PanelContainer" parent="." unique_id=494195464]
+visible = false
 custom_minimum_size = Vector2(990, 640)
 custom_maximum_size = Vector2(990, 640)
 anchors_preset = 15
@@ -882,4 +789,516 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_kenkv")
 theme_override_styles/hover = SubResource("StyleBoxTexture_750q2")
 icon = ExtResource("20_51guo")
 icon_alignment = 1
+expand_icon = true
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1012269845]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme = ExtResource("20_t48vm")
+
+[node name="panel" type="PanelContainer" parent="CenterContainer" unique_id=1360583259]
+custom_minimum_size = Vector2(520, 300)
+layout_mode = 2
+theme_type_variation = &"panel_popup"
+
+[node name="panel_label" type="Label" parent="CenterContainer/panel" unique_id=1576711825]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -58)
+offset_transform_visual_only = false
+theme_type_variation = &"panel_label"
+text = "Processing"
+horizontal_alignment = 1
+
+[node name="content" type="VBoxContainer" parent="CenterContainer/panel" unique_id=520749803]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="bean_name" type="HBoxContainer" parent="CenterContainer/panel/content" unique_id=2125169113]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="variety" type="Label" parent="CenterContainer/panel/content/bean_name" unique_id=1479409677]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"label_terroir"
+text = "VARIETY"
+
+[node name="arabica" type="Label" parent="CenterContainer/panel/content/bean_name" unique_id=350559986]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"label_arabica"
+text = "Arabica"
+
+[node name="robusta" type="Label" parent="CenterContainer/panel/content/bean_name" unique_id=1642999255]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"label_robusta"
+text = "Robusta"
+
+[node name="bean_detail" type="HBoxContainer" parent="CenterContainer/panel/content" unique_id=538519014]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="left" type="VBoxContainer" parent="CenterContainer/panel/content/bean_detail" unique_id=1491799]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="bean_data" type="VBoxContainer" parent="CenterContainer/panel/content/bean_detail/left" unique_id=317739332]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="data1" type="HBoxContainer" parent="CenterContainer/panel/content/bean_detail/left/bean_data" unique_id=1346968507]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content/bean_detail/left/bean_data/data1" unique_id=137746457]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Batch"
+
+[node name="value" type="Label" parent="CenterContainer/panel/content/bean_detail/left/bean_data/data1" unique_id=1794064287]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+text = "value"
+
+[node name="data2" type="HBoxContainer" parent="CenterContainer/panel/content/bean_detail/left/bean_data" unique_id=2007035375]
+visible = false
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content/bean_detail/left/bean_data/data2" unique_id=351913030]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "label2"
+
+[node name="value" type="Label" parent="CenterContainer/panel/content/bean_detail/left/bean_data/data2" unique_id=792741407]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+text = "value"
+
+[node name="methods" type="VBoxContainer" parent="CenterContainer/panel/content/bean_detail/left" unique_id=907605062]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content/bean_detail/left/methods" unique_id=1938645730]
+layout_mode = 2
+text = "Methods"
+
+[node name="toggle_buttons" type="HBoxContainer" parent="CenterContainer/panel/content/bean_detail/left/methods" unique_id=481747496]
+layout_mode = 2
+
+[node name="opt" type="Button" parent="CenterContainer/panel/content/bean_detail/left/methods/toggle_buttons" unique_id=1161868637]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_toggle"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_w2dss")
+text = "option1"
+
+[node name="opt2" type="Button" parent="CenterContainer/panel/content/bean_detail/left/methods/toggle_buttons" unique_id=225937591]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_toggle"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_w2dss")
+text = "option2"
+
+[node name="opt3" type="Button" parent="CenterContainer/panel/content/bean_detail/left/methods/toggle_buttons" unique_id=1958228720]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_toggle"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_w2dss")
+text = "option3"
+
+[node name="tools" type="VBoxContainer" parent="CenterContainer/panel/content/bean_detail/left" unique_id=1796445066]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content/bean_detail/left/tools" unique_id=939992129]
+layout_mode = 2
+text = "Tools"
+
+[node name="toggle_buttons" type="HBoxContainer" parent="CenterContainer/panel/content/bean_detail/left/tools" unique_id=1012297178]
+layout_mode = 2
+
+[node name="opt" type="Button" parent="CenterContainer/panel/content/bean_detail/left/tools/toggle_buttons" unique_id=270596982]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_toggle"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_w2dss")
+text = "option1"
+
+[node name="opt2" type="Button" parent="CenterContainer/panel/content/bean_detail/left/tools/toggle_buttons" unique_id=1236848291]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_toggle"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_w2dss")
+text = "option2"
+
+[node name="opt3" type="Button" parent="CenterContainer/panel/content/bean_detail/left/tools/toggle_buttons" unique_id=1324716231]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_toggle"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_w2dss")
+text = "option3"
+
+[node name="icon_custom" type="HBoxContainer" parent="CenterContainer/panel/content/bean_detail/left" unique_id=764331687]
+visible = false
+layout_mode = 2
+
+[node name="icon_list" type="VBoxContainer" parent="CenterContainer/panel/content/bean_detail/left/icon_custom" unique_id=507145748]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list" unique_id=472200604]
+layout_mode = 2
+text = "Icon"
+
+[node name="icons" type="GridContainer" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list" unique_id=688528163]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+columns = 4
+
+[node name="option1" type="Button" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons" unique_id=799493794]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_l1sff")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yowqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vn3uy")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3si71")
+
+[node name="color" type="TextureRect" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons/option1" unique_id=269604617]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_ob1y8")
+expand_mode = 2
+
+[node name="option2" type="Button" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons" unique_id=860787939]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_l1sff")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yowqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vn3uy")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3si71")
+
+[node name="color" type="TextureRect" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons/option2" unique_id=1998667189]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_ob1y8")
+expand_mode = 2
+
+[node name="option3" type="Button" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons" unique_id=1324157698]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_l1sff")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yowqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vn3uy")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3si71")
+
+[node name="color" type="TextureRect" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons/option3" unique_id=1366980138]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_ob1y8")
+expand_mode = 2
+
+[node name="option4" type="Button" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons" unique_id=1883244286]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_l1sff")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yowqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vn3uy")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3si71")
+
+[node name="color" type="TextureRect" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons/option4" unique_id=1562965904]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_ob1y8")
+expand_mode = 2
+
+[node name="option5" type="Button" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons" unique_id=33749256]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_l1sff")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yowqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vn3uy")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3si71")
+
+[node name="color" type="TextureRect" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons/option5" unique_id=2101501503]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_ob1y8")
+expand_mode = 2
+
+[node name="option6" type="Button" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons" unique_id=1019594217]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_l1sff")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yowqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vn3uy")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3si71")
+
+[node name="color" type="TextureRect" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons/option6" unique_id=1100127808]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_ob1y8")
+expand_mode = 2
+
+[node name="option7" type="Button" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons" unique_id=1750529014]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_l1sff")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yowqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vn3uy")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3si71")
+
+[node name="color" type="TextureRect" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons/option7" unique_id=1490183544]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_ob1y8")
+expand_mode = 2
+
+[node name="option8" type="Button" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons" unique_id=918165002]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_l1sff")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yowqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vn3uy")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3si71")
+
+[node name="color" type="TextureRect" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/icon_list/icons/option8" unique_id=1274991802]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_ob1y8")
+expand_mode = 2
+
+[node name="color_picker" type="VBoxContainer" parent="CenterContainer/panel/content/bean_detail/left/icon_custom" unique_id=108865566]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/color_picker" unique_id=391768739]
+layout_mode = 2
+text = "Icon Color"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CenterContainer/panel/content/bean_detail/left/icon_custom/color_picker" unique_id=1016479699]
+layout_mode = 2
+color = Color(0.6056738, 1.6605109e-06, 3.85046e-07, 1)
+
+[node name="cost_turn" type="VBoxContainer" parent="CenterContainer/panel/content/bean_detail/left" unique_id=224637076]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="cost" type="HBoxContainer" parent="CenterContainer/panel/content/bean_detail/left/cost_turn" unique_id=803213910]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content/bean_detail/left/cost_turn/cost" unique_id=518319532]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Cost"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/content/bean_detail/left/cost_turn/cost" unique_id=120009916]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("20_t48vm")
+theme_override_constants/separation = 0
+
+[node name="icon_button" type="TextureButton" parent="CenterContainer/panel/content/bean_detail/left/cost_turn/cost/HBoxContainer" unique_id=911743042]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = SubResource("Theme_c01qe")
+texture_normal = ExtResource("22_ob1y8")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="value" type="Label" parent="CenterContainer/panel/content/bean_detail/left/cost_turn/cost/HBoxContainer" unique_id=774551051]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_type_variation = &"label_varietas"
+text = "value"
+
+[node name="turn" type="HBoxContainer" parent="CenterContainer/panel/content/bean_detail/left/cost_turn" unique_id=2116586028]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content/bean_detail/left/cost_turn/turn" unique_id=1640522696]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Turn"
+
+[node name="value" type="Label" parent="CenterContainer/panel/content/bean_detail/left/cost_turn/turn" unique_id=93241989]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.24
+theme_type_variation = &"label_varietas"
+text = "value"
+
+[node name="right" type="PanelContainer" parent="CenterContainer/panel/content/bean_detail" unique_id=887875164]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("20_t48vm")
+theme_type_variation = &"panel_popup"
+theme_override_styles/panel = SubResource("StyleBoxFlat_f2tw2")
+
+[node name="chart" type="VBoxContainer" parent="CenterContainer/panel/content/bean_detail/right" unique_id=1531282839]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="label" type="Label" parent="CenterContainer/panel/content/bean_detail/right/chart" unique_id=1211375429]
+layout_mode = 2
+text = "Overview"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/panel/content/bean_detail/right/chart" unique_id=112184706]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_uu7e4")
+
+[node name="radar" parent="CenterContainer/panel/content/bean_detail/right/chart" unique_id=2092525909 instance=ExtResource("11_u7qg4")]
+layout_mode = 2
+radius = 65.0
+font = ExtResource("22_c01qe")
+font_size = 12
+font_color = Color(1, 1, 1, 1)
+font_outline_color = Color(0.5529412, 0.43137255, 0.3882353, 0)
+title_seperation = 5.305
+background_color = Color(0, 0, 0, 0.15294118)
+background_outline_color = Color(1, 1, 1, 0.3764706)
+background_outline_width = 0.7
+graph_color = Color(0.20392157, 0.78039217, 0.34901962, 0.39215687)
+graph_outline_color = Color(0.20392157, 0.78039217, 0.34901962, 1)
+graph_outline_width = 0.5
+guide_color = Color(1, 1, 1, 0.44313726)
+guide_width = 0.5
+extra_datasets_count = 1
+extra_dataset_0/color = Color(1, 0.8352941, 0.30980393, 0.7058824)
+extra_dataset_0/outline_color = Color(0.9607843, 0.49803922, 0.09019608, 1)
+extra_dataset_0/outline_width = 1.5
+extra_dataset_0/pulse_speed = 0.9
+extra_dataset_0/pulse_min_alpha = 0.3
+extra_dataset_0/key_0/value = 0.0
+extra_dataset_0/key_1/value = 0.0
+extra_dataset_0/key_2/value = 0.0
+extra_dataset_0/key_3/value = 0.0
+extra_dataset_0/key_4/value = 0.0
+extra_dataset_0/key_5/value = 0.0
+
+[node name="confirmation" type="HBoxContainer" parent="CenterContainer/panel/content" unique_id=777865236]
+layout_mode = 2
+alignment = 2
+
+[node name="space" type="VSeparator" parent="CenterContainer/panel/content/confirmation" unique_id=20555860]
+layout_mode = 2
+theme_override_constants/separation = 380
+theme_override_styles/separator = SubResource("StyleBoxEmpty_kqcc5")
+
+[node name="confirm" type="Button" parent="CenterContainer/panel/content/confirmation" unique_id=1126032899]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_confirm"
+theme_override_fonts/font = ExtResource("24_ed05q")
+text = "Confirm"
+
+[node name="close" type="Button" parent="CenterContainer/panel" unique_id=753478823]
+custom_minimum_size = Vector2(40, 46)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(32, -46)
+offset_transform_visual_only = false
+theme_type_variation = &"button_close_panel"
+theme_override_styles/normal = SubResource("StyleBoxTexture_5uinu")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_4blfy")
+theme_override_styles/hover = SubResource("StyleBoxTexture_kc0gm")
+icon = ExtResource("25_4llwy")
 expand_icon = true
