@@ -7,13 +7,22 @@ signal hopper_updated(hopper_id: String)
 ## Key: machine_id (String), Value: Dictionary berisi instance data
 var placed_machines: Dictionary = {}
 
+## Menyimpan daftar mesin yang dibeli dari toko tapi belum ditaruh.
+var owned_machines: Array[ItemData] = []
+
 var factory_level: int = 1
 
 
 func _ready() -> void:
-	# Berikan 1 Starter Hopper gratis saat game dimulai
-	var starter_data = preload("res://resources/items/machines/hopper_level_1.tres")
-	register_machine("hopper_1", starter_data, Vector3(0, 0.05, 2))
+	# Berikan 1 Starter Hopper, 1 Patio, 1 Roaster gratis saat game dimulai
+	var starter_hopper = preload("res://resources/items/machines/hopper_level_1.tres")
+	register_machine("hopper_1", starter_hopper, Vector3(0, 0.05, 2))
+	
+	var starter_patio = preload("res://resources/items/machines/patio_level_1.tres")
+	register_machine("patio_1", starter_patio, Vector3(-1.0, 0.05, 1.0))
+	
+	var starter_roaster = preload("res://resources/items/machines/roaster_level_1.tres")
+	register_machine("roaster_1", starter_roaster, Vector3(-2.0, 0.05, 1.0))
 
 ## Saat kursor/player meletakkan mesin baru ke lantai pabrik
 func register_machine(machine_id: String, item_data: ItemData, position: Vector3) -> void:
@@ -55,6 +64,12 @@ func fill_hopper(hopper_id: String, source_batch: CoffeeBatch, input_kg: int) ->
 	if hopper["current_batch"] == null:
 		hopper["current_batch"] = source_batch.duplicate(true)
 		hopper["current_amount_kg"] = 0
+	else:
+		# Jika hopper tidak kosong, PASTIKAN varietas dan tahun batch-nya SAMA!
+		var current = hopper["current_batch"]
+		if current.batch_year != source_batch.batch_year or current.variety_name != source_batch.variety_name:
+			# Tolak pengisian karena campuran tidak diizinkan
+			return 0
 		
 	var available_space = max_cap - hopper["current_amount_kg"]
 	var amount_to_add = min(input_kg, available_space)
@@ -64,3 +79,13 @@ func fill_hopper(hopper_id: String, source_batch: CoffeeBatch, input_kg: int) ->
 	
 	hopper_updated.emit(hopper_id)
 	return amount_to_add
+
+func has_idle_machine(tool_name: String) -> bool:
+	return get_idle_machine_id(tool_name) != ""
+	
+func get_idle_machine_id(tool_name: String) -> String:
+	for key in placed_machines:
+		var m = placed_machines[key]
+		if m["state"] == "IDLE" and m["data"].item_name == tool_name:
+			return key
+	return ""

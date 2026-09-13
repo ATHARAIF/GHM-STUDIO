@@ -69,13 +69,14 @@ func _clear_list() -> void:
 func _load_inventory() -> void:
 	_clear_list()
 	
-	# Ambil data mesin asli dari FactoryManager!
+	# Ambil data mesin asli dari FactoryManager (Mesin terpasang)
 	for m_id in FactoryManager.placed_machines:
 		var m_data = FactoryManager.placed_machines[m_id]
 		var item: ItemData = m_data["data"]
 		
 		var panel_data = {
 			"machine_id": m_id,
+			"raw_item_data": item,
 			"name": item.item_name,
 			"desc": "Kapasitas: " + str(item.max_capacity) + " Kg",
 			"buy_price": item.buy_price,
@@ -84,20 +85,34 @@ func _load_inventory() -> void:
 				"Max Capacity": str(item.max_capacity) + " kg",
 				"Efficiency": str(item.efficiency_multiplier) + "x"
 			},
-			"wear_pct": m_data["wear_pct"]
+			"wear_pct": m_data["wear_pct"],
+			"state": m_data.get("state", "IDLE")
 		}
 		_create_item_card(panel_data, false)
 
 func _load_shop() -> void:
 	_clear_list()
-	var dummy_shop = [
-		{"name": "Roaster Level 2", "desc": "Mesin sangrai industri kapasitas besar.", "buy_price": 500, "specs": {"Max Capacity": "8000 kg", "Efficiency": "1.5x"}},
-		{"name": "Espresso Machine", "desc": "Ekstrak kopi super cepat.", "buy_price": 1000, "specs": {"Max Capacity": "1000 kg", "Efficiency": "2.0x"}},
-		{"name": "Fermentation Tank", "desc": "Tangki fermentasi ceri kopi.", "buy_price": 300, "specs": {"Max Capacity": "5000 kg", "Efficiency": "1.0x"}}
+	
+	# Load item asli dari file resources (Untuk sementara hopper_level_1.tres saja)
+	var available_items: Array[ItemData] = [
+		preload("res://resources/items/machines/hopper_level_1.tres"),
+		preload("res://resources/items/machines/patio_level_1.tres"),
+		preload("res://resources/items/machines/roaster_level_1.tres")
 	]
 	
-	for data in dummy_shop:
-		_create_item_card(data, true)
+	for item in available_items:
+		var panel_data = {
+			"raw_item_data": item,
+			"name": item.item_name,
+			"desc": "Kapasitas: " + str(item.max_capacity) + " Kg",
+			"buy_price": item.buy_price,
+			"sell_price": item.sell_price,
+			"specs": {
+				"Max Capacity": str(item.max_capacity) + " kg",
+				"Efficiency": str(item.efficiency_multiplier) + "x"
+			}
+		}
+		_create_item_card(panel_data, true)
 
 func _create_item_card(data: Dictionary, is_shop: bool) -> void:
 	# Instansiasi komponen panel yang sudah dipisah!

@@ -18,6 +18,7 @@ class_name CoffeeBatch
 @export var cherry_kg: int = 0 # Disimpan di Hopper
 @export var green_bean_kg: float = 0.0 # Disimpan di Silo
 @export var roasted_bean_kg: float = 0.0
+@export var reserved_roasted_bean_kg: float = 0.0 # Yang sedang dipacking
 @export var species_name: String = "Arabica"
 @export var variety_name: String = "Unknown"
 

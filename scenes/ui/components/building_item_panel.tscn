@@ -105,7 +105,7 @@ text = "Sell"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_wom8j")
-current_tab = 3
+current_tab = 1
 tabs_visible = false
 
 [node name="BuyTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=1799693074]
@@ -163,7 +163,6 @@ size_flags_stretch_ratio = 0.4
 text = "Buy"
 
 [node name="StatusTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=1630191571]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rkcv6")
 metadata/_tab_index = 1
@@ -195,11 +194,11 @@ value = 100.0
 rounded = true
 fill_mode = 1
 
-[node name="BtnCleaning" type="Button" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer" unique_id=1769504851]
+[node name="BtnStatus" type="Button" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer" unique_id=1769504851]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
-text = "Cleaning"
+text = "Cleaning/In Use/Idle"
 
 [node name="InfoTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=2039722304]
 visible = false
@@ -234,6 +233,7 @@ label_settings = SubResource("LabelSettings_glx4a")
 autowrap_mode = 3
 
 [node name="DataTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=1319222026]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_1uxwi")
 metadata/_tab_index = 3

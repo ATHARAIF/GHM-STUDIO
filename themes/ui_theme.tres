@@ -276,6 +276,11 @@ content_margin_left = 4.0
 content_margin_right = 4.0
 bg_color = Color(0.3882353, 0.77254903, 0.4, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkgan"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.9254902, 0.5294118, 0.6666667, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybjhs"]
 content_margin_left = 8.0
 content_margin_right = 8.0
@@ -381,6 +386,8 @@ label_arabica/styles/normal = SubResource("StyleBoxFlat_ckjl0")
 label_robusta/base_type = &"Label"
 label_robusta/fonts/font = ExtResource("2_gfhtu")
 label_robusta/styles/normal = SubResource("StyleBoxFlat_3sl16")
+label_species/base_type = &"Label"
+label_species/styles/normal = SubResource("StyleBoxFlat_jkgan")
 label_terroir/base_type = &"Label"
 label_terroir/colors/font_color = Color(0.24313726, 0.24313726, 0.24313726, 1)
 label_terroir/font_sizes/font_size = 24

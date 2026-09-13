@@ -22,7 +22,7 @@ extends PanelContainer
 @onready var btn_action_buy = $VBoxContainer/Content/VBoxContainer/ValueTabContainer/BuyTab/MarginContainer/VBoxContainer/BtnBuy
 # Value StatusTab
 @onready var wear_status = $VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer/VBoxContainer/ProgressBar
-@onready var cleaning_btn = $VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer/BtnCleaning
+@onready var cleaning_btn = $VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer/BtnStatus
 # value InfoTab
 @onready var lbl_desc = $VBoxContainer/Content/VBoxContainer/ValueTabContainer/InfoTab/MarginContainer/VBoxContainer/Scroll/Desc
 # value DataTab
@@ -115,35 +115,99 @@ func setup_panel(data: Dictionary, mode: String) -> void:
 		if btn_tab_status: btn_tab_status.hide()
 		if btn_tab_sell: btn_tab_sell.hide()
 		
-		# Arahkan tab awal ke Info atau Buy
-		if tab_container.has_node("InfoTab"):
-			tab_container.current_tab = tab_container.get_node("InfoTab").get_index()
+		# Arahkan tab awal ke Buy
+		if tab_container.has_node("BuyTab"):
+			tab_container.current_tab = tab_container.get_node("BuyTab").get_index()
 		
 		if btn_action_buy:
-			# Hindari koneksi ganda jika panel digunakan ulang
-			if btn_action_buy.pressed.is_connected(_buy_item):
-				btn_action_buy.pressed.disconnect(_buy_item)
 			# Gunakan bind untuk passing data
+			# Kita aman dari koneksi ganda karena panel ini selalu dibuat baru (instantiate)
 			btn_action_buy.pressed.connect(_buy_item.bind(data))
 		
 	elif mode == "inventory":
 		# Di Inventory: Pemain tidak bisa "Buy" lagi
 		if btn_tab_buy: btn_tab_buy.hide()
 		
+		# Update wear dan button state
+		if data.has("wear_pct") and wear_status:
+			wear_status.value = data["wear_pct"]
+			
+		if cleaning_btn:
+			var state = data.get("state", "IDLE")
+			if state == "USED":
+				cleaning_btn.text = "In Use"
+				cleaning_btn.disabled = true
+			elif data.get("wear_pct", 100) < 50:
+				cleaning_btn.text = "Cleaning"
+				cleaning_btn.disabled = false
+			else:
+				cleaning_btn.text = "Idle"
+				cleaning_btn.disabled = true
+		
 		# Arahkan tab awal ke Info atau Status
 		if tab_container.has_node("StatusTab"):
 			tab_container.current_tab = tab_container.get_node("StatusTab").get_index()
 		
 		if btn_action_sell:
-			if btn_action_sell.pressed.is_connected(_sell_item):
-				btn_action_sell.pressed.disconnect(_sell_item)
 			btn_action_sell.pressed.connect(_sell_item.bind(data))
 
 func _buy_item(data: Dictionary) -> void:
-	print("Membeli: ", data.get("name"))
+	if not data.has("raw_item_data"):
+		print("Data mesin tidak valid untuk dibeli!")
+		return
+		
+	var item: ItemData = data["raw_item_data"]
+	
+	# Cek apakah masih ada grid kosong di pabrik sebelum mengizinkan pembelian
+	var empty_anchor = PlacementManager.find_empty_grid_spot(item)
+	if empty_anchor == null:
+		print("Pembelian dibatalkan: Ruangan pabrik sudah penuh!")
+		return
+		
+	if StageManager.budget >= item.buy_price:
+		StageManager.budget -= item.buy_price
+		StageManager.budget_changed.emit(StageManager.budget)
+		
+		# Letakkan di grid kosong secara otomatis
+		var unique_id = item.item_name.to_lower().replace(" ", "_") + "_" + str(Time.get_ticks_msec())
+		
+		# Tumbuhkan mesin 3D di ruangan
+		var tile = item.tile_scene.instantiate()
+		get_tree().current_scene.add_child(tile)
+		var final_pos = empty_anchor.global_position
+		final_pos.y += PlacementManager.ground_top_offset - PlacementManager._get_bottom_y(tile)
+		tile.global_position = final_pos
+		
+		PlacementManager.reoccupy_grid_for_restored_tile(tile, item)
+		FactoryManager.register_machine(unique_id, item, empty_anchor.global_position)
+		FactoryManager.placed_machines[unique_id]["node"] = tile
+		
+		print("Berhasil membeli dan langsung meletakkan: ", item.item_name)
+	else:
+		print("Uang tidak cukup untuk membeli ", item.item_name)
 
 func _sell_item(data: Dictionary) -> void:
-	print("Menjual: ", data.get("name"))
+	if not data.has("raw_item_data"):
+		return
+		
+	var item: ItemData = data["raw_item_data"]
+	
+	# Jual barang yang sudah di lantai (punya machine_id)
+	if data.has("machine_id"):
+		var m_id = data["machine_id"]
+		if FactoryManager.placed_machines.has(m_id):
+			var m_data = FactoryManager.placed_machines[m_id]
+			var node = m_data.get("node")
+			if is_instance_valid(node):
+				PlacementManager.remove_tile_from_grid(node)
+				node.queue_free()
+			
+			FactoryManager.placed_machines.erase(m_id)
+			StageManager.budget += item.sell_price
+			StageManager.budget_changed.emit(StageManager.budget)
+			print("Berhasil menjual mesin yang terpasang: ", item.item_name)
+			queue_free()
+			return
 
 func _on_place_item(data: Dictionary) -> void:
 	# Jika nanti ada tombol Place khusus

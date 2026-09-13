@@ -202,6 +202,9 @@ content_margin_top = 4.0
 content_margin_bottom = 0.0
 texture = ExtResource("19_uu7e4")
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_t48vm"]
+allow_unpress = true
+
 [sub_resource type="ButtonGroup" id="ButtonGroup_w2dss"]
 allow_unpress = true
 
@@ -904,7 +907,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"button_toggle"
 toggle_mode = true
-button_group = SubResource("ButtonGroup_w2dss")
+button_group = SubResource("ButtonGroup_t48vm")
 text = "option1"
 
 [node name="opt2" type="Button" parent="CenterContainer/panel/content/bean_detail/left/methods/toggle_buttons" unique_id=225937591]
@@ -912,7 +915,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"button_toggle"
 toggle_mode = true
-button_group = SubResource("ButtonGroup_w2dss")
+button_group = SubResource("ButtonGroup_t48vm")
 text = "option2"
 
 [node name="opt3" type="Button" parent="CenterContainer/panel/content/bean_detail/left/methods/toggle_buttons" unique_id=1958228720]
@@ -920,7 +923,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"button_toggle"
 toggle_mode = true
-button_group = SubResource("ButtonGroup_w2dss")
+button_group = SubResource("ButtonGroup_t48vm")
 text = "option3"
 
 [node name="tools" type="VBoxContainer" parent="CenterContainer/panel/content/bean_detail/left" unique_id=1796445066]

@@ -53,6 +53,8 @@ func _notification(what: int) -> void:
 			PlacementManager.call_deferred("toggle_farm_highlight", false)
 
 func _ready() -> void:
+	$base.pivot_offset = $base.size / 2.0
+	$base.position = -$base.size / 4.0
 	origin_parent = get_parent()
 	mouse_filter = MOUSE_FILTER_STOP
 	mouse_entered.connect(func(): _set_hover(true, false))
@@ -252,7 +254,7 @@ func _end_drag() -> void:
 	dragging = false
 	z_index = 0
 	if hover_tween: hover_tween.kill()
-	$base.position.y = 0.0
+	$base.position.y = -$base.size.y / 4.0
 
 	var mouse_pos := get_global_mouse_position()
 	var placed := false
@@ -282,6 +284,11 @@ func animate_return_from(from_pos: Vector2) -> void:
 	dragging = false
 	is_outside_hand = false
 	is_placed = false
+	_is_hovering_card = false
+	_is_hovering_btn = false
+	_current_hover_state = false
+	_apply_hover(false)
+	
 	if active_tween:
 		active_tween.kill()
 

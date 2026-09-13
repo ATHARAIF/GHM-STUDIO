@@ -31,18 +31,33 @@ func _spawn_factory_machines() -> void:
 			var tile = item.tile_scene.instantiate()
 			add_child(tile)
 			
-			# Gunakan sistem koordinat grid PlacementManager
+			if m_data.has("rotation_steps"):
+				tile.rotation_degrees.y = m_data["rotation_steps"] * 90.0
+			
 			var coord = PlacementManager._world_to_grid(m_data["position"])
-			if PlacementManager.grid.has(coord):
+			var placed_ok = false
+			if PlacementManager.grid.has(coord) and not PlacementManager.grid[coord].is_occupied:
 				var anchor = PlacementManager.grid[coord]
 				var final_pos = anchor.global_position
 				final_pos.y += PlacementManager.ground_top_offset - PlacementManager._get_bottom_y(tile)
 				tile.global_position = final_pos
+				placed_ok = true
 			else:
-				tile.global_position = m_data["position"]
+				# Fallback: Cari spot kosong pertama di lantai pabrik!
+				for gt in PlacementManager.ground_tiles:
+					if not gt.is_occupied:
+						var final_pos = gt.global_position
+						final_pos.y += PlacementManager.ground_top_offset - PlacementManager._get_bottom_y(tile)
+						tile.global_position = final_pos
+						m_data["position"] = final_pos # Simpan agar tidak nyasar lagi
+						placed_ok = true
+						break
+				if not placed_ok:
+					tile.global_position = m_data["position"] # Terpaksa di luar kalau pabrik full
 			
 			# Daftar ke grid supaya bisa digeser-geser oleh PlacementManager
-			PlacementManager.reoccupy_grid_for_restored_tile(tile, item)
+			if placed_ok:
+				PlacementManager.reoccupy_grid_for_restored_tile(tile, item)
 			
 			# Simpan referensi 3D node-nya agar UI bisa memberi highlight
 			m_data["node"] = tile

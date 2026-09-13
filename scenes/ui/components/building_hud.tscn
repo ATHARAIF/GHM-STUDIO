@@ -171,6 +171,7 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="building_item_panel" parent="footer/ItemContainer/MarginItem/ItemContainer/ItemContainer" unique_id=1515257976 instance=ExtResource("3_0sdbt")]
+visible = false
 layout_mode = 2
 
 [node name="LeftBtn" type="PanelContainer" parent="footer" unique_id=1866381028]

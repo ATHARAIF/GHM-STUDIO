@@ -164,17 +164,32 @@ func _update_ui() -> void:
 			radar_graph.set_extra_item_value(0, 3, 0.0)
 			radar_graph.set_extra_item_value(0, 4, 0.0)
 			radar_graph.set_extra_item_value(0, 5, 0.0)
+			
+	if btn_confirm:
+		var has_machine = FactoryManager.has_idle_machine("Roaster") if FactoryManager.has_method("has_idle_machine") else true
+		btn_confirm.disabled = not has_machine or selected_method == null
+		if not has_machine:
+			btn_confirm.text = "No Idle Roaster!"
+		else:
+			btn_confirm.text = "Confirm"
 
 func _on_confirm() -> void:
 	if selected_method == null:
 		return
 		
+	var machine_id = ""
+	if FactoryManager.has_method("get_idle_machine_id"):
+		machine_id = FactoryManager.get_idle_machine_id("Roaster")
+		if machine_id != "":
+			FactoryManager.placed_machines[machine_id]["state"] = "USED"
+
 	queue_free()
 	if has_node("/root/EventManager"):
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_confirmed.emit("Roasting", current_tile, current_card_data, {
 			"roasting_method": selected_method.method_name,
 			"roasting_intensity": slider.value if slider else 50.0,
+			"machine_id": machine_id,
 			"mod_acidity": mod_acidity,
 			"mod_aroma": mod_aroma,
 			"mod_sweetness": mod_sweetness,

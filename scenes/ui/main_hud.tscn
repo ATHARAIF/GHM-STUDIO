@@ -123,6 +123,7 @@ cache/0/16/0/scale = 1.0
 
 [node name="main_hud" type="CanvasLayer" unique_id=1969541750]
 script = ExtResource("1_hudgd")
+next_turn_hold_duration = 0.0
 hold_overlay_color = Color(0, 0.56078434, 0.5803922, 0.5764706)
 
 [node name="main_hud" type="Control" parent="." unique_id=2015919038]
@@ -163,7 +164,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_8npfc")
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 65
+theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 10
 
 [node name="card_hand" parent="main_hud/MarginContainer/CardPanel/Margin" unique_id=183433005 instance=ExtResource("1_2obvf")]

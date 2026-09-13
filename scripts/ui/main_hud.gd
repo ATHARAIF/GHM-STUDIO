@@ -64,10 +64,10 @@ func _ready() -> void:
 		mat.set_shader_parameter("tint_color", hold_overlay_color)
 		btn_next_turn.material = mat
 		
-	var top_bar_node = $main_hud/MarginContainer/header
-	if top_bar_node:
-		top_bar_node.menu_pressed.connect(func(): _toggle_popup(layer_menu_tabs))
-		top_bar_node.journal_pressed.connect(func(): _toggle_popup(layer_coffee_log))
+	var header_node = $main_hud/MarginContainer/header
+	if header_node:
+		header_node.menu_pressed.connect(func(): _toggle_popup(layer_menu_tabs))
+		header_node.journal_pressed.connect(func(): _toggle_popup(layer_coffee_log))
 		
 	_update_all()
 
@@ -249,13 +249,21 @@ func _on_stats_changed() -> void:
 		
 	var t = StageManager.current_location.current_tree if (StageManager.current_location and StageManager.current_location.current_tree) else null
 	
+	# Auto-fix untuk batch lama (supaya transformasinya terlihat meski sudah diproses sebelum update skrip)
+	if b.completed_processes.has("WP01") and b.green_bean_kg == 0 and b.cherry_kg > 0:
+		b.green_bean_kg = b.cherry_kg * 0.2
+		b.cherry_kg = 0
+	if b.completed_processes.has("DP01") and b.roasted_bean_kg == 0 and b.green_bean_kg > 0:
+		b.roasted_bean_kg = b.green_bean_kg * 0.85
+		b.green_bean_kg = 0
+
 	if t:
-		if debug_body: debug_body.text = "Body: %.2f (Base: %.2f)" % [b.body, t.current_body]
-		if debug_acidity: debug_acidity.text = "Acidity: %.2f (Base: %.2f)" % [b.acidity, t.current_acidity]
-		if debug_sweetness: debug_sweetness.text = "Sweetness: %.2f (Base: %.2f)" % [b.sweetness, t.current_sweetness]
-		if debug_aroma: debug_aroma.text = "Aroma: %.2f (Base: %.2f)" % [b.aroma, t.current_aroma]
-		if debug_flavor: debug_flavor.text = "Flavor: %.2f (Base: %.2f)" % [b.flavor, t.current_flavor]
-		if debug_bitterness: debug_bitterness.text = "Bitterness: %.2f (Base: %.2f)" % [b.bitterness, t.current_bitterness]
+		if debug_body: debug_body.text = "Body: %.2f (Mod: %+.2f)" % [b.body, b.body - t.current_body]
+		if debug_acidity: debug_acidity.text = "Acidity: %.2f (Mod: %+.2f)" % [b.acidity, b.acidity - t.current_acidity]
+		if debug_sweetness: debug_sweetness.text = "Sweetness: %.2f (Mod: %+.2f)" % [b.sweetness, b.sweetness - t.current_sweetness]
+		if debug_aroma: debug_aroma.text = "Aroma: %.2f (Mod: %+.2f)" % [b.aroma, b.aroma - t.current_aroma]
+		if debug_flavor: debug_flavor.text = "Flavor: %.2f (Mod: %+.2f)" % [b.flavor, b.flavor - t.current_flavor]
+		if debug_bitterness: debug_bitterness.text = "Bitterness: %.2f (Mod: %+.2f)" % [b.bitterness, b.bitterness - t.current_bitterness]
 	else:
 		if debug_body: debug_body.text = "Body: %.2f" % b.body
 		if debug_acidity: debug_acidity.text = "Acidity: %.2f" % b.acidity
@@ -264,11 +272,11 @@ func _on_stats_changed() -> void:
 		if debug_flavor: debug_flavor.text = "Flavor: %.2f" % b.flavor
 		if debug_bitterness: debug_bitterness.text = "Bitterness: %.2f" % b.bitterness
 		
-	if debug_yield: debug_yield.text = "Yield: %.2fkg" % b.cherry_kg
+	if debug_yield: debug_yield.text = "Yield: Cherry: %.1fkg | Green: %.1fkg | Roast: %.1fkg" % [float(b.cherry_kg), b.green_bean_kg, b.roasted_bean_kg]
 	if debug_yield_mod: 
 		var hist_str = ", ".join(b.history_log)
 		if hist_str.is_empty(): hist_str = "None"
-		debug_yield_mod.text = "Yield Mod: %.1f%% (%s)" % [b.accumulated_yield_modifier * 100.0, hist_str]
+		debug_yield_mod.text = "Modifiers: Yield %.1f%% \nHistory: %s" % [(b.accumulated_yield_modifier - 1.0) * 100.0, hist_str]
 
 
 func _on_next_turn_pressed() -> void:

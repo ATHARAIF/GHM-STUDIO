@@ -138,6 +138,11 @@ func _select_method(method: ProcessMethodData) -> void:
 				if tool_data.allowed_methods.size() > 0 and (not selected_method or not selected_method.method_name in tool_data.allowed_methods):
 					is_compatible = false
 					
+				# Cek apakah ada mesin yang nganggur di pabrik!
+				if is_compatible and FactoryManager.has_method("has_idle_machine"):
+					if not FactoryManager.has_idle_machine(tool_data.method_name):
+						is_compatible = false
+					
 				child.disabled = not is_compatible
 				
 				if is_compatible:
@@ -251,9 +256,16 @@ func _on_confirm() -> void:
 	queue_free()
 	if not selected_method or not selected_tool: return
 		
+	var machine_id = ""
+	if FactoryManager.has_method("get_idle_machine_id"):
+		machine_id = FactoryManager.get_idle_machine_id(selected_tool.method_name)
+		if machine_id != "":
+			FactoryManager.placed_machines[machine_id]["state"] = "USED"
+
 	var extra_data = {
 		"process_method": selected_method.method_name,
 		"drying_tool": selected_tool.method_name,
+		"machine_id": machine_id,
 		"override_cost": selected_method.override_cost + selected_tool.override_cost,
 		"turn_duration": selected_method.turn_duration + selected_tool.turn_duration,
 		"mod_acidity": selected_method.mod_acidity + selected_tool.mod_acidity,

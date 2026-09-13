@@ -127,12 +127,16 @@ func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 				op.set_card_played(data["card_data"], false)
 				
 		StageManager.unregister_placed_tile(tile)
-		placement_data.erase(tile)
-		for offset in data.shape:
-			var c: Vector2i = data.anchor + offset
-			if grid.has(c):
-				grid[c].clear()
-		tile.queue_free()
+		if data.has("machine_id") and data["machine_id"] != "":
+			if FactoryManager.placed_machines.has(data["machine_id"]):
+				FactoryManager.placed_machines[data["machine_id"]]["state"] = "IDLE"
+		else:
+			placement_data.erase(tile)
+			for offset in data.shape:
+				var c: Vector2i = data.anchor + offset
+				if grid.has(c):
+					grid[c].clear()
+			tile.queue_free()
 		
 		if card_node and is_instance_valid(card_node) and card_node.has_method("set"):
 			card_node.show()
@@ -385,8 +389,9 @@ func _try_place_move(mouse_pos: Vector2) -> void:
 	var item_data = data.get("card_data")
 	if item_data is ItemData:
 		for m_id in FactoryManager.placed_machines:
-			if FactoryManager.placed_machines[m_id]["data"] == item_data:
+			if FactoryManager.placed_machines[m_id].get("node") == moving_tile:
 				FactoryManager.placed_machines[m_id]["position"] = final_pos
+				FactoryManager.placed_machines[m_id]["rotation_steps"] = rotation_steps
 				break
 	
 	moving_tile = null
@@ -636,22 +641,41 @@ func _on_interaction_confirmed(card_name: String, tile: Node3D, card_data: Resou
 		for key in extra_data:
 			data[key] = extra_data[key]
 		
-		tile.show() # Munculkan bendanya sekarang
-		
-		# Animasi Bounce & Shine setelah konfirmasi popup
-		var anchor_tile = grid[data["anchor"]]
-		var final_pos = anchor_tile.global_position
-		final_pos.y += ground_top_offset - tile_bottom_offset
-		
-		var tw := create_tween()
-		tw.set_trans(Tween.TRANS_BOUNCE)
-		tw.set_ease(Tween.EASE_OUT)
-		tw.set_parallel(true)
-		tw.tween_property(tile, "global_position", final_pos, place_duration)
-		tw.tween_callback(_play_shine_effect.bind(tile)).set_delay(place_duration * shine_trigger_ratio)
+		if extra_data.has("machine_id") and extra_data["machine_id"] != "":
+			var m_id = extra_data["machine_id"]
+			var machine_node = FactoryManager.placed_machines[m_id].get("node")
+			
+			# Free occupied cells of the DUMMY card tile
+			for offset in data.shape:
+				var c: Vector2i = data.anchor + offset
+				if grid.has(c):
+					grid[c].clear()
+			placement_data.erase(tile)
+			tile.queue_free()
+			
+			# Play shine on the physical machine
+			var tw := create_tween()
+			tw.tween_callback(_play_shine_effect.bind(machine_node)).set_delay(place_duration * shine_trigger_ratio)
+			
+			# Register the PHYSICAL machine to StageManager
+			StageManager.register_placed_tile(machine_node, data["card_data"], data)
+		else:
+			tile.show() # Munculkan bendanya sekarang
+			
+			# Animasi Bounce & Shine setelah konfirmasi popup
+			var anchor_tile = grid[data["anchor"]]
+			var final_pos = anchor_tile.global_position
+			final_pos.y += ground_top_offset - tile_bottom_offset
+			
+			var tw := create_tween()
+			tw.set_trans(Tween.TRANS_BOUNCE)
+			tw.set_ease(Tween.EASE_OUT)
+			tw.set_parallel(true)
+			tw.tween_property(tile, "global_position", final_pos, place_duration)
+			tw.tween_callback(_play_shine_effect.bind(tile)).set_delay(place_duration * shine_trigger_ratio)
 
-		# Daftarkan tile ke sistem
-		StageManager.register_placed_tile(tile, data["card_data"], data)
+			# Daftarkan tile ke sistem
+			StageManager.register_placed_tile(tile, data["card_data"], data)
 		
 	if pending_interaction_tile == tile:
 		pending_interaction_tile = null
@@ -979,8 +1003,19 @@ func toggle_farm_highlight(enable: bool) -> void:
 					SilhouetteHighlight.apply_highlight(t, false)
 			highlighted_farm_tiles.clear()
 
+func find_empty_grid_spot(item_data: Resource) -> GroundTile:
+	if not item_data or not item_data.tile_scene: return null
+	var shape = _get_shape(item_data.tile_scene)
+	for coord in grid.keys():
+		if _can_place(coord, shape):
+			return grid[coord]
+	return null
+
 func reset_farm_highlight() -> void:
 	_farm_highlight_refs = 0
+	for tile in highlighted_farm_tiles:
+		if is_instance_valid(tile):
+			SilhouetteHighlight.apply_highlight(tile, false)
 	highlighted_farm_tiles.clear()
 
 # endregion

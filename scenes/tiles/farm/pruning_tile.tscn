@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bxw1i8idgadat" path="res://assets/3D/tiles/base_tiles/1side_2corner.glb" id="2_sywf6"]
 [ext_resource type="PackedScene" uid="uid://dwl1o45lrxqec" path="res://assets/3D/tiles/decorations/cangkul.glb" id="4_ac4w6"]
 [ext_resource type="Script" uid="uid://5kv8yfkw8yc8" path="res://scripts/tiles/multi_tree.gd" id="5_5ol47"]
+[ext_resource type="PackedScene" uid="uid://bhsfb4kol3l05" path="res://assets/3D/tiles/decorations/pruning_decor.glb" id="6_yw3dg"]
 [ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/tiles/tile_labels.tscn" id="999_tilelbl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8ffs"]
@@ -257,7 +258,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8gf4j")
 
-[sub_resource type="MultiMesh" id="MultiMesh_s8ffs"]
+[sub_resource type="MultiMesh" id="MultiMesh_1uh1c"]
 transform_format = 1
 instance_count = 27
 mesh = SubResource("ArrayMesh_7b6nj")
@@ -316,11 +317,15 @@ autoplay = &"cangkul"
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="decoration" unique_id=305733650]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2025111, 0.09617047, -1.2942908)
-multimesh = SubResource("MultiMesh_s8ffs")
+visible = false
+multimesh = SubResource("MultiMesh_1uh1c")
 script = ExtResource("5_5ol47")
 glb_file = ExtResource("1_1op8b")
 grid_size = Vector2i(9, 3)
 spacing = Vector2(0.325, 0.3)
+
+[node name="pruning_decor" parent="decoration" unique_id=309838399 instance=ExtResource("6_yw3dg")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.16473389, -0.99695396)
 
 [node name="tile_labels" parent="." unique_id=26388659 instance=ExtResource("999_tilelbl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 0, -0.034)

@@ -1,0 +1,350 @@
+[gd_scene format=3 uid="uid://x8ljuv20vqik"]
+
+[ext_resource type="FontFile" uid="uid://bc2yt828criij" path="res://assets/font/LondrinaSolid-Regular.ttf" id="1_xhyjr"]
+[ext_resource type="Script" uid="uid://b4xb04obxw8fb" path="res://themes/scripts/button_utility_anim.gd" id="2_e4c28"]
+[ext_resource type="Texture2D" uid="uid://bp1ggnl1u1gcf" path="res://assets/ui/ui_atlas.png" id="3_lt3ld"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wedm4"]
+content_margin_left = 8.0
+content_margin_top = 12.0
+content_margin_right = 8.0
+content_margin_bottom = 12.0
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_csuq6"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.24313726, 0.24313726, 0.24313726, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iicms"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dy1hn"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.24313726, 0.24313726, 0.24313726, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3mejs"]
+content_margin_bottom = 7.0
+texture = ExtResource("3_lt3ld")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(285, 116, 55, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6nhax"]
+content_margin_bottom = 4.0
+texture = ExtResource("3_lt3ld")
+texture_margin_left = 2.0
+texture_margin_top = 5.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(228, 116, 55, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hqmjh"]
+content_margin_bottom = 7.0
+texture = ExtResource("3_lt3ld")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(285, 116, 55, 56)
+
+[node name="tab_terroir" type="Control" unique_id=265957572]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=126571756]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/scrollbar_h_separation = 14
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer" unique_id=1510463472]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 24
+columns = 3
+
+[node name="terroir" type="VBoxContainer" parent="ScrollContainer/GridContainer" unique_id=1370467265]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="terroir_header" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir" unique_id=392829883]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="terroir_name" type="Label" parent="ScrollContainer/GridContainer/terroir/terroir_header" unique_id=420795362]
+layout_mode = 2
+theme_type_variation = &"label_terroir"
+text = "TERROIR"
+
+[node name="terroir_species" type="Label" parent="ScrollContainer/GridContainer/terroir/terroir_header" unique_id=331211238]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_type_variation = &"label_species"
+text = "Species"
+
+[node name="details" type="PanelContainer" parent="ScrollContainer/GridContainer/terroir" unique_id=1967865930]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wedm4")
+
+[node name="stats" type="VBoxContainer" parent="ScrollContainer/GridContainer/terroir/details" unique_id=1986180326]
+layout_mode = 2
+
+[node name="profile" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=1757291398]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="sand" type="VBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats/profile" unique_id=1565431509]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/profile/sand" unique_id=2078472016]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Sand"
+horizontal_alignment = 1
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/profile/sand" unique_id=519671321]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_csuq6")
+text = "value%"
+horizontal_alignment = 1
+
+[node name="clay" type="VBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats/profile" unique_id=130620087]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/profile/clay" unique_id=178643172]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Clay"
+horizontal_alignment = 1
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/profile/clay" unique_id=138848042]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_csuq6")
+text = "value%"
+horizontal_alignment = 1
+
+[node name="loam" type="VBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats/profile" unique_id=466182612]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/profile/loam" unique_id=773545192]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Loam"
+horizontal_alignment = 1
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/profile/loam" unique_id=77517533]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_csuq6")
+text = "value%"
+horizontal_alignment = 1
+
+[node name="space2" type="HSeparator" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=1506384985]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_iicms")
+
+[node name="exposure" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=971901392]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/exposure" unique_id=1035514207]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Exposure"
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/exposure" unique_id=641387544]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_dy1hn")
+text = "value"
+
+[node name="altitude" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=1656093475]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/altitude" unique_id=1136330514]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Altitude"
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/altitude" unique_id=596324957]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_dy1hn")
+text = "value"
+
+[node name="slope" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=1528097489]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/slope" unique_id=455645293]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Slope"
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/slope" unique_id=19391035]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_dy1hn")
+text = "value"
+
+[node name="ph" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=869921096]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/ph" unique_id=1993025435]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Ph"
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/ph" unique_id=1419600716]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_dy1hn")
+text = "value"
+
+[node name="terracing" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=9740166]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/terracing" unique_id=1880101155]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Terracing"
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/terracing" unique_id=1403685721]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_dy1hn")
+text = "value"
+
+[node name="irrigation" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=1242019243]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/irrigation" unique_id=268774489]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Irrigation"
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/irrigation" unique_id=1940206416]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_dy1hn")
+text = "value"
+
+[node name="age" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=867319176]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/age" unique_id=329975836]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Age"
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/age" unique_id=653533635]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_dy1hn")
+text = "value"
+
+[node name="plt_density" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=507881718]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/plt_density" unique_id=1742609014]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Plant Density"
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/plt_density" unique_id=1300450348]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_dy1hn")
+text = "value"
+
+[node name="health" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=8535553]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/health" unique_id=744660571]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Health"
+
+[node name="value" type="Label" parent="ScrollContainer/GridContainer/terroir/details/stats/health" unique_id=1328175802]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+theme_override_styles/normal = SubResource("StyleBoxFlat_dy1hn")
+text = "value"
+
+[node name="space" type="HSeparator" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=1530789639]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_iicms")
+
+[node name="action" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir/details/stats" unique_id=1190814673]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="manage" type="Button" parent="ScrollContainer/GridContainer/terroir/details/stats/action" unique_id=1365928264]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_type_variation = &"button_confirm"
+theme_override_fonts/font = ExtResource("1_xhyjr")
+text = "Manage Employee"
+script = ExtResource("2_e4c28")
+
+[node name="disable" type="Button" parent="ScrollContainer/GridContainer/terroir/details/stats/action" unique_id=1920664772]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_confirm"
+theme_override_fonts/font = ExtResource("1_xhyjr")
+theme_override_styles/normal = SubResource("StyleBoxTexture_3mejs")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6nhax")
+theme_override_styles/hover = SubResource("StyleBoxTexture_hqmjh")
+text = "Disable"
+script = ExtResource("2_e4c28")

@@ -1,0 +1,75 @@
+[gd_scene format=4 uid="uid://dc8kytr1fxuaj"]
+
+[ext_resource type="PackedScene" uid="uid://b5omglxf5doma" path="res://assets/3D/tiles/base_tiles/3side_border.glb" id="2_6k0lx"]
+[ext_resource type="PackedScene" uid="uid://frh6p78eav5l" path="res://assets/3D/tiles/decorations/production_house/natural_drying_beans.glb" id="2_sqff3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kkagj"]
+resource_name = "color test"
+cull_mode = 2
+albedo_color = Color(0.33619693, 0.24374354, 0.69870377, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rgkwn"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.060000002, -0.5, 1, 0.120000005, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAwAAAAIAAAAEAAEAAQAFAAMAAwAGAAAABQAGAAMAAAAGAAcABQAHAAYAAAAHAAQAAQAHAAUAAQAEAAcA"),
+"name": "color test",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAD/////AAAAAAAA//8AAAAAAAD/////AAD//wAAAAAAAP///////wAAAAAAAP//AAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_in50t"]
+resource_name = "3side_border_Cube_011"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.060000002, -0.5, 1, 0.120000005, 1),
+"attribute_data": PackedByteArray("/1//v/+f/3//n/+//1//f/+f////X/+//5//v/9f////n/8//18AAP+fAAD/X/8//5//f//f/z//3/9//5//P/8f/3//X/8//1//f/8f/z//n/9//1//P/+f/z//X/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_kkagj"),
+"name": "color test",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAAAA////////AAD//wAA//8AAP////8AAAAA//8AAP////9U1QAAAAAAAFTVAAD//wAAVNUAAAAA//9U1f////////+/AAAAAP///78AAP//////v///AAD///+//////wAA//8AAP///////wAA//8AAP////////////8AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAFTV//8AAP//VNX///////9U1f//AAAAAFTV/7//v/+//7//v/+//7//v1TVVNVU1VTVVNVU1VTVVNX//////////////////////3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3+qKqoqqiqqKqoqqiqqKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_rgkwn")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_glx4a"]
+size = Vector3(1, 0.45141983, 2)
+
+[node name="hopper_tile" type="Node3D" unique_id=119833576]
+
+[node name="base_tiles" type="Node3D" parent="." unique_id=1283527291]
+
+[node name="3side_border2" parent="base_tiles" unique_id=642160241 instance=ExtResource("2_6k0lx")]
+
+[node name="3side_border" parent="base_tiles/3side_border2" index="0" unique_id=1288981619]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_in50t")
+
+[node name="3side_border3" parent="base_tiles" unique_id=1750179654 instance=ExtResource("2_6k0lx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="3side_border" parent="base_tiles/3side_border3" index="0" unique_id=1288981619]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_in50t")
+
+[node name="decoration" type="Node3D" parent="." unique_id=1917898958]
+
+[node name="natural_drying_beans" parent="decoration" unique_id=1086556941 instance=ExtResource("2_sqff3")]
+transform = Transform3D(-1.3987644e-08, 0, 0.15, 0, 0.15, 0, -0.32, 0, -6.5567085e-09, 0, 0.07193804, -0.4973203)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=916856232]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=810383293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1461811, -0.5)
+shape = SubResource("BoxShape3D_glx4a")
+
+[editable path="base_tiles/3side_border2"]
+[editable path="base_tiles/3side_border3"]

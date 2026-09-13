@@ -151,6 +151,18 @@ func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Di
 func unregister_placed_tile(tile_node: Node3D) -> void:
 	for i in range(active_tiles.size() - 1, -1, -1):
 		if active_tiles[i].tile == tile_node:
+			var tile_dict = active_tiles[i]
+			if tile_dict.data.process_id == "DP03" and tile_dict.has("packs") and tile_dict.has("size"):
+				var kg_used = (tile_dict["packs"] * tile_dict["size"]) / 1000.0
+				var target_b = null
+				if tile_dict.has("target_batch_year") and tile_dict.target_batch_year != -1:
+					if batches.has(tile_dict.target_batch_year):
+						target_b = batches[tile_dict.target_batch_year]
+				if target_b == null:
+					target_b = get_oldest_ready_batch(tile_dict.data.process_id)
+				if target_b and target_b.get("reserved_roasted_bean_kg") != null:
+					target_b.reserved_roasted_bean_kg = max(0.0, target_b.reserved_roasted_bean_kg - kg_used)
+					
 			active_tiles.remove_at(i)
 			break
 	stats_changed.emit()
@@ -211,8 +223,12 @@ func advance_turn() -> void:
 				target_b.add_history(tile_dict.data.card_name)
 				target_b.apply_effects(tile_dict)
 				stats_changed.emit()
-				if tile_dict.tile and is_instance_valid(tile_dict.tile):
-					PlacementManager.remove_tile_from_grid(tile_dict.tile)
+				if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
+					if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
+						FactoryManager.placed_machines[tile_dict["machine_id"]]["state"] = "IDLE"
+				else:
+					if tile_dict.tile and is_instance_valid(tile_dict.tile):
+						PlacementManager.remove_tile_from_grid(tile_dict.tile)
 					
 				# Remove from active ticking list
 				active_tiles.remove_at(i)
@@ -295,12 +311,39 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 		var final_yield = raw_yield * target_b.accumulated_yield_modifier
 		target_b.cherry_kg = int(clamp(final_yield, 0, 5000))
 		
-	if tile_dict.tile and is_instance_valid(tile_dict.tile):
-		PlacementManager.remove_tile_from_grid(tile_dict.tile)
+	if tile_dict.data.process_id == "WP01":
+		# Processing / Washing Station
+		if target_b.green_bean_kg == 0 and target_b.cherry_kg > 0:
+			target_b.green_bean_kg = target_b.cherry_kg * 0.2
+			target_b.cherry_kg = 0 # Cherry sudah diubah jadi Green Bean
+		
+	if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
+		if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
+			FactoryManager.placed_machines[tile_dict["machine_id"]]["state"] = "IDLE"
+	else:
+		if tile_dict.tile and is_instance_valid(tile_dict.tile):
+			PlacementManager.remove_tile_from_grid(tile_dict.tile)
 		
 	if tile_dict.data.process_id == "DP01":
+		if target_b.green_bean_kg == 0 and target_b.cherry_kg > 0:
+			# Fallback kalau belum diproses di Washing Station
+			target_b.green_bean_kg = target_b.cherry_kg * 0.2
+			target_b.cherry_kg = 0
+		if target_b.roasted_bean_kg == 0 and target_b.green_bean_kg > 0:
+			target_b.roasted_bean_kg = target_b.green_bean_kg * 0.85
+			target_b.green_bean_kg = 0 # Green Bean sudah diubah jadi Roasted Bean
+		
 		batch_flags["after_roasting"] = true
 		batch_flag_unlocked.emit("after_roasting")
+	elif tile_dict.data.process_id == "DP03":
+		if tile_dict.has("packs") and tile_dict.has("size"):
+			var kg_used = (tile_dict["packs"] * tile_dict["size"]) / 1000.0
+			if target_b.get("reserved_roasted_bean_kg") != null:
+				target_b.reserved_roasted_bean_kg = max(0.0, target_b.reserved_roasted_bean_kg - kg_used)
+			target_b.roasted_bean_kg = max(0.0, target_b.roasted_bean_kg - kg_used)
+			# Simpan result packs di dictionary stage manager atau inventory (bisa diimplementasi penuh nanti)
+			# print("Packing finished: ", tile_dict["packs"], " packs")
+			
 	elif tile_dict.data.process_id == "TEST01":
 		batch_flags["after_testing"] = true
 		batch_flag_unlocked.emit("after_testing")

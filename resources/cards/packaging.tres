@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://d3pc72w4pm3x0"]
+
+[ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://bqogf3rb1fff" path="res://scenes/tiles/packaging/packaging_tile.tscn" id="2_2mfb6"]
+[ext_resource type="Texture2D" uid="uid://cqmnwqr1ieqsv" path="res://assets/ui/cards/tile_shapes/Type=3x2 U-Shape.png" id="3_ty8d7"]
+[ext_resource type="PackedScene" uid="uid://nan205nqvjte" path="res://scenes/ui/popups/packaging_popup.tscn" id="4_popup"]
+
+[resource]
+script = ExtResource("1_script")
+card_name = "Packing"
+process_id = "DP03"
+duration = 0
+tile_shape_icon = ExtResource("3_ty8d7")
+tile_scene = ExtResource("2_2mfb6")
+has_config_popup = true
+custom_popup_ui = ExtResource("4_popup")
+availability = 2
+unlock_condition = "DP01"
+metadata/_custom_type_script = "uid://uich76k1cing"

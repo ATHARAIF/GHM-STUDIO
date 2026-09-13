@@ -271,6 +271,7 @@ autoplay = &"cangkul"
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="decoration" unique_id=305733650]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2812912, 0.09617047, -1.2942908)
+visible = false
 multimesh = SubResource("MultiMesh_wmjeh")
 script = ExtResource("4_f5526")
 glb_file = ExtResource("5_eeb7e")
