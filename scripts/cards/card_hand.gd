@@ -79,12 +79,13 @@ func _auto_load_cards_from_folders() -> void:
 			var file_name = dir.get_next()
 			while file_name != "":
 				if not dir.current_is_dir():
-					var actual_file = file_name
-					if actual_file.ends_with(".remap"):
-						actual_file = actual_file.replace(".remap", "")
-						
+					# Pakai trim_suffix, JANGAN pakai replace() biar akurat
+					var actual_file = file_name.trim_suffix(".remap")
+					
 					if actual_file.ends_with(".tres"):
-						var full_path = folder_path + "/" + file_name
+						# Pakai path_join() untuk menghindari double-slash (//)
+						var full_path = folder_path.path_join(actual_file)
+						
 						var data = load(full_path) as CardData
 						if data:
 							card_database.append(data)

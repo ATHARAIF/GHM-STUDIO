@@ -1,44 +1,46 @@
 extends Node3D
 
 @export var farm_scene_path: String = "res://scenes/maps/main_farm.tscn"
+@export var warehouse_level: int = 1
 
 func _ready() -> void:
-	# 1. Daftarkan Kamera Pabrik (Kalau ada)
+	# 1. Daftarkan Kamera Gudang
 	if has_node("Camera3D"):
 		PlacementManager.register_camera($Camera3D)
 		
-	# 2. Daftarkan lantai grid pabrik (Kalau ada)
+	# 2. Daftarkan lantai grid gudang
 	var tiles: Array[GroundTile] = []
 	_collect_ground_tiles(self, tiles)
 	PlacementManager.register_ground_tiles(tiles)
 	
-	_apply_factory_level()
+	_apply_warehouse_level()
 	
-	# 3. Load mesin-mesin yang sudah ditaruh di pabrik
-	_spawn_factory_machines()
+	# 3. Load rak/pallet yang sudah ditaruh di gudang
+	if has_node("/root/WarehouseManager"):
+		_spawn_warehouse_racks()
 		
-	# 4. Hubungkan tombol keluar
-	if has_node("CanvasLayer/BtnExit"):
-		get_node("CanvasLayer/BtnExit").pressed.connect(_on_btn_exit_pressed)
+	# 4. Hubungkan tombol keluar (sementara pakai UI yang ada)
+	if has_node("prod_house_hud/CanvasLayer/BtnExit"):
+		get_node("prod_house_hud/CanvasLayer/BtnExit").pressed.connect(_on_btn_exit_pressed)
 
-func _spawn_factory_machines() -> void:
-	for m_id in FactoryManager.placed_machines:
-		var m_data = FactoryManager.placed_machines[m_id]
-		var item: ItemData = m_data["data"]
+func _spawn_warehouse_racks() -> void:
+	var wm = get_node("/root/WarehouseManager")
+	for r_id in wm.placed_racks:
+		var r_data = wm.placed_racks[r_id]
+		var item: ItemData = r_data["data"]
 		
-		# Pastikan item punya wujud 3D
-		if item.tile_scene:
+		if item and item.tile_scene:
 			var tile = item.tile_scene.instantiate()
 			add_child(tile)
 			
-			if m_data.has("rotation_steps"):
-				tile.rotation_degrees.y = m_data["rotation_steps"] * 90.0
+			if r_data.has("rotation_steps"):
+				tile.rotation_degrees.y = r_data["rotation_steps"] * 90.0
 			
-			var coord = PlacementManager._world_to_grid(m_data["position"])
+			var coord = PlacementManager._world_to_grid(r_data["position"])
 			var placed_ok = false
 			
 			# Fungsi helper untuk cek ketersediaan area
-			var rot_steps = m_data.get("rotation_steps", 0)
+			var rot_steps = r_data.get("rotation_steps", 0)
 			var base_shape = PlacementManager._get_shape(item.tile_scene)
 			var shape = PlacementManager._rotate_shape(base_shape, rot_steps)
 			
@@ -56,45 +58,40 @@ func _spawn_factory_machines() -> void:
 				tile.global_position = final_pos
 				placed_ok = true
 			else:
-				# Fallback: Cari spot kosong pertama di lantai pabrik yang muat seluruh shape!
+				# Fallback: Cari spot kosong pertama di lantai gudang yang muat seluruh shape!
 				for check_coord in PlacementManager.grid.keys():
 					if can_place_at.call(check_coord):
 						var anchor = PlacementManager.grid[check_coord]
 						var final_pos = anchor.global_position
 						final_pos.y += PlacementManager.ground_top_offset - PlacementManager._get_bottom_y(tile)
 						tile.global_position = final_pos
-						m_data["position"] = final_pos # Simpan agar tidak nyasar lagi
+						r_data["position"] = final_pos
 						placed_ok = true
 						break
 						
 				if not placed_ok:
-					tile.global_position = m_data["position"] # Terpaksa di luar kalau pabrik full
+					tile.global_position = r_data["position"]
 			
-			# Daftar ke grid supaya bisa digeser-geser oleh PlacementManager
 			if placed_ok:
 				PlacementManager.reoccupy_grid_for_restored_tile(tile, item)
 			
-			# Simpan referensi 3D node-nya agar UI bisa memberi highlight
-			m_data["node"] = tile
-			
-			if StageManager.has_method("_sync_machine_tiles"):
-				StageManager._sync_machine_tiles(tile)
+			r_data["node"] = tile
 
 func _on_btn_exit_pressed() -> void:
-	print("Keluar dari pabrik, kembali ke ladang...")
+	print("Keluar dari gudang, kembali ke ladang...")
 	
-	# 1. Simpan posisi mesin-mesin di pabrik ke FactoryManager
-	for m_id in FactoryManager.placed_machines:
-		var m_data = FactoryManager.placed_machines[m_id]
-		var node = m_data.get("node")
-		if is_instance_valid(node):
-			var rot_steps = int(round(node.rotation_degrees.y / 90.0))
-			FactoryManager.update_machine_transform(m_id, node.global_position, rot_steps)
+	var wm = get_node("/root/WarehouseManager")
+	if wm:
+		for r_id in wm.placed_racks:
+			var r_data = wm.placed_racks[r_id]
+			var node = r_data.get("node")
+			if is_instance_valid(node):
+				var rot_steps = int(round(node.rotation_degrees.y / 90.0))
+				wm.update_rack_transform(r_id, node.global_position, rot_steps)
 	
 	if StageManager.has_method("save_room_state"):
-		StageManager.save_room_state("prod_house")
+		StageManager.save_room_state("warehouse")
 		
-	# 2. Pindah scene
 	if not farm_scene_path.is_empty() and ResourceLoader.exists(farm_scene_path):
 		await TransitionManager.fade_out()
 		get_tree().change_scene_to_file(farm_scene_path)
@@ -108,21 +105,17 @@ func _collect_ground_tiles(node: Node, tiles: Array[GroundTile]) -> void:
 
 var wall_container: Node3D = null
 
-func _apply_factory_level() -> void:
-	var lvl = FactoryManager.factory_level
+func _apply_warehouse_level() -> void:
+	# Bentuk dan ukuran gudang bisa disesuaikan, sementara pakai format pabrik
 	var bounds = {
 		1: Rect2i(2, 2, 3, 4),
 		2: Rect2i(1, 2, 5, 4),
 		3: Rect2i(1, 1, 5, 5),
 		4: Rect2i(0, 0, 7, 7)
 	}
-	var current_bound = bounds.get(lvl, bounds[1])
+	var current_bound = bounds.get(warehouse_level, bounds[1])
 	
-	var lvl_label_path = "prod_house_hud/prod_house_hud/building_hud/upgrade/MarginContainer/HBoxContainer/value"
-	if has_node(lvl_label_path):
-		get_node(lvl_label_path).text = str(lvl)
-	
-	# 1. Hide & Lock tiles outside bounds
+	# Sembunyikan tile di luar batas
 	var coords_to_erase = []
 	for coord in PlacementManager.grid:
 		var tile = PlacementManager.grid[coord]
@@ -137,7 +130,7 @@ func _apply_factory_level() -> void:
 	for coord in coords_to_erase:
 		PlacementManager.grid.erase(coord)
 		
-	# 2. Build Walls
+	# Bangun Tembok
 	if is_instance_valid(wall_container):
 		wall_container.queue_free()
 	
@@ -148,7 +141,6 @@ func _apply_factory_level() -> void:
 	var cell_size = PlacementManager.cell_size
 	var wall_thick = 0.15
 	
-	# Kalkulasi center dan ukuran bounds
 	var center_grid_x = current_bound.position.x + (current_bound.size.x - 1) / 2.0
 	var center_grid_z = current_bound.position.y + (current_bound.size.y - 1) / 2.0
 	
@@ -163,16 +155,9 @@ func _apply_factory_level() -> void:
 	
 	var base_pos = Vector3(center_x, 0, center_z)
 	
-	# Belakang Kiri (Top-Left Edge) -> +X direction
 	_spawn_wall_segment(base_pos, Vector3(offset_x, 0, 0), Vector3(wall_thick, 1.0, depth_z + wall_thick*2), true, false)
-	
-	# Belakang Kanan (Top-Right Edge) -> +Z direction
 	_spawn_wall_segment(base_pos, Vector3(0, 0, offset_z), Vector3(width_x + wall_thick*2, 0.3, wall_thick), false, true)
-	
-	# Depan Kiri (Bottom-Left Edge) -> -Z direction
 	_spawn_wall_segment(base_pos, Vector3(0, 0, -offset_z), Vector3(width_x + wall_thick*2, 1.0, wall_thick), true, true)
-	
-	# Depan Kanan (Bottom-Right Edge) -> -X direction
 	_spawn_wall_segment(base_pos, Vector3(-offset_x, 0, 0), Vector3(wall_thick, 0.3, depth_z + wall_thick*2), false, false)
 
 @export var wall_high_scene: PackedScene
@@ -181,30 +166,26 @@ func _apply_factory_level() -> void:
 func _spawn_wall_segment(base_pos: Vector3, offset: Vector3, size: Vector3, is_high: bool, is_z_axis: bool) -> void:
 	var wall_node: Node3D
 	
-	# Kalau user sudah set scene di inspector, pakai scene itu!
 	if is_high and wall_high_scene:
 		wall_node = wall_high_scene.instantiate()
 	elif not is_high and wall_low_scene:
 		wall_node = wall_low_scene.instantiate()
 	else:
-		# Fallback kalau scene belum ada
 		var csg = CSGBox3D.new()
 		csg.size = size
 		var mat = StandardMaterial3D.new()
-		mat.albedo_color = Color("ca152d")
+		# Warna dinding gudang (Biru Tua/Abu-abu misal) berbeda dengan Pabrik (Merah)
+		mat.albedo_color = Color("2c3e50") 
 		csg.material = mat
 		wall_node = csg
 	
 	wall_container.add_child(wall_node)
 	
 	var final_pos = base_pos + offset
-	# Kalau pakai scene asli, anggap originnya ada di bawah. 
-	# Kalau CSGBox originnya di tengah, jadi perlu ditambah size.y/2
 	if wall_node is CSGBox3D:
 		final_pos.y += PlacementManager.ground_top_offset + (size.y / 2.0)
 	else:
 		final_pos.y += PlacementManager.ground_top_offset
-		# Putar mesh kalau dia dipasang sejajar sumbu Z
 		if is_z_axis:
 			wall_node.rotation_degrees.y = 90
 		

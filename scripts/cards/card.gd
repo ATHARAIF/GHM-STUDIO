@@ -183,7 +183,8 @@ func resume_drag_at(mouse_pos: Vector2, initial_rotation_steps: int = 0) -> void
 		origin_parent.set_card_played(card_data, false)
 	show()
 	modulate.a = 1.0
-	_begin_drag(mouse_pos - size / 2.0)
+	_begin_drag(mouse_pos - custom_minimum_size / 2.0)
+	_apply_hover(true)
 
 # titik masuk tunggal buat mulai state [2], dipanggil baik dari klik card di hand
 # maupun dari resume_drag_at() pas pickup dari ground.
@@ -194,6 +195,7 @@ func _begin_drag(start_screen_pos: Vector2) -> void:
 	origin_parent = get_parent()
 	origin_index = get_index()
 	top_level = true
+	size = custom_minimum_size
 	global_position = start_screen_pos
 	is_outside_hand = false
 	dragging = true
@@ -203,7 +205,7 @@ func _process(_delta: float) -> void:
 		return
 
 	var mouse_pos := get_global_mouse_position()
-	global_position = mouse_pos - size / 2.0
+	global_position = mouse_pos - custom_minimum_size / 2.0
 
 	var hand_rect := origin_parent.get_global_rect()
 	var now_outside := not hand_rect.has_point(mouse_pos)

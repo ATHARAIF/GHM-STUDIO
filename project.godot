@@ -13,6 +13,7 @@ config_version=5
 config/name="Terrafein"
 run/main_scene="uid://bcehomfgtbuls"
 config/features=PackedStringArray("4.7", "Forward Plus")
+run/max_fps=45
 config/icon="res://icon.svg"
 
 [autoload]
@@ -24,6 +25,7 @@ EventManager="*res://scripts/autoloads/event_manager.gd"
 TransitionManager="*res://scenes/autoloads/transition_manager.tscn"
 FactoryManager="*uid://bc0df2d5e733o"
 SilhouetteHighlight="*res://scenes/autoloads/silhouette_highlight.tscn"
+WarehouseManager="*uid://cn76w7quvch1b"
 
 [display]
 

@@ -11,4 +11,5 @@ category = 3
 buy_price = 3000
 sell_price = 1500
 max_capacity = 500
+allowed_methods = Array[String](["Light", "Medium", "Dark"])
 tile_scene = ExtResource("2_roastertile")

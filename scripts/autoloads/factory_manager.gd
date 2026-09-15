@@ -15,14 +15,16 @@ var factory_level: int = 1
 
 func _ready() -> void:
 	# Berikan 1 Starter Hopper, 1 Patio, 1 Roaster gratis saat game dimulai
-	var starter_hopper = preload("res://resources/items/machines/hopper_level_1.tres")
-	register_machine("hopper_1", starter_hopper, Vector3(0, 0.05, 2))
-	
-	var starter_patio = preload("res://resources/items/machines/patio_level_1.tres")
-	register_machine("patio_1", starter_patio, Vector3(-1.0, 0.05, 1.0))
+	# Posisi disesuaikan agar rapi di dalam Grid Level 1 (2,2 sampai 4,4)
 	
 	var starter_roaster = preload("res://resources/items/machines/roaster_level_1.tres")
-	register_machine("roaster_1", starter_roaster, Vector3(-2.0, 0.05, 1.0))
+	register_machine("roaster_1", starter_roaster, Vector3(2.0, 0.05, 2.0)) # Pojok Belakang
+	
+	var starter_patio = preload("res://resources/items/machines/patio_level_1.tres")
+	register_machine("patio_1", starter_patio, Vector3(3.0, 0.05, 4.0)) # Kiri Depan (Makan 2 slot)
+	
+	var starter_hopper = preload("res://resources/items/machines/hopper_level_1.tres")
+	register_machine("hopper_1", starter_hopper, Vector3(4.0, 0.05, 2.0)) # Pojok Kanan Atas
 
 ## Saat kursor/player meletakkan mesin baru ke lantai pabrik
 func register_machine(machine_id: String, item_data: ItemData, position: Vector3) -> void:
@@ -41,6 +43,11 @@ func register_machine(machine_id: String, item_data: ItemData, position: Vector3
 	
 	placed_machines[machine_id] = machine_dict
 	machine_registered.emit(machine_id)
+
+func update_machine_transform(machine_id: String, new_pos: Vector3, rot_steps: int) -> void:
+	if placed_machines.has(machine_id):
+		placed_machines[machine_id]["position"] = new_pos
+		placed_machines[machine_id]["rotation_steps"] = rot_steps
 
 ## Mengambil semua Hopper yang ada di pabrik
 func get_all_hoppers() -> Array[Dictionary]:
@@ -89,3 +96,12 @@ func get_idle_machine_id(tool_name: String) -> String:
 		if m["state"] == "IDLE" and m["data"].item_name == tool_name:
 			return key
 	return ""
+
+## Mengambil semua mesin berdasarkan kategorinya (misal DRYER atau ROASTER)
+func get_machines_by_category(category: ItemData.ItemCategory) -> Array[Dictionary]:
+	var machines: Array[Dictionary] = []
+	for key in placed_machines:
+		var m = placed_machines[key]
+		if m["data"].category == category:
+			machines.append(m)
+	return machines

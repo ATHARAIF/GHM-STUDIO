@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://b8c7m5dp6l0k0"]
+[gd_scene format=3 uid="uid://kj8mv86fdr0d"]
 
-[ext_resource type="Script" uid="uid://bdg6gkhx3jreo" path="res://scripts/maps/production_house.gd" id="1_qdl7o"]
-[ext_resource type="PackedScene" uid="uid://cj3djbtpfddtc" path="res://scenes/tiles/base/tile_ground.tscn" id="2_2tdal"]
-[ext_resource type="Script" uid="uid://b2swc5h05w7jy" path="res://scripts/utils/rts_camera.gd" id="2_rggwp"]
-[ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environment/surrounding_ground.tscn" id="3_nltun"]
-[ext_resource type="PackedScene" uid="uid://dv742tmvj668o" path="res://scenes/ui/building_hud.tscn" id="4_i6jaw"]
+[ext_resource type="Script" uid="uid://c4mopi82b2xct" path="res://scripts/maps/warehouse.gd" id="1_blj12"]
+[ext_resource type="Script" uid="uid://b2swc5h05w7jy" path="res://scripts/utils/rts_camera.gd" id="2_ig80s"]
+[ext_resource type="PackedScene" uid="uid://cj3djbtpfddtc" path="res://scenes/tiles/base/tile_ground.tscn" id="3_j1koe"]
+[ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environment/surrounding_ground.tscn" id="4_vkh22"]
+[ext_resource type="PackedScene" uid="uid://dv742tmvj668o" path="res://scenes/ui/building_hud.tscn" id="5_kmunq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2tdal"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -26,8 +26,8 @@ albedo_color = Color(0, 0.6784314, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwpir"]
 albedo_color = Color(0.039215688, 0.54901963, 0.22352941, 1)
 
-[node name="production_house" type="Node3D" unique_id=765019154]
-script = ExtResource("1_qdl7o")
+[node name="warehouse" type="Node3D" unique_id=765019154]
+script = ExtResource("1_blj12")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1209572683]
 environment = SubResource("Environment_nltun")
@@ -57,7 +57,7 @@ projection = 1
 current = true
 size = 10.351
 far = 200.0
-script = ExtResource("2_rggwp")
+script = ExtResource("2_ig80s")
 pan_speed = 0.7
 zoom_speed = 1.0
 min_zoom = 5.0
@@ -69,194 +69,194 @@ auto_limit_multiplier = 0.8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.135, 0)
 metadata/_edit_lock_ = true
 
-[node name="tile_ground11" parent="tile_grounds" unique_id=477365592 instance=ExtResource("2_2tdal")]
+[node name="tile_ground11" parent="tile_grounds" unique_id=477365592 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, -1)
 
-[node name="tile_ground12" parent="tile_grounds" unique_id=566345809 instance=ExtResource("2_2tdal")]
+[node name="tile_ground12" parent="tile_grounds" unique_id=566345809 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 0)
 
-[node name="tile_ground13" parent="tile_grounds" unique_id=998125080 instance=ExtResource("2_2tdal")]
+[node name="tile_ground13" parent="tile_grounds" unique_id=998125080 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 1)
 
-[node name="tile_ground14" parent="tile_grounds" unique_id=1900227799 instance=ExtResource("2_2tdal")]
+[node name="tile_ground14" parent="tile_grounds" unique_id=1900227799 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -1)
 
-[node name="tile_ground15" parent="tile_grounds" unique_id=566945111 instance=ExtResource("2_2tdal")]
+[node name="tile_ground15" parent="tile_grounds" unique_id=566945111 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 
-[node name="tile_ground16" parent="tile_grounds" unique_id=1522139057 instance=ExtResource("2_2tdal")]
+[node name="tile_ground16" parent="tile_grounds" unique_id=1522139057 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 1)
 
-[node name="tile_ground17" parent="tile_grounds" unique_id=387934074 instance=ExtResource("2_2tdal")]
+[node name="tile_ground17" parent="tile_grounds" unique_id=387934074 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -1)
 
-[node name="tile_ground18" parent="tile_grounds" unique_id=119582654 instance=ExtResource("2_2tdal")]
+[node name="tile_ground18" parent="tile_grounds" unique_id=119582654 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 0)
 
-[node name="tile_ground19" parent="tile_grounds" unique_id=867654890 instance=ExtResource("2_2tdal")]
+[node name="tile_ground19" parent="tile_grounds" unique_id=867654890 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 1)
 
-[node name="tile_ground52" parent="tile_grounds" unique_id=308753654 instance=ExtResource("2_2tdal")]
+[node name="tile_ground52" parent="tile_grounds" unique_id=308753654 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 0)
 is_locked = true
 
-[node name="tile_ground53" parent="tile_grounds" unique_id=504652977 instance=ExtResource("2_2tdal")]
+[node name="tile_ground53" parent="tile_grounds" unique_id=504652977 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 0)
 is_locked = true
 
-[node name="tile_ground54" parent="tile_grounds" unique_id=784845417 instance=ExtResource("2_2tdal")]
+[node name="tile_ground54" parent="tile_grounds" unique_id=784845417 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 0)
 is_locked = true
 
-[node name="tile_ground55" parent="tile_grounds" unique_id=1159360459 instance=ExtResource("2_2tdal")]
+[node name="tile_ground55" parent="tile_grounds" unique_id=1159360459 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 0)
 is_locked = true
 
-[node name="tile_ground59" parent="tile_grounds" unique_id=74310160 instance=ExtResource("2_2tdal")]
+[node name="tile_ground59" parent="tile_grounds" unique_id=74310160 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 1)
 is_locked = true
 
-[node name="tile_ground60" parent="tile_grounds" unique_id=1760215606 instance=ExtResource("2_2tdal")]
+[node name="tile_ground60" parent="tile_grounds" unique_id=1760215606 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 1)
 is_locked = true
 
-[node name="tile_ground61" parent="tile_grounds" unique_id=1876763482 instance=ExtResource("2_2tdal")]
+[node name="tile_ground61" parent="tile_grounds" unique_id=1876763482 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 1)
 is_locked = true
 
-[node name="tile_ground62" parent="tile_grounds" unique_id=1182833217 instance=ExtResource("2_2tdal")]
+[node name="tile_ground62" parent="tile_grounds" unique_id=1182833217 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 1)
 is_locked = true
 
-[node name="tile_ground64" parent="tile_grounds" unique_id=1330492789 instance=ExtResource("2_2tdal")]
+[node name="tile_ground64" parent="tile_grounds" unique_id=1330492789 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 2)
 
-[node name="tile_ground65" parent="tile_grounds" unique_id=390610501 instance=ExtResource("2_2tdal")]
+[node name="tile_ground65" parent="tile_grounds" unique_id=390610501 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 2)
 
-[node name="tile_ground66" parent="tile_grounds" unique_id=32447235 instance=ExtResource("2_2tdal")]
+[node name="tile_ground66" parent="tile_grounds" unique_id=32447235 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 2)
 is_locked = true
 
-[node name="tile_ground67" parent="tile_grounds" unique_id=415617875 instance=ExtResource("2_2tdal")]
+[node name="tile_ground67" parent="tile_grounds" unique_id=415617875 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 2)
 is_locked = true
 
-[node name="tile_ground68" parent="tile_grounds" unique_id=272653459 instance=ExtResource("2_2tdal")]
+[node name="tile_ground68" parent="tile_grounds" unique_id=272653459 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 2)
 is_locked = true
 
-[node name="tile_ground69" parent="tile_grounds" unique_id=354227330 instance=ExtResource("2_2tdal")]
+[node name="tile_ground69" parent="tile_grounds" unique_id=354227330 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 2)
 is_locked = true
 
-[node name="tile_ground70" parent="tile_grounds" unique_id=1213981601 instance=ExtResource("2_2tdal")]
+[node name="tile_ground70" parent="tile_grounds" unique_id=1213981601 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 2)
 
-[node name="tile_ground71" parent="tile_grounds" unique_id=1567930261 instance=ExtResource("2_2tdal")]
+[node name="tile_ground71" parent="tile_grounds" unique_id=1567930261 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 3)
 is_locked = true
 
-[node name="tile_ground72" parent="tile_grounds" unique_id=49624466 instance=ExtResource("2_2tdal")]
+[node name="tile_ground72" parent="tile_grounds" unique_id=49624466 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, 3)
 is_locked = true
 
-[node name="tile_ground73" parent="tile_grounds" unique_id=1189808406 instance=ExtResource("2_2tdal")]
+[node name="tile_ground73" parent="tile_grounds" unique_id=1189808406 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 3)
 is_locked = true
 
-[node name="tile_ground74" parent="tile_grounds" unique_id=938610389 instance=ExtResource("2_2tdal")]
+[node name="tile_ground74" parent="tile_grounds" unique_id=938610389 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 3)
 is_locked = true
 
-[node name="tile_ground75" parent="tile_grounds" unique_id=664906420 instance=ExtResource("2_2tdal")]
+[node name="tile_ground75" parent="tile_grounds" unique_id=664906420 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 3)
 is_locked = true
 
-[node name="tile_ground76" parent="tile_grounds" unique_id=2100426936 instance=ExtResource("2_2tdal")]
+[node name="tile_ground76" parent="tile_grounds" unique_id=2100426936 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, 3)
 is_locked = true
 
-[node name="tile_ground77" parent="tile_grounds" unique_id=409614325 instance=ExtResource("2_2tdal")]
+[node name="tile_ground77" parent="tile_grounds" unique_id=409614325 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, 3)
 is_locked = true
 
-[node name="tile_ground80" parent="tile_grounds" unique_id=1120835240 instance=ExtResource("2_2tdal")]
+[node name="tile_ground80" parent="tile_grounds" unique_id=1120835240 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, -1)
 is_locked = true
 
-[node name="tile_ground81" parent="tile_grounds" unique_id=1917073487 instance=ExtResource("2_2tdal")]
+[node name="tile_ground81" parent="tile_grounds" unique_id=1917073487 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, -1)
 is_locked = true
 
-[node name="tile_ground82" parent="tile_grounds" unique_id=1906712370 instance=ExtResource("2_2tdal")]
+[node name="tile_ground82" parent="tile_grounds" unique_id=1906712370 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, -1)
 is_locked = true
 
-[node name="tile_ground83" parent="tile_grounds" unique_id=1199907933 instance=ExtResource("2_2tdal")]
+[node name="tile_ground83" parent="tile_grounds" unique_id=1199907933 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -1)
 is_locked = true
 
-[node name="tile_ground85" parent="tile_grounds" unique_id=804747071 instance=ExtResource("2_2tdal")]
+[node name="tile_ground85" parent="tile_grounds" unique_id=804747071 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -2)
 is_locked = true
 
-[node name="tile_ground86" parent="tile_grounds" unique_id=1585909247 instance=ExtResource("2_2tdal")]
+[node name="tile_ground86" parent="tile_grounds" unique_id=1585909247 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, -2)
 is_locked = true
 
-[node name="tile_ground87" parent="tile_grounds" unique_id=378493086 instance=ExtResource("2_2tdal")]
+[node name="tile_ground87" parent="tile_grounds" unique_id=378493086 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, -2)
 is_locked = true
 
-[node name="tile_ground88" parent="tile_grounds" unique_id=1135943831 instance=ExtResource("2_2tdal")]
+[node name="tile_ground88" parent="tile_grounds" unique_id=1135943831 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, -2)
 is_locked = true
 
-[node name="tile_ground89" parent="tile_grounds" unique_id=1331155072 instance=ExtResource("2_2tdal")]
+[node name="tile_ground89" parent="tile_grounds" unique_id=1331155072 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, -2)
 is_locked = true
 
-[node name="tile_ground90" parent="tile_grounds" unique_id=1682877332 instance=ExtResource("2_2tdal")]
+[node name="tile_ground90" parent="tile_grounds" unique_id=1682877332 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -2)
 is_locked = true
 
-[node name="tile_ground91" parent="tile_grounds" unique_id=279543826 instance=ExtResource("2_2tdal")]
+[node name="tile_ground91" parent="tile_grounds" unique_id=279543826 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -2)
 is_locked = true
 
-[node name="tile_ground92" parent="tile_grounds" unique_id=1195338216 instance=ExtResource("2_2tdal")]
+[node name="tile_ground92" parent="tile_grounds" unique_id=1195338216 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -3)
 is_locked = true
 
-[node name="tile_ground93" parent="tile_grounds" unique_id=21857102 instance=ExtResource("2_2tdal")]
+[node name="tile_ground93" parent="tile_grounds" unique_id=21857102 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.05, -3)
 is_locked = true
 
-[node name="tile_ground94" parent="tile_grounds" unique_id=151816452 instance=ExtResource("2_2tdal")]
+[node name="tile_ground94" parent="tile_grounds" unique_id=151816452 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, -3)
 is_locked = true
 
-[node name="tile_ground95" parent="tile_grounds" unique_id=739844141 instance=ExtResource("2_2tdal")]
+[node name="tile_ground95" parent="tile_grounds" unique_id=739844141 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, -3)
 is_locked = true
 
-[node name="tile_ground96" parent="tile_grounds" unique_id=493770342 instance=ExtResource("2_2tdal")]
+[node name="tile_ground96" parent="tile_grounds" unique_id=493770342 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, -3)
 is_locked = true
 
-[node name="tile_ground97" parent="tile_grounds" unique_id=1795998151 instance=ExtResource("2_2tdal")]
+[node name="tile_ground97" parent="tile_grounds" unique_id=1795998151 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -3)
 is_locked = true
 
-[node name="tile_ground98" parent="tile_grounds" unique_id=504452 instance=ExtResource("2_2tdal")]
+[node name="tile_ground98" parent="tile_grounds" unique_id=504452 instance=ExtResource("3_j1koe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.05, -3)
 is_locked = true
 
 [node name="environtment" type="Node3D" parent="." unique_id=1753237198]
 metadata/_edit_lock_ = true
 
-[node name="surrounding_ground" parent="environtment" unique_id=1246640729 instance=ExtResource("3_nltun")]
+[node name="surrounding_ground" parent="environtment" unique_id=1246640729 instance=ExtResource("4_vkh22")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19379854, 0)
 
 [node name="Plane" parent="environtment/surrounding_ground" index="1" unique_id=390990799]
@@ -459,6 +459,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
 visible = true
 surface_material_override/0 = SubResource("StandardMaterial3D_fwpir")
 
-[node name="building_hud" parent="." unique_id=1158770422 instance=ExtResource("4_i6jaw")]
+[node name="building_hud" parent="." unique_id=1158770422 instance=ExtResource("5_kmunq")]
 
 [editable path="environtment/surrounding_ground"]

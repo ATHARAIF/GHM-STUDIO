@@ -63,7 +63,7 @@ TooltipLabel/constants/outline_size = 2
 TooltipLabel/font_sizes/font_size = 24
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_0jewy")
 
-[node name="tab_coffeelog" type="Control" unique_id=870761485]
+[node name="tab_coffeelog" type="Control" unique_id=1131410544]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -74,7 +74,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="contents" type="HBoxContainer" parent="." unique_id=472494463]
+[node name="contents" type="HBoxContainer" parent="." unique_id=1228958184]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,33 +85,33 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 24
 
-[node name="bean_list" type="VBoxContainer" parent="contents" unique_id=718930412]
+[node name="bean_list" type="VBoxContainer" parent="contents" unique_id=1215809244]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 
-[node name="header" type="HBoxContainer" parent="contents/bean_list" unique_id=610218275]
+[node name="header" type="HBoxContainer" parent="contents/bean_list" unique_id=1754063673]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="contents/bean_list/header" unique_id=269709745]
+[node name="Label" type="Label" parent="contents/bean_list/header" unique_id=93251457]
 layout_mode = 2
 theme_type_variation = &"label_terroir"
 theme_override_font_sizes/font_size = 32
 text = "COFFEE BEAN LIST"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/header" unique_id=627436211]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/header" unique_id=753078217]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_wqmkk")
 
-[node name="sort" type="HBoxContainer" parent="contents/bean_list/header" unique_id=1137354390]
+[node name="sort" type="HBoxContainer" parent="contents/bean_list/header" unique_id=52975262]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="contents/bean_list/header/sort" unique_id=696919485]
+[node name="Label" type="Label" parent="contents/bean_list/header/sort" unique_id=877046589]
 layout_mode = 2
 text = "Sort by :"
 
-[node name="opt1" type="Button" parent="contents/bean_list/header/sort" unique_id=1518452368]
+[node name="opt1" type="Button" parent="contents/bean_list/header/sort" unique_id=768686225]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -123,7 +123,7 @@ icon = ExtResource("1_svile")
 icon_alignment = 1
 expand_icon = true
 
-[node name="opt2" type="Button" parent="contents/bean_list/header/sort" unique_id=1551340479]
+[node name="opt2" type="Button" parent="contents/bean_list/header/sort" unique_id=1910180502]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -134,7 +134,7 @@ icon = ExtResource("1_svile")
 icon_alignment = 1
 expand_icon = true
 
-[node name="opt3" type="Button" parent="contents/bean_list/header/sort" unique_id=651564868]
+[node name="opt3" type="Button" parent="contents/bean_list/header/sort" unique_id=27803127]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -145,7 +145,7 @@ icon = ExtResource("1_svile")
 icon_alignment = 1
 expand_icon = true
 
-[node name="opt4" type="Button" parent="contents/bean_list/header/sort" unique_id=535641753]
+[node name="opt4" type="Button" parent="contents/bean_list/header/sort" unique_id=1243279506]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -156,12 +156,12 @@ icon = ExtResource("1_svile")
 icon_alignment = 1
 expand_icon = true
 
-[node name="HSeparator" type="HSeparator" parent="contents/bean_list" unique_id=1433076174]
+[node name="HSeparator" type="HSeparator" parent="contents/bean_list" unique_id=98700461]
 layout_mode = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ftmxa")
 
-[node name="list" type="ScrollContainer" parent="contents/bean_list" unique_id=76321042]
+[node name="list" type="ScrollContainer" parent="contents/bean_list" unique_id=782062716]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -169,11 +169,11 @@ size_flags_stretch_ratio = 0.85
 theme_override_constants/scrollbar_h_separation = 14
 scroll_hint_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="contents/bean_list/list" unique_id=734139769]
+[node name="VBoxContainer" type="VBoxContainer" parent="contents/bean_list/list" unique_id=1234002735]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="bean" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1972727997]
+[node name="bean" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1155063035]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -182,7 +182,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean" unique_id=695837189]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean" unique_id=986744797]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -194,45 +194,45 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1612174461]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=347194168]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=1408101869]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=641255860]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=1430712796]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=1780471600]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1319641373]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1303208742]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1912408919]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=650782217]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=15910625]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=469562112]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1968607176]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1810657215]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="bean2" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=109536502]
+[node name="bean2" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1983761891]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -241,7 +241,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean2" unique_id=911754560]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean2" unique_id=312600913]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -253,45 +253,45 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=2069375817]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=282336344]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer/name" unique_id=758318198]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer/name" unique_id=1946512892]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer/name" unique_id=1512731287]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer/name" unique_id=2146347713]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=2132676908]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=1260736085]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=752408716]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=1866227458]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=1503796569]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=1569422001]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=1984373006]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=348694677]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="bean3" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=615692163]
+[node name="bean3" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1947373570]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -300,7 +300,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean3" unique_id=176254940]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean3" unique_id=1668837231]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -312,45 +312,45 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=1782234690]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=1241893538]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer/name" unique_id=92059244]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer/name" unique_id=1837221297]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer/name" unique_id=2121324942]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer/name" unique_id=2006461119]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=212922862]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=1906705401]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=1252710767]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=1941588341]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=1823062871]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=1489879267]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=212811708]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=505908763]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="bean4" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=101057056]
+[node name="bean4" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1546782629]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -359,7 +359,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean4" unique_id=2130196990]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean4" unique_id=478649142]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -371,45 +371,45 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=163779160]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=976045439]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer/name" unique_id=1541974163]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer/name" unique_id=809263497]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer/name" unique_id=375660997]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer/name" unique_id=1561951931]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=10154881]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=1126889526]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=1332135970]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=655154577]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=1527559685]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=922626250]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=2033389588]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=1397146702]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="bean5" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1596333824]
+[node name="bean5" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1475228243]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -418,7 +418,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean5" unique_id=1061290645]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean5" unique_id=907289277]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -430,45 +430,45 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=1002042263]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=93181192]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer/name" unique_id=1350968409]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer/name" unique_id=1130339888]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer/name" unique_id=2087720532]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer/name" unique_id=774619323]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=191513342]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=886327647]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=319318950]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=1426222203]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=754313019]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=718222738]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=2091911649]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=1607403324]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="bean6" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=738720842]
+[node name="bean6" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=331088675]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -477,7 +477,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean6" unique_id=1003360351]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean6" unique_id=1296470572]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -489,45 +489,45 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=1161743354]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=273139987]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer/name" unique_id=854404348]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer/name" unique_id=852210374]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer/name" unique_id=1655923090]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer/name" unique_id=1487092625]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=603636635]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=2084687753]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=1954407770]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=1837018501]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=838385290]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=1446510070]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=960192301]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=650542730]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="bean7" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1267248300]
+[node name="bean7" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1588262951]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -536,7 +536,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean7" unique_id=1430087916]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean7" unique_id=1524517453]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -548,45 +548,45 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=1658295320]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=1450465237]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer/name" unique_id=1090879154]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer/name" unique_id=1943586177]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer/name" unique_id=1688997331]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer/name" unique_id=1004671188]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=1387242880]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=1009288069]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=456155541]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=2056394373]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=1641426613]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=851138377]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=2017800611]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=730741853]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="bean8" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=715161183]
+[node name="bean8" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1664636444]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -595,7 +595,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean8" unique_id=866982198]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean8" unique_id=100509501]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -607,45 +607,45 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=2041030598]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=901173794]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer/name" unique_id=1835133664]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer/name" unique_id=210295439]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer/name" unique_id=1999557873]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer/name" unique_id=501097651]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=1089366266]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=2096016722]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=813266822]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=1080379561]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=1521885047]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=1561842801]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=2035549961]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=792516221]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="bean9" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=584921635]
+[node name="bean9" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=379867457]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -654,7 +654,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean9" unique_id=227352530]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean9" unique_id=734342190]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -666,45 +666,45 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=789766571]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=2015156952]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer/name" unique_id=2078384433]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer/name" unique_id=1195710094]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer/name" unique_id=981313618]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer/name" unique_id=1223355427]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=1414474321]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=1780009676]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=1454648276]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=1740634665]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=1776362600]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=1118275879]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=786162972]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=75004866]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="bean10" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1360730626]
+[node name="bean10" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=155756690]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -713,7 +713,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean10" unique_id=1232672530]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean10" unique_id=1215184623]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -725,54 +725,54 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=1108459471]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=1997806272]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer/name" unique_id=1821001044]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer/name" unique_id=343400851]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer/name" unique_id=2078723192]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer/name" unique_id=1621141671]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=190874613]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=2016971924]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=1089580764]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=835842122]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=668539332]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=663008191]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=228080109]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=62037997]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="contents" unique_id=1433057219]
+[node name="VBoxContainer2" type="VBoxContainer" parent="contents" unique_id=2048023938]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16
 
-[node name="tab_button" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=1798084841]
+[node name="tab_button" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=1890864681]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="info" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=1166210512]
+[node name="info" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=257407091]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 0.7254902)
@@ -786,7 +786,7 @@ button_pressed = true
 button_group = SubResource("ButtonGroup_48q4c")
 text = "INFO"
 
-[node name="ideal" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=439117287]
+[node name="ideal" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=1273890535]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
@@ -798,7 +798,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_48q4c")
 text = "IDEAL"
 
-[node name="terroir" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=714994077]
+[node name="terroir" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=988597272]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
@@ -811,7 +811,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_48q4c")
 text = "TERROIR"
 
-[node name="sales" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=1988871389]
+[node name="sales" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=388763389]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
@@ -824,34 +824,34 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_48q4c")
 text = "SALES"
 
-[node name="terroir_header" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=968418559]
+[node name="terroir_header" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=613653994]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="terroir_name" type="Label" parent="contents/VBoxContainer2/terroir_header" unique_id=7019028]
+[node name="terroir_name" type="Label" parent="contents/VBoxContainer2/terroir_header" unique_id=200282095]
 layout_mode = 2
 theme_type_variation = &"label_terroir"
 text = "TERROIR"
 
-[node name="terroir_species" type="Label" parent="contents/VBoxContainer2/terroir_header" unique_id=1213908228]
+[node name="terroir_species" type="Label" parent="contents/VBoxContainer2/terroir_header" unique_id=382470758]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_type_variation = &"label_species"
 text = "Species"
 
-[node name="stats" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=611159082]
+[node name="stats" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=1859752860]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="packaging_3d" type="Panel" parent="contents/VBoxContainer2/stats" unique_id=1968620276]
+[node name="packaging_3d" type="Panel" parent="contents/VBoxContainer2/stats" unique_id=107062835]
 custom_minimum_size = Vector2(154, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 theme_override_styles/panel = SubResource("StyleBoxFlat_io4e5")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="contents/VBoxContainer2/stats" unique_id=368456397]
+[node name="VBoxContainer2" type="VBoxContainer" parent="contents/VBoxContainer2/stats" unique_id=159358560]
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -927,116 +927,116 @@ items/key_6/title = "Body"
 items/key_6/tooltip = ""
 extra_datasets_count = 0
 
-[node name="rating" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer2" unique_id=2146457965]
+[node name="rating" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer2" unique_id=873428876]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "⭐90"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="contents/VBoxContainer2/stats" unique_id=831490323]
+[node name="VBoxContainer" type="VBoxContainer" parent="contents/VBoxContainer2/stats" unique_id=1645447485]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="speciality" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=894941070]
+[node name="speciality" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=1150904523]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/speciality" unique_id=414355685]
+[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/speciality" unique_id=213007305]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Speciality:"
 
-[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/speciality" unique_id=535435849]
+[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/speciality" unique_id=135357670]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "value"
 
-[node name="size" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=1644493197]
+[node name="size" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=176823962]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/size" unique_id=1676064869]
+[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/size" unique_id=546210448]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Size:"
 
-[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/size" unique_id=411728881]
+[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/size" unique_id=1196653241]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "value"
 
-[node name="stock" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=1972216683]
+[node name="stock" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=1944026177]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/stock" unique_id=147512581]
+[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/stock" unique_id=874245826]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Stock:"
 
-[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/stock" unique_id=2088313744]
+[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/stock" unique_id=1476700492]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "value"
 
-[node name="aftertaste" type="VBoxContainer" parent="contents/VBoxContainer2" unique_id=532041772]
+[node name="aftertaste" type="VBoxContainer" parent="contents/VBoxContainer2" unique_id=1858868187]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="label" type="Label" parent="contents/VBoxContainer2/aftertaste" unique_id=8572468]
+[node name="label" type="Label" parent="contents/VBoxContainer2/aftertaste" unique_id=725927545]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Aftertastes:"
 
-[node name="GridContainer" type="HBoxContainer" parent="contents/VBoxContainer2/aftertaste" unique_id=296990285]
+[node name="GridContainer" type="HBoxContainer" parent="contents/VBoxContainer2/aftertaste" unique_id=2057641210]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Panel" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=324514308]
+[node name="Panel" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1937889890]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="Panel2" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1943101101]
+[node name="Panel2" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1713311763]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="Panel3" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=414776298]
+[node name="Panel3" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1422136990]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="Panel4" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=65568787]
+[node name="Panel4" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1088303423]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="Panel5" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=2056690935]
+[node name="Panel5" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=662226633]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="Panel6" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=426529021]
+[node name="Panel6" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1026375065]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="Panel7" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1619227521]
+[node name="Panel7" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1452392653]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="Panel8" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1198766561]
+[node name="Panel8" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1621107706]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="note" type="VBoxContainer" parent="contents/VBoxContainer2" unique_id=32098651]
+[node name="note" type="VBoxContainer" parent="contents/VBoxContainer2" unique_id=877183068]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="label" type="Label" parent="contents/VBoxContainer2/note" unique_id=1118797056]
+[node name="label" type="Label" parent="contents/VBoxContainer2/note" unique_id=1809931414]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Notes:"
 
-[node name="value" type="RichTextLabel" parent="contents/VBoxContainer2/note" unique_id=1154894690]
+[node name="value" type="RichTextLabel" parent="contents/VBoxContainer2/note" unique_id=512548437]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("2_odg5w")
 text = "lorem ipsum dolor sit amet consectetur adipiscing elit blanditiis officia aliquip sint quo eiusmod ut sed est distinctio sunt id do deleniti est deleniti provident fugiat soluta eu ullamco qui facilis id consectetur nisi facere animi "

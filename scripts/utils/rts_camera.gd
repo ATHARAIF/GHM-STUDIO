@@ -28,6 +28,19 @@ extends Camera3D
 ## Faktor kompensasi batas otomatis. Jika saat Zoom In kamu masih bisa melihat area yang tidak terlihat saat Max Zoom Out (bocor), turunkan angka ini (misal ke 0.8, 0.5, atau 0.3).
 @export var auto_limit_multiplier: float = 1.0
 
+@export_subgroup("Manual Bounds")
+## Centang jika ingin menggunakan batas jarak manual yang kaku (Kiri, Kanan, Atas, Bawah). 
+## Rules bahwa "Max Zoom Out = tidak bisa digeser" akan TETAP berlaku. Batas di bawah ini mendefinisikan seberapa jauh kamu bisa geser saat Max Zoom In.
+@export var use_manual_bounds: bool = false
+## Jarak batas kiri layar (Berapa unit kamera boleh geser ke kiri dari posisi awal).
+@export var manual_limit_left: float = 5.0
+## Jarak batas kanan layar.
+@export var manual_limit_right: float = 5.0
+## Jarak batas atas layar.
+@export var manual_limit_top: float = 5.0
+## Jarak batas bawah layar.
+@export var manual_limit_bottom: float = 5.0
+
 var _target_size: float = 10.0
 var _target_position: Vector3
 var _is_panning: bool = false
@@ -41,6 +54,29 @@ func _ready() -> void:
 	_initial_position = global_position # Jadikan posisi awal sebagai pusat (center)
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Cek apakah ada popup aktif di layar. Jika ada, abaikan semua input kamera!
+	var popups = [
+		"MenuPanel", 
+		"FarmlandDetailPopup", 
+		"HarvestMethodPopup", 
+		"HarvestResultPopup", 
+		"PackagingPopup", 
+		"ProcessingPopup", 
+		"PruningPopup", 
+		"RoastingPopup"
+	]
+	
+	var tree = get_tree()
+	if tree and tree.current_scene:
+		# Cari semua CanvasLayer di dalam current_scene (termasuk anak-anak dari tile)
+		var canvas_layers = tree.current_scene.find_children("*", "CanvasLayer", true, false)
+		for layer in canvas_layers:
+			var layer_name = str(layer.name)
+			for p in popups:
+				if p in layer_name and layer.visible:
+					# Ada popup yang sedang terbuka (visible)!
+					return
+				
 	if event is InputEventMouseButton:
 		# --- Logika Zoom ---
 		var prev_size = _target_size
@@ -49,14 +85,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_target_size = clamp(_target_size + zoom_speed, min_zoom, max_zoom)
 			
-		# Geser target posisi jika fitur Zoom to Cursor menyala
+		# Geser target posisi jika fitur Zoom to Cursor menyala (HANYA saat Zoom In)
 		if zoom_to_cursor and _target_size != prev_size:
+			var is_zooming_in = _target_size < prev_size
 			var viewport_rect = get_viewport().get_visible_rect()
 			var viewport_size = viewport_rect.size
 			var center = viewport_size / 2.0
 			
 			var offset = Vector2.ZERO
-			if viewport_rect.has_point(event.position):
+			# Hanya bergeser ke kursor jika sedang Zoom In
+			if is_zooming_in and viewport_rect.has_point(event.position):
 				offset = event.position - center
 			
 			var ratio_diff = (prev_size - _target_size) / viewport_size.y
@@ -141,14 +179,32 @@ func _process(delta: float) -> void:
 		var viewport_size = get_viewport().get_visible_rect().size
 		var aspect = viewport_size.x / viewport_size.y
 		
-		# Batas maksimal gerak dihitung berdasarkan selisih zoom.
-		# Sumbu X (lebar layar) otomatis dikali aspect ratio agar proporsinya berbentuk persegi panjang persis seperti monitor!
-		var move_limit_z = (max_zoom - size) * auto_limit_multiplier
-		var move_limit_x = move_limit_z * aspect
+		var lim_left = 0.0
+		var lim_right = 0.0
+		var lim_top = 0.0
+		var lim_bottom = 0.0
+		
+		if use_manual_bounds:
+			# Skala 0.0 (Max Zoom Out) sampai 1.0 (Max Zoom In)
+			# Memastikan rules "semakin zoom out, semakin gak bisa digeser" tetap berlaku!
+			var zoom_factor = clamp((max_zoom - size) / max(0.01, max_zoom - min_zoom), 0.0, 1.0)
+			
+			lim_left = -manual_limit_left * zoom_factor
+			lim_right = manual_limit_right * zoom_factor
+			lim_top = manual_limit_top * zoom_factor
+			lim_bottom = -manual_limit_bottom * zoom_factor
+		else:
+			# Batas otomatis
+			var auto_lim_z = (max_zoom - size) * auto_limit_multiplier
+			var move_limit_x = auto_lim_z * aspect
+			lim_left = -move_limit_x
+			lim_right = move_limit_x
+			lim_top = auto_lim_z
+			lim_bottom = -auto_lim_z
 		
 		# Kurung pergerakan di sumbu layar
-		local_x = clamp(local_x, -move_limit_x, move_limit_x)
-		local_z = clamp(local_z, -move_limit_z, move_limit_z)
+		local_x = clamp(local_x, lim_left, lim_right)
+		local_z = clamp(local_z, lim_bottom, lim_top)
 		
 		# Kembalikan ke koordinat dunia 3D (World Space)
 		_target_position.x = _initial_position.x + (cam_right.x * local_x) + (cam_forward.x * local_z)

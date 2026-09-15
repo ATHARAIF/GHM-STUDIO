@@ -15,12 +15,12 @@ extends CanvasLayer
 @onready var lbl_qty_sell = $TabContainer/storage_selection/panel/content/left/data/quantity_sell/value
 @onready var lbl_selling_price = $TabContainer/storage_selection/panel/content/left/data/selling_price/value
 @onready var lbl_income = $TabContainer/storage_selection/panel/content/left/data/income/value
-#storage_selection - storage list
-@onready var illustration = $TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage/HBoxContainer/illustration
 
+#storage_selection - storage list
+@onready var illustration = $TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content/HBoxContainer/illustration
 # --- STORAGE SELECTION (LIST & BUTTONS) ---
 @onready var storage_list_container = $TabContainer/storage_selection/panel/content/right/list/VBoxContainer
-@onready var storage_template = $TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage
+@onready var storage_template = $TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage
 
 @onready var btn_back = $TabContainer/storage_selection/panel/content/left/back
 @onready var btn_confirm = $TabContainer/storage_selection/panel/content/right/confirmation/confirm
@@ -156,27 +156,51 @@ func _refresh_storage_ui() -> void:
 			storage_list_container.add_child(item)
 			
 			# Akses node di dalam item duplikat
-			var t_name = item.get_node("HBoxContainer/MarginContainer/VBoxContainer/name")
-			var t_cap = item.get_node("HBoxContainer/MarginContainer/VBoxContainer/capacity")
-			var t_avail = item.get_node("HBoxContainer/MarginContainer/VBoxContainer/available")
-			var t_check = item.get_node("HBoxContainer/checbox/CheckBox")
+			var t_name = item.get_node("content/HBoxContainer/MarginContainer/VBoxContainer/name")
+			var t_cap = item.get_node("content/HBoxContainer/MarginContainer/VBoxContainer/capacity")
+			var t_avail = item.get_node("content/HBoxContainer/MarginContainer/VBoxContainer/use/available")
+			var t_dash = item.get_node("content/HBoxContainer/MarginContainer/VBoxContainer/use/-")
+			var t_batch = item.get_node("content/HBoxContainer/MarginContainer/VBoxContainer/use/batch")
 			
 			t_name.text = h["data"].item_name
 			t_cap.text = "Capacity: %d Kg" % cap
 			
+			# Tentukan status Idle / In Use
+			var current_batch = h.get("current_batch")
+			var farm_batch = StageManager.get_active_farm_batch()
+			var is_compatible = true
+			
+			if current_batch:
+				t_avail.text = "In Use"
+				t_dash.show()
+				t_batch.show()
+				t_batch.text = current_batch.variety_name + " " + str(current_batch.batch_year)
+				
+				# Cek apakah batch beda
+				if farm_batch and (current_batch.variety_name != farm_batch.variety_name or current_batch.batch_year != farm_batch.batch_year):
+					is_compatible = false
+			else:
+				t_avail.text = "Idle"
+				t_dash.hide()
+				t_batch.hide()
+			
+			item.toggle_mode = true
 			if selected_hoppers.has(h_id):
-				t_check.button_pressed = true
+				item.button_pressed = true
 				var filled = min(total_harvest_kg, space) # Perkiraan kasar
 				t_avail.text = "Will be filled"
+				t_dash.hide()
+				t_batch.hide()
 			else:
-				t_check.button_pressed = false
-				t_avail.text = "Available: %d Kg" % space
+				item.button_pressed = false
+				
 				# Disable checkbox jika panen sudah habis dialokasikan, dan hopper ini belum terpilih
-				if remaining_harvest_kg <= 0 or space <= 0:
-					t_check.disabled = true
+				# ATAU jika batch tidak cocok
+				if remaining_harvest_kg <= 0 or space <= 0 or not is_compatible:
+					item.disabled = true
 			
 			# Event Click pada Checkbox
-			t_check.toggled.connect(func(is_pressed: bool):
+			item.toggled.connect(func(is_pressed: bool):
 				if is_pressed:
 					if not selected_hoppers.has(h_id):
 						selected_hoppers.append(h_id)

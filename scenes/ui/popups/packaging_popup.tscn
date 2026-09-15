@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dehofmfbhqm8m" path="res://scenes/ui/popups/radar_widget.tscn" id="13_mmroj"]
 [ext_resource type="FontFile" uid="uid://bc2yt828criij" path="res://assets/font/LondrinaSolid-Regular.ttf" id="14_ba45h"]
 [ext_resource type="Texture2D" uid="uid://ci6jejy2uc0so" path="res://assets/ui/icons/Close_panel_popup.png" id="15_3g2f3"]
-[ext_resource type="Script" uid="uid://doedojhbh0c7p" path="res://scenes/ui/popups/tes_sub_viewport_container.gd" id="15_ba45h"]
+[ext_resource type="Script" uid="uid://doedojhbh0c7p" path="res://scripts/ui/components/model_viewer_3d.gd" id="15_ba45h"]
 [ext_resource type="Texture2D" uid="uid://cbpjfa1a2mdqf" path="res://assets/ui/panels/close_normal.svg" id="17_0bbmk"]
 [ext_resource type="Texture2D" uid="uid://dwhyrn1qg1u8v" path="res://assets/ui/panels/close_pressed.svg" id="18_kx020"]
 [ext_resource type="Texture2D" uid="uid://gsp5b3iwd5ei" path="res://assets/ui/panels/icons/close.svg" id="19_g2fhe"]

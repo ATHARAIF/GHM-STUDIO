@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cj3djbtpfddtc" path="res://scenes/tiles/base/tile_ground.tscn" id="2_4a7qg"]
 [ext_resource type="Script" uid="uid://b2swc5h05w7jy" path="res://scripts/utils/rts_camera.gd" id="2_bryle"]
 [ext_resource type="PackedScene" uid="uid://c2l2p1va76vy1" path="res://scenes/objects/bldg_prod_house.tscn" id="5_p8nxr"]
+[ext_resource type="PackedScene" uid="uid://dupleke72w0ve" path="res://scenes/objects/bldg_warehouse.tscn" id="7_nyp46"]
 [ext_resource type="PackedScene" uid="uid://dqal3c8f8dmld" path="res://scenes/environment/surrounding_ground.tscn" id="7_wbbc8"]
 [ext_resource type="PackedScene" uid="uid://bdk741fhg4k35" path="res://assets/3D/environtment/tree/tree.glb" id="9_5fh0g"]
 [ext_resource type="PackedScene" uid="uid://c4c5cwiyvnpal" path="res://assets/3D/buildings/warehouse_1.glb" id="13_l53mr"]
@@ -39,7 +40,7 @@ script = ExtResource("1_lmksl")
 environment = SubResource("Environment_lbc21")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=184307939]
-transform = Transform3D(-0.91205055, 0.16332261, -0.37615097, -0.08331026, 0.824343, 0.55992687, 0.4015261, 0.5420188, -0.7382362, -6.208373, 4.496863, -7.872581)
+transform = Transform3D(-0.91205055, 0.16332261, -0.37615097, -0.08331026, 0.824343, 0.55992687, 0.4015261, 0.5420188, -0.7382362, -14.769386, 17.240526, -24.674479)
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_blur = 0.3
@@ -59,11 +60,16 @@ script = ExtResource("2_bryle")
 pan_speed = 0.7
 keyboard_pan_speed = 14.0
 smooth_pan = 14.0
-zoom_speed = 1.0
-min_zoom = 2.0
+zoom_speed = 0.5
+min_zoom = 4.0
 max_zoom = 18.0
-smooth_zoom = 8.0
-auto_limit_multiplier = 0.8
+smooth_zoom = 5.0
+auto_limit_multiplier = 0.9
+use_manual_bounds = true
+manual_limit_left = 15.0
+manual_limit_right = 15.0
+manual_limit_top = 15.0
+manual_limit_bottom = 15.0
 
 [node name="tile_grounds" type="Node3D" parent="." unique_id=865124454]
 metadata/_edit_lock_ = true
@@ -231,14 +237,20 @@ surface_material_override/0 = SubResource("StandardMaterial3D_3suc6")
 
 [node name="FarmInfoTile" parent="." unique_id=1856349914 instance=ExtResource("18_farm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6118784, 0.20584494, -2.5084658)
+visible = false
 
 [node name="Building" type="Node3D" parent="." unique_id=974439094]
 
 [node name="bld_prod_house" parent="Building" unique_id=1015193291 instance=ExtResource("5_p8nxr")]
 transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, 5.7, 0.631, 0.112)
+interior_scene_path = "res://scenes/maps/production_house.tscn"
+
+[node name="bldg_warehouse" parent="Building" unique_id=401850509 instance=ExtResource("7_nyp46")]
+transform = Transform3D(-0.45, 0, 6.794811e-08, 0, 0.45, 0, -6.794811e-08, 0, -0.45, 1.9668131, 0.691283, 5.7898884)
 
 [node name="warehouse" parent="Building" unique_id=394532502 instance=ExtResource("13_l53mr")]
 transform = Transform3D(-0.45, 0, 6.794811e-08, 0, 0.45, 0, -6.794811e-08, 0, -0.45, 1.9668131, 0.691283, 5.7898884)
+visible = false
 
 [node name="tools_shed" parent="Building" unique_id=1737704632 instance=ExtResource("14_3suc6")]
 transform = Transform3D(0.060777232, 0, -0.49629238, 0, 0.5, 0, 0.49629238, 0, 0.060777232, 0.21877465, 0.2703983, -4.727638)
@@ -255,7 +267,6 @@ transform = Transform3D(0.10606601, 0, -0.10606602, 0, 0.15, 0, 0.10606602, 0, 0
 texture = ExtResource("16_p5s2n")
 
 [node name="debugcamera" type="Node3D" parent="Building" unique_id=947395238]
-visible = false
 
 [node name="warehouse2" parent="Building/debugcamera" unique_id=196333792 instance=ExtResource("13_l53mr")]
 transform = Transform3D(-0.45, 0, 6.794811e-08, 0, 0.45, 0, -6.794811e-08, 0, -0.45, 10.418487, 0.6912811, 12.324273)
@@ -302,5 +313,8 @@ transform = Transform3D(-0.51975393, 0, -0.4688878, 0, 0.7, 0, 0.4688878, 0, -0.
 transform = Transform3D(-0.62772036, 0, 0.3097857, 0, 0.7, 0, -0.3097857, 0, -0.62772036, 2.015376, 0.2599667, -5.9937882)
 
 [node name="main_hud" parent="." unique_id=1895636831 instance=ExtResource("15_p5s2n")]
+
+[node name="farmland_1" parent="." unique_id=1637197955 instance=ExtResource("18_farm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6118784, 0.20584494, -2.5084658)
 
 [editable path="environtment/surrounding_ground"]

@@ -13,5 +13,5 @@ shine_duration_override = 0.67
 
 [node name="GhostVisualizer" type="Node" parent="." unique_id=1157116938]
 script = ExtResource("2_2vm3b")
-ghost_float_alpha = 0.7
+ghost_float_alpha = 0.9
 ghost_indicator_alpha = 0.5

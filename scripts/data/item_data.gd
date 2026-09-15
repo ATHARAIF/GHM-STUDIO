@@ -5,7 +5,7 @@ extends Resource
 @export var item_name: String = "Mesin Baru"
 @export var item_id: String = "item_000"
 
-enum ItemCategory { HOPPER, PULPER, DRYER, ROASTER, PACKAGING, DECORATION, TOOL }
+enum ItemCategory { HOPPER, PULPER, DRYER, ROASTER, PACKAGING, DECORATION, TOOL, STORAGE }
 @export var category: ItemCategory = ItemCategory.HOPPER
 
 @export_group("Economy")
@@ -19,6 +19,8 @@ enum ItemCategory { HOPPER, PULPER, DRYER, ROASTER, PACKAGING, DECORATION, TOOL 
 @export var max_capacity: int = 4000
 ## Efisiensi/kecepatan (untuk kalkulasi buff waktu)
 @export var efficiency_multiplier: float = 1.0
+## Metode proses yang didukung oleh mesin ini (misal: "Natural", "Washed")
+@export var allowed_methods: Array[String] = []
 
 @export_group("Visuals")
 ## Ikon untuk ditampilkan di Shop atau UI Pemilihan Mesin

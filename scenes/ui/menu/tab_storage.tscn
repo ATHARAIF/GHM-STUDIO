@@ -71,7 +71,7 @@ texture_margin_right = 2.0
 texture_margin_bottom = 5.0
 region_rect = Rect2(0, 116, 55, 56)
 
-[node name="tab_storage" type="Control" unique_id=1540395410]
+[node name="tab_storage" type="Control" unique_id=1073576969]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -82,7 +82,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1390024807]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=423673010]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,63 +92,63 @@ grow_vertical = 2
 theme_override_constants/scrollbar_h_separation = 14
 scroll_hint_mode = 1
 
-[node name="GridContainer" type="GridContainer" parent="ScrollContainer" unique_id=1613571176]
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer" unique_id=450692956]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 16
 columns = 20
 
-[node name="terroir_card" type="VBoxContainer" parent="ScrollContainer/GridContainer" unique_id=1225435350]
+[node name="terroir_card" type="VBoxContainer" parent="ScrollContainer/GridContainer" unique_id=1750015849]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="terroir_header" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir_card" unique_id=1823609113]
+[node name="terroir_header" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir_card" unique_id=1977985269]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="terroir_name" type="Label" parent="ScrollContainer/GridContainer/terroir_card/terroir_header" unique_id=1070660481]
+[node name="terroir_name" type="Label" parent="ScrollContainer/GridContainer/terroir_card/terroir_header" unique_id=1124845370]
 layout_mode = 2
 theme_type_variation = &"label_terroir"
 text = "TERROIR"
 
-[node name="terroir_species" type="Label" parent="ScrollContainer/GridContainer/terroir_card/terroir_header" unique_id=525922134]
+[node name="terroir_species" type="Label" parent="ScrollContainer/GridContainer/terroir_card/terroir_header" unique_id=1860339862]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_type_variation = &"label_species"
 text = "Species"
 
-[node name="details" type="PanelContainer" parent="ScrollContainer/GridContainer/terroir_card" unique_id=224349575]
+[node name="details" type="PanelContainer" parent="ScrollContainer/GridContainer/terroir_card" unique_id=506257157]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wedm4")
 
-[node name="stats" type="VBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details" unique_id=866936792]
+[node name="stats" type="VBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details" unique_id=623866910]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="image" type="PanelContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats" unique_id=1394027862]
+[node name="image" type="PanelContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats" unique_id=689911029]
 custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ynekw")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats/image" unique_id=1025571720]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats/image" unique_id=2037439968]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="icon" type="TextureRect" parent="ScrollContainer/GridContainer/terroir_card/details/stats/image/HBoxContainer" unique_id=50807331]
+[node name="icon" type="TextureRect" parent="ScrollContainer/GridContainer/terroir_card/details/stats/image/HBoxContainer" unique_id=295295209]
 layout_mode = 2
 texture = ExtResource("1_2tkwx")
 expand_mode = 2
 
-[node name="stock" type="Label" parent="ScrollContainer/GridContainer/terroir_card/details/stats/image/HBoxContainer" unique_id=1231103706]
+[node name="stock" type="Label" parent="ScrollContainer/GridContainer/terroir_card/details/stats/image/HBoxContainer" unique_id=2132289301]
 layout_mode = 2
 text = "122/1223"
 
-[node name="chart" type="VBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats" unique_id=2129817497]
+[node name="chart" type="VBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats" unique_id=1625070780]
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -224,18 +224,18 @@ items/key_6/title = "Body"
 items/key_6/tooltip = ""
 extra_datasets_count = 0
 
-[node name="rating" type="Label" parent="ScrollContainer/GridContainer/terroir_card/details/stats/chart" unique_id=1740819382]
+[node name="rating" type="Label" parent="ScrollContainer/GridContainer/terroir_card/details/stats/chart" unique_id=1057421773]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "⭐90"
 horizontal_alignment = 1
 
-[node name="action" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats" unique_id=1837364511]
+[node name="action" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats" unique_id=1828215254]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 2
 
-[node name="bulk_sell" type="Button" parent="ScrollContainer/GridContainer/terroir_card/details/stats/action" unique_id=230030313]
+[node name="bulk_sell" type="Button" parent="ScrollContainer/GridContainer/terroir_card/details/stats/action" unique_id=825956137]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
@@ -244,7 +244,7 @@ theme_override_fonts/font = ExtResource("4_a6gbf")
 text = "Bulk Sell"
 script = ExtResource("5_n4omx")
 
-[node name="info" type="Button" parent="ScrollContainer/GridContainer/terroir_card/details/stats/action" unique_id=1035246132]
+[node name="info" type="Button" parent="ScrollContainer/GridContainer/terroir_card/details/stats/action" unique_id=1767358202]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"button_confirm"

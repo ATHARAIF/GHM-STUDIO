@@ -130,13 +130,13 @@ func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 		if data.has("machine_id") and data["machine_id"] != "":
 			if FactoryManager.placed_machines.has(data["machine_id"]):
 				FactoryManager.placed_machines[data["machine_id"]]["state"] = "IDLE"
-		else:
-			placement_data.erase(tile)
-			for offset in data.shape:
-				var c: Vector2i = data.anchor + offset
-				if grid.has(c):
-					grid[c].clear()
-			tile.queue_free()
+				
+		placement_data.erase(tile)
+		for offset in data.shape:
+			var c: Vector2i = data.anchor + offset
+			if grid.has(c):
+				grid[c].clear()
+		tile.queue_free()
 		
 		if card_node and is_instance_valid(card_node) and card_node.has_method("set"):
 			card_node.show()
@@ -145,11 +145,12 @@ func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 			var oi = card_node.get("origin_index")
 			if op:
 				op.move_child(card_node, oi)
-			var card_size = card_node.get("size")
+			var card_size = card_node.get("custom_minimum_size")
+			var global_mouse_pos = card_node.get_global_mouse_position()
 			if card_size:
-				card_node.call("animate_return_from", get_viewport().get_mouse_position() - (card_size / 2.0))
+				card_node.call("animate_return_from", global_mouse_pos - (card_size / 2.0))
 			else:
-				card_node.call("animate_return_from", get_viewport().get_mouse_position())
+				card_node.call("animate_return_from", global_mouse_pos)
 		elif data.has("card_data"):
 			# If restored from memory, card_node is null. Find the newly spawned card and animate it!
 			var card_data = data["card_data"]
@@ -165,11 +166,12 @@ func _try_pickup(mouse_pos: Vector2, instant_cancel: bool = false) -> void:
 					print("Checking child: ", c.name)
 					if c.get("card_data") == card_data and not c.get("is_placed"):
 						print("FOUND MATCHING CARD! Animating.")
-						var card_size = c.get("size")
+						var card_size = c.get("custom_minimum_size")
+						var global_mouse_pos = c.get_global_mouse_position()
 						if card_size:
-							c.call("animate_return_from", get_viewport().get_mouse_position() - (card_size / 2.0))
+							c.call("animate_return_from", global_mouse_pos - (card_size / 2.0))
 						else:
-							c.call("animate_return_from", get_viewport().get_mouse_position())
+							c.call("animate_return_from", global_mouse_pos)
 						break
 	else:
 		_begin_move_tile(tile, data)
@@ -271,6 +273,7 @@ func _begin_move_tile(tile: Node3D, data: Dictionary) -> void:
 			drag_dummy_card.hide()
 			drag_dummy_card.set_process(false)
 			drag_dummy_card.set_process_unhandled_input(false)
+			drag_dummy_card.set("dragging", true) # Prevent card_hand.gd from interfering
 			ch.add_child(drag_dummy_card)
 	
 	set_process(true)
@@ -313,9 +316,13 @@ func _process(delta: float) -> void:
 				drag_dummy_card.modulate.a = 0.0
 				var tw = create_tween()
 				tw.tween_property(drag_dummy_card, "modulate:a", 1.0, 0.15)
-			var s = drag_dummy_card.get("size")
-			if s: drag_dummy_card.global_position = mouse_pos - (s / 2.0)
-			else: drag_dummy_card.global_position = mouse_pos
+			var s = drag_dummy_card.get("custom_minimum_size")
+			var ui_mouse_pos = drag_dummy_card.get_global_mouse_position()
+			if s and s != Vector2.ZERO: 
+				drag_dummy_card.global_position = ui_mouse_pos - (s / 2.0)
+			else: 
+				# Fallback just in case custom_minimum_size isn't set, use hardcoded base card size
+				drag_dummy_card.global_position = ui_mouse_pos - Vector2(66.0, 90.0)
 	
 	if Input.is_action_just_pressed("rotate"):
 		rotate_ghost()
@@ -429,6 +436,9 @@ func _cancel_move(skip_clear_ghost: bool = false) -> void:
 	if not is_item:
 		if temp_tile:
 			StageManager.unregister_placed_tile(temp_tile)
+			if original_move_data.has("machine_id") and original_move_data["machine_id"] != "":
+				if FactoryManager.placed_machines.has(original_move_data["machine_id"]):
+					FactoryManager.placed_machines[original_move_data["machine_id"]]["state"] = "IDLE"
 			if placement_data.has(temp_tile):
 				placement_data.erase(temp_tile)
 			temp_tile.queue_free()
@@ -457,12 +467,12 @@ func _cancel_move(skip_clear_ghost: bool = false) -> void:
 			var oi = card.get("origin_index")
 			if op:
 				op.move_child(card, oi)
-			var mouse_pos = get_viewport().get_mouse_position()
-			var card_size = card.get("size")
+			var global_mouse_pos = card.get_global_mouse_position()
+			var card_size = card.get("custom_minimum_size")
 			if card_size:
-				card.call("animate_return_from", mouse_pos - (card_size / 2.0))
+				card.call("animate_return_from", global_mouse_pos - (card_size / 2.0))
 			else:
-				card.call("animate_return_from", mouse_pos)
+				card.call("animate_return_from", global_mouse_pos)
 	elif original_move_data.has("card_data"):
 		var card_data = original_move_data["card_data"]
 		var ch = null
@@ -475,12 +485,12 @@ func _cancel_move(skip_clear_ghost: bool = false) -> void:
 		if ch:
 			for c in ch.get_children():
 				if c.get("card_data") == card_data and not c.get("is_placed"):
-					var mouse_pos = get_viewport().get_mouse_position()
-					var card_size = c.get("size")
+					var global_mouse_pos = c.get_global_mouse_position()
+					var card_size = c.get("custom_minimum_size")
 					if card_size:
-						c.call("animate_return_from", mouse_pos - (card_size / 2.0))
+						c.call("animate_return_from", global_mouse_pos - (card_size / 2.0))
 					else:
-						c.call("animate_return_from", mouse_pos)
+						c.call("animate_return_from", global_mouse_pos)
 					break
 			
 	if not original_move_data.is_empty():
@@ -641,41 +651,22 @@ func _on_interaction_confirmed(card_name: String, tile: Node3D, card_data: Resou
 		for key in extra_data:
 			data[key] = extra_data[key]
 		
-		if extra_data.has("machine_id") and extra_data["machine_id"] != "":
-			var m_id = extra_data["machine_id"]
-			var machine_node = FactoryManager.placed_machines[m_id].get("node")
-			
-			# Free occupied cells of the DUMMY card tile
-			for offset in data.shape:
-				var c: Vector2i = data.anchor + offset
-				if grid.has(c):
-					grid[c].clear()
-			placement_data.erase(tile)
-			tile.queue_free()
-			
-			# Play shine on the physical machine
-			var tw := create_tween()
-			tw.tween_callback(_play_shine_effect.bind(machine_node)).set_delay(place_duration * shine_trigger_ratio)
-			
-			# Register the PHYSICAL machine to StageManager
-			StageManager.register_placed_tile(machine_node, data["card_data"], data)
-		else:
-			tile.show() # Munculkan bendanya sekarang
-			
-			# Animasi Bounce & Shine setelah konfirmasi popup
-			var anchor_tile = grid[data["anchor"]]
-			var final_pos = anchor_tile.global_position
-			final_pos.y += ground_top_offset - tile_bottom_offset
-			
-			var tw := create_tween()
-			tw.set_trans(Tween.TRANS_BOUNCE)
-			tw.set_ease(Tween.EASE_OUT)
-			tw.set_parallel(true)
-			tw.tween_property(tile, "global_position", final_pos, place_duration)
-			tw.tween_callback(_play_shine_effect.bind(tile)).set_delay(place_duration * shine_trigger_ratio)
+		tile.show() # Munculkan bendanya sekarang
+		
+		# Animasi Bounce & Shine setelah konfirmasi popup
+		var anchor_tile = grid[data["anchor"]]
+		var final_pos = anchor_tile.global_position
+		final_pos.y += ground_top_offset - tile_bottom_offset
+		
+		var tw := create_tween()
+		tw.set_trans(Tween.TRANS_BOUNCE)
+		tw.set_ease(Tween.EASE_OUT)
+		tw.set_parallel(true)
+		tw.tween_property(tile, "global_position", final_pos, place_duration)
+		tw.tween_callback(_play_shine_effect.bind(tile)).set_delay(place_duration * shine_trigger_ratio)
 
-			# Daftarkan tile ke sistem
-			StageManager.register_placed_tile(tile, data["card_data"], data)
+		# Daftarkan tile ke sistem
+		StageManager.register_placed_tile(tile, data["card_data"], data)
 		
 	if pending_interaction_tile == tile:
 		pending_interaction_tile = null
@@ -900,7 +891,7 @@ func remove_tile_from_grid(tile: Node3D) -> void:
 # ==========================================
 # RESTORE STATE HELPER (Untuk Opsi A)
 # ==========================================
-func reoccupy_grid_for_restored_tile(tile: Node3D, data: Resource) -> void:
+func reoccupy_grid_for_restored_tile(tile: Node3D, data: Resource, extra_data: Dictionary = {}) -> void:
 	if not tile or not data: return
 	
 	var anchor_coord := _world_to_grid(tile.global_position)
@@ -917,6 +908,7 @@ func reoccupy_grid_for_restored_tile(tile: Node3D, data: Resource) -> void:
 		"card_node": null,
 		"card_data": data
 	}
+	placement_data[tile].merge(extra_data)
 	
 	for offset in shape:
 		var coord = anchor_coord + offset
@@ -1003,13 +995,15 @@ func toggle_farm_highlight(enable: bool) -> void:
 					SilhouetteHighlight.apply_highlight(t, false)
 			highlighted_farm_tiles.clear()
 
-func find_empty_grid_spot(item_data: Resource) -> GroundTile:
-	if not item_data or not item_data.tile_scene: return null
-	var shape = _get_shape(item_data.tile_scene)
+func find_empty_grid_spot(item_data: Resource) -> Dictionary:
+	if not item_data or not item_data.tile_scene: return {}
+	var base_shape = _get_shape(item_data.tile_scene)
 	for coord in grid.keys():
-		if _can_place(coord, shape):
-			return grid[coord]
-	return null
+		for rot in range(4):
+			var shape = _rotate_shape(base_shape, rot)
+			if _can_place(coord, shape):
+				return {"tile": grid[coord], "rotation_steps": rot}
+	return {}
 
 func reset_farm_highlight() -> void:
 	_farm_highlight_refs = 0

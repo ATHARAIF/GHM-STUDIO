@@ -170,6 +170,8 @@ func unregister_placed_tile(tile_node: Node3D) -> void:
 
 
 func _find_tile_labels(node: Node) -> Node3D:
+	if not node:
+		return null
 	for child in node.get_children():
 		if child.name == "tile_labels" or child.has_method("set_ready_state"):
 			return child
@@ -226,9 +228,9 @@ func advance_turn() -> void:
 				if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
 					if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
 						FactoryManager.placed_machines[tile_dict["machine_id"]]["state"] = "IDLE"
-				else:
-					if tile_dict.tile and is_instance_valid(tile_dict.tile):
-						PlacementManager.remove_tile_from_grid(tile_dict.tile)
+				
+				if tile_dict.tile and is_instance_valid(tile_dict.tile):
+					PlacementManager.remove_tile_from_grid(tile_dict.tile)
 					
 				# Remove from active ticking list
 				active_tiles.remove_at(i)
@@ -277,13 +279,30 @@ func apply_missed_penalty(card_data: CardData) -> void:
 	stats_changed.emit()
 	_check_stage_progression()
 
+func _sync_machine_tiles(tile_node: Node3D) -> void:
+	for dict in active_tiles:
+		if dict.tile == null and dict.has("machine_id") and dict["machine_id"] != "":
+			if FactoryManager.placed_machines.has(dict["machine_id"]):
+				if FactoryManager.placed_machines[dict["machine_id"]].get("node") == tile_node:
+					dict.tile = tile_node
+					tile_node.set_meta("locked", true)
+					var labels = _find_tile_labels(tile_node)
+					if labels:
+						dict.tile_labels = labels
+						if dict.ready:
+							labels.set_ready_state(true)
+						else:
+							labels.set_turn(dict.remaining_duration)
+
 func is_tile_ready_for_interaction(tile_node: Node3D) -> bool:
+	_sync_machine_tiles(tile_node)
 	for dict in active_tiles:
 		if dict.tile == tile_node and dict.ready:
 			return true
 	return false
 
 func trigger_interaction(tile_node: Node3D) -> void:
+	_sync_machine_tiles(tile_node)
 	for dict in active_tiles:
 		if dict.tile == tile_node and dict.ready:
 			interaction_requested.emit(dict.data.card_name, dict)
@@ -320,9 +339,9 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 	if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
 		if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
 			FactoryManager.placed_machines[tile_dict["machine_id"]]["state"] = "IDLE"
-	else:
-		if tile_dict.tile and is_instance_valid(tile_dict.tile):
-			PlacementManager.remove_tile_from_grid(tile_dict.tile)
+			
+	if tile_dict.tile and is_instance_valid(tile_dict.tile):
+		PlacementManager.remove_tile_from_grid(tile_dict.tile)
 		
 	if tile_dict.data.process_id == "DP01":
 		if target_b.green_bean_kg == 0 and target_b.cherry_kg > 0:
@@ -341,8 +360,11 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 			if target_b.get("reserved_roasted_bean_kg") != null:
 				target_b.reserved_roasted_bean_kg = max(0.0, target_b.reserved_roasted_bean_kg - kg_used)
 			target_b.roasted_bean_kg = max(0.0, target_b.roasted_bean_kg - kg_used)
-			# Simpan result packs di dictionary stage manager atau inventory (bisa diimplementasi penuh nanti)
-			# print("Packing finished: ", tile_dict["packs"], " packs")
+			
+			# Simpan result packs ke Warehouse
+			if has_node("/root/WarehouseManager"):
+				var wm = get_node("/root/WarehouseManager")
+				wm.store_packed_goods(target_b, tile_dict)
 			
 	elif tile_dict.data.process_id == "TEST01":
 		batch_flags["after_testing"] = true
@@ -386,6 +408,7 @@ func _check_stage_progression() -> void:
 		stage_changed.emit(current_stage)
 		
 func is_tile_locked(tile_node: Node3D) -> bool:
+	_sync_machine_tiles(tile_node)
 	return tile_node.has_meta("locked") and tile_node.get_meta("locked") == true
 
 func is_process_active(process_id: String) -> bool:
@@ -458,7 +481,7 @@ func restore_room_state(room_id: String) -> void:
 		active_tiles.append(new_dict)
 		
 		if has_node("/root/PlacementManager"):
-			get_node("/root/PlacementManager").reoccupy_grid_for_restored_tile(new_tile, cd)
+			get_node("/root/PlacementManager").reoccupy_grid_for_restored_tile(new_tile, cd, new_dict)
 
 
 	stats_changed.emit()

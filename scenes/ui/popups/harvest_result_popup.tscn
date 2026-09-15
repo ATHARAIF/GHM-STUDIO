@@ -117,6 +117,36 @@ texture_margin_right = 4.0
 texture_margin_bottom = 9.0
 region_rect = Rect2(171, 0, 55, 56)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hdu64"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5diib"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36dd3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [node name="HarvestResultPopup" type="CanvasLayer" unique_id=1231566695]
 layer = 20
 script = ExtResource("1_popup")
@@ -138,10 +168,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_glx4a")
-current_tab = 0
+current_tab = 1
 tabs_visible = false
 
 [node name="result" type="CenterContainer" parent="TabContainer" unique_id=1312098069]
+visible = false
 layout_mode = 2
 mouse_filter = 0
 theme = ExtResource("2_q1gqe")
@@ -746,7 +777,6 @@ icon = ExtResource("8_1ujdb")
 expand_icon = true
 
 [node name="storage_selection" type="CenterContainer" parent="TabContainer" unique_id=1833131991]
-visible = false
 layout_mode = 2
 mouse_filter = 0
 theme = ExtResource("2_q1gqe")
@@ -899,22 +929,38 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="storage" type="PanelContainer" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer" unique_id=1637898546]
+[node name="btn_storage" type="Button" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer" unique_id=1288202832]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_hdu64")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5diib")
+theme_override_styles/hover = SubResource("StyleBoxFlat_36dd3")
+toggle_mode = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage" unique_id=1793508506]
+[node name="content" type="MarginContainer" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage" unique_id=931193240]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content" unique_id=188568833]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="illustration" type="TextureRect" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage/HBoxContainer" unique_id=543546330]
+[node name="illustration" type="TextureRect" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content/HBoxContainer" unique_id=1656930121]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("8_hdu64")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage/HBoxContainer" unique_id=2130351994]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content/HBoxContainer" unique_id=1617957907]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 8
@@ -922,34 +968,36 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage/HBoxContainer/MarginContainer" unique_id=495242442]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content/HBoxContainer/MarginContainer" unique_id=1493607411]
 layout_mode = 2
 
-[node name="name" type="Label" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1521845651]
+[node name="name" type="Label" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1792012872]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "Storage Name"
 
-[node name="capacity" type="Label" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage/HBoxContainer/MarginContainer/VBoxContainer" unique_id=2000242567]
+[node name="capacity" type="Label" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content/HBoxContainer/MarginContainer/VBoxContainer" unique_id=354381359]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "4000 Kg"
 
-[node name="available" type="Label" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage/HBoxContainer/MarginContainer/VBoxContainer" unique_id=396138984]
+[node name="use" type="HBoxContainer" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1789663297]
+layout_mode = 2
+
+[node name="available" type="Label" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content/HBoxContainer/MarginContainer/VBoxContainer/use" unique_id=1412235553]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
-text = "Not In Use"
+text = "IDLE"
 
-[node name="checbox" type="PanelContainer" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage/HBoxContainer" unique_id=219710472]
-custom_minimum_size = Vector2(70, 0)
+[node name="-" type="Label" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content/HBoxContainer/MarginContainer/VBoxContainer/use" unique_id=984781597]
 layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "-"
 
-[node name="CheckBox" type="CheckBox" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/storage/HBoxContainer/checbox" unique_id=1439272667]
+[node name="batch" type="Label" parent="TabContainer/storage_selection/panel/content/right/list/VBoxContainer/btn_storage/content/HBoxContainer/MarginContainer/VBoxContainer/use" unique_id=1272862865]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-icon_alignment = 1
+theme_override_font_sizes/font_size = 13
+text = "Abc 2020"
 
 [node name="confirmation" type="HBoxContainer" parent="TabContainer/storage_selection/panel/content/right" unique_id=863853089]
 layout_mode = 2

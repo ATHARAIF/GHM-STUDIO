@@ -158,11 +158,13 @@ func _buy_item(data: Dictionary) -> void:
 		
 	var item: ItemData = data["raw_item_data"]
 	
-	# Cek apakah masih ada grid kosong di pabrik sebelum mengizinkan pembelian
-	var empty_anchor = PlacementManager.find_empty_grid_spot(item)
-	if empty_anchor == null:
-		print("Pembelian dibatalkan: Ruangan pabrik sudah penuh!")
+	var spot_data = PlacementManager.find_empty_grid_spot(item)
+	if spot_data.is_empty():
+		print("Pembelian dibatalkan: Ruangan sudah penuh atau ukuran tidak pas!")
 		return
+		
+	var empty_anchor = spot_data["tile"]
+	var rotation_steps = spot_data["rotation_steps"]
 		
 	if StageManager.budget >= item.buy_price:
 		StageManager.budget -= item.buy_price
@@ -174,13 +176,26 @@ func _buy_item(data: Dictionary) -> void:
 		# Tumbuhkan mesin 3D di ruangan
 		var tile = item.tile_scene.instantiate()
 		get_tree().current_scene.add_child(tile)
+		
+		# Terapkan rotasi
+		tile.rotation_degrees.y = float(rotation_steps) * 90.0
+		
 		var final_pos = empty_anchor.global_position
 		final_pos.y += PlacementManager.ground_top_offset - PlacementManager._get_bottom_y(tile)
 		tile.global_position = final_pos
 		
 		PlacementManager.reoccupy_grid_for_restored_tile(tile, item)
-		FactoryManager.register_machine(unique_id, item, empty_anchor.global_position)
-		FactoryManager.placed_machines[unique_id]["node"] = tile
+		
+		var scene = get_tree().current_scene
+		if scene.name.find("Warehouse") != -1 or scene.name.find("warehouse") != -1:
+			var wm = get_node("/root/WarehouseManager")
+			if wm:
+				wm.register_rack(unique_id, item, tile.global_position, rotation_steps)
+				wm.placed_racks[unique_id]["node"] = tile
+		else:
+			FactoryManager.register_machine(unique_id, item, tile.global_position)
+			FactoryManager.placed_machines[unique_id]["node"] = tile
+			FactoryManager.placed_machines[unique_id]["rotation_steps"] = rotation_steps
 		
 		print("Berhasil membeli dan langsung meletakkan: ", item.item_name)
 	else:
@@ -195,17 +210,28 @@ func _sell_item(data: Dictionary) -> void:
 	# Jual barang yang sudah di lantai (punya machine_id)
 	if data.has("machine_id"):
 		var m_id = data["machine_id"]
-		if FactoryManager.placed_machines.has(m_id):
-			var m_data = FactoryManager.placed_machines[m_id]
+		
+		var scene = get_tree().current_scene
+		var is_warehouse = scene.name.find("Warehouse") != -1 or scene.name.find("warehouse") != -1
+		
+		var data_source = null
+		if is_warehouse:
+			var wm = get_node_or_null("/root/WarehouseManager")
+			if wm: data_source = wm.placed_racks
+		else:
+			data_source = FactoryManager.placed_machines
+			
+		if data_source and data_source.has(m_id):
+			var m_data = data_source[m_id]
 			var node = m_data.get("node")
 			if is_instance_valid(node):
 				PlacementManager.remove_tile_from_grid(node)
 				node.queue_free()
 			
-			FactoryManager.placed_machines.erase(m_id)
+			data_source.erase(m_id)
 			StageManager.budget += item.sell_price
 			StageManager.budget_changed.emit(StageManager.budget)
-			print("Berhasil menjual mesin yang terpasang: ", item.item_name)
+			print("Berhasil menjual item yang terpasang: ", item.item_name)
 			queue_free()
 			return
 

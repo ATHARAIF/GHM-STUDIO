@@ -14,10 +14,6 @@ var debug_yield_mod: Label
 var debug_batch_dropdown: OptionButton
 var selected_debug_batch_year: int = -1
 
-# Popup Layers
-@onready var layer_menu_tabs = $menu_tabs
-@onready var layer_coffee_log = $menu_coffee_log
-
 @export_group("Next Turn Settings")
 @export var next_turn_hold_duration: float = 0.5
 @export var hold_overlay_color: Color = Color(0.7, 0.35, 0.18, 0.9)
@@ -64,11 +60,6 @@ func _ready() -> void:
 		mat.set_shader_parameter("tint_color", hold_overlay_color)
 		btn_next_turn.material = mat
 		
-	var header_node = $main_hud/MarginContainer/header
-	if header_node:
-		header_node.menu_pressed.connect(func(): _toggle_popup(layer_menu_tabs))
-		header_node.journal_pressed.connect(func(): _toggle_popup(layer_coffee_log))
-		
 	_update_all()
 
 	if has_node("/root/EventManager"):
@@ -76,14 +67,15 @@ func _ready() -> void:
 		em.card_placement_interaction_requested.connect(_on_card_placement_interaction_requested)
 
 func _has_active_popup() -> bool:
-	if layer_menu_tabs and layer_menu_tabs.visible: return true
-	if layer_coffee_log and layer_coffee_log.visible: return true
+	# Cek apakah ada menu_panel yang sedang terbuka di scene
+	if get_tree().current_scene.has_node("menu_panel"):
+		return true
+		
 	for c in get_children():
 		if c is CanvasLayer and c.has_node("CenterContainer"):
 			return true
 		if c is CanvasLayer and c.has_node("TabContainer"):
 			return true
-		
 	return false
 
 func _process(delta: float) -> void:
@@ -181,15 +173,6 @@ func _build_debug_panel() -> void:
 	debug_panel.add_child(debug_yield)
 	debug_yield_mod = Label.new()
 	debug_panel.add_child(debug_yield_mod)
-
-func _toggle_popup(layer: CanvasLayer) -> void:
-	if layer:
-		layer.visible = !layer.visible
-		# Optional: Hide the other popup if one is opened
-		if layer == layer_menu_tabs and layer_coffee_log:
-			layer_coffee_log.visible = false
-		elif layer == layer_coffee_log and layer_menu_tabs:
-			layer_menu_tabs.visible = false
 
 func _on_stage_interaction_requested(interaction_name: String, tile_data: Dictionary) -> void:
 	var card_data = tile_data.get("data")

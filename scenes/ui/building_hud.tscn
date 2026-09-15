@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dv742tmvj668o"]
+
+[ext_resource type="PackedScene" uid="uid://3pmmnlno864s" path="res://scenes/ui/components/building_hud.tscn" id="2_0rs5x"]
+[ext_resource type="PackedScene" uid="uid://docyv7a3s7tss" path="res://scenes/ui/components/header.tscn" id="2_3vasv"]
+
+[node name="building_hud" type="CanvasLayer" unique_id=1158770422]
+
+[node name="prod_house_hud" type="Control" parent="." unique_id=1818464353]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="prod_house_hud" unique_id=1153219652]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="header" parent="prod_house_hud/MarginContainer" unique_id=552095148 instance=ExtResource("2_3vasv")]
+layout_mode = 2
+
+[node name="building_hud" parent="prod_house_hud" unique_id=1509702277 instance=ExtResource("2_0rs5x")]
+layout_mode = 1
