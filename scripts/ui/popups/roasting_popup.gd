@@ -14,6 +14,18 @@ var mod_quant_pct: float = 0.0
 var current_tile: Node3D
 var current_card_data: Resource
 
+func _get_target_batch() -> CoffeeBatch:
+	var process_id = current_card_data.process_id if current_card_data else "RP01"
+	
+	if current_tile and PlacementManager.placement_data.has(current_tile):
+		var p_data = PlacementManager.placement_data[current_tile]
+		if p_data.has("target_batch_year") and p_data["target_batch_year"] != -1:
+			var byear = p_data["target_batch_year"]
+			if StageManager.batches.has(byear):
+				return StageManager.batches[byear]
+				
+	return StageManager.get_oldest_ready_batch(process_id)
+
 @onready var lbl_title = $CenterContainer/panel/panel_label
 @onready var btn_confirm = $CenterContainer/panel/content/confirmation/confirm
 @onready var btn_close = $CenterContainer/panel/close
@@ -66,7 +78,7 @@ func show_popup() -> void:
 		lbl_arabica.visible = (v_data.species_name.to_lower() == "arabica")
 		lbl_robusta.visible = (v_data.species_name.to_lower() == "robusta")
 		
-	var cb = StageManager.get_active_farm_batch()
+	var cb = _get_target_batch()
 	if cb and val_batch:
 		val_batch.text = str(cb.batch_year)
 		
@@ -131,7 +143,7 @@ func _update_ui() -> void:
 		cont_cost.visible = (selected_method != null)
 
 	if radar_graph:
-		var cb = StageManager.get_active_farm_batch()
+		var cb = _get_target_batch()
 		var b_acid = cb.acidity if cb else 0.0
 		var b_aroma = cb.aroma if cb else 0.0
 		var b_sweet = cb.sweetness if cb else 0.0

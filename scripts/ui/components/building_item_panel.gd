@@ -223,6 +223,11 @@ func _sell_item(data: Dictionary) -> void:
 			
 		if data_source and data_source.has(m_id):
 			var m_data = data_source[m_id]
+			
+			if m_data.has("state") and m_data["state"] == "USED":
+				print("Tidak bisa menjual mesin yang sedang digunakan!")
+				return
+				
 			var node = m_data.get("node")
 			if is_instance_valid(node):
 				PlacementManager.remove_tile_from_grid(node)

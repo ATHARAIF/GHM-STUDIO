@@ -32,6 +32,18 @@ var selected_machine_id: String = ""
 var current_tile: Node3D
 var current_card_data: Resource
 
+func _get_target_batch() -> CoffeeBatch:
+	var process_id = current_card_data.process_id if current_card_data else "WP01"
+	
+	if current_tile and PlacementManager.placement_data.has(current_tile):
+		var p_data = PlacementManager.placement_data[current_tile]
+		if p_data.has("target_batch_year") and p_data["target_batch_year"] != -1:
+			var byear = p_data["target_batch_year"]
+			if StageManager.batches.has(byear):
+				return StageManager.batches[byear]
+				
+	return StageManager.get_oldest_ready_batch(process_id)
+
 func _ready() -> void:
 	if hbox_methods.has_node("opt"):
 		method_btn_template = hbox_methods.get_node("opt").duplicate()
@@ -49,7 +61,7 @@ func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, c
 	current_tile = tile
 	current_card_data = card_data
 	
-	var farm_batch = StageManager.get_active_farm_batch()
+	var farm_batch = _get_target_batch()
 	
 	if card_data.get("popup_methods"):
 		available_methods = card_data.popup_methods
@@ -92,7 +104,7 @@ func _build_buttons() -> void:
 		
 		# Validasi apakah method ini diizinkan oleh game rule
 		# Misalnya untuk processing, cek apakah batch kita punya nilai cherry_kg yang valid
-		var target_batch = StageManager.get_active_farm_batch()
+		var target_batch = _get_target_batch()
 		if target_batch == null or target_batch.cherry_kg == 0:
 			btn.disabled = true
 			btn.set_pressed_no_signal(false)
@@ -228,7 +240,7 @@ func _update_ui() -> void:
 			cont_turn.visible = (selected_method != null)
 
 	if radar_graph:
-		var cb = StageManager.get_active_farm_batch()
+		var cb = _get_target_batch()
 		var b_acid = cb.acidity if cb else 0.0
 		var b_aroma = cb.aroma if cb else 0.0
 		var b_sweet = cb.sweetness if cb else 0.0
@@ -278,7 +290,7 @@ func _on_confirm() -> void:
 	FactoryManager.placed_machines[machine_id]["state"] = "USED"
 	
 	# Simpan nama batch agar nanti "In Use - Batch Name" bisa muncul
-	var farm_batch = StageManager.get_active_farm_batch()
+	var farm_batch = _get_target_batch()
 	if farm_batch:
 		FactoryManager.placed_machines[machine_id]["batch_name"] = farm_batch.variety_name + " " + str(farm_batch.batch_year)
 	
