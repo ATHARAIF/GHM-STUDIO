@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://proc1234567"]
+
+[ext_resource type="PackedScene" uid="uid://tp26kt3k744s" path="res://scenes/ui/popups/processing_popup.tscn" id="1_deo0e"]
+[ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_e8fbb"]
+[ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+[ext_resource type="Resource" uid="uid://da5aaq37ovub2" path="res://resources/methods/processing/method/honey.tres" id="2_deo0e"]
+[ext_resource type="Resource" uid="uid://dwho0m2pewh88" path="res://resources/methods/processing/method/natural.tres" id="3_4wsoi"]
+[ext_resource type="Resource" uid="uid://cylha8uu5fhir" path="res://resources/methods/processing/method/wet.tres" id="4_ymunl"]
+[ext_resource type="Resource" uid="uid://b1usiv31b16vw" path="res://resources/methods/processing/drying/mechanical.tres" id="5_fest3"]
+[ext_resource type="Resource" uid="uid://dr48yq2jn0hov" path="res://resources/methods/processing/drying/patio.tres" id="6_mtnav"]
+[ext_resource type="Resource" uid="uid://cjgjrxohx2dkl" path="res://resources/methods/processing/drying/solar_dome.tres" id="8_xgu3h"]
+
+[resource]
+script = ExtResource("1_script")
+card_name = "Processing"
+process_id = "WP01"
+cost = 150
+duration = 5
+placement_interaction = true
+custom_popup_ui = ExtResource("1_deo0e")
+popup_methods = Array[ExtResource("1_e8fbb")]([ExtResource("2_deo0e"), ExtResource("3_4wsoi"), ExtResource("4_ymunl")])
+popup_tools = Array[ExtResource("1_e8fbb")]([ExtResource("5_fest3"), ExtResource("6_mtnav"), ExtResource("8_xgu3h")])
+availability = 2
+unlock_condition = "FP04"

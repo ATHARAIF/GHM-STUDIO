@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://yq2mev6278ge"]
+
+[node name="Card" type="PanelContainer" unique_id=1688047968]
+custom_minimum_size = Vector2(280, 0)
+theme_type_variation = &"CardPanel"
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1743519900]
+layout_mode = 2
+
+[node name="HeaderOverflow" type="MarginContainer" parent="VBox" unique_id=644668552]
+layout_mode = 2
+theme_override_constants/margin_left = -8
+theme_override_constants/margin_top = -3
+theme_override_constants/margin_right = -8
+
+[node name="HeaderBar" type="PanelContainer" parent="VBox/HeaderOverflow" unique_id=171802940]
+layout_mode = 2
+theme_type_variation = &"CardHeaderBar"
+
+[node name="LblLocationName" type="Label" parent="VBox/HeaderOverflow/HeaderBar" unique_id=519082788]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+horizontal_alignment = 1
+
+[node name="ContentPad" type="MarginContainer" parent="VBox" unique_id=1699843798]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox2" type="VBoxContainer" parent="VBox/ContentPad" unique_id=885861974]
+layout_mode = 2
+
+[node name="PctPanel" type="PanelContainer" parent="VBox/ContentPad/VBox2" unique_id=676399346]
+layout_mode = 2
+theme_type_variation = &"CardHeaderBar"
+
+[node name="PctRow" type="HBoxContainer" parent="VBox/ContentPad/VBox2/PctPanel" unique_id=1256046534]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SandBox" type="VBoxContainer" parent="VBox/ContentPad/VBox2/PctPanel/PctRow" unique_id=1462066599]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValSandPct" type="Label" parent="VBox/ContentPad/VBox2/PctPanel/PctRow/SandBox" unique_id=1613368994]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+horizontal_alignment = 1
+
+[node name="LblSand" type="Label" parent="VBox/ContentPad/VBox2/PctPanel/PctRow/SandBox" unique_id=2112894652]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+text = "Sand"
+horizontal_alignment = 1
+
+[node name="ClayBox" type="VBoxContainer" parent="VBox/ContentPad/VBox2/PctPanel/PctRow" unique_id=229111276]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValClayPct" type="Label" parent="VBox/ContentPad/VBox2/PctPanel/PctRow/ClayBox" unique_id=86804275]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+horizontal_alignment = 1
+
+[node name="LblClay" type="Label" parent="VBox/ContentPad/VBox2/PctPanel/PctRow/ClayBox" unique_id=2091487999]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+text = "Clay"
+horizontal_alignment = 1
+
+[node name="LoamBox" type="VBoxContainer" parent="VBox/ContentPad/VBox2/PctPanel/PctRow" unique_id=18217672]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValLoamPct" type="Label" parent="VBox/ContentPad/VBox2/PctPanel/PctRow/LoamBox" unique_id=632420117]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+horizontal_alignment = 1
+
+[node name="LblLoam" type="Label" parent="VBox/ContentPad/VBox2/PctPanel/PctRow/LoamBox" unique_id=1051731195]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+text = "Loam"
+horizontal_alignment = 1
+
+[node name="Grid" type="GridContainer" parent="VBox/ContentPad/VBox2" unique_id=1229662773]
+layout_mode = 2
+columns = 2
+
+[node name="Exposure" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=519529614]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Exposure"
+
+[node name="ValExposure" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=581580568]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+
+[node name="Altitude" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=1091037854]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Altitude"
+
+[node name="ValAltitude" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=1050030985]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+
+[node name="Ph" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=1697420814]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Ph"
+
+[node name="ValPh" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=2144616600]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+
+[node name="Slope" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=748831735]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Slope"
+
+[node name="ValSlope" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=893638858]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+
+[node name="Terracing" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=1743492588]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Terracing"
+
+[node name="ValTerracing" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=1329816521]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+
+[node name="Irrigation" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=234546128]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Irrigation"
+
+[node name="ValIrrigation" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=276503984]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+
+[node name="Coffee Variety" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=416956965]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Coffee Variety"
+
+[node name="ValVariety" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=899515632]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+
+[node name="Age" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=862611657]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Age"
+
+[node name="ValAge" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=1991430660]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+
+[node name="Planting Density" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=197141974]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Planting Density"
+
+[node name="ValDensity" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=200725741]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+
+[node name="Health" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=320302667]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Health"
+
+[node name="ValHealth" type="Label" parent="VBox/ContentPad/VBox2/Grid" unique_id=2033485312]
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+
+[node name="ButtonRow" type="HBoxContainer" parent="VBox/ContentPad/VBox2" unique_id=1491363172]
+layout_mode = 2
+
+[node name="BtnManageEmployee" type="Button" parent="VBox/ContentPad/VBox2/ButtonRow" unique_id=485544015]
+layout_mode = 2
+theme_type_variation = &"SellButton"
+text = "manage employee"
+
+[node name="BtnDisable" type="Button" parent="VBox/ContentPad/VBox2/ButtonRow" unique_id=1488761310]
+layout_mode = 2
+theme_type_variation = &"SecondaryButton"
+text = "Disable"

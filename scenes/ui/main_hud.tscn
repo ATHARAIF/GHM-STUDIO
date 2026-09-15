@@ -1,149 +1,1872 @@
-[gd_scene format=3 uid="uid://cx4x2m3u4v5w"]
+[gd_scene format=3 uid="uid://cxy720dnitlvc"]
 
-[ext_resource type="Script" uid="uid://ca341oaktpwcu" path="res://scripts/ui/main_hud.gd" id="1_q1w2e"]
-[ext_resource type="PackedScene" uid="uid://ddyxy0w123abf" path="res://scenes/ui/dry_popup.tscn" id="3_dry"]
-[ext_resource type="PackedScene" uid="uid://b755fr0qv6osp" path="res://scenes/ui/controllers/pruning_controller.tscn" id="4_prun"]
+[ext_resource type="PackedScene" uid="uid://c2uke58d1oepu" path="res://scenes/cards/card_hand.tscn" id="1_2obvf"]
+[ext_resource type="Script" uid="uid://ccgq84p33gpag" path="res://scripts/ui/main_hud.gd" id="1_hudgd"]
+[ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="2_6230l"]
+[ext_resource type="Script" uid="uid://cs3m2stp3g8dh" path="res://scripts/data/menu_tabs.gd" id="3_5leir"]
+[ext_resource type="Script" uid="uid://dytnpq8icrodu" path="res://scripts/data/terroir_tab.gd" id="4_mti1m"]
+[ext_resource type="Script" uid="uid://dfavq6c1whokv" path="res://scripts/ui/calender/calendar_popup.gd" id="6_6lxsi"]
+[ext_resource type="Theme" uid="uid://doe1watjy8phv" path="res://tres/ui_theme.tres" id="7_yh5fs"]
+[ext_resource type="Texture2D" uid="uid://cth6a32p0ocg2" path="res://assets/ui/Frame 302.png" id="8_d282s"]
 
-[node name="MainHUD" type="CanvasLayer" unique_id=176383737]
-script = ExtResource("1_q1w2e")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_footer_floating"]
+bg_color = Color(0.12156863, 0.16078432, 0.2, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=706933967]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_next"]
+bg_color = Color(0.18, 0.55, 0.35, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.9, 0.4, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_glx4a"]
+font_size = 17
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6230l"]
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_bottom = 4
+border_color = Color(0.7745787, 0.32913658, 0.35560834, 1)
+
+[sub_resource type="FontFile" id="FontFile_a5a3o"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="FontFile" id="FontFile_1jl3g"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="FontFile" id="FontFile_e5wvh"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vyuuk"]
+texture = ExtResource("8_d282s")
+region_rect = Rect2(342, 0, 110, 112)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0yliy"]
+load_path = "res://.godot/imported/Frame 302.png-3037ca9536c4f2abb3da097e05aee246.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ww3d0"]
+texture = SubResource("CompressedTexture2D_0yliy")
+region_rect = Rect2(456, 6, 110, 106)
+
+[node name="overlays" type="Control" unique_id=1895636831]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+script = ExtResource("1_hudgd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1334757595]
-layout_mode = 2
-mouse_filter = 2
+[node name="main" type="CanvasLayer" parent="." unique_id=2121045524]
 
-[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1616932465]
-layout_mode = 2
-theme_override_constants/separation = 50
+[node name="header" type="ColorRect" parent="main" unique_id=866420312]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.19607843)
 
-[node name="Stage" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopBar" unique_id=667011566]
-layout_mode = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="main/header" unique_id=726116962]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 333.0
+offset_bottom = 20.0
+grow_vertical = 2
+alignment = 1
 
-[node name="LblStage" type="Label" parent="MarginContainer/VBoxContainer/TopBar/Stage" unique_id=1366804348]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Stage: 0"
-
-[node name="Budget" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopBar" unique_id=531359044]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="LblBudget" type="Label" parent="MarginContainer/VBoxContainer/TopBar/Budget" unique_id=345403336]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.73, 0.3, 1)
-theme_override_font_sizes/font_size = 24
-text = "Budget: $50000"
-
-[node name="SeasonTurn" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopBar" unique_id=1512242125]
-layout_mode = 2
-
-[node name="LblSeason" type="Label" parent="MarginContainer/VBoxContainer/TopBar/SeasonTurn" unique_id=326649278]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Spring"
-horizontal_alignment = 2
-
-[node name="LblTurn" type="Label" parent="MarginContainer/VBoxContainer/TopBar/SeasonTurn" unique_id=647347248]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Turn: 1/5"
-horizontal_alignment = 2
-
-[node name="StatsPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=172465648]
+[node name="calendar" type="Button" parent="main/header/HBoxContainer" unique_id=1604833920]
+custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "📅 04 SPRING"
 
-[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/StatsPanel" unique_id=419453495]
+[node name="fame" type="Button" parent="main/header/HBoxContainer" unique_id=501780795]
+custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 10
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "👑 10"
 
-[node name="StatsGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/StatsPanel/Margin" unique_id=1413516637]
+[node name="money" type="Button" parent="main/header/HBoxContainer" unique_id=640228457]
+custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
-theme_override_constants/h_separation = 40
-theme_override_constants/v_separation = 5
-columns = 4
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "🪙 100.000"
 
-[node name="Body" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=21924554]
-layout_mode = 2
-text = "Body: 0"
-
-[node name="Acidity" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1787323554]
-layout_mode = 2
-text = "Acidity: 0"
-
-[node name="Sweetness" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1554023410]
-layout_mode = 2
-text = "Sweetness: 0"
-
-[node name="Aroma" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=598692839]
-layout_mode = 2
-text = "Aroma: 0"
-
-[node name="Flavor" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=256882403]
-layout_mode = 2
-text = "Flavor: 0"
-
-[node name="Bitterness" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=827477104]
-layout_mode = 2
-text = "Bitterness: 0"
-
-[node name="Complexity" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=746035065]
-layout_mode = 2
-text = "Complexity: 0"
-
-[node name="Aftertaste" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=2038222473]
-layout_mode = 2
-text = "Aftertaste: 0"
-
-[node name="Defect" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1361213424]
-layout_mode = 2
-text = "Defect: 10.0%"
-
-[node name="Moisture" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=628190098]
-layout_mode = 2
-text = "Moisture: 25.0%"
-
-[node name="Yield" type="Label" parent="MarginContainer/VBoxContainer/StatsPanel/Margin/StatsGrid" unique_id=1775234278]
-layout_mode = 2
-text = "Yield: 0kg"
-
-[node name="Control" type="Control" parent="MarginContainer" unique_id=1129595092]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="BtnEndTurn" type="Button" parent="MarginContainer/Control" unique_id=1733069794]
+[node name="HBoxContainer2" type="HBoxContainer" parent="main/header" unique_id=1916833963]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -333.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 1
+
+[node name="journal" type="Button" parent="main/header/HBoxContainer2" unique_id=684940315]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "📖JOURNAL"
+
+[node name="setting" type="Button" parent="main/header/HBoxContainer2" unique_id=989173619]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "⚙️SETTING
+"
+
+[node name="menu" type="Button" parent="main/header/HBoxContainer2" unique_id=1075578230]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Ⓜ️MENU"
+
+[node name="effect" type="Button" parent="main/header" unique_id=727160163]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -208.0
+offset_top = 48.0
+offset_right = 211.0
+offset_bottom = 84.0
+grow_horizontal = 2
+text = "🌧️ RAINING : ALL BEANS ARE WET!"
+
+[node name="footer" type="HBoxContainer" parent="main" unique_id=2031305487]
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -60.0
-grow_horizontal = 0
+offset_top = -184.0
+grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="CardPanel" type="PanelContainer" parent="main/footer" unique_id=987654321]
+custom_minimum_size = Vector2(850, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_footer_floating")
+
+[node name="Margin" type="MarginContainer" parent="main/footer/CardPanel" unique_id=123456789]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="card_hand" parent="main/footer/CardPanel/Margin" unique_id=1143458886 instance=ExtResource("1_2obvf")]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" type="Button" parent="main/footer" unique_id=1169105168]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+size_flags_vertical = 4
 theme_override_font_sizes/font_size = 24
-text = "End Turn"
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_next")
+text = "NEXT TURN"
 
-[node name="HarvestPopup" parent="." unique_id=2061107133 instance=ExtResource("3_dry")]
+[node name="PanelContainer" type="PanelContainer" parent="main" unique_id=290367956]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 165.0
+offset_bottom = 70.0
+grow_vertical = 2
+
+[node name="DebugStats" type="VBoxContainer" parent="main/PanelContainer" unique_id=883771430]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Body" type="Label" parent="main/PanelContainer/DebugStats" unique_id=398006823]
+layout_mode = 2
+text = "Body: 0"
+label_settings = SubResource("LabelSettings_glx4a")
+
+[node name="Acidity" type="Label" parent="main/PanelContainer/DebugStats" unique_id=971912744]
+layout_mode = 2
+text = "Acidity: 0"
+label_settings = SubResource("LabelSettings_glx4a")
+
+[node name="Sweetness" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1951031391]
+layout_mode = 2
+text = "Sweetness: 0"
+label_settings = SubResource("LabelSettings_glx4a")
+
+[node name="Aroma" type="Label" parent="main/PanelContainer/DebugStats" unique_id=28017356]
+layout_mode = 2
+text = "Aroma: 0"
+label_settings = SubResource("LabelSettings_glx4a")
+
+[node name="Flavor" type="Label" parent="main/PanelContainer/DebugStats" unique_id=391158666]
+layout_mode = 2
+text = "Flavor: 0"
+label_settings = SubResource("LabelSettings_glx4a")
+
+[node name="Bitterness" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1398842063]
+layout_mode = 2
+text = "Bitterness: 0"
+label_settings = SubResource("LabelSettings_glx4a")
+
+[node name="Moisture" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1589169424]
+layout_mode = 2
+text = "Moisture: 0%"
+label_settings = SubResource("LabelSettings_glx4a")
+
+[node name="Defect" type="Label" parent="main/PanelContainer/DebugStats" unique_id=1880209882]
+layout_mode = 2
+text = "Defect: 0%"
+label_settings = SubResource("LabelSettings_glx4a")
+
+[node name="Yield" type="Label" parent="main/PanelContainer/DebugStats" unique_id=570867853]
+layout_mode = 2
+text = "Yield: 0kg"
+label_settings = SubResource("LabelSettings_glx4a")
+
+[node name="menu_tabs" type="CanvasLayer" parent="." unique_id=813571542]
+visible = false
+script = ExtResource("3_5leir")
+
+[node name="background" type="ColorRect" parent="menu_tabs" unique_id=1763953984]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0, 0, 0, 0.3137255)
+
+[node name="header" type="VBoxContainer" parent="menu_tabs" unique_id=445086883]
+custom_minimum_size = Vector2(0, 120)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 99.0
+grow_horizontal = 2
+theme_override_constants/separation = 17
+alignment = 2
+
+[node name="tabs" type="HBoxContainer" parent="menu_tabs/header" unique_id=1634386984]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="terroir" type="Button" parent="menu_tabs/header/tabs" unique_id=887080822]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"TabButtonActive"
+text = "terroir"
+
+[node name="coffee_log" type="Button" parent="menu_tabs/header/tabs" unique_id=615491357]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"TabButtonInactive"
+toggle_mode = true
+button_pressed = true
+text = "coffee log"
+
+[node name="storage" type="Button" parent="menu_tabs/header/tabs" unique_id=2005114941]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"TabButtonInactive"
+text = "storage"
+
+[node name="order" type="Button" parent="menu_tabs/header/tabs" unique_id=1945748205]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"TabButtonInactive"
+text = "order"
+
+[node name="upgrade" type="Button" parent="menu_tabs/header/tabs" unique_id=129772868]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"TabButtonInactive"
+text = "upgrade"
+
+[node name="balance" type="Button" parent="menu_tabs/header/tabs" unique_id=251644100]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"TabButtonInactive"
+text = "balance"
+
+[node name="exit" type="Button" parent="menu_tabs/header/tabs" unique_id=550722540]
+custom_minimum_size = Vector2(50, 80)
+layout_mode = 2
+text = "X
+"
+flat = true
+
+[node name="bottom_line" type="ColorRect" parent="menu_tabs/header" unique_id=1226999365]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="content" type="PanelContainer" parent="menu_tabs" unique_id=229868372]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Terroir" type="Control" parent="menu_tabs/content" unique_id=699595078]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("4_mti1m")
+
+[node name="MainPanel" type="PanelContainer" parent="menu_tabs/content/Terroir" unique_id=2031915252]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MainPanel"
+
+[node name="CenterContainer" type="CenterContainer" parent="menu_tabs/content/Terroir/MainPanel" unique_id=614575995]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CardsRow" type="HBoxContainer" parent="menu_tabs/content/Terroir/MainPanel/CenterContainer" unique_id=1247939820]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="CoffeeLog" type="Control" parent="menu_tabs/content" unique_id=2024112290]
+visible = false
+layout_mode = 2
+
+[node name="MainRow" type="HBoxContainer" parent="menu_tabs/content/CoffeeLog" unique_id=813663372]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ListPanel" type="PanelContainer" parent="menu_tabs/content/CoffeeLog/MainRow" unique_id=1906650516]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"MainPanel"
+
+[node name="ListVBox" type="VBoxContainer" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel" unique_id=406130359]
+layout_mode = 2
+
+[node name="HeaderRow" type="HBoxContainer" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox" unique_id=1148986971]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LblTitle" type="Label" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/HeaderRow" unique_id=1562442692]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "COFFEE BEAN LIST"
+
+[node name="LblSortBy" type="Label" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/HeaderRow" unique_id=748832713]
+layout_mode = 2
+text = "Sort by :"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox" unique_id=1286610915]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="ItemsVBox" type="VBoxContainer" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/ScrollContainer" unique_id=1382145726]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="BeanItem1" type="PanelContainer" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/ScrollContainer/ItemsVBox" unique_id=1034184906]
+custom_minimum_size = Vector2(280, 60)
+layout_mode = 2
+theme_type_variation = &"ListItemPanel"
+
+[node name="ItemHBox" type="HBoxContainer" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/ScrollContainer/ItemsVBox/BeanItem1" unique_id=1276692894]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxNameYear" type="VBoxContainer" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/ScrollContainer/ItemsVBox/BeanItem1/ItemHBox" unique_id=1299294941]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LblName" type="Label" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/ScrollContainer/ItemsVBox/BeanItem1/ItemHBox/VBoxNameYear" unique_id=537940602]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "Kintamani"
+
+[node name="LblYear" type="Label" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/ScrollContainer/ItemsVBox/BeanItem1/ItemHBox/VBoxNameYear" unique_id=577280150]
+layout_mode = 2
+theme_type_variation = &"BodyLabel"
+text = "2027"
+
+[node name="LblScore" type="Label" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/ScrollContainer/ItemsVBox/BeanItem1/ItemHBox" unique_id=998509356]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_type_variation = &"BodyLabel"
+text = "★ 90"
+
+[node name="LblWeight" type="Label" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/ScrollContainer/ItemsVBox/BeanItem1/ItemHBox" unique_id=1972295601]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_type_variation = &"BodyLabel"
+text = "100 g"
+
+[node name="LblStock" type="Label" parent="menu_tabs/content/CoffeeLog/MainRow/ListPanel/ListVBox/ScrollContainer/ItemsVBox/BeanItem1/ItemHBox" unique_id=1104787708]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"BodyLabel"
+text = "120/1332"
+
+[node name="DetailPanel" type="PanelContainer" parent="menu_tabs/content/CoffeeLog/MainRow" unique_id=167265326]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+theme_type_variation = &"MainPanel"
+
+[node name="Storage" type="Control" parent="menu_tabs/content" unique_id=738116774]
+visible = false
+layout_mode = 2
+
+[node name="MainPanel" type="PanelContainer" parent="menu_tabs/content/Storage" unique_id=12071761]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MainPanel"
+
+[node name="CenterContainer" type="CenterContainer" parent="menu_tabs/content/Storage/MainPanel" unique_id=1195453866]
+layout_mode = 2
+
+[node name="CardsRow" type="HBoxContainer" parent="menu_tabs/content/Storage/MainPanel/CenterContainer" unique_id=1636576298]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Card1" type="PanelContainer" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow" unique_id=1441780230]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_type_variation = &"CardPanel"
+
+[node name="VBox" type="VBoxContainer" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card1" unique_id=1379655345]
+layout_mode = 2
+
+[node name="LblTitle" type="Label" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card1/VBox" unique_id=80508653]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "Kintamani"
+
+[node name="ImagePlaceholder" type="TextureRect" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card1/VBox" unique_id=1796304626]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("2_6230l")
+
+[node name="RadarChartPlaceholder" type="Panel" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card1/VBox" unique_id=1278406731]
+custom_minimum_size = Vector2(180, 150)
+layout_mode = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card1/VBox" unique_id=1247141795]
+layout_mode = 2
+
+[node name="BtnBulkSell" type="Button" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card1/VBox/ButtonRow" unique_id=1887432480]
+layout_mode = 2
+theme_type_variation = &"SellButton"
+text = "Bulk sell"
+
+[node name="BtnInfo" type="Button" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card1/VBox/ButtonRow" unique_id=2059149401]
+layout_mode = 2
+theme_type_variation = &"SecondaryButton"
+text = "Info
+"
+
+[node name="Card2" type="PanelContainer" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow" unique_id=902390911]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_type_variation = &"CardPanel"
+
+[node name="VBox" type="VBoxContainer" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card2" unique_id=835465807]
+layout_mode = 2
+
+[node name="LblTitle" type="Label" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card2/VBox" unique_id=1612064592]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "Kintamani"
+
+[node name="ImagePlaceholder" type="TextureRect" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card2/VBox" unique_id=673751412]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("2_6230l")
+
+[node name="RadarChartPlaceholder" type="Panel" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card2/VBox" unique_id=376017437]
+custom_minimum_size = Vector2(180, 150)
+layout_mode = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card2/VBox" unique_id=1047656960]
+layout_mode = 2
+
+[node name="BtnBulkSell" type="Button" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card2/VBox/ButtonRow" unique_id=291288389]
+layout_mode = 2
+theme_type_variation = &"SellButton"
+text = "Bulk sell"
+
+[node name="BtnInfo" type="Button" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card2/VBox/ButtonRow" unique_id=931902019]
+layout_mode = 2
+theme_type_variation = &"SecondaryButton"
+text = "Info
+"
+
+[node name="Card3" type="PanelContainer" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow" unique_id=1907015020]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_type_variation = &"CardPanel"
+
+[node name="VBox" type="VBoxContainer" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card3" unique_id=160986072]
+layout_mode = 2
+
+[node name="LblTitle" type="Label" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card3/VBox" unique_id=870370348]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "Kintamani"
+
+[node name="ImagePlaceholder" type="TextureRect" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card3/VBox" unique_id=1766067615]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("2_6230l")
+
+[node name="RadarChartPlaceholder" type="Panel" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card3/VBox" unique_id=1515353188]
+custom_minimum_size = Vector2(180, 150)
+layout_mode = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card3/VBox" unique_id=1098605809]
+layout_mode = 2
+
+[node name="BtnBulkSell" type="Button" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card3/VBox/ButtonRow" unique_id=1412061573]
+layout_mode = 2
+theme_type_variation = &"SellButton"
+text = "Bulk sell"
+
+[node name="BtnInfo" type="Button" parent="menu_tabs/content/Storage/MainPanel/CenterContainer/CardsRow/Card3/VBox/ButtonRow" unique_id=511365664]
+layout_mode = 2
+theme_type_variation = &"SecondaryButton"
+text = "Info
+"
+
+[node name="Order" type="Control" parent="menu_tabs/content" unique_id=87676650]
+layout_mode = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="menu_tabs/content/Order" unique_id=1582282571]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="SubTabs" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox" unique_id=286678890]
+layout_mode = 2
+
+[node name="BtnOrders" type="Button" parent="menu_tabs/content/Order/MainVBox/SubTabs" unique_id=2038263111]
+layout_mode = 2
+theme_type_variation = &"SecondaryButton"
+text = "Orders"
+
+[node name="BtnSpecialOrder" type="Button" parent="menu_tabs/content/Order/MainVBox/SubTabs" unique_id=380067354]
+layout_mode = 2
+theme_type_variation = &"SecondaryButton"
+text = "Special Orders"
+
+[node name="ColumnsRow" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox" unique_id=1375023672]
+layout_mode = 2
+
+[node name="QueueColumn" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow" unique_id=1461286015]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblQueueTitle" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn" unique_id=190465869]
+layout_mode = 2
+theme_type_variation = &"SectionLabel"
+text = "Queue"
+
+[node name="QueueScroll" type="ScrollContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn" unique_id=361634456]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="QueueList" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll" unique_id=2049567468]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="OrderItem1" type="PanelContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList" unique_id=1900379863]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"ListItemPanel"
+
+[node name="ItemHBox" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1" unique_id=2036786978]
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox" unique_id=298598830]
+layout_mode = 2
+texture = ExtResource("2_6230l")
+expand_mode = 2
+
+[node name="InfoVBox" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox" unique_id=592133199]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Row1" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox" unique_id=2057154561]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="NameVarietyGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox/Row1" unique_id=958662949]
+layout_mode = 2
+
+[node name="LblCoffeeName" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=528931830]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Kintamani11"
+
+[node name="LblVarietyTag" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=1786451170]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Arabica"
+
+[node name="LblDisc" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox/Row1" unique_id=1371481688]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Disc.: 140"
+
+[node name="LblQty" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox/Row1" unique_id=397384589]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Qty: x200"
+
+[node name="Row2" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox" unique_id=1872308823]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatsGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox/Row2" unique_id=1634208831]
+layout_mode = 2
+
+[node name="LblWeight" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=847109200]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "200gr"
+
+[node name="LblRating" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1975175113]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "★ 90"
+
+[node name="LblPrice" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=710822258]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "150"
+
+[node name="LblTotal" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox/InfoVBox/Row2" unique_id=1389222193]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Total: 28000"
+
+[node name="BtnSell" type="Button" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem1/ItemHBox" unique_id=538111302]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"SellButton"
+text = "Sell"
+
+[node name="OrderItem2" type="PanelContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList" unique_id=1688011277]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"ListItemPanel"
+
+[node name="ItemHBox" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2" unique_id=1504225455]
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox" unique_id=1746167688]
+layout_mode = 2
+texture = ExtResource("2_6230l")
+expand_mode = 2
+
+[node name="InfoVBox" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox" unique_id=674306249]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Row1" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox" unique_id=1941957454]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="NameVarietyGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox/Row1" unique_id=1031133411]
+layout_mode = 2
+
+[node name="LblCoffeeName" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=1766224429]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Kintamani11"
+
+[node name="LblVarietyTag" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=910182399]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Arabica"
+
+[node name="LblDisc" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox/Row1" unique_id=2007526589]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Disc.: 140"
+
+[node name="LblQty" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox/Row1" unique_id=605769661]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Qty: x200"
+
+[node name="Row2" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox" unique_id=255707227]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatsGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox/Row2" unique_id=1752487817]
+layout_mode = 2
+
+[node name="LblWeight" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=708672879]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "200gr"
+
+[node name="LblRating" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=699718283]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "★ 90"
+
+[node name="LblPrice" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=329797940]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "150"
+
+[node name="LblTotal" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox/InfoVBox/Row2" unique_id=1752647856]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Total: 28000"
+
+[node name="BtnSell" type="Button" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem2/ItemHBox" unique_id=1131624838]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"SellButton"
+text = "Sell"
+
+[node name="OrderItem3" type="PanelContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList" unique_id=1988272852]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"ListItemPanel"
+
+[node name="ItemHBox" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3" unique_id=1004294859]
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox" unique_id=1111445492]
+layout_mode = 2
+texture = ExtResource("2_6230l")
+expand_mode = 2
+
+[node name="InfoVBox" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox" unique_id=1592463466]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Row1" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox" unique_id=479252768]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="NameVarietyGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox/Row1" unique_id=660859285]
+layout_mode = 2
+
+[node name="LblCoffeeName" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=753445285]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Kintamani11"
+
+[node name="LblVarietyTag" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=807564136]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Arabica"
+
+[node name="LblDisc" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox/Row1" unique_id=592480196]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Disc.: 140"
+
+[node name="LblQty" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox/Row1" unique_id=824376815]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Qty: x200"
+
+[node name="Row2" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox" unique_id=1522062300]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatsGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox/Row2" unique_id=1584944084]
+layout_mode = 2
+
+[node name="LblWeight" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=355145126]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "200gr"
+
+[node name="LblRating" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=2010823404]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "★ 90"
+
+[node name="LblPrice" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1869365394]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "150"
+
+[node name="LblTotal" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox/InfoVBox/Row2" unique_id=2019493529]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Total: 28000"
+
+[node name="BtnSell" type="Button" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem3/ItemHBox" unique_id=565351033]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"SellButton"
+text = "Sell"
+
+[node name="OrderItem4" type="PanelContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList" unique_id=898719812]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"ListItemPanel"
+
+[node name="ItemHBox" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4" unique_id=697707143]
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox" unique_id=1119530557]
+layout_mode = 2
+texture = ExtResource("2_6230l")
+expand_mode = 2
+
+[node name="InfoVBox" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox" unique_id=1736089247]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Row1" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox" unique_id=1686222986]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="NameVarietyGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox/Row1" unique_id=1193714013]
+layout_mode = 2
+
+[node name="LblCoffeeName" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=1414054748]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Kintamani11"
+
+[node name="LblVarietyTag" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=1503199497]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Arabica"
+
+[node name="LblDisc" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox/Row1" unique_id=1871655744]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Disc.: 140"
+
+[node name="LblQty" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox/Row1" unique_id=1957050865]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Qty: x200"
+
+[node name="Row2" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox" unique_id=1640759937]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatsGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox/Row2" unique_id=1452558380]
+layout_mode = 2
+
+[node name="LblWeight" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1793354515]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "200gr"
+
+[node name="LblRating" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1927828839]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "★ 90"
+
+[node name="LblPrice" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1986849876]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "150"
+
+[node name="LblTotal" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox/InfoVBox/Row2" unique_id=756181386]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Total: 28000"
+
+[node name="BtnSell" type="Button" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem4/ItemHBox" unique_id=1488554730]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"SellButton"
+text = "Sell"
+
+[node name="OrderItem5" type="PanelContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList" unique_id=248531642]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"ListItemPanel"
+
+[node name="ItemHBox" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5" unique_id=1795465209]
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox" unique_id=236346159]
+layout_mode = 2
+texture = ExtResource("2_6230l")
+expand_mode = 2
+
+[node name="InfoVBox" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox" unique_id=679775835]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Row1" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox" unique_id=1080818197]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="NameVarietyGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox/Row1" unique_id=1468674786]
+layout_mode = 2
+
+[node name="LblCoffeeName" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=1108645446]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Kintamani11"
+
+[node name="LblVarietyTag" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=829117136]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Arabica"
+
+[node name="LblDisc" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox/Row1" unique_id=698146721]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Disc.: 140"
+
+[node name="LblQty" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox/Row1" unique_id=2036930702]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Qty: x200"
+
+[node name="Row2" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox" unique_id=845073085]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatsGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox/Row2" unique_id=826765347]
+layout_mode = 2
+
+[node name="LblWeight" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=151289161]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "200gr"
+
+[node name="LblRating" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1207015896]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "★ 90"
+
+[node name="LblPrice" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1689651284]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "150"
+
+[node name="LblTotal" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox/InfoVBox/Row2" unique_id=1296626500]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Total: 28000"
+
+[node name="BtnSell" type="Button" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/QueueColumn/QueueScroll/QueueList/OrderItem5/ItemHBox" unique_id=2019762758]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"SellButton"
+text = "Sell"
+
+[node name="LogColumn" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow" unique_id=588115105]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblLogTitle" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn" unique_id=2097248494]
+layout_mode = 2
+theme_type_variation = &"SectionLabel"
+text = "Log"
+
+[node name="LogScroll" type="ScrollContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn" unique_id=1509976255]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="LogList" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll" unique_id=1217156910]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OrderItem6" type="PanelContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList" unique_id=270735323]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"ListItemPanel"
+
+[node name="ItemHBox" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6" unique_id=957418677]
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox" unique_id=624983561]
+layout_mode = 2
+texture = ExtResource("2_6230l")
+expand_mode = 2
+
+[node name="InfoVBox" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox" unique_id=554278771]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Row1" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox" unique_id=1793484780]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="NameVarietyGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox/Row1" unique_id=831041113]
+layout_mode = 2
+
+[node name="LblCoffeeName" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=644671777]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Kintamani11"
+
+[node name="LblVarietyTag" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=324168005]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Arabica"
+
+[node name="LblDisc" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox/Row1" unique_id=1300348628]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Disc.: 140"
+
+[node name="LblQty" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox/Row1" unique_id=1560657555]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Qty: x200"
+
+[node name="Row2" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox" unique_id=1657953266]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatsGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox/Row2" unique_id=462488309]
+layout_mode = 2
+
+[node name="LblWeight" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1034587659]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "200gr"
+
+[node name="LblRating" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1559989425]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "★ 90"
+
+[node name="LblPrice" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1239005861]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "150"
+
+[node name="LblTotal" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox/InfoVBox/Row2" unique_id=776462205]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Total: 28000"
+
+[node name="BtnSell" type="Button" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem6/ItemHBox" unique_id=473236939]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"SellButton"
+text = "Sell"
+
+[node name="OrderItem7" type="PanelContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList" unique_id=1318333095]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"ListItemPanel"
+
+[node name="ItemHBox" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7" unique_id=778363887]
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox" unique_id=1303707563]
+layout_mode = 2
+texture = ExtResource("2_6230l")
+expand_mode = 2
+
+[node name="InfoVBox" type="VBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox" unique_id=1029488799]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Row1" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox" unique_id=1377636317]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="NameVarietyGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox/Row1" unique_id=967455082]
+layout_mode = 2
+
+[node name="LblCoffeeName" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=430334471]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Kintamani11"
+
+[node name="LblVarietyTag" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox/Row1/NameVarietyGroup" unique_id=1327681008]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Arabica"
+
+[node name="LblDisc" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox/Row1" unique_id=56745849]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Disc.: 140"
+
+[node name="LblQty" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox/Row1" unique_id=1328610659]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Qty: x200"
+
+[node name="Row2" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox" unique_id=182705605]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatsGroup" type="HBoxContainer" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox/Row2" unique_id=10889380]
+layout_mode = 2
+
+[node name="LblWeight" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1521029855]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "200gr"
+
+[node name="LblRating" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=166838205]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "★ 90"
+
+[node name="LblPrice" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox/Row2/StatsGroup" unique_id=1643362950]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "150"
+
+[node name="LblTotal" type="Label" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox/InfoVBox/Row2" unique_id=1082706214]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Total: 28000"
+
+[node name="BtnSell" type="Button" parent="menu_tabs/content/Order/MainVBox/ColumnsRow/LogColumn/LogScroll/LogList/OrderItem7/ItemHBox" unique_id=619069289]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"SellButton"
+text = "Sell"
+
+[node name="Upgrade" type="Control" parent="menu_tabs/content" unique_id=2050484777]
+layout_mode = 2
+
+[node name="Balance" type="Control" parent="menu_tabs/content" unique_id=2050733257]
+layout_mode = 2
+
+[node name="menu_coffee_log" type="CanvasLayer" parent="." unique_id=348317728]
 visible = false
 
-[node name="DryPopup" parent="." unique_id=1010791625 instance=ExtResource("3_dry")]
-visible = false
+[node name="container" type="VBoxContainer" parent="menu_coffee_log" unique_id=1133760874]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -556.0
+offset_top = -505.0
+offset_right = 556.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 22
 
-[node name="PruningController" parent="." unique_id=2081107134 instance=ExtResource("4_prun")]
-visible = false
+[node name="contents" type="HBoxContainer" parent="menu_coffee_log/container" unique_id=986789514]
+custom_minimum_size = Vector2(260, 505)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="bean_lists" type="ScrollContainer" parent="menu_coffee_log/container/contents" unique_id=1252014673]
+custom_minimum_size = Vector2(240, 0)
+custom_maximum_size = Vector2(-1, 480)
+layout_mode = 2
+size_flags_horizontal = 4
+horizontal_scroll_mode = 0
+
+[node name="container" type="VBoxContainer" parent="menu_coffee_log/container/contents/bean_lists" unique_id=1624057923]
+custom_minimum_size = Vector2(240, 0)
+custom_maximum_size = Vector2(-1, 1000)
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="bean" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=921917978]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6230l")
+toggle_mode = true
+button_pressed = true
+text = "packaging | coffee bean | 1000 | 9/10"
+
+[node name="bean2" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=1713440994]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "ini dibuat sepertiga layar UI"
+
+[node name="bean3" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=993799245]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "coffee bean"
+
+[node name="bean4" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=453493787]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "coffee bean"
+
+[node name="bean5" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=2130947214]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "coffee bean"
+
+[node name="bean6" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=393942249]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "coffee bean"
+
+[node name="bean7" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=986573699]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "coffee bean"
+
+[node name="bean8" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=1121889492]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "coffee bean"
+
+[node name="bean9" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=508473273]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "coffee bean"
+
+[node name="bean10" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=1317741714]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "coffee bean"
+
+[node name="bean11" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=1279754731]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "coffee bean"
+
+[node name="bean12" type="Button" parent="menu_coffee_log/container/contents/bean_lists/container" unique_id=1629549606]
+custom_minimum_size = Vector2(220, 60)
+custom_maximum_size = Vector2(220, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "coffee bean"
+
+[node name="bean_detail" type="VBoxContainer" parent="menu_coffee_log/container/contents" unique_id=732969312]
+custom_minimum_size = Vector2(840, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="image" type="TextureRect" parent="menu_coffee_log/container/contents/bean_detail" unique_id=1875626379]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_6230l")
+expand_mode = 2
+
+[node name="detail_container" type="ColorRect" parent="menu_coffee_log/container/contents/bean_detail" unique_id=2079552299]
+custom_minimum_size = Vector2(0, 262.375)
+layout_mode = 2
+color = Color(0, 0, 0, 0.19607843)
+
+[node name="detail" type="ScrollContainer" parent="menu_coffee_log/container/contents/bean_detail/detail_container" unique_id=660704309]
+custom_minimum_size = Vector2(200, 100)
+custom_maximum_size = Vector2(800, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -135.0
+offset_right = 400.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="description" type="RichTextLabel" parent="menu_coffee_log/container/contents/bean_detail/detail_container/detail" unique_id=1426118384]
+custom_minimum_size = Vector2(780, 0)
+layout_mode = 2
+theme_override_fonts/bold_font = SubResource("FontFile_a5a3o")
+theme_override_fonts/bold_italics_font = SubResource("FontFile_1jl3g")
+theme_override_fonts/italics_font = SubResource("FontFile_e5wvh")
+text = "					Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet 
+
+					Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet "
+fit_content = true
+horizontal_alignment = 3
+
+[node name="menu_calendar" type="CanvasLayer" parent="." unique_id=978666021]
+script = ExtResource("6_6lxsi")
+
+[node name="CalendarBody" type="Control" parent="menu_calendar" unique_id=1713477568]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -320.0
+offset_right = 300.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="menu_calendar/CalendarBody" unique_id=517149173]
+custom_minimum_size = Vector2(280, 100)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_yh5fs")
+theme_type_variation = &"CalendarPanel"
+
+[node name="VBoxRoot" type="VBoxContainer" parent="menu_calendar/CalendarBody/Panel" unique_id=724983057]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="YearBarWrapper" type="Control" parent="menu_calendar/CalendarBody/Panel/VBoxRoot" unique_id=559398258]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+
+[node name="YearBar" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper" unique_id=2089606291]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 48.0
+size_flags_horizontal = 3
+theme_type_variation = &"CalendarYearBar"
+
+[node name="YearCenter" type="CenterContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/YearBar" unique_id=1010755320]
+layout_mode = 2
+
+[node name="YearLabel" type="Label" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/YearBar/YearCenter" unique_id=1347710120]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -6)
+theme_type_variation = &"CalendarYearLabel"
+horizontal_alignment = 1
+
+[node name="PegsRow" type="HBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper" unique_id=300359935]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 40.0
+offset_bottom = 56.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 12)
+offset_transform_visual_only = false
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/PegsRow" unique_id=693233218]
+custom_minimum_size = Vector2(10, 25)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/PegsRow" unique_id=1781258481]
+custom_minimum_size = Vector2(10, 25)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/PegsRow" unique_id=872758538]
+custom_minimum_size = Vector2(10, 25)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/PegsRow" unique_id=804674402]
+custom_minimum_size = Vector2(10, 25)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/PegsRow" unique_id=1872866489]
+custom_minimum_size = Vector2(10, 25)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/PegsRow" unique_id=127099503]
+custom_minimum_size = Vector2(10, 25)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/PegsRow" unique_id=474387078]
+custom_minimum_size = Vector2(10, 25)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/PegsRow" unique_id=1822888187]
+custom_minimum_size = Vector2(10, 25)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/PegsRow" unique_id=1700151473]
+custom_minimum_size = Vector2(10, 25)
+layout_mode = 2
+
+[node name="ColorRect10" type="ColorRect" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper/PegsRow" unique_id=1701136103]
+custom_minimum_size = Vector2(10, 25)
+layout_mode = 2
+
+[node name="LeftRivet" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper" unique_id=124593773]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -14.0
+offset_top = 10.0
+offset_right = 14.0
+offset_bottom = 38.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(45, 8)
+offset_transform_visual_only = false
+theme_type_variation = &"CalendarYearBarRivet"
+
+[node name="RightRivet" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/YearBarWrapper" unique_id=1357247371]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -14.0
+offset_top = 10.0
+offset_right = 14.0
+offset_bottom = 38.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-45, 8)
+offset_transform_visual_only = false
+theme_type_variation = &"CalendarYearBarRivet"
+
+[node name="ContentMargin" type="MarginContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot" unique_id=1264856721]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Seasons" type="GridContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin" unique_id=1233968914]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="SpringBox" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons" unique_id=1781187109]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SeasonBox"
+
+[node name="Spring" type="VBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SpringBox" unique_id=241834663]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SeasonHeaderWrapper" type="Control" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SpringBox/Spring" unique_id=1527802550]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ColorBar" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SpringBox/Spring/SeasonHeaderWrapper" unique_id=1631267679]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 32.0
+theme_type_variation = &"SeasonHeaderSpring"
+
+[node name="SeasonHeaderLabel" type="Label" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SpringBox/Spring/SeasonHeaderWrapper" unique_id=759024964]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+offset_left = -55.0
+offset_top = -40.0
+offset_right = 55.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"SeasonHeaderLabel"
+text = "SPRING"
+horizontal_alignment = 1
+
+[node name="DaysMargin" type="MarginContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SpringBox/Spring" unique_id=681945226]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DaysRows" type="VBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SpringBox/Spring/DaysMargin" unique_id=1364770477]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Row1" type="HBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SpringBox/Spring/DaysMargin/DaysRows" unique_id=2087243612]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SpringBox/Spring/DaysMargin/DaysRows" unique_id=1019955314]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SummerBox" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons" unique_id=1237183418]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SeasonBox"
+
+[node name="Summer" type="VBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SummerBox" unique_id=1078467248]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SeasonHeaderWrapper" type="Control" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SummerBox/Summer" unique_id=2082843568]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ColorBar" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SummerBox/Summer/SeasonHeaderWrapper" unique_id=431758869]
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 32.0
+theme_type_variation = &"SeasonHeaderSummer"
+
+[node name="SeasonHeaderLabel" type="Label" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SummerBox/Summer/SeasonHeaderWrapper" unique_id=1492747159]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+offset_left = -55.0
+offset_top = -40.0
+offset_right = 55.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"SeasonHeaderLabel"
+text = "SUMMER"
+horizontal_alignment = 1
+
+[node name="DaysMargin" type="MarginContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SummerBox/Summer" unique_id=1416206821]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DaysRows" type="VBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SummerBox/Summer/DaysMargin" unique_id=1821119372]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Row1" type="HBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SummerBox/Summer/DaysMargin/DaysRows" unique_id=1831570390]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/SummerBox/Summer/DaysMargin/DaysRows" unique_id=30929628]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="FallBox" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons" unique_id=853674874]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SeasonBox"
+
+[node name="Fall" type="VBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/FallBox" unique_id=1410361597]
+layout_mode = 2
+
+[node name="SeasonHeader" type="Control" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/FallBox/Fall" unique_id=151833989]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ColorBar" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/FallBox/Fall/SeasonHeader" unique_id=288328055]
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 32.0
+theme_type_variation = &"SeasonHeaderFall"
+
+[node name="SeasonHeaderLabel" type="Label" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/FallBox/Fall/SeasonHeader" unique_id=1648839331]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+offset_left = -55.0
+offset_top = -40.0
+offset_right = 55.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"SeasonHeaderLabel"
+text = "FALL"
+horizontal_alignment = 1
+
+[node name="DaysMargin" type="MarginContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/FallBox/Fall" unique_id=7028950]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DaysRows" type="VBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/FallBox/Fall/DaysMargin" unique_id=1349162877]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Row1" type="HBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/FallBox/Fall/DaysMargin/DaysRows" unique_id=2126271965]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/FallBox/Fall/DaysMargin/DaysRows" unique_id=1379788270]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="WinterBox" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons" unique_id=958652200]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SeasonBox"
+
+[node name="Winter" type="VBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/WinterBox" unique_id=377882132]
+layout_mode = 2
+
+[node name="SeasonHeaderWrapper" type="Control" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/WinterBox/Winter" unique_id=1273689790]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ColorBar" type="PanelContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/WinterBox/Winter/SeasonHeaderWrapper" unique_id=1030167573]
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 32.0
+theme_type_variation = &"SeasonHeaderWinter"
+
+[node name="SeasonHeaderLabel" type="Label" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/WinterBox/Winter/SeasonHeaderWrapper" unique_id=1051688824]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+offset_left = -55.0
+offset_top = -40.0
+offset_right = 55.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"SeasonHeaderLabel"
+text = "WINTER"
+horizontal_alignment = 1
+
+[node name="DaysMargin" type="MarginContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/WinterBox/Winter" unique_id=891314959]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DaysRows" type="VBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/WinterBox/Winter/DaysMargin" unique_id=531708774]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Row1" type="HBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/WinterBox/Winter/DaysMargin/DaysRows" unique_id=494719762]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="menu_calendar/CalendarBody/Panel/VBoxRoot/ContentMargin/Seasons/WinterBox/Winter/DaysMargin/DaysRows" unique_id=803739669]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="CloseButton" type="Button" parent="menu_calendar/CalendarBody" unique_id=2036586897]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(59.03, 0)
+offset_transform_visual_only = false
+theme_type_variation = &"CalendarCloseButton"
+theme_override_styles/normal = SubResource("StyleBoxTexture_vyuuk")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ww3d0")
+theme_override_styles/hover = SubResource("StyleBoxTexture_vyuuk")
+text = "X"

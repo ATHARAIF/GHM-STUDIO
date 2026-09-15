@@ -1,0 +1,380 @@
+[gd_resource type="Theme" format=3 uid="uid://doe1watjy8phv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_calendar_close_button"]
+bg_color = Color(0.792, 0.243, 0.243, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_calendar_panel"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.24313726, 0.24313726, 0.24313726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_calendar_year_bar"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.84313726, 0.4745098, 0.2784314, 1)
+border_width_bottom = 10
+border_color = Color(0.7288721, 0.38858494, 0.20277447, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_year_bar_rivet"]
+bg_color = Color(0.976, 0.965, 0.941, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_calendar_year_label_bg"]
+content_margin_left = 18.0
+content_margin_top = 6.0
+content_margin_right = 18.0
+content_margin_bottom = 6.0
+bg_color = Color(0.6745098, 0.38039216, 0.22352941, 0.8235294)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_header"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.816, 0.706, 0.545, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.361, 0.271, 0.204, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.898, 0.816, 0.678, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.361, 0.271, 0.204, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_day_cell_footer"]
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+bg_color = Color(0.24313726, 0.24313726, 0.24313726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_day_cell_future"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.976, 0.965, 0.941, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.827, 0.8, 0.749, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_day_cell_past"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.827, 0.8, 0.749, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_day_cell_today"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.976, 0.965, 0.941, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.478, 0.106, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_list_item"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.949, 0.898, 0.808, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_list_item_selected"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.949, 0.898, 0.808, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.792, 0.29, 0.243, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main_panel"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.898, 0.816, 0.678, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.361, 0.271, 0.204, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vitgj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o6qec"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_season_box"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_season_header_fall"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 0.33333334, 0.09019608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_season_header_label_bg"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.976, 0.965, 0.941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_season_header_spring"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.20392157, 0.78039217, 0.34901962, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_season_header_summer"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 0.76862746, 0.011764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_season_header_winter"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.3137255, 0.70980394, 0.83137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_secondary_hover"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.949, 0.898, 0.808, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.549, 0.408, 0.318, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_secondary_normal"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.914, 0.847, 0.729, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.549, 0.408, 0.318, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sell_hover"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.565, 0.831, 0.616, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sell_normal"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.494, 0.784, 0.553, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sell_pressed"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.412, 0.678, 0.471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_active"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.898, 0.816, 0.678, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_color = Color(0.361, 0.271, 0.204, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_inactive"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.635, 0.482, 0.412, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+
+[resource]
+BodyLabel/base_type = &"Label"
+BodyLabel/colors/font_color = Color(0.361, 0.271, 0.204, 1)
+BodyLabel/font_sizes/font_size = 14
+CalendarCloseButton/base_type = &"Button"
+CalendarCloseButton/colors/font_color = Color(1, 1, 1, 1)
+CalendarCloseButton/font_sizes/font_size = 16
+CalendarCloseButton/styles/hover = SubResource("StyleBoxFlat_calendar_close_button")
+CalendarCloseButton/styles/normal = SubResource("StyleBoxFlat_calendar_close_button")
+CalendarCloseButton/styles/pressed = SubResource("StyleBoxFlat_calendar_close_button")
+CalendarPanel/base_type = &"PanelContainer"
+CalendarPanel/styles/panel = SubResource("StyleBoxFlat_calendar_panel")
+CalendarYearBar/base_type = &"PanelContainer"
+CalendarYearBar/styles/panel = SubResource("StyleBoxFlat_calendar_year_bar")
+CalendarYearBarRivet/base_type = &"PanelContainer"
+CalendarYearBarRivet/styles/panel = SubResource("StyleBoxFlat_year_bar_rivet")
+CalendarYearLabel/base_type = &"Label"
+CalendarYearLabel/colors/font_color = Color(1, 1, 1, 1)
+CalendarYearLabel/font_sizes/font_size = 20
+CalendarYearLabel/styles/normal = SubResource("StyleBoxFlat_calendar_year_label_bg")
+CardHeaderBar/base_type = &"PanelContainer"
+CardHeaderBar/styles/panel = SubResource("StyleBoxFlat_card_header")
+CardPanel/base_type = &"PanelContainer"
+CardPanel/styles/panel = SubResource("StyleBoxFlat_card")
+DayCellFooter/base_type = &"PanelContainer"
+DayCellFooter/styles/panel = SubResource("StyleBoxFlat_day_cell_footer")
+DayCellFooterLabel/base_type = &"Label"
+DayCellFooterLabel/colors/font_color = Color(1, 1, 1, 1)
+DayCellFooterLabel/font_sizes/font_size = 13
+DayCellFuture/base_type = &"PanelContainer"
+DayCellFuture/styles/panel = SubResource("StyleBoxFlat_day_cell_future")
+DayCellLabel/base_type = &"Label"
+DayCellLabel/colors/font_color = Color(0.361, 0.271, 0.204, 1)
+DayCellLabel/font_sizes/font_size = 10
+DayCellNumberLabel/base_type = &"Label"
+DayCellNumberLabel/colors/font_color = Color(0.243, 0.176, 0.129, 1)
+DayCellNumberLabel/font_sizes/font_size = 22
+DayCellPast/base_type = &"PanelContainer"
+DayCellPast/styles/panel = SubResource("StyleBoxFlat_day_cell_past")
+DayCellToday/base_type = &"PanelContainer"
+DayCellToday/styles/panel = SubResource("StyleBoxFlat_day_cell_today")
+ListItemPanel/base_type = &"PanelContainer"
+ListItemPanel/styles/panel = SubResource("StyleBoxFlat_list_item")
+ListItemPanelSelected/base_type = &"PanelContainer"
+ListItemPanelSelected/styles/panel = SubResource("StyleBoxFlat_list_item_selected")
+MainPanel/base_type = &"PanelContainer"
+MainPanel/styles/panel = SubResource("StyleBoxFlat_main_panel")
+PanelContainer/styles/focus = SubResource("StyleBoxFlat_vitgj")
+PanelContainer/styles/normal = SubResource("StyleBoxEmpty_o6qec")
+SeasonBox/base_type = &"PanelContainer"
+SeasonBox/styles/panel = SubResource("StyleBoxFlat_season_box")
+SeasonHeaderFall/base_type = &"PanelContainer"
+SeasonHeaderFall/styles/panel = SubResource("StyleBoxFlat_season_header_fall")
+SeasonHeaderLabel/base_type = &"Label"
+SeasonHeaderLabel/colors/font_color = Color(0.361, 0.271, 0.204, 1)
+SeasonHeaderLabel/font_sizes/font_size = 14
+SeasonHeaderLabel/styles/normal = SubResource("StyleBoxFlat_season_header_label_bg")
+SeasonHeaderSpring/base_type = &"PanelContainer"
+SeasonHeaderSpring/styles/panel = SubResource("StyleBoxFlat_season_header_spring")
+SeasonHeaderSummer/base_type = &"PanelContainer"
+SeasonHeaderSummer/styles/panel = SubResource("StyleBoxFlat_season_header_summer")
+SeasonHeaderWinter/base_type = &"PanelContainer"
+SeasonHeaderWinter/styles/panel = SubResource("StyleBoxFlat_season_header_winter")
+SecondaryButton/base_type = &"Button"
+SecondaryButton/colors/font_color = Color(0.361, 0.271, 0.204, 1)
+SecondaryButton/colors/font_hover_color = Color(0.361, 0.271, 0.204, 1)
+SecondaryButton/font_sizes/font_size = 16
+SecondaryButton/styles/hover = SubResource("StyleBoxFlat_secondary_hover")
+SecondaryButton/styles/normal = SubResource("StyleBoxFlat_secondary_normal")
+SecondaryButton/styles/pressed = SubResource("StyleBoxFlat_secondary_normal")
+SectionLabel/base_type = &"Label"
+SectionLabel/colors/font_color = Color(0.361, 0.271, 0.204, 1)
+SectionLabel/font_sizes/font_size = 16
+SellButton/base_type = &"Button"
+SellButton/colors/font_color = Color(1, 1, 1, 1)
+SellButton/colors/font_hover_color = Color(1, 1, 1, 1)
+SellButton/colors/font_pressed_color = Color(1, 1, 1, 1)
+SellButton/font_sizes/font_size = 16
+SellButton/styles/hover = SubResource("StyleBoxFlat_sell_hover")
+SellButton/styles/normal = SubResource("StyleBoxFlat_sell_normal")
+SellButton/styles/pressed = SubResource("StyleBoxFlat_sell_pressed")
+TabButtonActive/base_type = &"Button"
+TabButtonActive/colors/font_color = Color(0.361, 0.271, 0.204, 1)
+TabButtonActive/font_sizes/font_size = 15
+TabButtonActive/styles/hover = SubResource("StyleBoxFlat_tab_active")
+TabButtonActive/styles/normal = SubResource("StyleBoxFlat_tab_active")
+TabButtonActive/styles/pressed = SubResource("StyleBoxFlat_tab_active")
+TabButtonInactive/base_type = &"Button"
+TabButtonInactive/colors/font_color = Color(0.949, 0.898, 0.808, 1)
+TabButtonInactive/font_sizes/font_size = 14
+TabButtonInactive/styles/hover = SubResource("StyleBoxFlat_tab_inactive")
+TabButtonInactive/styles/normal = SubResource("StyleBoxFlat_tab_inactive")
+TabButtonInactive/styles/pressed = SubResource("StyleBoxFlat_tab_inactive")
+TitleLabel/base_type = &"Label"
+TitleLabel/colors/font_color = Color(0.361, 0.271, 0.204, 1)
+TitleLabel/font_sizes/font_size = 22
+ValueLabel/base_type = &"Label"
+ValueLabel/colors/font_color = Color(0.545, 0.475, 0.404, 1)
+ValueLabel/font_sizes/font_size = 14

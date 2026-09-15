@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://pybhs1mga858"]
+
+[node name="BatchListItem" type="PanelContainer" unique_id=1229136701]
+
+[node name="HBox" type="HBoxContainer" parent="." unique_id=1717016267]
+layout_mode = 2
+
+[node name="LblName" type="Label" parent="HBox" unique_id=325852788]
+layout_mode = 2
+
+[node name="LblScore" type="Label" parent="HBox" unique_id=647759073]
+layout_mode = 2
+
+[node name="LblRemaining" type="Label" parent="HBox" unique_id=1287143820]
+layout_mode = 2

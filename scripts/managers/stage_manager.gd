@@ -5,50 +5,89 @@ signal stage_changed(stage: int)
 signal budget_changed(budget: int)
 signal stats_changed()
 signal interaction_requested(interaction_type: String, tile_data: Dictionary)
+signal farm_locations_changed()
 
 enum Season { SPRING, SUMMER, FALL, WINTER }
 
 var current_stage: int = 0
 var budget: int = 50000
 var current_location: FarmLocation
+var farm_locations: Array[FarmLocation] = []
 var batches: Dictionary = {}
 
 var active_tiles: Array[Dictionary] = []
 var batch_flags: Dictionary = {}
 signal batch_flag_unlocked(flag_name: String) # { "tile": Node3D, "data": CardData, "remaining_duration": int, "label": Label3D }
 
-func can_afford(amount: int) -> bool:
-	return budget >= amount
-
-func spend(amount: int) -> bool:
-	if not can_afford(amount):
-		return false
-	budget -= amount
-	budget_changed.emit(budget)
-	return true
-
-func add(amount: int) -> void:
-	budget += amount
-	budget_changed.emit(budget)
-
 
 func _ready() -> void:
 	current_location = FarmLocation.new()
-	
+	current_location.owned = true # Lahan awal, udah dimiliki dari mulai game
 	_create_new_batch(2025)
+
+	farm_locations = [current_location]
+
+	# --- Sementara buat testing: 3 lahan tambahan yang masih terkunci ---
+	var lahan_2 = FarmLocation.new()
+	lahan_2.location_name = "Lahan 2"
+	lahan_2.owned = false
+	lahan_2.unlock_price = 5000
+	farm_locations.append(lahan_2)
+
+	var lahan_3 = FarmLocation.new()
+	lahan_3.location_name = "Lahan 3"
+	lahan_3.owned = false
+	lahan_3.unlock_price = 5000
+	farm_locations.append(lahan_3)
+
+	var lahan_4 = FarmLocation.new()
+	lahan_4.location_name = "Lahan 4"
+	lahan_4.owned = false
+	lahan_4.unlock_price = 5000
+	farm_locations.append(lahan_4)
+	# --- Hapus blok testing di atas kalau sistem beli lahan asli udah ada ---
+
+	if has_node("/root/TimeManager"):
+		get_node("/root/TimeManager").year_changed.connect(_on_year_changed)
+
+## Placeholder sementara buat "beli/buka" lahan.
+## Panggil ini dari UI tombol beli lahan nanti (misal di scene 3D map).
+func unlock_farm_location(location: FarmLocation) -> bool:
+	if not location or location.owned:
+		return false
+	if budget < location.unlock_price:
+		return false
+
+	budget -= location.unlock_price
+	budget_changed.emit(budget)
+	location.owned = true
+	farm_locations_changed.emit()
+	return true
+
+func _on_year_changed(new_year: int) -> void:
+	if current_location and current_location.current_tree:
+		current_location.current_tree.age_years += 1.0
+		# Recalculate base stats/yield because age changed
+		current_location.current_tree.initialize_from_terroir(current_location)
+		
+	_create_new_batch(new_year)
 	
 func _create_new_batch(year: int) -> void:
 	var b = CoffeeBatch.new()
 	b.batch_year = year
-	b.aroma = current_location.base_aroma
-	b.body = current_location.base_body
-	b.acidity = current_location.base_acidity
-	b.sweetness = current_location.base_sweetness
-	b.complexity = current_location.base_complexity
-	b.aftertaste = current_location.base_aftertaste
-	b.moisture = current_location.base_moisture
-	b.defect_rate = current_location.base_defect_rate
-	b.cherry_kg = current_location.base_yield
+	
+	if current_location and current_location.current_tree:
+		var tree = current_location.current_tree
+		b.aroma = tree.current_aroma
+		b.body = tree.current_body
+		b.acidity = tree.current_acidity
+		b.sweetness = tree.current_sweetness
+		b.flavor = tree.current_flavor
+		b.bitterness = tree.current_bitterness
+		b.moisture = tree.current_moisture
+		b.defect_rate = tree.current_defect
+		b.cherry_kg = tree.current_yield_potential
+	
 	batches[year] = b
 	
 func get_active_farm_batch() -> CoffeeBatch:
@@ -86,23 +125,41 @@ func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Di
 	if card_data == null:
 		return
 		
-	var label = _find_turn_label(tile_node)
-	if label:
-		label.text = str(card_data.duration)
-		
-	var name_label = _find_lahan_name_label(tile_node)
-	if name_label and current_location:
-		name_label.text = current_location.location_name
-		
+	var duration = card_data.duration
+	if extra_data.has("turn_duration"):
+		duration = extra_data["turn_duration"]
+
+	var tile_labels = _find_tile_labels(tile_node)
+	if tile_labels:
+		tile_labels.set_turn(duration)
+		if current_location:
+			tile_labels.set_lahan_name(current_location.location_name)
+			
 	var tile_dict = {
 		"tile": tile_node,
 		"data": card_data,
-		"remaining_duration": card_data.duration,
-		"label": label,
+		"remaining_duration": duration,
+		"tile_labels": tile_labels,
 		"paid": false,
 		"ready": false
 	}
 	tile_dict.merge(extra_data)
+	
+	if duration <= 0:
+		if card_data.requires_interaction:
+			tile_dict.ready = true
+			if tile_labels:
+				tile_labels.set_ready_state(true)
+		else:
+			# Apply effects immediately for normal cards
+			var target_b = get_oldest_ready_batch(card_data.process_id)
+			if target_b:
+				target_b.apply_effects(tile_dict)
+			stats_changed.emit()
+			if tile_node and is_instance_valid(tile_node):
+				PlacementManager.remove_tile_from_grid(tile_node)
+			return # Do not append to active_tiles if instantly resolved
+			
 	active_tiles.append(tile_dict)
 
 
@@ -113,19 +170,12 @@ func unregister_placed_tile(tile_node: Node3D) -> void:
 			break
 
 
-func _find_turn_label(node: Node) -> Label3D:
-	for child in node.get_children():
-		if child is Label3D and child.name == "turn":
-			return child
-		var found = _find_turn_label(child)
-		if found: return found
-	return null
 
-func _find_lahan_name_label(node: Node) -> Label3D:
+func _find_tile_labels(node: Node) -> Node3D:
 	for child in node.get_children():
-		if child is Label3D and child.name == "lahan":
+		if child.name == "tile_labels" or child.has_method("set_ready_state"):
 			return child
-		var found = _find_lahan_name_label(child)
+		var found = _find_tile_labels(child)
 		if found: return found
 	return null
 
@@ -139,7 +189,11 @@ func advance_turn() -> void:
 		# Deduct cost if not yet paid (placed this turn)
 		if not tile_dict.paid:
 			tile_dict.paid = true
-			budget -= tile_dict.data.cost
+			var final_cost = tile_dict.data.cost
+			if tile_dict.has("override_cost"):
+				final_cost = tile_dict["override_cost"]
+			
+			budget -= final_cost
 			budget_changed.emit(budget)
 			
 		# Lock the tile if it's not locked yet
@@ -151,15 +205,14 @@ func advance_turn() -> void:
 			
 		tile_dict.remaining_duration -= 1
 		
-		if tile_dict.label and is_instance_valid(tile_dict.label):
-			tile_dict.label.text = str(max(0, tile_dict.remaining_duration))
+		if tile_dict.get("tile_labels") and is_instance_valid(tile_dict.tile_labels):
+			tile_dict.tile_labels.set_turn(max(0, tile_dict.remaining_duration))
 			
 		if tile_dict.remaining_duration <= 0:
 			if tile_dict.data.requires_interaction:
 				tile_dict.ready = true
-				if tile_dict.label and is_instance_valid(tile_dict.label):
-					tile_dict.label.text = "!"
-					tile_dict.label.modulate = Color(1.0, 1.0, 0.0) # Highlight yellow
+				if tile_dict.get("tile_labels") and is_instance_valid(tile_dict.tile_labels):
+					tile_dict.tile_labels.set_ready_state(true)
 			else:
 				# Apply effects immediately for normal cards
 				var target_b = get_oldest_ready_batch(tile_dict.data.process_id)
@@ -172,6 +225,25 @@ func advance_turn() -> void:
 				active_tiles.remove_at(i)
 				
 	turn_changed.emit(TimeManager.turn_in_year, TimeManager.season, TimeManager.year)
+
+func apply_missed_penalty(card_data: CardData) -> void:
+	var target_b = get_oldest_ready_batch(card_data.process_id)
+	if target_b:
+		target_b.aroma = clamp(target_b.aroma + card_data.penalty_aroma, 0.0, 100.0)
+		target_b.acidity = clamp(target_b.acidity + card_data.penalty_acidity, 0.0, 100.0)
+		target_b.body = clamp(target_b.body + card_data.penalty_body, 0.0, 100.0)
+		target_b.sweetness = clamp(target_b.sweetness + card_data.penalty_sweetness, 0.0, 100.0)
+		target_b.flavor = clamp(target_b.flavor + card_data.penalty_flavor, 0.0, 100.0)
+		target_b.bitterness = clamp(target_b.bitterness + card_data.penalty_bitterness, 0.0, 100.0)
+		target_b.moisture = clamp(target_b.moisture + card_data.penalty_moisture, 0.0, 100.0)
+		target_b.defect_rate = clamp(target_b.defect_rate + card_data.penalty_defect, 0.0, 100.0)
+		target_b.cherry_kg = int(clamp(float(target_b.cherry_kg) * (1.0 + card_data.penalty_yield), 0, 5000))
+		
+	if current_location and current_location.current_tree:
+		current_location.current_tree.health_pct = clamp(current_location.current_tree.health_pct + card_data.penalty_health, 0.0, 100.0)
+	
+	print("Penalti diberikan karena gagal menyelesaikan proses: ", card_data.card_name)
+	stats_changed.emit()
 	_check_stage_progression()
 
 func is_tile_ready_for_interaction(tile_node: Node3D) -> bool:
@@ -183,7 +255,7 @@ func is_tile_ready_for_interaction(tile_node: Node3D) -> bool:
 func trigger_interaction(tile_node: Node3D) -> void:
 	for dict in active_tiles:
 		if dict.tile == tile_node and dict.ready:
-			interaction_requested.emit(dict.data.interaction_type, dict)
+			interaction_requested.emit(dict.data.card_name, dict)
 			return
 
 func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
@@ -196,10 +268,10 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 	if tile_dict.tile and is_instance_valid(tile_dict.tile):
 		PlacementManager.remove_tile_from_grid(tile_dict.tile)
 		
-	if tile_dict.data.interaction_type == "ROASTING":
+	if tile_dict.data.process_id == "DP01":
 		batch_flags["after_roasting"] = true
 		batch_flag_unlocked.emit("after_roasting")
-	elif tile_dict.data.interaction_type == "TESTING":
+	elif tile_dict.data.process_id == "TEST01":
 		batch_flags["after_testing"] = true
 		batch_flag_unlocked.emit("after_testing")
 		
@@ -226,12 +298,14 @@ func _check_stage_progression() -> void:
 		next_stage = 0
 		if not batches.has(TimeManager.year):
 			_create_new_batch(TimeManager.year)
-	elif turn_in_year == 3: next_stage = 1
-	elif turn_in_year == 6: next_stage = 2
-	elif turn_in_year == 8: next_stage = 3
-	elif turn_in_year == 11: next_stage = 4
-	elif turn_in_year == 13: next_stage = 5
-	# Stage 6, 7, 8 happen after Roasting, handled separately or via UI
+	elif turn_in_year >= 3 and turn_in_year < 6:
+		next_stage = 1 # Weeding & Pruning window (mapped to 1 so neither is red)
+	elif turn_in_year >= 6 and turn_in_year < 8:
+		next_stage = 3 # Suckering
+	elif turn_in_year >= 8 and turn_in_year < 13:
+		next_stage = 4 # Harvest
+	elif turn_in_year >= 13:
+		next_stage = 5 # Processing
 	
 	if next_stage != current_stage:
 		current_stage = next_stage

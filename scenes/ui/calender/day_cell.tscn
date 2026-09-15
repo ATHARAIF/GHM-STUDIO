@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bsxg7u5142bl8"]
+
+[ext_resource type="Script" uid="uid://i2jyaaatdp4f" path="res://scripts/ui/calender/day_cell.gd" id="1_dt5vt"]
+[ext_resource type="Theme" uid="uid://doe1watjy8phv" path="res://tres/ui_theme.tres" id="1_lums4"]
+[ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="3_lums4"]
+
+[node name="DayCell" type="PanelContainer" unique_id=1236205744]
+custom_minimum_size = Vector2(60, 60)
+offset_right = 70.0
+offset_bottom = 89.0
+theme = ExtResource("1_lums4")
+theme_type_variation = &"DayCellFuture"
+script = ExtResource("1_dt5vt")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1735816366]
+layout_mode = 2
+
+[node name="TopMargin" type="MarginContainer" parent="VBox" unique_id=1883810603]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="TopVBox" type="VBoxContainer" parent="VBox/TopMargin" unique_id=1520278131]
+layout_mode = 2
+
+[node name="DayTagLabel" type="Label" parent="VBox/TopMargin/TopVBox" unique_id=1629042102]
+layout_mode = 2
+theme_type_variation = &"DayCellLabel"
+text = "DAY"
+horizontal_alignment = 1
+
+[node name="NumberLabel" type="Label" parent="VBox/TopMargin/TopVBox" unique_id=1710935539]
+layout_mode = 2
+theme_type_variation = &"DayCellNumberLabel"
+text = "1"
+horizontal_alignment = 1
+
+[node name="FooterBar" type="PanelContainer" parent="VBox" unique_id=1578082109]
+layout_mode = 2
+theme_type_variation = &"DayCellFooter"
+
+[node name="FooterHBox" type="HBoxContainer" parent="VBox/FooterBar" unique_id=1661121740]
+layout_mode = 2
+alignment = 1
+
+[node name="GearIcon" type="TextureRect" parent="VBox/FooterBar/FooterHBox" unique_id=1428402248]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("3_lums4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ValueLabel" type="Label" parent="VBox/FooterBar/FooterHBox" unique_id=1761577722]
+layout_mode = 2
+theme_type_variation = &"DayCellFooterLabel"
+text = "90°"

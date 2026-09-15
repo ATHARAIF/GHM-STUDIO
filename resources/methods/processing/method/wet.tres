@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ProcessMethodData" format=3 uid="uid://cylha8uu5fhir"]
+
+[ext_resource type="Script" uid="uid://1ugwrcg7mlkc" path="res://scripts/data/process_method_data.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://21nlhad3agns" path="res://scripts/data/process_method_level.gd" id="2_6aowo"]
+
+[resource]
+script = ExtResource("1_script")
+method_name = "Washed (Wet)"
+override_cost = 250
+turn_duration = 5
+sort_order = 2
+mod_acidity = 3.0
+mod_aroma = 1.0
+mod_sweetness = -2.0
+mod_flavor = 3.0
+mod_body = -2.0
+mod_quant_pct = -0.82
+
+mod_bitterness = 0.0

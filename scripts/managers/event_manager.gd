@@ -10,3 +10,6 @@ signal card_placement_interaction_confirmed(card_name: String, tile: Node3D, car
 
 # Emitted by a controller/popup when the interaction is cancelled
 signal card_placement_interaction_cancelled(card_name: String, tile: Node3D, card_data: Resource)
+
+# Emitted when a card expires without being played
+signal card_expired(process_id: String)

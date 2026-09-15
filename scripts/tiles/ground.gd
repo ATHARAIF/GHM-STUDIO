@@ -1,7 +1,6 @@
 extends Node3D
 
 func _ready() -> void:
-	get_viewport().physics_object_picking = true
 	PlacementManager.register_camera($Camera3D)
 	PlacementManager.register_ground_tiles(_get_ground_tiles())
 

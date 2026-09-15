@@ -17,21 +17,26 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlacementManager="*uid://b6uium5s0ij74"
+PlacementManager="*res://scenes/placement_manager.tscn"
 StageManager="*res://scripts/managers/stage_manager.gd"
 TimeManager="*res://scripts/managers/time_manager.gd"
 EventManager="*res://scripts/managers/event_manager.gd"
-InventoryManager="*uid://bjkgydfytcqk2"
-WarehousePlacement="*uid://cwjh81ulljlxn"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/custom="res://tres/ui_theme.tres"
 
 [input]
 
