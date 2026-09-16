@@ -218,6 +218,9 @@ func rotate_ghost() -> void:
 
 	rotation_steps = (rotation_steps + 1) % 4
 	current_shape = _rotate_shape(current_base_shape, rotation_steps)
+	
+	# Rotasi juga grab_offset agar benda tidak lari dari kursor mouse
+	grab_offset = Vector2i(grab_offset.y, -grab_offset.x)
 
 	var start_rot := ghost_visual_rotation
 	ghost_visual_rotation += 90.0
@@ -271,10 +274,13 @@ func _begin_move_tile(tile: Node3D, data: Dictionary) -> void:
 			drag_dummy_card.set("card_data", data["card_data"])
 			drag_dummy_card.top_level = true
 			drag_dummy_card.hide()
-			drag_dummy_card.set_process(false)
-			drag_dummy_card.set_process_unhandled_input(false)
 			drag_dummy_card.set("dragging", true) # Prevent card_hand.gd from interfering
 			ch.add_child(drag_dummy_card)
+			
+			# Harus di-disable SETELAH masuk tree, karena saat masuk tree Godot otomatis
+			# menyalakan set_process kembali jika class-nya punya _process().
+			drag_dummy_card.set_process(false)
+			drag_dummy_card.set_process_unhandled_input(false)
 	
 	set_process(true)
 
