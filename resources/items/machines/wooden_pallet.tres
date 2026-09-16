@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1_4n20r"]
+[ext_resource type="PackedScene" path="res://scenes/tiles/items/pallet_tile.tscn" id="2_8n30q"]
+
+[resource]
+script = ExtResource("1_4n20r")
+item_name = "Wooden Pallet"
+item_id = "pallet_wood_1"
+category = 7
+buy_price = 100
+sell_price = 50
+max_capacity = 2500
+efficiency_multiplier = 1.0
+tile_scene = ExtResource("2_8n30q")

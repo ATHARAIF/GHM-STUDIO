@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c7x2b1m3n5o8"]
+
+[ext_resource type="Script" uid="uid://bkwlyqihyacfk" path="res://scripts/autoloads/silhouette_highlight.gd" id="1_shighlight"]
+
+[node name="SilhouetteHighlight" type="CanvasLayer" unique_id=659919685]
+script = ExtResource("1_shighlight")
+outline_color = Color(1, 1, 1, 0.88235295)
+outline_width = 2.0

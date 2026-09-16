@@ -14,25 +14,37 @@ var mod_quant_pct: float = 0.0
 var current_tile: Node3D
 var current_card_data: Resource
 
-@onready var lbl_title = $popup_panel/Control/title_container/lbl_title
-@onready var btn_close = $popup_panel/close
+func _get_target_batch() -> CoffeeBatch:
+	var process_id = current_card_data.process_id if current_card_data else "RP01"
+	
+	if current_tile and PlacementManager.placement_data.has(current_tile):
+		var p_data = PlacementManager.placement_data[current_tile]
+		if p_data.has("target_batch_year") and p_data["target_batch_year"] != -1:
+			var byear = p_data["target_batch_year"]
+			if StageManager.batches.has(byear):
+				return StageManager.batches[byear]
+				
+	return StageManager.get_oldest_ready_batch(process_id)
 
-# Left Side
-@onready var lbl_variety = $popup_panel/margin/hbox/left_side/margin/content/bean/lbl_variety
-@onready var lbl_arabica = $popup_panel/margin/hbox/left_side/margin/content/bean/lbl_arabica
-@onready var lbl_robusta = $popup_panel/margin/hbox/left_side/margin/content/bean/lbl_robusta
-@onready var val_batch = $popup_panel/margin/hbox/left_side/margin/content/batch/value
-@onready var radar_graph = $popup_panel/margin/hbox/left_side/margin/content/chart/radar
-@onready var cont_cost = get_node_or_null("popup_panel/margin/hbox/left_side/margin/content/cost")
-@onready var val_cost = get_node_or_null("popup_panel/margin/hbox/left_side/margin/content/cost/HBoxContainer/value") if has_node("popup_panel/margin/hbox/left_side/margin/content/cost/HBoxContainer/value") else get_node_or_null("popup_panel/margin/hbox/left_side/margin/content/cost/value")
+@onready var lbl_title = $CenterContainer/panel/panel_label
+@onready var btn_confirm = $CenterContainer/panel/content/confirmation/confirm
+@onready var btn_close = $CenterContainer/panel/close
 
-# Right Side
-@onready var method_container = $popup_panel/margin/hbox/right_side/margin/method_container
-@onready var slider_container = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container
-@onready var lbl_level = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container/level_lbl
-@onready var slider = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container/slider
-@onready var lbl_slider_val = $popup_panel/margin/hbox/right_side/margin/method_container/slider_container/label
-@onready var btn_confirm = $popup_panel/margin/hbox/right_side/margin/method_container/confirm
+#content
+@onready var lbl_variety = $CenterContainer/panel/content/bean_name/variety
+@onready var lbl_arabica = $CenterContainer/panel/content/bean_name/arabica
+@onready var lbl_robusta = $CenterContainer/panel/content/bean_name/robusta
+@onready var val_batch = $CenterContainer/panel/content/bean_detail/left/bean_data/data1/value
+@onready var radar_graph = $CenterContainer/panel/content/bean_detail/left/chart/radar
+@onready var slider_container = $CenterContainer/panel/content/bean_detail/left/slider
+@onready var lbl_level = $CenterContainer/panel/content/bean_detail/left/slider/label
+@onready var slider = $CenterContainer/panel/content/bean_detail/left/slider/container/slider
+@onready var lbl_slider_val = $CenterContainer/panel/content/bean_detail/left/slider/container/value
+
+
+@onready var method_container = $CenterContainer/panel/content/bean_detail/left/methods/toggle_buttons
+@onready var val_cost = get_node_or_null("CenterContainer/panel/content/bean_detail/left/cost_turn/cost/HBoxContainer/value") if has_node("CenterContainer/panel/content/bean_detail/left/cost_turn/cost/HBoxContainer/value") else get_node_or_null("CenterContainer/panel/content/bean_detail/left/cost_turn/cost/HBoxContainer/value")
+@onready var cont_cost = get_node_or_null("CenterContainer/panel/content/bean_detail/left/cost_turn/cost/HBoxContainer")
 
 
 func _ready() -> void:
@@ -66,7 +78,7 @@ func show_popup() -> void:
 		lbl_arabica.visible = (v_data.species_name.to_lower() == "arabica")
 		lbl_robusta.visible = (v_data.species_name.to_lower() == "robusta")
 		
-	var cb = StageManager.get_active_farm_batch()
+	var cb = _get_target_batch()
 	if cb and val_batch:
 		val_batch.text = str(cb.batch_year)
 		
@@ -131,7 +143,7 @@ func _update_ui() -> void:
 		cont_cost.visible = (selected_method != null)
 
 	if radar_graph:
-		var cb = StageManager.get_active_farm_batch()
+		var cb = _get_target_batch()
 		var b_acid = cb.acidity if cb else 0.0
 		var b_aroma = cb.aroma if cb else 0.0
 		var b_sweet = cb.sweetness if cb else 0.0
@@ -164,17 +176,32 @@ func _update_ui() -> void:
 			radar_graph.set_extra_item_value(0, 3, 0.0)
 			radar_graph.set_extra_item_value(0, 4, 0.0)
 			radar_graph.set_extra_item_value(0, 5, 0.0)
+			
+	if btn_confirm:
+		var has_machine = FactoryManager.has_idle_machine("Roaster") if FactoryManager.has_method("has_idle_machine") else true
+		btn_confirm.disabled = not has_machine or selected_method == null
+		if not has_machine:
+			btn_confirm.text = "No Idle Roaster!"
+		else:
+			btn_confirm.text = "Confirm"
 
 func _on_confirm() -> void:
 	if selected_method == null:
 		return
 		
+	var machine_id = ""
+	if FactoryManager.has_method("get_idle_machine_id"):
+		machine_id = FactoryManager.get_idle_machine_id("Roaster")
+		if machine_id != "":
+			FactoryManager.placed_machines[machine_id]["state"] = "USED"
+
 	queue_free()
 	if has_node("/root/EventManager"):
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_confirmed.emit("Roasting", current_tile, current_card_data, {
 			"roasting_method": selected_method.method_name,
 			"roasting_intensity": slider.value if slider else 50.0,
+			"machine_id": machine_id,
 			"mod_acidity": mod_acidity,
 			"mod_aroma": mod_aroma,
 			"mod_sweetness": mod_sweetness,
@@ -193,4 +220,3 @@ func _on_cancel() -> void:
 		em.card_placement_interaction_cancelled.emit("Roasting", current_tile, current_card_data)
 	current_tile = null
 	current_card_data = null
-

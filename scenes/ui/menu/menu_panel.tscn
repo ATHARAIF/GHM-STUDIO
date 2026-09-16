@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://dr2uiuwtnaxxa"]
+
+[ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="1_mo5ph"]
+[ext_resource type="Script" uid="uid://fkvo3v7pypvo" path="res://themes/scripts/button_tab_anim.gd" id="2_vvd2i"]
+[ext_resource type="Texture2D" uid="uid://bp1ggnl1u1gcf" path="res://assets/ui/ui_atlas.png" id="3_8f2hf"]
+[ext_resource type="PackedScene" uid="uid://x8ljuv20vqik" path="res://scenes/ui/menu/tab_terroir.tscn" id="4_4tnp1"]
+[ext_resource type="PackedScene" uid="uid://dnt3ghxtnn5x7" path="res://scenes/ui/menu/tab_coffeelog.tscn" id="5_gqdox"]
+[ext_resource type="PackedScene" uid="uid://b1eguy57oj3it" path="res://scenes/ui/menu/tab_storage.tscn" id="6_agyn7"]
+[ext_resource type="PackedScene" uid="uid://7eujgdopl4nn" path="res://scenes/ui/menu/tab_order.tscn" id="7_mo5ph"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tmd5"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_1nn7h"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m81xx"]
+content_margin_left = 24.0
+content_margin_top = 23.0
+content_margin_right = 24.0
+content_margin_bottom = 25.0
+texture = ExtResource("3_8f2hf")
+texture_margin_left = 5.0
+texture_margin_top = 8.0
+texture_margin_right = 5.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(0, 0, 55, 56)
+
+[node name="MenuPanel" type="CanvasLayer" unique_id=2057925342]
+
+[node name="menu_panel" type="Control" parent="." unique_id=508918949]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mo5ph")
+
+[node name="MarginContainer" type="MarginContainer" parent="menu_panel" unique_id=1940970419]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu_panel/MarginContainer" unique_id=607468767]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="tab_buttons" type="VBoxContainer" parent="menu_panel/MarginContainer/HBoxContainer" unique_id=453460039]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="space" type="VSeparator" parent="menu_panel/MarginContainer/HBoxContainer/tab_buttons" unique_id=568818190]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_1tmd5")
+
+[node name="tab_terroir" type="Button" parent="menu_panel/MarginContainer/HBoxContainer/tab_buttons" unique_id=558856767]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 0)
+custom_maximum_size = Vector2(120, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_type_variation = &"button_tab"
+toggle_mode = true
+button_pressed = true
+action_mode = 0
+keep_pressed_outside = true
+button_group = SubResource("ButtonGroup_1nn7h")
+text = "TERROIR"
+alignment = 2
+script = ExtResource("2_vvd2i")
+
+[node name="tab_coffee_log" type="Button" parent="menu_panel/MarginContainer/HBoxContainer/tab_buttons" unique_id=1240291098]
+texture_filter = 1
+custom_minimum_size = Vector2(94, 0)
+custom_maximum_size = Vector2(120, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_type_variation = &"button_tab"
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_1nn7h")
+text = "COFFEE LOG"
+alignment = 2
+script = ExtResource("2_vvd2i")
+
+[node name="tab_storage" type="Button" parent="menu_panel/MarginContainer/HBoxContainer/tab_buttons" unique_id=580343329]
+texture_filter = 1
+custom_minimum_size = Vector2(94, 0)
+custom_maximum_size = Vector2(120, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_type_variation = &"button_tab"
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_1nn7h")
+text = "STORAGE"
+alignment = 2
+script = ExtResource("2_vvd2i")
+
+[node name="tab_order" type="Button" parent="menu_panel/MarginContainer/HBoxContainer/tab_buttons" unique_id=1190475353]
+texture_filter = 1
+custom_minimum_size = Vector2(94, 0)
+custom_maximum_size = Vector2(120, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_type_variation = &"button_tab"
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_1nn7h")
+text = "ORDER"
+alignment = 2
+script = ExtResource("2_vvd2i")
+
+[node name="tab_upgrade" type="Button" parent="menu_panel/MarginContainer/HBoxContainer/tab_buttons" unique_id=463079733]
+texture_filter = 1
+custom_minimum_size = Vector2(94, 0)
+custom_maximum_size = Vector2(120, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_type_variation = &"button_tab"
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_1nn7h")
+text = "UPGRADE"
+alignment = 2
+script = ExtResource("2_vvd2i")
+
+[node name="tab_balance" type="Button" parent="menu_panel/MarginContainer/HBoxContainer/tab_buttons" unique_id=1039483581]
+texture_filter = 1
+custom_minimum_size = Vector2(94, 0)
+custom_maximum_size = Vector2(120, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_type_variation = &"button_tab"
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_1nn7h")
+text = "BALANCE"
+alignment = 2
+script = ExtResource("2_vvd2i")
+
+[node name="tab_contents" type="PanelContainer" parent="menu_panel/MarginContainer/HBoxContainer" unique_id=1422664125]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 9.0
+theme_type_variation = &"panel_popup"
+theme_override_styles/panel = SubResource("StyleBoxTexture_m81xx")
+
+[node name="tab_terroir" parent="menu_panel/MarginContainer/HBoxContainer/tab_contents" unique_id=1199853604 instance=ExtResource("4_4tnp1")]
+visible = true
+layout_mode = 2
+
+[node name="tab_coffeelog" parent="menu_panel/MarginContainer/HBoxContainer/tab_contents" unique_id=1131410544 instance=ExtResource("5_gqdox")]
+visible = false
+layout_mode = 2
+
+[node name="tab_storage" parent="menu_panel/MarginContainer/HBoxContainer/tab_contents" unique_id=1073576969 instance=ExtResource("6_agyn7")]
+visible = false
+layout_mode = 2
+
+[node name="tab_order" parent="menu_panel/MarginContainer/HBoxContainer/tab_contents" unique_id=1828706220 instance=ExtResource("7_mo5ph")]
+visible = false
+layout_mode = 2
+
+[connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_terroir" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_terroir" method="_on_toggled"]
+[connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_coffee_log" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_coffee_log" method="_on_toggled"]
+[connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_storage" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_storage" method="_on_toggled"]
+[connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_order" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_order" method="_on_toggled"]
+[connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_upgrade" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_upgrade" method="_on_toggled"]
+[connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_balance" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_balance" method="_on_toggled"]

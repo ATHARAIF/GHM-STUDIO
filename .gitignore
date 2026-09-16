@@ -1,7 +1,8 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
-Need\ To\ Merge/
+NeedToMerge/
 docs/
-
-
+export/Terrafein.console.exe
+export/Terrafein.exe
+export/Terrafein.pck

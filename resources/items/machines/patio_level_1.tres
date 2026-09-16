@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cic0887wspc32"]
+
+[ext_resource type="Script" uid="uid://c0hkq7kibybm4" path="res://scripts/data/item_data.gd" id="1_itemdata"]
+[ext_resource type="PackedScene" uid="uid://dc8kytr1fxuaj" path="res://scenes/tiles/items/patio_tile.tscn" id="2_patiotile"]
+
+[resource]
+script = ExtResource("1_itemdata")
+item_name = "Patio"
+item_id = "patio_01"
+category = 2
+buy_price = 1500
+sell_price = 750
+max_capacity = 2000
+allowed_methods = Array[String](["Natural", "Washed", "Honey"])
+tile_scene = ExtResource("2_patiotile")

@@ -3,13 +3,13 @@
 [ext_resource type="Shader" uid="uid://w7lwrqfuy7pn" path="res://shaders/3d_item_highlighter.gdshader" id="1_7qxrj"]
 
 [resource]
-render_priority = 0
+render_priority = 1
 shader = ExtResource("1_7qxrj")
-shader_parameter/shine_color = Color(1, 1, 1, 0.49411765)
+shader_parameter/shine_color = Color(1, 1, 1, 0.3529412)
 shader_parameter/shine_speed = 8.00000038
-shader_parameter/shine_width = 0.4350000206625
+shader_parameter/shine_width = 0.400000019
 shader_parameter/cycle_interval = 5.0000002375
-shader_parameter/angle_fade = 0.0
+shader_parameter/angle_fade = 0.50000002375
 shader_parameter/local_time = 0.0
 shader_parameter/position_offset = 0.0
 shader_parameter/x_direction = 1.0

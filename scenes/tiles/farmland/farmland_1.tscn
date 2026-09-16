@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://ddyxy0w123abc"]
+
+[ext_resource type="Script" uid="uid://b2nvhpl5frama" path="res://scripts/tiles/farmland/farmland_tile.gd" id="1_4kww1"]
+[ext_resource type="PackedScene" uid="uid://dcvt0q2nmlmqr" path="res://assets/3D/tiles/decorations/weeding_decor.glb" id="2_34umb"]
+[ext_resource type="PackedScene" uid="uid://18egujo0myla" path="res://scenes/ui/popups/farmland_detail_popup.tscn" id="3_opvb1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_info"]
+size = Vector3(2.108574, 0.38754883, 2.998642)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_info"]
+albedo_color = Color(0.4, 0.25, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_info"]
+material = SubResource("StandardMaterial3D_info")
+size = Vector3(1.1, 0.2, 3)
+
+[node name="farmland_1" type="Node3D" unique_id=1637197955]
+script = ExtResource("1_4kww1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1834968503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55635715, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1483762880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50252914, 0.10212403, 0)
+shape = SubResource("BoxShape3D_info")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=717974260]
+mesh = SubResource("BoxMesh_info")
+
+[node name="weeding_decor" parent="StaticBody3D" unique_id=329275244 instance=ExtResource("2_34umb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18378243, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D" unique_id=1980991942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("BoxMesh_info")
+
+[node name="weeding_decor2" parent="StaticBody3D" unique_id=2010245186 instance=ExtResource("2_34umb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.18378243, 0)
+
+[node name="FarmlandDetailPopup" parent="." unique_id=1827776694 instance=ExtResource("3_opvb1")]
+visible = false
+
+[connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]

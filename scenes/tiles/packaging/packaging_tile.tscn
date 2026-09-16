@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bqogf3rb1fff"]
+
+[ext_resource type="PackedScene" uid="uid://b5omglxf5doma" path="res://assets/3D/tiles/base_tiles/3side_border.glb" id="2_8w2sw"]
+[ext_resource type="PackedScene" uid="uid://d4jkvh7x4iwh1" path="res://assets/3D/tiles/base_tiles/cornerv2.glb" id="3_diylk"]
+[ext_resource type="PackedScene" uid="uid://fyfn51j3jhbb" path="res://assets/3D/tiles/base_tiles/2side_border.glb" id="3_vid5v"]
+[ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/tiles/tile_labels.tscn" id="999_tilelbl"]
+
+[node name="roasting_tile" type="Node3D" unique_id=699342220]
+
+[node name="base_tiles" type="Node3D" parent="." unique_id=519441691]
+
+[node name="cornerv22" parent="base_tiles" unique_id=1245215778 instance=ExtResource("3_diylk")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0, 0)
+
+[node name="3side_border2" parent="base_tiles" unique_id=1419871748 instance=ExtResource("2_8w2sw")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -1, 0, 1)
+
+[node name="cornerv23" parent="base_tiles" unique_id=420150624 instance=ExtResource("3_diylk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -8.742278e-08)
+
+[node name="3side_border3" parent="base_tiles" unique_id=1498193767 instance=ExtResource("2_8w2sw")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 1, 0, 0.99999976)
+
+[node name="2side_border2" parent="base_tiles" unique_id=2102587836 instance=ExtResource("3_vid5v")]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 0, 0, 0)
+
+[node name="decoration" type="Node3D" parent="." unique_id=489955234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020626113, 0)
+
+[node name="tile_labels" parent="." unique_id=344741940 instance=ExtResource("999_tilelbl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0.973)

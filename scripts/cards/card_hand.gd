@@ -79,12 +79,13 @@ func _auto_load_cards_from_folders() -> void:
 			var file_name = dir.get_next()
 			while file_name != "":
 				if not dir.current_is_dir():
-					var actual_file = file_name
-					if actual_file.ends_with(".remap"):
-						actual_file = actual_file.replace(".remap", "")
-						
+					# Pakai trim_suffix, JANGAN pakai replace() biar akurat
+					var actual_file = file_name.trim_suffix(".remap")
+					
 					if actual_file.ends_with(".tres"):
-						var full_path = folder_path + "/" + file_name
+						# Pakai path_join() untuk menghindari double-slash (//)
+						var full_path = folder_path.path_join(actual_file)
+						
 						var data = load(full_path) as CardData
 						if data:
 							card_database.append(data)
@@ -136,6 +137,8 @@ func _update_cards() -> void:
 				var is_played_now = played_cards_this_year.has(cd)
 				if StageManager.has_method("is_process_active") and StageManager.is_process_active(cd.process_id):
 					is_played_now = true
+					
+				print("Card Update [", cd.card_name, "] is_completed:", is_completed, " is_played_now:", is_played_now)
 				
 				var req_met = true
 				if active_batch:

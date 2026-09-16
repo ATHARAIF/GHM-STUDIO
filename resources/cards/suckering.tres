@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://22x5enqrwpc4" path="res://scenes/tiles/farm/suckering_tile.tscn" id="2_fy7id"]
+[ext_resource type="Texture2D" uid="uid://cv8wllasf7tg2" path="res://assets/ui/cards/tile_shapes/3x3 Z-Shape.png" id="3_56kpb"]
 
 [resource]
 script = ExtResource("1_script")
@@ -10,6 +11,7 @@ process_id = "FP03"
 cost = 300
 duration = 2
 card_color = Color(0, 0.78431374, 0.7019608, 1)
+tile_shape_icon = ExtResource("3_56kpb")
 tile_scene = ExtResource("2_fy7id")
 has_expiration_penalty = true
 base_mod_aroma = 2.0

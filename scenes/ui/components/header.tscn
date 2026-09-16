@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://docyv7a3s7tss"]
+
+[ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="1_ef8wp"]
+[ext_resource type="Script" uid="uid://c76b38ibnl65f" path="res://scripts/ui/components/header.gd" id="1_p0k7y"]
+[ext_resource type="Texture2D" uid="uid://ihmcjim1yn12" path="res://assets/ui/icons/Seting.png" id="2_ef8wp"]
+[ext_resource type="Script" uid="uid://b4xb04obxw8fb" path="res://themes/scripts/button_utility_anim.gd" id="3_vn48o"]
+[ext_resource type="Texture2D" uid="uid://ikg0asxmiwoj" path="res://assets/ui/icons/Fame.png" id="4_b0hhn"]
+[ext_resource type="Texture2D" uid="uid://bdove5h4l2qds" path="res://assets/ui/icons/Money.png" id="5_k2t4p"]
+[ext_resource type="Texture2D" uid="uid://b5o2gl8ws12qt" path="res://assets/ui/icons/Journal.png" id="6_4fe2l"]
+[ext_resource type="Texture2D" uid="uid://18hnbec3jlp" path="res://assets/ui/icons/Menu.png" id="7_w54qm"]
+[ext_resource type="Texture2D" uid="uid://ci6jejy2uc0so" path="res://assets/ui/icons/Close_panel_popup.png" id="9_vn48o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_phxny"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w0i6r"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b0hhn"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k2t4p"]
+content_margin_top = 15.0
+content_margin_bottom = 17.0
+texture = SubResource("CompressedTexture2D_b0hhn")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(171, 0, 55, 56)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4fe2l"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w54qm"]
+content_margin_left = 13.0
+content_margin_top = 18.0
+content_margin_right = 13.0
+content_margin_bottom = 14.0
+texture = SubResource("CompressedTexture2D_4fe2l")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(228, 0, 55, 56)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vlbtq"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2332w"]
+content_margin_left = 13.0
+content_margin_top = 15.0
+content_margin_right = 13.0
+content_margin_bottom = 17.0
+texture = SubResource("CompressedTexture2D_vlbtq")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(171, 0, 55, 56)
+
+[node name="header" type="PanelContainer" unique_id=552095148]
+offset_right = 1279.0
+offset_bottom = 56.0
+size_flags_vertical = 0
+theme = ExtResource("1_ef8wp")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_phxny")
+script = ExtResource("1_p0k7y")
+
+[node name="status" type="HBoxContainer" parent="." unique_id=397866650]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="calendar" type="Button" parent="status" unique_id=2020535271]
+custom_minimum_size = Vector2(168, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"button_status"
+theme_override_constants/h_separation = 23
+text = "6 AUTUMN 2077	"
+icon = ExtResource("2_ef8wp")
+alignment = 0
+expand_icon = true
+script = ExtResource("3_vn48o")
+
+[node name="fame" type="Button" parent="status" unique_id=1696192620]
+custom_minimum_size = Vector2(168, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"button_status"
+theme_override_constants/h_separation = 23
+text = "Level 100"
+icon = ExtResource("4_b0hhn")
+alignment = 0
+expand_icon = true
+script = ExtResource("3_vn48o")
+
+[node name="money" type="HBoxContainer" parent="status" unique_id=897440349]
+layout_mode = 2
+
+[node name="balance" type="Button" parent="status/money" unique_id=4242057]
+custom_minimum_size = Vector2(168, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"button_status"
+theme_override_constants/h_separation = 23
+text = "1,000,000"
+icon = ExtResource("5_k2t4p")
+alignment = 0
+expand_icon = true
+script = ExtResource("3_vn48o")
+
+[node name="Label" type="Label" parent="status/money" unique_id=243564043]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="." unique_id=1929030220]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_w0i6r")
+
+[node name="utility" type="HBoxContainer" parent="." unique_id=1661499761]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="setting" type="Button" parent="utility" unique_id=1245585659]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_type_variation = &"button_utility"
+icon = ExtResource("2_ef8wp")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("3_vn48o")
+
+[node name="journal" type="Button" parent="utility" unique_id=1501513175]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_type_variation = &"button_utility"
+icon = ExtResource("6_4fe2l")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("3_vn48o")
+
+[node name="menu" type="Button" parent="utility" unique_id=825875392]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_type_variation = &"button_utility"
+icon = ExtResource("7_w54qm")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("3_vn48o")
+
+[node name="close" type="Button" parent="utility" unique_id=1210539048]
+visible = false
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_position = Vector2(32, -46)
+offset_transform_visual_only = false
+theme_type_variation = &"button_close_panel"
+theme_override_styles/normal = SubResource("StyleBoxTexture_k2t4p")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_w54qm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_2332w")
+icon = ExtResource("9_vn48o")
+icon_alignment = 1
+expand_icon = true

@@ -1,5 +1,10 @@
 extends Control
 
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP or event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			accept_event()
+
 @export var farm_scene_path: String = "res://scenes/maps/main_farm.tscn"
 const ITEM_PANEL = preload("res://scenes/ui/components/building_item_panel.tscn")
 
@@ -22,23 +27,36 @@ func _ready() -> void:
 	if btn_shop: btn_shop.pressed.connect(_on_btn_shop_pressed)
 	if btn_upgrade: btn_upgrade.pressed.connect(_on_btn_upgrade_pressed)
 	
-	# Hapus node dummy bawaan editor sebelum memuat data asli
 	_clear_list()
-		
-	# Default buka inventory (Panggil simulasi klik tombol agar judul label ikut berubah)
+	_update_level_label()
 	_on_btn_inventory_pressed()
 
+func _update_level_label() -> void:
+	var value_label = $upgrade/MarginContainer/HBoxContainer/value
+	if not value_label: return
+	
+	var scene = get_tree().current_scene
+	if scene.name.find("Warehouse") != -1 or scene.name.find("warehouse") != -1:
+		if scene.get("warehouse_level") != null:
+			value_label.text = str(scene.warehouse_level)
+	else:
+		value_label.text = str(FactoryManager.factory_level)
+
 func _on_btn_back_pressed() -> void:
-	print("Keluar dari pabrik, kembali ke ladang...")
-	if StageManager.has_method("save_room_state"):
-		StageManager.save_room_state("prod_house")
-		
+	print("Keluar dari gedung, kembali ke ladang...")
+	var scene = get_tree().current_scene
+	if scene.name.find("Warehouse") != -1 or scene.name.find("warehouse") != -1:
+		if StageManager.has_method("save_room_state"):
+			StageManager.save_room_state("warehouse")
+	else:
+		if StageManager.has_method("save_room_state"):
+			StageManager.save_room_state("prod_house")
+			
 	await TransitionManager.fade_out()
 	get_tree().change_scene_to_file(farm_scene_path)
 	TransitionManager.fade_in()
 
 func _on_btn_eye_pressed() -> void:
-	# Toggle hide/unhide
 	if container_label and container_list:
 		var is_hidden = !container_list.visible
 		container_list.visible = is_hidden
@@ -62,30 +80,69 @@ func _on_btn_upgrade_pressed() -> void:
 	print("Buka popup upgrade ruangan!")
 
 func _clear_list() -> void:
-	# Hapus semua anak di kontainer (termasuk dummy dari editor)
 	for child in list_parent.get_children():
 		child.queue_free()
 
 func _load_inventory() -> void:
 	_clear_list()
-	var dummy_inventory = [
-		{"name": "Roaster Level 1", "desc": "Mesin sangrai kopi dasar.", "sell_price": 50},
-		{"name": "Grinder Manual", "desc": "Penggiling kopi tradisional.", "sell_price": 10}
-	]
 	
-	for data in dummy_inventory:
-		_create_item_card(data, false)
+	var is_warehouse = false
+	var scene = get_tree().current_scene
+	if scene.name.find("Warehouse") != -1 or scene.name.find("warehouse") != -1:
+		is_warehouse = true
+	
+	var data_source = {}
+	if is_warehouse:
+		if has_node("/root/WarehouseManager"):
+			data_source = get_node("/root/WarehouseManager").placed_racks
+	else:
+		data_source = FactoryManager.placed_machines
+		
+	for m_id in data_source:
+		var m_data = data_source[m_id]
+		var item: ItemData = m_data["data"]
+		
+		var panel_data = {
+			"machine_id": m_id,
+			"raw_item_data": item,
+			"name": item.item_name,
+			"desc": "Kapasitas: " + str(item.max_capacity),
+			"buy_price": item.buy_price,
+			"sell_price": item.sell_price,
+			"specs": {
+				"Max Capacity": str(item.max_capacity)
+			},
+			"wear_pct": m_data.get("wear_pct", 100.0),
+			"state": m_data.get("state", "IDLE")
+		}
+		_create_item_card(panel_data, false)
 
 func _load_shop() -> void:
 	_clear_list()
-	var dummy_shop = [
-		{"name": "Roaster Level 2", "desc": "Mesin sangrai industri kapasitas besar.", "buy_price": 500},
-		{"name": "Espresso Machine", "desc": "Ekstrak kopi super cepat.", "buy_price": 1000},
-		{"name": "Fermentation Tank", "desc": "Tangki fermentasi ceri kopi.", "buy_price": 300}
-	]
 	
-	for data in dummy_shop:
-		_create_item_card(data, true)
+	var available_items: Array[ItemData] = []
+	var scene = get_tree().current_scene
+	
+	if scene.name.find("Warehouse") != -1 or scene.name.find("warehouse") != -1:
+		if ResourceLoader.exists("res://resources/items/machines/wooden_pallet.tres"):
+			available_items.append(load("res://resources/items/machines/wooden_pallet.tres"))
+	else:
+		available_items.append(preload("res://resources/items/machines/hopper_level_1.tres"))
+		available_items.append(preload("res://resources/items/machines/patio_level_1.tres"))
+		available_items.append(preload("res://resources/items/machines/roaster_level_1.tres"))
+	
+	for item in available_items:
+		var panel_data = {
+			"raw_item_data": item,
+			"name": item.item_name,
+			"desc": "Kapasitas: " + str(item.max_capacity),
+			"buy_price": item.buy_price,
+			"sell_price": item.sell_price,
+			"specs": {
+				"Max Capacity": str(item.max_capacity)
+			}
+		}
+		_create_item_card(panel_data, true)
 
 func _create_item_card(data: Dictionary, is_shop: bool) -> void:
 	# Instansiasi komponen panel yang sudah dipisah!

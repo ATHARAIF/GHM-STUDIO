@@ -10,9 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Terrafein - Canio"
+config/name="Terrafein"
 run/main_scene="uid://bcehomfgtbuls"
 config/features=PackedStringArray("4.7", "Forward Plus")
+run/max_fps=45
 config/icon="res://icon.svg"
 
 [autoload]
@@ -22,6 +23,9 @@ StageManager="*res://scripts/autoloads/stage_manager.gd"
 TimeManager="*res://scripts/autoloads/time_manager.gd"
 EventManager="*res://scripts/autoloads/event_manager.gd"
 TransitionManager="*res://scenes/autoloads/transition_manager.tscn"
+FactoryManager="*uid://bc0df2d5e733o"
+SilhouetteHighlight="*res://scenes/autoloads/silhouette_highlight.tscn"
+WarehouseManager="*uid://cn76w7quvch1b"
 
 [display]
 
@@ -61,7 +65,8 @@ next_turn={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=2
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
 textures/default_filters/use_nearest_mipmap_filter=true
 anti_aliasing/quality/screen_space_aa=2

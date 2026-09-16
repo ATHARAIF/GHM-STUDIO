@@ -194,11 +194,11 @@ value = 100.0
 rounded = true
 fill_mode = 1
 
-[node name="BtnCleaning" type="Button" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer" unique_id=1769504851]
+[node name="BtnStatus" type="Button" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/StatusTab/MarginContainer/VBoxContainer" unique_id=1769504851]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
-text = "Cleaning"
+text = "Cleaning/In Use/Idle"
 
 [node name="InfoTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=2039722304]
 visible = false
@@ -220,7 +220,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
 scroll_hint_mode = 3
 
 [node name="Desc" type="Label" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/InfoTab/MarginContainer/VBoxContainer/Scroll" unique_id=194696972]

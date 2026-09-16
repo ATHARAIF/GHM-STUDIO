@@ -14,7 +14,6 @@ mod_aroma = 2.0
 mod_sweetness = 3.0
 mod_flavor = 1.0
 mod_body = 2.0
-mod_defect = 5.0
-
 mod_bitterness = -1.0
+mod_defect = 5.0
 mod_quant_pct = -0.8

@@ -48,7 +48,10 @@ func _create_new_batch(year: int) -> void:
 		b.moisture = tree.current_moisture
 		b.defect_rate = tree.current_defect
 		b.cherry_kg = 0 # Calculated at Harvest
-	
+		if current_location.variety_data:
+			b.species_name = current_location.variety_data.species_name
+			b.variety_name = current_location.variety_data.variety_name
+			
 	batches[year] = b
 	
 func get_active_farm_batch() -> CoffeeBatch:
@@ -71,6 +74,8 @@ func get_oldest_ready_batch(process_id: String) -> CoffeeBatch:
 	var target_batch: CoffeeBatch = null
 	for y in batches.keys():
 		var b = batches[y]
+		if b.has_meta("sold_out") and b.get_meta("sold_out") == true:
+			continue
 		# Asumsikan kalau mau diproses lebih lanjut, minimal sudah lewat FP04 (Harvest)
 		if b.completed_processes.has("FP04") and not b.completed_processes.has(process_id):
 			if y < oldest_year:
@@ -85,6 +90,8 @@ func get_ready_batches_for_process(process_id: String, unlock_condition: String 
 	var ready_years: Array[int] = []
 	for y in batches.keys():
 		var b = batches[y]
+		if b.has_meta("sold_out") and b.get_meta("sold_out") == true:
+			continue
 		if b.completed_processes.has("FP04") and not b.completed_processes.has(process_id):
 			if unlock_condition == "" or b.completed_processes.has(unlock_condition):
 				var already_placed = false
@@ -144,6 +151,18 @@ func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Di
 func unregister_placed_tile(tile_node: Node3D) -> void:
 	for i in range(active_tiles.size() - 1, -1, -1):
 		if active_tiles[i].tile == tile_node:
+			var tile_dict = active_tiles[i]
+			if tile_dict.data.process_id == "DP03" and tile_dict.has("packs") and tile_dict.has("size"):
+				var kg_used = (tile_dict["packs"] * tile_dict["size"]) / 1000.0
+				var target_b = null
+				if tile_dict.has("target_batch_year") and tile_dict.target_batch_year != -1:
+					if batches.has(tile_dict.target_batch_year):
+						target_b = batches[tile_dict.target_batch_year]
+				if target_b == null:
+					target_b = get_oldest_ready_batch(tile_dict.data.process_id)
+				if target_b and target_b.get("reserved_roasted_bean_kg") != null:
+					target_b.reserved_roasted_bean_kg = max(0.0, target_b.reserved_roasted_bean_kg - kg_used)
+					
 			active_tiles.remove_at(i)
 			break
 	stats_changed.emit()
@@ -151,6 +170,8 @@ func unregister_placed_tile(tile_node: Node3D) -> void:
 
 
 func _find_tile_labels(node: Node) -> Node3D:
+	if not node:
+		return null
 	for child in node.get_children():
 		if child.name == "tile_labels" or child.has_method("set_ready_state"):
 			return child
@@ -204,6 +225,10 @@ func advance_turn() -> void:
 				target_b.add_history(tile_dict.data.card_name)
 				target_b.apply_effects(tile_dict)
 				stats_changed.emit()
+				if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
+					if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
+						FactoryManager.placed_machines[tile_dict["machine_id"]]["state"] = "IDLE"
+				
 				if tile_dict.tile and is_instance_valid(tile_dict.tile):
 					PlacementManager.remove_tile_from_grid(tile_dict.tile)
 					
@@ -254,13 +279,30 @@ func apply_missed_penalty(card_data: CardData) -> void:
 	stats_changed.emit()
 	_check_stage_progression()
 
+func _sync_machine_tiles(tile_node: Node3D) -> void:
+	for dict in active_tiles:
+		if dict.tile == null and dict.has("machine_id") and dict["machine_id"] != "":
+			if FactoryManager.placed_machines.has(dict["machine_id"]):
+				if FactoryManager.placed_machines[dict["machine_id"]].get("node") == tile_node:
+					dict.tile = tile_node
+					tile_node.set_meta("locked", true)
+					var labels = _find_tile_labels(tile_node)
+					if labels:
+						dict.tile_labels = labels
+						if dict.ready:
+							labels.set_ready_state(true)
+						else:
+							labels.set_turn(dict.remaining_duration)
+
 func is_tile_ready_for_interaction(tile_node: Node3D) -> bool:
+	_sync_machine_tiles(tile_node)
 	for dict in active_tiles:
 		if dict.tile == tile_node and dict.ready:
 			return true
 	return false
 
 func trigger_interaction(tile_node: Node3D) -> void:
+	_sync_machine_tiles(tile_node)
 	for dict in active_tiles:
 		if dict.tile == tile_node and dict.ready:
 			interaction_requested.emit(dict.data.card_name, dict)
@@ -288,12 +330,42 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 		var final_yield = raw_yield * target_b.accumulated_yield_modifier
 		target_b.cherry_kg = int(clamp(final_yield, 0, 5000))
 		
+	if tile_dict.data.process_id == "WP01":
+		# Processing / Washing Station
+		if target_b.green_bean_kg == 0 and target_b.cherry_kg > 0:
+			target_b.green_bean_kg = target_b.cherry_kg * 0.2
+			target_b.cherry_kg = 0 # Cherry sudah diubah jadi Green Bean
+		
+	if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
+		if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
+			FactoryManager.placed_machines[tile_dict["machine_id"]]["state"] = "IDLE"
+			
 	if tile_dict.tile and is_instance_valid(tile_dict.tile):
 		PlacementManager.remove_tile_from_grid(tile_dict.tile)
 		
 	if tile_dict.data.process_id == "DP01":
+		if target_b.green_bean_kg == 0 and target_b.cherry_kg > 0:
+			# Fallback kalau belum diproses di Washing Station
+			target_b.green_bean_kg = target_b.cherry_kg * 0.2
+			target_b.cherry_kg = 0
+		if target_b.roasted_bean_kg == 0 and target_b.green_bean_kg > 0:
+			target_b.roasted_bean_kg = target_b.green_bean_kg * 0.85
+			target_b.green_bean_kg = 0 # Green Bean sudah diubah jadi Roasted Bean
+		
 		batch_flags["after_roasting"] = true
 		batch_flag_unlocked.emit("after_roasting")
+	elif tile_dict.data.process_id == "DP03":
+		if tile_dict.has("packs") and tile_dict.has("size"):
+			var kg_used = (tile_dict["packs"] * tile_dict["size"]) / 1000.0
+			if target_b.get("reserved_roasted_bean_kg") != null:
+				target_b.reserved_roasted_bean_kg = max(0.0, target_b.reserved_roasted_bean_kg - kg_used)
+			target_b.roasted_bean_kg = max(0.0, target_b.roasted_bean_kg - kg_used)
+			
+			# Simpan result packs ke Warehouse
+			if has_node("/root/WarehouseManager"):
+				var wm = get_node("/root/WarehouseManager")
+				wm.store_packed_goods(target_b, tile_dict)
+			
 	elif tile_dict.data.process_id == "TEST01":
 		batch_flags["after_testing"] = true
 		batch_flag_unlocked.emit("after_testing")
@@ -336,11 +408,12 @@ func _check_stage_progression() -> void:
 		stage_changed.emit(current_stage)
 		
 func is_tile_locked(tile_node: Node3D) -> bool:
+	_sync_machine_tiles(tile_node)
 	return tile_node.has_meta("locked") and tile_node.get_meta("locked") == true
 
 func is_process_active(process_id: String) -> bool:
 	for dict in active_tiles:
-		if dict.data and dict.data.process_id == process_id:
+		if dict.data and "process_id" in dict.data and dict.data.process_id == process_id:
 			return true
 	return false
 
@@ -408,7 +481,7 @@ func restore_room_state(room_id: String) -> void:
 		active_tiles.append(new_dict)
 		
 		if has_node("/root/PlacementManager"):
-			get_node("/root/PlacementManager").reoccupy_grid_for_restored_tile(new_tile, cd)
+			get_node("/root/PlacementManager").reoccupy_grid_for_restored_tile(new_tile, cd, new_dict)
 
 
 	stats_changed.emit()

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cjbcdyfcbr7vh"]
+
+[ext_resource type="Script" uid="uid://c0hkq7kibybm4" path="res://scripts/data/item_data.gd" id="1_itemdata"]
+[ext_resource type="PackedScene" uid="uid://chncgm72c0ock" path="res://scenes/tiles/items/roasting_tile.tscn" id="2_roastertile"]
+
+[resource]
+script = ExtResource("1_itemdata")
+item_name = "Roaster"
+item_id = "roaster_01"
+category = 3
+buy_price = 3000
+sell_price = 1500
+max_capacity = 500
+allowed_methods = Array[String](["Light", "Medium", "Dark"])
+tile_scene = ExtResource("2_roastertile")
