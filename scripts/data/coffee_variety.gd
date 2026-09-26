@@ -23,19 +23,21 @@ class_name CoffeeVariety
 @export var base_bitterness: int = 3
 
 
-@export_group("Target Ideal Real")
-## Target Ideal Acidity di dunia nyata (1-10).
-@export var target_acidity: int = 8
-## Target Ideal Aroma di dunia nyata (1-10).
-@export var target_aroma: int = 9
-## Target Ideal Sweetness di dunia nyata (1-10).
-@export var target_sweetness: int = 7
-## Target Ideal Flavor di dunia nyata (1-10).
-@export var target_flavor: int = 8
-## Target Ideal Body di dunia nyata (1-10).
-@export var target_body: int = 5
-## Target Ideal Bitterness di dunia nyata (1-10).
-@export var target_bitterness: int = 2
+@export_group("Target Ideal")
+@export var target_acidity: float = 9.0
+@export var target_aroma: float = 9.0
+@export var target_sweetness: float = 7.0
+@export var target_flavor: float = 10.0
+@export var target_body: float = 5.0
+@export var target_bitterness: float = 2.0
+
+@export_group("Penalty Weights")
+@export var penalty_weight_acidity: float = 0.05
+@export var penalty_weight_aroma: float = 0.05
+@export var penalty_weight_sweetness: float = 0.03
+@export var penalty_weight_flavor: float = 0.03
+@export var penalty_weight_body: float = 0.01
+@export var penalty_weight_bitterness: float = 0.01
 
 @export_group("Farm Baseline")
 ## Persentase bawaan awal Moisture ceri untuk varietas ini (%).
@@ -102,39 +104,12 @@ class_name CoffeeVariety
 static func get_dictionary() -> Dictionary:
 	var dict = {}
 	
-	var kintamani = CoffeeVariety.new()
-	kintamani.species_name = "Arabica"
-	kintamani.variety_name = "Kintamani"
-	kintamani.base_acidity = 0
-	kintamani.base_aroma = 0
-	kintamani.base_sweetness = 3
-	kintamani.base_body = 8
-	kintamani.base_flavor = 0
-	kintamani.base_bitterness = 4
-	kintamani.target_acidity = 8
-	kintamani.target_aroma = 9
-	kintamani.target_sweetness = 7
-	kintamani.target_flavor = 8
-	kintamani.target_body = 5
-	kintamani.target_bitterness = 2
-
-	# Terroir is already initialized to Arabica defaults above
-	dict["arabika_kintamani"] = kintamani
+	var k_path = "res://resources/varieties/kintamani.tres"
+	if ResourceLoader.exists(k_path):
+		dict["arabika_kintamani"] = load(k_path)
 	
-	var robusta = CoffeeVariety.new()
-	robusta.species_name = "Robusta"
-	robusta.variety_name = "Dampit"
-	robusta.base_acidity = 1
-	robusta.base_aroma = 5
-	robusta.base_sweetness = 2
-	robusta.base_body = 9
-	robusta.base_flavor = 4
-	robusta.base_bitterness = 8
-	# Robusta Terroir Adjustments
-	robusta.ideal_altitude_min = 400
-	robusta.ideal_altitude_max = 800
-	robusta.safe_altitude_min = 200
-	robusta.safe_altitude_max = 900
-	dict["robusta_dampit"] = robusta
-	
+	var r_path = "res://resources/varieties/robusta_dampit.tres"
+	if ResourceLoader.exists(r_path):
+		dict["robusta_dampit"] = load(r_path)
+		
 	return dict

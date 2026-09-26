@@ -244,6 +244,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="decoration" type="Node3D" parent="." unique_id=489955234]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020626113, 1)
+visible = false
 
 [node name="jalur_cangkul" type="Node3D" parent="decoration" unique_id=58360879]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1.9854383)

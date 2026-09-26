@@ -322,7 +322,8 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 					h["current_amount_kg"] -= taken
 					kg_needed -= taken
 					print("DEBUG: Took ", taken, " from hopper. Remaining kg_needed = ", kg_needed, " Hopper remaining = ", h["current_amount_kg"])
-					if h["current_amount_kg"] <= 0:
+					if h["current_amount_kg"] <= 0.01:
+						h["current_amount_kg"] = 0.0
 						h["current_batch"] = null
 						h["state"] = "IDLE"
 						print("DEBUG: Hopper is now IDLE")
@@ -349,7 +350,8 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 				var taken = min(kg_needed, p["current_amount_kg"])
 				p["current_amount_kg"] -= taken
 				kg_needed -= taken
-				if p["current_amount_kg"] <= 0:
+				if p["current_amount_kg"] <= 0.01:
+					p["current_amount_kg"] = 0.0
 					p["current_batch"] = null
 					p["state"] = "IDLE"
 		# ------------------------------------------------
@@ -373,7 +375,8 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 					var taken = min(kg_needed, r["current_amount_kg"])
 					r["current_amount_kg"] -= taken
 					kg_needed -= taken
-					if r["current_amount_kg"] <= 0:
+					if r["current_amount_kg"] <= 0.01:
+						r["current_amount_kg"] = 0.0
 						r["current_batch"] = null
 						r["state"] = "IDLE"
 			# ------------------------------------------------

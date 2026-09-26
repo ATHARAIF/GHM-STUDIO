@@ -1,0 +1,1406 @@
+[gd_scene format=3 uid="uid://dsa6av8afm54i"]
+
+[ext_resource type="Script" uid="uid://c7niea3s3ui2" path="res://scripts/ui/popups/testing_result_popup.gd" id="1_cgx6w"]
+[ext_resource type="Texture2D" uid="uid://ihmcjim1yn12" path="res://assets/ui/icons/Seting.png" id="3_cgx6w"]
+[ext_resource type="PackedScene" uid="uid://dehofmfbhqm8m" path="res://scenes/ui/popups/radar_widget.tscn" id="5_xcgj1"]
+[ext_resource type="PackedScene" uid="uid://6k1jn3ig8u6e" path="res://scenes/ui/popups/radar_widget_hexagon.tscn" id="11_fvfi4"]
+[ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="22_dko2c"]
+[ext_resource type="FontFile" uid="uid://blxtbq7avsy75" path="res://assets/font/LondrinaSolid-Light.ttf" id="23_0aa6p"]
+[ext_resource type="Texture2D" uid="uid://bdove5h4l2qds" path="res://assets/ui/icons/Money.png" id="24_ywb5f"]
+[ext_resource type="FontFile" uid="uid://bc2yt828criij" path="res://assets/font/LondrinaSolid-Regular.ttf" id="25_gtl6u"]
+[ext_resource type="Texture2D" uid="uid://ci6jejy2uc0so" path="res://assets/ui/icons/Close_panel_popup.png" id="26_kgxr0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gktk5"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_5t7dj"]
+allow_unpress = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b584f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3df0p"]
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yyxn3"]
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.53333336, 1, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ktk0j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pmcaf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vxwj"]
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 0)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_8f37s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5dmq"]
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0jewy"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8509804, 0.44313726, 0.23529412, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_tt4fo"]
+default_base_scale = 1.08
+TooltipLabel/colors/font_color = Color(1, 1, 1, 1)
+TooltipLabel/colors/font_outline_color = Color(1, 1, 1, 1)
+TooltipLabel/constants/outline_size = 2
+TooltipLabel/font_sizes/font_size = 24
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_0jewy")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_haegt"]
+color = Color(1, 1, 1, 0.39215687)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_fjqeb"]
+allow_unpress = true
+
+[sub_resource type="Theme" id="Theme_n3im3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c73pr"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 0.0
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y7qar"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_acjja"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_joicg"]
+content_margin_left = 13.0
+content_margin_top = 15.0
+content_margin_right = 13.0
+content_margin_bottom = 17.0
+texture = SubResource("CompressedTexture2D_acjja")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(171, 0, 55, 56)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jgkso"]
+load_path = "res://.godot/imported/ui_atlas.png-71f36247c8e6dac640aac754147301e4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_32ilt"]
+content_margin_left = 13.0
+content_margin_top = 18.0
+content_margin_right = 13.0
+content_margin_bottom = 14.0
+texture = SubResource("CompressedTexture2D_jgkso")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(228, 0, 55, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ewns6"]
+content_margin_left = 13.0
+content_margin_top = 15.0
+content_margin_right = 13.0
+content_margin_bottom = 17.0
+texture = SubResource("CompressedTexture2D_acjja")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(171, 0, 55, 56)
+
+[node name="TestingResultPopup" type="CanvasLayer" unique_id=723379850]
+layer = 20
+script = ExtResource("1_cgx6w")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=249128086]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1807523505]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme = ExtResource("22_dko2c")
+
+[node name="panel" type="PanelContainer" parent="CenterContainer" unique_id=1510447369]
+custom_minimum_size = Vector2(520, 300)
+layout_mode = 2
+theme_type_variation = &"panel_popup"
+
+[node name="panel_label" type="Label" parent="CenterContainer/panel" unique_id=1952936382]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -58)
+offset_transform_visual_only = false
+theme_type_variation = &"panel_label"
+text = "Testing Result"
+horizontal_alignment = 1
+
+[node name="contents" type="HBoxContainer" parent="CenterContainer/panel" unique_id=406974348]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="bean_list" type="VBoxContainer" parent="CenterContainer/panel/contents" unique_id=379990141]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="header" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list" unique_id=258460150]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/panel/contents/bean_list/header" unique_id=2104383395]
+layout_mode = 2
+theme_type_variation = &"label_terroir"
+theme_override_font_sizes/font_size = 32
+text = "COFFEE BEAN LIST"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/header" unique_id=65734676]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_gktk5")
+
+[node name="sort" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/header" unique_id=1150285576]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/panel/contents/bean_list/header/sort" unique_id=1152293321]
+layout_mode = 2
+text = "Sort by :"
+
+[node name="opt1" type="Button" parent="CenterContainer/panel/contents/bean_list/header/sort" unique_id=1654704972]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_sort"
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_5t7dj")
+icon = ExtResource("3_cgx6w")
+icon_alignment = 1
+expand_icon = true
+
+[node name="opt2" type="Button" parent="CenterContainer/panel/contents/bean_list/header/sort" unique_id=2118220231]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_sort"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_5t7dj")
+icon = ExtResource("3_cgx6w")
+icon_alignment = 1
+expand_icon = true
+
+[node name="opt3" type="Button" parent="CenterContainer/panel/contents/bean_list/header/sort" unique_id=222807041]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_sort"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_5t7dj")
+icon = ExtResource("3_cgx6w")
+icon_alignment = 1
+expand_icon = true
+
+[node name="opt4" type="Button" parent="CenterContainer/panel/contents/bean_list/header/sort" unique_id=1069649673]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_sort"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_5t7dj")
+icon = ExtResource("3_cgx6w")
+icon_alignment = 1
+expand_icon = true
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/panel/contents/bean_list" unique_id=1532153527]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_b584f")
+
+[node name="list" type="ScrollContainer" parent="CenterContainer/panel/contents/bean_list" unique_id=137897905]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+theme_override_constants/scrollbar_h_separation = 14
+scroll_hint_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list" unique_id=1563880799]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="bean" type="Button" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer" unique_id=1472033055]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ktk0j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean" unique_id=1317851477]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="name" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=70107889]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=912575035]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Kintamani"
+
+[node name="year" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=1816818600]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "2077"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1704437442]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pmcaf")
+
+[node name="score" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1100904291]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+
+[node name="size" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=442333015]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100g"
+horizontal_alignment = 2
+
+[node name="stock" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1312763630]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "122/1223"
+horizontal_alignment = 2
+
+[node name="bean2" type="Button" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer" unique_id=744508319]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ktk0j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean2" unique_id=1712098030]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="name" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=1049448125]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean2/HBoxContainer/name" unique_id=1919336314]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Kintamani"
+
+[node name="year" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean2/HBoxContainer/name" unique_id=625168558]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "2077"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=67466439]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pmcaf")
+
+[node name="score" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=582003178]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+
+[node name="size" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=1825089718]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100g"
+horizontal_alignment = 2
+
+[node name="stock" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean2/HBoxContainer" unique_id=1332564555]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "122/1223"
+horizontal_alignment = 2
+
+[node name="bean3" type="Button" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer" unique_id=1622550790]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ktk0j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean3" unique_id=1250612621]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="name" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=448598560]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean3/HBoxContainer/name" unique_id=1054174623]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Kintamani"
+
+[node name="year" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean3/HBoxContainer/name" unique_id=1619952593]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "2077"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=1310984846]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pmcaf")
+
+[node name="score" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=1867081879]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+
+[node name="size" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=167844672]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100g"
+horizontal_alignment = 2
+
+[node name="stock" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean3/HBoxContainer" unique_id=1839120548]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "122/1223"
+horizontal_alignment = 2
+
+[node name="bean4" type="Button" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer" unique_id=2025790627]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ktk0j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean4" unique_id=759298943]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="name" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=633158077]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean4/HBoxContainer/name" unique_id=918806751]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Kintamani"
+
+[node name="year" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean4/HBoxContainer/name" unique_id=251475318]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "2077"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=330496094]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pmcaf")
+
+[node name="score" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=1218339728]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+
+[node name="size" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=1951413289]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100g"
+horizontal_alignment = 2
+
+[node name="stock" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean4/HBoxContainer" unique_id=1572107528]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "122/1223"
+horizontal_alignment = 2
+
+[node name="bean5" type="Button" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer" unique_id=1997020118]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ktk0j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean5" unique_id=1025601520]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="name" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=1972165154]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean5/HBoxContainer/name" unique_id=1579533958]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Kintamani"
+
+[node name="year" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean5/HBoxContainer/name" unique_id=340616960]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "2077"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=150654702]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pmcaf")
+
+[node name="score" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=329863904]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+
+[node name="size" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=1401333820]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100g"
+horizontal_alignment = 2
+
+[node name="stock" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean5/HBoxContainer" unique_id=2114767152]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "122/1223"
+horizontal_alignment = 2
+
+[node name="bean6" type="Button" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer" unique_id=754265013]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ktk0j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean6" unique_id=1674464947]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="name" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=560796611]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean6/HBoxContainer/name" unique_id=1328805605]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Kintamani"
+
+[node name="year" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean6/HBoxContainer/name" unique_id=1668383596]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "2077"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=128627380]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pmcaf")
+
+[node name="score" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=646620107]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+
+[node name="size" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=1994784183]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100g"
+horizontal_alignment = 2
+
+[node name="stock" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean6/HBoxContainer" unique_id=390513965]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "122/1223"
+horizontal_alignment = 2
+
+[node name="bean7" type="Button" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer" unique_id=440563043]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ktk0j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean7" unique_id=1585421502]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="name" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=1121150326]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean7/HBoxContainer/name" unique_id=1982308544]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Kintamani"
+
+[node name="year" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean7/HBoxContainer/name" unique_id=792416357]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "2077"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=1806813600]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pmcaf")
+
+[node name="score" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=1628293656]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+
+[node name="size" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=1301399965]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100g"
+horizontal_alignment = 2
+
+[node name="stock" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean7/HBoxContainer" unique_id=1449573795]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "122/1223"
+horizontal_alignment = 2
+
+[node name="bean8" type="Button" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer" unique_id=1373837084]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ktk0j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean8" unique_id=1363631553]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="name" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=1837551488]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean8/HBoxContainer/name" unique_id=969410130]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Kintamani"
+
+[node name="year" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean8/HBoxContainer/name" unique_id=784591238]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "2077"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=458801378]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pmcaf")
+
+[node name="score" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=626046044]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+
+[node name="size" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=672365705]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100g"
+horizontal_alignment = 2
+
+[node name="stock" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean8/HBoxContainer" unique_id=734803280]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "122/1223"
+horizontal_alignment = 2
+
+[node name="bean9" type="Button" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer" unique_id=916919691]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ktk0j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean9" unique_id=93176781]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="name" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=1295951356]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean9/HBoxContainer/name" unique_id=652424513]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Kintamani"
+
+[node name="year" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean9/HBoxContainer/name" unique_id=1431752031]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "2077"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=2088472813]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pmcaf")
+
+[node name="score" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=641826899]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+
+[node name="size" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=2107914828]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100g"
+horizontal_alignment = 2
+
+[node name="stock" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean9/HBoxContainer" unique_id=1201614590]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "122/1223"
+horizontal_alignment = 2
+
+[node name="bean10" type="Button" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer" unique_id=1013130242]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ktk0j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean10" unique_id=1545117162]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="name" type="VBoxContainer" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=696939804]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean10/HBoxContainer/name" unique_id=1191515831]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Kintamani"
+
+[node name="year" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean10/HBoxContainer/name" unique_id=53979171]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "2077"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=1885267380]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pmcaf")
+
+[node name="score" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=108734620]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+
+[node name="size" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=182081095]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100g"
+horizontal_alignment = 2
+
+[node name="stock" type="Label" parent="CenterContainer/panel/contents/bean_list/list/VBoxContainer/bean10/HBoxContainer" unique_id=793542126]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "122/1223"
+horizontal_alignment = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/panel/contents" unique_id=622526233]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="tab_button" type="HBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2" unique_id=1800332201]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="info" type="Button" parent="CenterContainer/panel/contents/VBoxContainer2/tab_button" unique_id=1051074555]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 0.7254902)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_0vxwj")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_8f37s")
+text = "INFO"
+
+[node name="ideal" type="Button" parent="CenterContainer/panel/contents/VBoxContainer2/tab_button" unique_id=1432863965]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_0vxwj")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_8f37s")
+text = "IDEAL"
+
+[node name="terroir" type="Button" parent="CenterContainer/panel/contents/VBoxContainer2/tab_button" unique_id=724000335]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_0vxwj")
+disabled = true
+toggle_mode = true
+button_group = SubResource("ButtonGroup_8f37s")
+text = "TERROIR"
+
+[node name="sales" type="Button" parent="CenterContainer/panel/contents/VBoxContainer2/tab_button" unique_id=1799716586]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yyxn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3df0p")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_0vxwj")
+disabled = true
+toggle_mode = true
+button_group = SubResource("ButtonGroup_8f37s")
+text = "SALES"
+
+[node name="header" type="HBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2" unique_id=451415735]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="variety_name" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/header" unique_id=526023935]
+layout_mode = 2
+theme_type_variation = &"label_terroir"
+text = "Variety"
+
+[node name="species_name" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/header" unique_id=1354018393]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_type_variation = &"label_species"
+text = "Species"
+
+[node name="stats" type="HBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2" unique_id=1973612751]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="packaging_3d" type="Panel" parent="CenterContainer/panel/contents/VBoxContainer2/stats" unique_id=849744157]
+custom_minimum_size = Vector2(154, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme_override_styles/panel = SubResource("StyleBoxFlat_m5dmq")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2/stats" unique_id=1620745390]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="radar" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer2" unique_id=956399758 instance=ExtResource("5_xcgj1")]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = SubResource("Theme_tt4fo")
+key_count = 7
+radius = 82.975
+key_items = Array[Dictionary]([{
+"title": "Sweetness
+",
+"tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Fusce nisl sapien, cursus sit amet dui sit amet, pharetra egestas tortor.
+Praesent in porta nibh. Pellentesque ac mauris id purus mollis bibendum a sed sem. In at elementum velit, id dictum massa. Phasellus consectetur eros et nibh aliquet pretium.
+Proin imperdiet purus lorem, a euismod neque porttitor quis. Fusce quis cursus urna. Pellentesque gravida lacinia lectus, ac consequat mi.
+Duis ligula leo, bibendum a velit id, dignissim volutpat mi.
+Vivamus vel tempor lacus. Proin sit amet varius libero, vel placerat felis.",
+"value": 2.4000000000000004
+}, {
+"title": "Aroma",
+"tooltip": "",
+"value": 3.0
+}, {
+"title": "Acidity",
+"tooltip": "",
+"value": 1.0
+}, {
+"title": "Flavour",
+"tooltip": "",
+"value": 0.0
+}, {
+"title": "Bitterness",
+"tooltip": "",
+"value": 0.0
+}, {
+"title": "Typicity",
+"tooltip": "",
+"value": 0.0
+}, {
+"title": "Body",
+"tooltip": "",
+"value": 0.0
+}])
+font = ExtResource("23_0aa6p")
+font_size = 16
+font_color = Color(1, 1, 1, 1)
+font_outline_color = Color(0.5529412, 0.43137255, 0.3882353, 0)
+title_seperation = 5.305
+background_color = Color(0, 0, 0, 0.15294118)
+background_outline_color = Color(1, 1, 1, 0.3764706)
+background_outline_width = 0.7
+graph_color = Color(0.20392157, 0.78039217, 0.34901962, 0.39215687)
+graph_outline_color = Color(0.20392157, 0.78039217, 0.34901962, 1)
+graph_outline_width = 0.5
+guide_color = Color(1, 1, 1, 0.44313726)
+guide_width = 0.5
+items/key_0/title = "Sweetness
+"
+items/key_1/title = "Aroma"
+items/key_2/title = "Acidity"
+items/key_3/value = 0.0
+items/key_3/title = "Flavour"
+items/key_3/tooltip = ""
+items/key_4/value = 0.0
+items/key_4/title = "Bitterness"
+items/key_4/tooltip = ""
+items/key_5/value = 0.0
+items/key_5/title = "Typicity"
+items/key_5/tooltip = ""
+items/key_6/value = 0.0
+items/key_6/title = "Body"
+items/key_6/tooltip = ""
+extra_datasets_count = 0
+
+[node name="rating" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer2" unique_id=242816493]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "⭐90"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2/stats" unique_id=1879770877]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="speciality" type="VBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer" unique_id=992299279]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer/speciality" unique_id=1237520059]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Grade:"
+
+[node name="value" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer/speciality" unique_id=17037622]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "value"
+
+[node name="size" type="VBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer" unique_id=1777159026]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer/size" unique_id=864523231]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Size:"
+
+[node name="value" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer/size" unique_id=1440530980]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "value"
+
+[node name="stock" type="VBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer" unique_id=1263192026]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer/stock" unique_id=1976653589]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Stock:"
+
+[node name="value" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer/stock" unique_id=1355070446]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_0aa6p")
+text = "value"
+
+[node name="aftertaste" type="VBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2" unique_id=102181917]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/aftertaste" unique_id=1450099373]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Aftertastes:"
+
+[node name="GridContainer" type="HBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2/aftertaste" unique_id=1442521437]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Panel" type="Panel" parent="CenterContainer/panel/contents/VBoxContainer2/aftertaste/GridContainer" unique_id=2030814507]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="note" type="VBoxContainer" parent="CenterContainer/panel/contents/VBoxContainer2" unique_id=991665568]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="label" type="Label" parent="CenterContainer/panel/contents/VBoxContainer2/note" unique_id=1221199832]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Notes:"
+
+[node name="value" type="RichTextLabel" parent="CenterContainer/panel/contents/VBoxContainer2/note" unique_id=1969314722]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("23_0aa6p")
+text = "lorem ipsum dolor sit amet consectetur adipiscing elit blanditiis officia aliquip sint quo eiusmod ut sed est distinctio sunt id do deleniti est deleniti provident fugiat soluta eu ullamco qui facilis id consectetur nisi facere animi "
+fit_content = true
+
+[node name="content2" type="VBoxContainer" parent="CenterContainer/panel" unique_id=1055955455]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="bean_name" type="HBoxContainer" parent="CenterContainer/panel/content2" unique_id=2083546370]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="variety" type="Label" parent="CenterContainer/panel/content2/bean_name" unique_id=616318899]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"label_terroir"
+text = "VARIETY"
+
+[node name="arabica" type="Label" parent="CenterContainer/panel/content2/bean_name" unique_id=1483088347]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"label_arabica"
+text = "Arabica"
+
+[node name="robusta" type="Label" parent="CenterContainer/panel/content2/bean_name" unique_id=1286706710]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"label_robusta"
+text = "Robusta"
+
+[node name="bean_detail" type="HBoxContainer" parent="CenterContainer/panel/content2" unique_id=1698397885]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="left" type="VBoxContainer" parent="CenterContainer/panel/content2/bean_detail" unique_id=2008332212]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="bean_data" type="VBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left" unique_id=226902334]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="data1" type="HBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left/bean_data" unique_id=2000498326]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content2/bean_detail/left/bean_data/data1" unique_id=1105257071]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Batch"
+
+[node name="value" type="Label" parent="CenterContainer/panel/content2/bean_detail/left/bean_data/data1" unique_id=912239915]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+text = "value"
+
+[node name="data2" type="HBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left/bean_data" unique_id=762850055]
+visible = false
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content2/bean_detail/left/bean_data/data2" unique_id=1476951322]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "label2"
+
+[node name="value" type="Label" parent="CenterContainer/panel/content2/bean_detail/left/bean_data/data2" unique_id=1956904902]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"label_varietas"
+text = "value"
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/panel/content2/bean_detail/left" unique_id=1925857547]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_haegt")
+
+[node name="slider" type="VBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left" unique_id=1933670512]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content2/bean_detail/left/slider" unique_id=868127513]
+layout_mode = 2
+text = "Roasting Level"
+
+[node name="container" type="VBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left/slider" unique_id=1314488979]
+layout_mode = 2
+
+[node name="slider" type="HSlider" parent="CenterContainer/panel/content2/bean_detail/left/slider/container" unique_id=725576174]
+layout_mode = 2
+step = 25.0
+value = 100.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="value" type="Label" parent="CenterContainer/panel/content2/bean_detail/left/slider/container" unique_id=1058452839]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 4)
+theme_override_fonts/font = ExtResource("23_0aa6p")
+theme_override_font_sizes/font_size = 12
+text = "value"
+horizontal_alignment = 1
+
+[node name="chart" type="VBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left" unique_id=1199901044]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="label" type="Label" parent="CenterContainer/panel/content2/bean_detail/left/chart" unique_id=236943946]
+layout_mode = 2
+text = "Overview"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/panel/content2/bean_detail/left/chart" unique_id=1430484446]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_haegt")
+
+[node name="radar" parent="CenterContainer/panel/content2/bean_detail/left/chart" unique_id=374824187 instance=ExtResource("11_fvfi4")]
+layout_mode = 2
+radius = 65.0
+font = ExtResource("23_0aa6p")
+font_size = 12
+font_color = Color(1, 1, 1, 1)
+font_outline_color = Color(0.5529412, 0.43137255, 0.3882353, 0)
+title_seperation = 5.305
+background_color = Color(0, 0, 0, 0.15294118)
+background_outline_color = Color(1, 1, 1, 0.3764706)
+background_outline_width = 0.7
+graph_color = Color(0.20392157, 0.78039217, 0.34901962, 0.39215687)
+graph_outline_color = Color(0.20392157, 0.78039217, 0.34901962, 1)
+graph_outline_width = 0.5
+guide_color = Color(1, 1, 1, 0.44313726)
+guide_width = 0.5
+extra_datasets_count = 1
+extra_dataset_0/color = Color(1, 0.8352941, 0.30980393, 0.7058824)
+extra_dataset_0/outline_color = Color(0.9607843, 0.49803922, 0.09019608, 1)
+extra_dataset_0/outline_width = 1.5
+extra_dataset_0/pulse_speed = 0.9
+extra_dataset_0/pulse_min_alpha = 0.3
+extra_dataset_0/key_0/value = 0.0
+extra_dataset_0/key_1/value = 0.0
+extra_dataset_0/key_2/value = 0.0
+extra_dataset_0/key_3/value = 0.0
+extra_dataset_0/key_4/value = 0.0
+extra_dataset_0/key_5/value = 0.0
+
+[node name="methods" type="VBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left" unique_id=1350540398]
+visible = false
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content2/bean_detail/left/methods" unique_id=1757773643]
+layout_mode = 2
+text = "Methods"
+
+[node name="toggle_buttons" type="HBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left/methods" unique_id=1133719113]
+layout_mode = 2
+
+[node name="opt" type="Button" parent="CenterContainer/panel/content2/bean_detail/left/methods/toggle_buttons" unique_id=789233187]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_toggle"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_fjqeb")
+text = "option1"
+
+[node name="opt2" type="Button" parent="CenterContainer/panel/content2/bean_detail/left/methods/toggle_buttons" unique_id=1787409156]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_toggle"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_fjqeb")
+text = "option2"
+
+[node name="opt3" type="Button" parent="CenterContainer/panel/content2/bean_detail/left/methods/toggle_buttons" unique_id=123932376]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_toggle"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_fjqeb")
+text = "option3"
+
+[node name="cost_turn" type="VBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left" unique_id=1461174052]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="cost" type="HBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left/cost_turn" unique_id=1270068468]
+visible = false
+layout_mode = 2
+
+[node name="label" type="Label" parent="CenterContainer/panel/content2/bean_detail/left/cost_turn/cost" unique_id=297004939]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+text = "Cost"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/panel/content2/bean_detail/left/cost_turn/cost" unique_id=1461917509]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("22_dko2c")
+theme_override_constants/separation = 0
+
+[node name="icon_button" type="TextureButton" parent="CenterContainer/panel/content2/bean_detail/left/cost_turn/cost/HBoxContainer" unique_id=705473392]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = SubResource("Theme_n3im3")
+texture_normal = ExtResource("24_ywb5f")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="value" type="Label" parent="CenterContainer/panel/content2/bean_detail/left/cost_turn/cost/HBoxContainer" unique_id=873764138]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_type_variation = &"label_varietas"
+text = "value"
+
+[node name="right" type="PanelContainer" parent="CenterContainer/panel/content2/bean_detail" unique_id=1612295615]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("22_dko2c")
+theme_type_variation = &"panel_popup"
+theme_override_styles/panel = SubResource("StyleBoxFlat_c73pr")
+
+[node name="chart" type="VBoxContainer" parent="CenterContainer/panel/content2/bean_detail/right" unique_id=847343475]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="label" type="Label" parent="CenterContainer/panel/content2/bean_detail/right/chart" unique_id=698194372]
+layout_mode = 2
+text = "Overview"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/panel/content2/bean_detail/right/chart" unique_id=1613502429]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_haegt")
+
+[node name="radar" parent="CenterContainer/panel/content2/bean_detail/right/chart" unique_id=1888193728 instance=ExtResource("11_fvfi4")]
+layout_mode = 2
+radius = 65.0
+font = ExtResource("23_0aa6p")
+font_size = 12
+font_color = Color(1, 1, 1, 1)
+font_outline_color = Color(0.5529412, 0.43137255, 0.3882353, 0)
+title_seperation = 5.305
+background_color = Color(0, 0, 0, 0.15294118)
+background_outline_color = Color(1, 1, 1, 0.3764706)
+background_outline_width = 0.7
+graph_color = Color(0.20392157, 0.78039217, 0.34901962, 0.39215687)
+graph_outline_color = Color(0.20392157, 0.78039217, 0.34901962, 1)
+graph_outline_width = 0.5
+guide_color = Color(1, 1, 1, 0.44313726)
+guide_width = 0.5
+extra_datasets_count = 1
+extra_dataset_0/color = Color(1, 0.8352941, 0.30980393, 0.7058824)
+extra_dataset_0/outline_color = Color(0.9607843, 0.49803922, 0.09019608, 1)
+extra_dataset_0/outline_width = 1.5
+extra_dataset_0/pulse_speed = 0.9
+extra_dataset_0/pulse_min_alpha = 0.3
+extra_dataset_0/key_0/value = 0.0
+extra_dataset_0/key_1/value = 0.0
+extra_dataset_0/key_2/value = 0.0
+extra_dataset_0/key_3/value = 0.0
+extra_dataset_0/key_4/value = 0.0
+extra_dataset_0/key_5/value = 0.0
+
+[node name="confirmation" type="HBoxContainer" parent="CenterContainer/panel/content2" unique_id=1895184190]
+layout_mode = 2
+alignment = 2
+
+[node name="space" type="VSeparator" parent="CenterContainer/panel/content2/confirmation" unique_id=1307783296]
+layout_mode = 2
+theme_override_constants/separation = 380
+theme_override_styles/separator = SubResource("StyleBoxEmpty_y7qar")
+
+[node name="confirm" type="Button" parent="CenterContainer/panel/content2/confirmation" unique_id=1438438982]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"button_confirm"
+theme_override_fonts/font = ExtResource("25_gtl6u")
+text = "Confirm"
+
+[node name="close" type="Button" parent="CenterContainer/panel" unique_id=55263393]
+custom_minimum_size = Vector2(40, 46)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(32, -46)
+offset_transform_visual_only = false
+theme_type_variation = &"button_close_panel"
+theme_override_styles/normal = SubResource("StyleBoxTexture_joicg")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_32ilt")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ewns6")
+icon = ExtResource("26_kgxr0")
+expand_icon = true

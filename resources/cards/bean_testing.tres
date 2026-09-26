@@ -1,12 +1,18 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://7mrkwcsb1xyo"]
 
 [ext_resource type="Script" uid="uid://uich76k1cing" path="res://scripts/data/card_data.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://dsa6av8afm54i" path="res://scenes/ui/popups/testing_result_popup.tscn" id="2_popup"]
+[ext_resource type="PackedScene" uid="uid://c8a70dhainbdy" path="res://scenes/tiles/process/testing_tile.tscn" id="3_gkd56"]
+[ext_resource type="Texture2D" uid="uid://cwo6lard10pvc" path="res://assets/ui/cards/tile_shapes/Type=3x2 L-Shape 2.png" id="4_a77id"]
 
 [resource]
 script = ExtResource("1_script")
 card_name = "Bean Testing"
-process_id = "DP02"
+process_id = "TEST01"
+tile_shape_icon = ExtResource("4_a77id")
+tile_scene = ExtResource("3_gkd56")
 has_result_popup = true
+custom_result_popup_ui = ExtResource("2_popup")
 availability = 2
-unlock_condition = "after_roasting"
+unlock_condition = "DP03"
 metadata/_custom_type_script = "uid://uich76k1cing"

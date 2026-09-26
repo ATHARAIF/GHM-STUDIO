@@ -135,6 +135,11 @@ signal title_clicked(button: MouseButton, index: int)
 	set(value):
 		graph_outline_width = value
 		queue_redraw()
+## The radius of the dots at the vertices of the graph. Set to 0.0 to hide them.
+@export var vertex_dot_radius := 3.0:
+	set(value):
+		vertex_dot_radius = value
+		queue_redraw()
 
 @export_subgroup("Guide")
 ## Determines the visibility of the guides. See [member guide_step] for more.
@@ -743,6 +748,9 @@ func _rg_draw_graph() -> void:
 			var out_points = ext_points.duplicate()
 			out_points.append(out_points[0])
 			draw_polyline(out_points, out_clr, out_w)
+			if vertex_dot_radius > 0:
+				for p in ext_points:
+					draw_circle(p, vertex_dot_radius, out_clr)
 
 
 func _rg_draw_graph_outline() -> void:
@@ -756,9 +764,14 @@ func _rg_draw_graph_outline() -> void:
 		var target := _get_polygon_point(index)
 		points.append(radius_v2.lerp(target, value / max_value))
 
-	points.append(points[0])
+	var points_for_line = points.duplicate()
+	points_for_line.append(points[0])
 
-	draw_polyline(points, graph_outline_color, graph_outline_width)
+	draw_polyline(points_for_line, graph_outline_color, graph_outline_width)
+	
+	if vertex_dot_radius > 0:
+		for p in points:
+			draw_circle(p, vertex_dot_radius, graph_outline_color)
 
 
 func _rg_draw_guides() -> void:

@@ -277,7 +277,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8gf4j")
 
-[sub_resource type="MultiMesh" id="MultiMesh_ytrbw"]
+[sub_resource type="MultiMesh" id="MultiMesh_7il03"]
 transform_format = 1
 instance_count = 27
 mesh = SubResource("ArrayMesh_7b6nj")
@@ -336,7 +336,7 @@ autoplay = &"cangkul"
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="decoration" unique_id=1525315756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1968124, 0.09617047, -0.26907063)
 visible = false
-multimesh = SubResource("MultiMesh_ytrbw")
+multimesh = SubResource("MultiMesh_7il03")
 script = ExtResource("5_i3vu3")
 glb_file = ExtResource("6_esk3q")
 grid_size = Vector2i(9, 3)
