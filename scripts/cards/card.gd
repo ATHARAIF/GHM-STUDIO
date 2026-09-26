@@ -119,6 +119,9 @@ func _setup_ui() -> void:
 		requires_sunny_weather = card_data.requires_sunny_weather
 		card_color = card_data.card_color
 
+	if tex_illustration and card_data.illustration:
+		tex_illustration.texture = card_data.illustration
+
 	if lbl_process:
 		lbl_process.text = card_data.card_name.to_upper()
 	if lbl_turn:

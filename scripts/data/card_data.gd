@@ -10,6 +10,7 @@ class_name CardData
 
 @export_group("Card Visual & 3D")
 @export var card_color: Color = Color(0.85, 0.44, 0.25)
+@export var illustration: Texture2D
 @export var tile_shape_icon: Texture2D
 @export var tile_scene: PackedScene
 @export var requires_sunny_weather: bool = false

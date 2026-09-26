@@ -58,6 +58,15 @@ func get_all_hoppers() -> Array[Dictionary]:
 			hoppers.append(m)
 	return hoppers
 
+## Mengambil semua mesin (Patio, Roaster, dll) yang memegang batch tahun tertentu
+func get_machines_with_batch(batch_year: int) -> Array[Dictionary]:
+	var matches: Array[Dictionary] = []
+	for key in placed_machines:
+		var m = placed_machines[key]
+		if m["current_batch"] != null and m["current_batch"].batch_year == batch_year:
+			matches.append(m)
+	return matches
+
 ## Fungsi utama memecah batch dari kebun ke dalam Hopper (Click-to-fill)
 ## Mengembalikan jumlah kg yang berhasill masuk.
 func fill_hopper(hopper_id: String, source_batch: CoffeeBatch, input_kg: int) -> int:
@@ -83,6 +92,9 @@ func fill_hopper(hopper_id: String, source_batch: CoffeeBatch, input_kg: int) ->
 	
 	hopper["current_amount_kg"] += amount_to_add
 	hopper["current_batch"].cherry_kg = hopper["current_amount_kg"]
+	
+	if hopper["current_amount_kg"] > 0:
+		hopper["state"] = "USED"
 	
 	hopper_updated.emit(hopper_id)
 	return amount_to_add

@@ -23,7 +23,7 @@ enum ItemCategory { HOPPER, PULPER, DRYER, ROASTER, PACKAGING, DECORATION, TOOL,
 @export var allowed_methods: Array[String] = []
 
 @export_group("Visuals")
-## Ikon untuk ditampilkan di Shop atau UI Pemilihan Mesin
-@export var icon: Texture2D
+## Ilustrasi untuk ditampilkan di Shop atau UI Pemilihan Mesin
+@export var illustration: Texture2D
 ## Wujud 3D untuk lantai pabrik
 @export var tile_scene: PackedScene

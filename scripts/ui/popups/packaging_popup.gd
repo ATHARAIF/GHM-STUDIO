@@ -1,5 +1,13 @@
 extends CanvasLayer
 
+const PACKING_COSTS = {
+	"size": { 100.0: 1.0, 200.0: 1.2, 500.0: 1.5, 1000.0: 2.0 },
+	"type": { "pouch": 0.5, "f_bottom": 1.5, "gusset": 1.0 },
+	"material": { "plastic": 0.25, "paper": 0.5, "alumunium": 1.0 }
+}
+var calculated_total_cost: float = 0.0
+
+
 var total_yield_grams: float = 0.0
 
 # Current Selections
@@ -179,8 +187,19 @@ func _update_ui() -> void:
 	if selected_material == "": is_valid = false
 	if current_packs <= 0: is_valid = false
 	
+	calculated_total_cost = 0.0
+	if is_valid:
+		var size_cost = PACKING_COSTS.size.get(selected_size, 1.0)
+		var type_cost = PACKING_COSTS.type.get(selected_type, 0.5)
+		var material_cost = PACKING_COSTS.material.get(selected_material, 0.25)
+		calculated_total_cost = (size_cost + type_cost + material_cost) * current_packs
+	
 	if btn_confirm:
 		btn_confirm.disabled = not is_valid
+		if is_valid:
+			btn_confirm.text = "Confirm ($" + str(calculated_total_cost) + ")"
+		else:
+			btn_confirm.text = "Confirm"
 		
 	if pcs_value:
 		pcs_value.text = str(current_packs) + " pcs"
@@ -220,6 +239,7 @@ func _on_confirm() -> void:
 			"type": selected_type,
 			"material": selected_material,
 			"turn_duration": calculated_turns,
+			"override_cost": int(calculated_total_cost),
 			"target_batch_year": target_batch.batch_year if target_batch else 0
 		}
 		var em = get_node("/root/EventManager")

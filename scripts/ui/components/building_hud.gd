@@ -106,9 +106,12 @@ func _load_inventory() -> void:
 			"machine_id": m_id,
 			"raw_item_data": item,
 			"name": item.item_name,
+			"illustration": item.illustration,
 			"desc": "Kapasitas: " + str(item.max_capacity),
 			"buy_price": item.buy_price,
 			"sell_price": item.sell_price,
+			"current_batch": m_data.get("current_batch", null),
+			"current_amount_kg": m_data.get("current_amount_kg", 0),
 			"specs": {
 				"Max Capacity": str(item.max_capacity)
 			},
@@ -135,6 +138,7 @@ func _load_shop() -> void:
 		var panel_data = {
 			"raw_item_data": item,
 			"name": item.item_name,
+			"illustration": item.illustration,
 			"desc": "Kapasitas: " + str(item.max_capacity),
 			"buy_price": item.buy_price,
 			"sell_price": item.sell_price,

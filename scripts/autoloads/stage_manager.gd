@@ -133,13 +133,8 @@ func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Di
 			if tile_labels:
 				tile_labels.set_ready_state(true)
 		else:
-			# Apply effects immediately for normal cards
-			var target_b = get_oldest_ready_batch(card_data.process_id)
-			if target_b:
-				target_b.apply_effects(tile_dict)
-			call_deferred("emit_signal", "stats_changed")
-			if tile_node and is_instance_valid(tile_node):
-				PlacementManager.remove_tile_from_grid(tile_node)
+			# Apply effects immediately using the main resolution flow
+			resolve_interaction(tile_dict, false)
 			return # Do not append to active_tiles if instantly resolved
 			
 	active_tiles.append(tile_dict)
@@ -214,26 +209,8 @@ func advance_turn() -> void:
 				if tile_dict.get("tile_labels") and is_instance_valid(tile_dict.tile_labels):
 					tile_dict.tile_labels.set_ready_state(true)
 			else:
-				# Apply effects immediately for normal cards
-				var target_b: CoffeeBatch = null
-				if tile_dict.has("target_batch_year") and tile_dict.target_batch_year != -1:
-					if batches.has(tile_dict.target_batch_year):
-						target_b = batches[tile_dict.target_batch_year]
-				if target_b == null:
-					target_b = get_oldest_ready_batch(tile_dict.data.process_id)
-				
-				target_b.add_history(tile_dict.data.card_name)
-				target_b.apply_effects(tile_dict)
-				stats_changed.emit()
-				if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
-					if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
-						FactoryManager.placed_machines[tile_dict["machine_id"]]["state"] = "IDLE"
-				
-				if tile_dict.tile and is_instance_valid(tile_dict.tile):
-					PlacementManager.remove_tile_from_grid(tile_dict.tile)
-					
-				# Remove from active ticking list
-				active_tiles.remove_at(i)
+				# Resolve the card properly using the main interaction logic
+				resolve_interaction(tile_dict, false)
 				
 	# Cleanup ghost batches (missed harvest)
 	var dead_years = []
@@ -330,24 +307,53 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 		var final_yield = raw_yield * target_b.accumulated_yield_modifier
 		target_b.cherry_kg = int(clamp(final_yield, 0, 5000))
 		
-	if tile_dict.data.process_id == "WP01":
+	if tile_dict.data.process_id == "WP01" or tile_dict.data.process_id == "DP01":
+		# --- HYBRID FIX: Sedot kopi dari Hopper fisik! ---
+		var kg_needed = target_b.cherry_kg
+		print("DEBUG: Sedot dari Hopper! kg_needed = ", kg_needed)
+		var hoppers = FactoryManager.get_all_hoppers()
+		for h in hoppers:
+			print("DEBUG: Checking Hopper ", h["id"], " amount: ", h["current_amount_kg"])
+			if kg_needed <= 0: break
+			if h["current_amount_kg"] > 0 and h["current_batch"] != null:
+				print("DEBUG: Hopper holds ", h["current_batch"].variety_name, " ", h["current_batch"].batch_year, " Target: ", target_b.variety_name, " ", target_b.batch_year)
+				if h["current_batch"].variety_name == target_b.variety_name and h["current_batch"].batch_year == target_b.batch_year:
+					var taken = min(kg_needed, h["current_amount_kg"])
+					h["current_amount_kg"] -= taken
+					kg_needed -= taken
+					print("DEBUG: Took ", taken, " from hopper. Remaining kg_needed = ", kg_needed, " Hopper remaining = ", h["current_amount_kg"])
+					if h["current_amount_kg"] <= 0:
+						h["current_batch"] = null
+						h["state"] = "IDLE"
+						print("DEBUG: Hopper is now IDLE")
+					FactoryManager.hopper_updated.emit(h["id"])
+		# ------------------------------------------------
+		
 		# Processing / Washing Station
 		if target_b.green_bean_kg == 0 and target_b.cherry_kg > 0:
 			target_b.green_bean_kg = target_b.cherry_kg * 0.2
 			target_b.cherry_kg = 0 # Cherry sudah diubah jadi Green Bean
-		
-	if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
-		if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
-			FactoryManager.placed_machines[tile_dict["machine_id"]]["state"] = "IDLE"
 			
-	if tile_dict.tile and is_instance_valid(tile_dict.tile):
-		PlacementManager.remove_tile_from_grid(tile_dict.tile)
-		
 	if tile_dict.data.process_id == "DP01":
+		# --- HYBRID FIX: Sedot Green Bean dari Patio fisik! ---
 		if target_b.green_bean_kg == 0 and target_b.cherry_kg > 0:
-			# Fallback kalau belum diproses di Washing Station
+			# Fallback kalau belum diproses di Washing Station (langsung Natural)
 			target_b.green_bean_kg = target_b.cherry_kg * 0.2
 			target_b.cherry_kg = 0
+			
+		var kg_needed = target_b.green_bean_kg
+		var patios = FactoryManager.get_machines_with_batch(target_b.batch_year)
+		for p in patios:
+			if kg_needed <= 0: break
+			if p["current_amount_kg"] > 0:
+				var taken = min(kg_needed, p["current_amount_kg"])
+				p["current_amount_kg"] -= taken
+				kg_needed -= taken
+				if p["current_amount_kg"] <= 0:
+					p["current_batch"] = null
+					p["state"] = "IDLE"
+		# ------------------------------------------------
+			
 		if target_b.roasted_bean_kg == 0 and target_b.green_bean_kg > 0:
 			target_b.roasted_bean_kg = target_b.green_bean_kg * 0.85
 			target_b.green_bean_kg = 0 # Green Bean sudah diubah jadi Roasted Bean
@@ -357,6 +363,21 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 	elif tile_dict.data.process_id == "DP03":
 		if tile_dict.has("packs") and tile_dict.has("size"):
 			var kg_used = (tile_dict["packs"] * tile_dict["size"]) / 1000.0
+			
+			# --- HYBRID FIX: Sedot Roasted Bean dari Roaster fisik! ---
+			var kg_needed = kg_used
+			var roasters = FactoryManager.get_machines_with_batch(target_b.batch_year)
+			for r in roasters:
+				if kg_needed <= 0: break
+				if r["current_amount_kg"] > 0:
+					var taken = min(kg_needed, r["current_amount_kg"])
+					r["current_amount_kg"] -= taken
+					kg_needed -= taken
+					if r["current_amount_kg"] <= 0:
+						r["current_batch"] = null
+						r["state"] = "IDLE"
+			# ------------------------------------------------
+			
 			if target_b.get("reserved_roasted_bean_kg") != null:
 				target_b.reserved_roasted_bean_kg = max(0.0, target_b.reserved_roasted_bean_kg - kg_used)
 			target_b.roasted_bean_kg = max(0.0, target_b.roasted_bean_kg - kg_used)
@@ -365,6 +386,23 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 			if has_node("/root/WarehouseManager"):
 				var wm = get_node("/root/WarehouseManager")
 				wm.store_packed_goods(target_b, tile_dict)
+		
+	if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
+		if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
+			var m = FactoryManager.placed_machines[tile_dict["machine_id"]]
+			if tile_dict.data.process_id == "WP01":
+				m["current_batch"] = target_b
+				m["current_amount_kg"] = target_b.green_bean_kg
+				m["state"] = "USED"
+			elif tile_dict.data.process_id == "DP01":
+				m["current_batch"] = target_b
+				m["current_amount_kg"] = target_b.roasted_bean_kg
+				m["state"] = "USED"
+			else:
+				m["state"] = "IDLE"
+			
+	if tile_dict.tile and is_instance_valid(tile_dict.tile):
+		PlacementManager.remove_tile_from_grid(tile_dict.tile)
 			
 	elif tile_dict.data.process_id == "TEST01":
 		batch_flags["after_testing"] = true

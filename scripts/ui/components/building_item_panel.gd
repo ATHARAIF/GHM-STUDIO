@@ -1,7 +1,7 @@
 extends PanelContainer
 
 # Ref Ilustrasi gambar Item
-@onready var illustration = $VBoxContainer/Illustrasi
+@onready var illustration = $VBoxContainer/Illustration
 
 # Item Name
 @onready var item_name = $VBoxContainer/Content/VBoxContainer/ItemName/ItemName
@@ -83,7 +83,12 @@ func _set_machine_highlight(enable: bool) -> void:
 func setup_panel(data: Dictionary, mode: String) -> void:
 	current_data = data
 	
-	# Isi data teks dasar
+	# Isi data teks & gambar dasar
+	if illustration:
+		if data.has("illustration") and data["illustration"] != null:
+			illustration.texture = data["illustration"]
+		else:
+			illustration.texture = preload("res://icon.svg")
 	if item_name: item_name.text = data.get("name", "Unknown Item")
 	if lbl_desc: lbl_desc.text = data.get("desc", "Tanpa deskripsi")
 	if buy_price: buy_price.text = str(data.get("buy_price", 0))
@@ -135,7 +140,15 @@ func setup_panel(data: Dictionary, mode: String) -> void:
 		if cleaning_btn:
 			var state = data.get("state", "IDLE")
 			if state == "USED":
-				cleaning_btn.text = "In Use"
+				var label_text = "In Use"
+				if data.has("batch_name") and data["batch_name"] != "":
+					label_text += " - " + data["batch_name"]
+				elif data.has("current_batch") and data["current_batch"] != null:
+					label_text += " - " + data["current_batch"].variety_name + " " + str(data["current_batch"].batch_year)
+				if data.has("current_amount_kg") and data["current_amount_kg"] > 0:
+					label_text += " (%.1f kg)" % float(data["current_amount_kg"])
+				
+				cleaning_btn.text = label_text
 				cleaning_btn.disabled = true
 			elif data.get("wear_pct", 100) < 50:
 				cleaning_btn.text = "Cleaning"

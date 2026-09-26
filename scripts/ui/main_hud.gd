@@ -232,14 +232,6 @@ func _on_stats_changed() -> void:
 		
 	var t = StageManager.current_location.current_tree if (StageManager.current_location and StageManager.current_location.current_tree) else null
 	
-	# Auto-fix untuk batch lama (supaya transformasinya terlihat meski sudah diproses sebelum update skrip)
-	if b.completed_processes.has("WP01") and b.green_bean_kg == 0 and b.cherry_kg > 0:
-		b.green_bean_kg = b.cherry_kg * 0.2
-		b.cherry_kg = 0
-	if b.completed_processes.has("DP01") and b.roasted_bean_kg == 0 and b.green_bean_kg > 0:
-		b.roasted_bean_kg = b.green_bean_kg * 0.85
-		b.green_bean_kg = 0
-
 	if t:
 		if debug_body: debug_body.text = "Body: %.2f (Mod: %+.2f)" % [b.body, b.body - t.current_body]
 		if debug_acidity: debug_acidity.text = "Acidity: %.2f (Mod: %+.2f)" % [b.acidity, b.acidity - t.current_acidity]

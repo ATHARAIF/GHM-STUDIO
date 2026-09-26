@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="1_agfhb"]
 [ext_resource type="Script" uid="uid://cpjkugt6jlw6p" path="res://scripts/ui/components/building_item_panel.gd" id="1_q1inm"]
-[ext_resource type="Texture2D" uid="uid://c4yenilqdkg8v" path="res://assets/ui/icons/stats/money.svg" id="3_ey0bp"]
+[ext_resource type="Texture2D" uid="uid://bdove5h4l2qds" path="res://assets/ui/icons/Money.png" id="3_dls7u"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wom8j"]
 
@@ -36,7 +36,7 @@ script = ExtResource("1_q1inm")
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Illustrasi" type="TextureRect" parent="VBoxContainer" unique_id=189911884]
+[node name="Illustration" type="TextureRect" parent="VBoxContainer" unique_id=189911884]
 custom_minimum_size = Vector2(0, 100)
 custom_maximum_size = Vector2(-1, 100)
 layout_mode = 2
@@ -105,7 +105,7 @@ text = "Sell"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_wom8j")
-current_tab = 1
+current_tab = 4
 tabs_visible = false
 
 [node name="BuyTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=1799693074]
@@ -141,12 +141,11 @@ size_flags_vertical = 4
 theme_override_constants/separation = 1
 
 [node name="icon_button" type="TextureButton" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/BuyTab/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=980222778]
-modulate = Color(1, 0.8666667, 0, 1)
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 4
 theme = SubResource("Theme_dls7u")
-texture_normal = ExtResource("3_ey0bp")
+texture_normal = ExtResource("3_dls7u")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -163,6 +162,7 @@ size_flags_stretch_ratio = 0.4
 text = "Buy"
 
 [node name="StatusTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=1630191571]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rkcv6")
 metadata/_tab_index = 1
@@ -278,7 +278,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="SellTab" type="PanelContainer" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer" unique_id=814500399]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_slf7g")
 metadata/_tab_index = 4
@@ -310,12 +309,11 @@ size_flags_vertical = 4
 theme_override_constants/separation = 1
 
 [node name="icon_button" type="TextureButton" parent="VBoxContainer/Content/VBoxContainer/ValueTabContainer/SellTab/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1440125551]
-modulate = Color(1, 0.8666667, 0, 1)
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 4
 theme = SubResource("Theme_dls7u")
-texture_normal = ExtResource("3_ey0bp")
+texture_normal = ExtResource("3_dls7u")
 ignore_texture_size = true
 stretch_mode = 5
 
