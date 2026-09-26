@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://7eujgdopl4nn"]
 
+[ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="1_qfmj5"]
 [ext_resource type="Texture2D" uid="uid://cpxii2vgaxxbk" path="res://icon.svg" id="1_wqaeo"]
 [ext_resource type="Texture2D" uid="uid://dr4230ruvik4o" path="res://assets/ui/icons/stock.png" id="2_qfmj5"]
 [ext_resource type="FontFile" uid="uid://blxtbq7avsy75" path="res://assets/font/LondrinaSolid-Light.ttf" id="3_ywmrj"]
@@ -152,6 +153,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_qfmj5")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1891567624]
 layout_mode = 1

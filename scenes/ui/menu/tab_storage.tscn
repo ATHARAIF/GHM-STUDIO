@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b1eguy57oj3it"]
 
 [ext_resource type="Texture2D" uid="uid://dr4230ruvik4o" path="res://assets/ui/icons/stock.png" id="1_2tkwx"]
+[ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="1_128r3"]
 [ext_resource type="PackedScene" uid="uid://dehofmfbhqm8m" path="res://scenes/ui/popups/radar_widget.tscn" id="2_128r3"]
 [ext_resource type="FontFile" uid="uid://blxtbq7avsy75" path="res://assets/font/LondrinaSolid-Light.ttf" id="3_wf3p2"]
 [ext_resource type="FontFile" uid="uid://bc2yt828criij" path="res://assets/font/LondrinaSolid-Regular.ttf" id="4_a6gbf"]
@@ -81,6 +82,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_128r3")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=423673010]
 layout_mode = 1

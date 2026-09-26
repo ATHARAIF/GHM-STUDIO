@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://dr2uiuwtnaxxa"]
 
 [ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="1_mo5ph"]
+[ext_resource type="Script" uid="uid://bujkctpw4a3n2" path="res://scripts/ui/menu/menu_panel.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://fkvo3v7pypvo" path="res://themes/scripts/button_tab_anim.gd" id="2_vvd2i"]
 [ext_resource type="Texture2D" uid="uid://bp1ggnl1u1gcf" path="res://assets/ui/ui_atlas.png" id="3_8f2hf"]
-[ext_resource type="PackedScene" uid="uid://x8ljuv20vqik" path="res://scenes/ui/menu/tab_terroir.tscn" id="4_4tnp1"]
+[ext_resource type="PackedScene" uid="uid://x8ljuv20vqik" path="res://scenes/ui/menu/tab_farmland.tscn" id="4_4tnp1"]
 [ext_resource type="PackedScene" uid="uid://dnt3ghxtnn5x7" path="res://scenes/ui/menu/tab_coffeelog.tscn" id="5_gqdox"]
 [ext_resource type="PackedScene" uid="uid://b1eguy57oj3it" path="res://scenes/ui/menu/tab_storage.tscn" id="6_agyn7"]
 [ext_resource type="PackedScene" uid="uid://7eujgdopl4nn" path="res://scenes/ui/menu/tab_order.tscn" id="7_mo5ph"]
@@ -24,9 +25,10 @@ texture_margin_right = 5.0
 texture_margin_bottom = 10.0
 region_rect = Rect2(0, 0, 55, 56)
 
-[node name="MenuPanel" type="CanvasLayer" unique_id=2057925342]
+[node name="MenuPanel" type="CanvasLayer" unique_id=1867447752]
+script = ExtResource("1_script")
 
-[node name="menu_panel" type="Control" parent="." unique_id=508918949]
+[node name="menu_panel" type="Control" parent="." unique_id=1750370014]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,7 +64,7 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_1tmd5")
 
-[node name="tab_terroir" type="Button" parent="menu_panel/MarginContainer/HBoxContainer/tab_buttons" unique_id=558856767]
+[node name="tab_farmland" type="Button" parent="menu_panel/MarginContainer/HBoxContainer/tab_buttons" unique_id=558856767]
 texture_filter = 1
 custom_minimum_size = Vector2(120, 0)
 custom_maximum_size = Vector2(120, -1)
@@ -75,7 +77,7 @@ button_pressed = true
 action_mode = 0
 keep_pressed_outside = true
 button_group = SubResource("ButtonGroup_1nn7h")
-text = "TERROIR"
+text = "FARMLANDS"
 alignment = 2
 script = ExtResource("2_vvd2i")
 
@@ -162,8 +164,7 @@ size_flags_stretch_ratio = 9.0
 theme_type_variation = &"panel_popup"
 theme_override_styles/panel = SubResource("StyleBoxTexture_m81xx")
 
-[node name="tab_terroir" parent="menu_panel/MarginContainer/HBoxContainer/tab_contents" unique_id=1199853604 instance=ExtResource("4_4tnp1")]
-visible = true
+[node name="tab_farmland" parent="menu_panel/MarginContainer/HBoxContainer/tab_contents" unique_id=1380164621 instance=ExtResource("4_4tnp1")]
 layout_mode = 2
 
 [node name="tab_coffeelog" parent="menu_panel/MarginContainer/HBoxContainer/tab_contents" unique_id=1131410544 instance=ExtResource("5_gqdox")]
@@ -178,7 +179,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_terroir" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_terroir" method="_on_toggled"]
+[connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_farmland" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_farmland" method="_on_toggled"]
 [connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_coffee_log" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_coffee_log" method="_on_toggled"]
 [connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_storage" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_storage" method="_on_toggled"]
 [connection signal="toggled" from="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_order" to="menu_panel/MarginContainer/HBoxContainer/tab_buttons/tab_order" method="_on_toggled"]

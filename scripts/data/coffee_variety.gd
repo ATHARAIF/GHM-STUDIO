@@ -107,9 +107,5 @@ static func get_dictionary() -> Dictionary:
 	var k_path = "res://resources/varieties/kintamani.tres"
 	if ResourceLoader.exists(k_path):
 		dict["arabika_kintamani"] = load(k_path)
-	
-	var r_path = "res://resources/varieties/robusta_dampit.tres"
-	if ResourceLoader.exists(r_path):
-		dict["robusta_dampit"] = load(r_path)
 		
 	return dict

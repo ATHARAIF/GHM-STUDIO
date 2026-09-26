@@ -170,3 +170,4 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_2332w")
 icon = ExtResource("9_vn48o")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("3_vn48o")

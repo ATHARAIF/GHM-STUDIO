@@ -27,7 +27,7 @@ func _ready() -> void:
 	# Pastikan tombol close sembunyi saat mulai
 	if has_node("utility/close"):
 		$utility/close.hide()
-		$utility/close.pressed.connect(_close_popup)
+		$utility/close.pressed.connect(_on_close_pressed)
 		
 	# Initial UI update
 	_update_initial_state()
@@ -35,18 +35,43 @@ func _ready() -> void:
 const MENU_PANEL = preload("res://scenes/ui/menu/menu_panel.tscn")
 var active_menu: Node = null
 var active_popup_button: Button = null
+var _is_transitioning: bool = false
 
 func _on_menu_pressed() -> void:
+	if _is_transitioning: return
+	_is_transitioning = true
+	
+	# Beri waktu sedikit agar animasi tombol (squish/bounce) sempat terlihat
+	await get_tree().create_timer(0.15).timeout
+	
 	if active_menu != null: _close_popup()
 	else: _open_popup(MENU_PANEL, btn_menu)
+	
+	_is_transitioning = false
 
 func _on_journal_pressed() -> void:
+	if _is_transitioning: return
+	_is_transitioning = true
+	await get_tree().create_timer(0.15).timeout
 	print("Tombol Journal ditekan! (UI belum dibuat)")
-	# Nanti ganti dengan: _open_popup(JOURNAL_PANEL, btn_journal)
+	_is_transitioning = false
 
 func _on_setting_pressed() -> void:
+	if _is_transitioning: return
+	_is_transitioning = true
+	await get_tree().create_timer(0.15).timeout
 	print("Tombol Setting ditekan! (UI belum dibuat)")
-	# Nanti ganti dengan: _open_popup(SETTING_PANEL, btn_setting)
+	_is_transitioning = false
+
+func _on_close_pressed() -> void:
+	if _is_transitioning: return
+	_is_transitioning = true
+	
+	# Beri waktu sedikit agar animasi tombol close sempat terlihat
+	await get_tree().create_timer(0.15).timeout
+	
+	_close_popup()
+	_is_transitioning = false
 
 func _open_popup(popup_scene: PackedScene, source_btn: Button) -> void:
 	active_menu = popup_scene.instantiate()
