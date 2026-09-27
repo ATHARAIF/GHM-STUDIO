@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dr4230ruvik4o" path="res://assets/ui/icons/stock.png" id="1_2tkwx"]
 [ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="1_128r3"]
 [ext_resource type="PackedScene" uid="uid://dehofmfbhqm8m" path="res://scenes/ui/popups/radar_widget.tscn" id="2_128r3"]
+[ext_resource type="Script" uid="uid://b41q8sppgfg0c" path="res://scripts/ui/menu/tab_storage.gd" id="2_wf3p2"]
 [ext_resource type="FontFile" uid="uid://blxtbq7avsy75" path="res://assets/font/LondrinaSolid-Light.ttf" id="3_wf3p2"]
 [ext_resource type="FontFile" uid="uid://bc2yt828criij" path="res://assets/font/LondrinaSolid-Regular.ttf" id="4_a6gbf"]
 [ext_resource type="Script" uid="uid://b4xb04obxw8fb" path="res://themes/scripts/button_utility_anim.gd" id="5_n4omx"]
@@ -83,6 +84,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_128r3")
+script = ExtResource("2_wf3p2")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=423673010]
 layout_mode = 1
@@ -142,13 +144,14 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 
 [node name="icon" type="TextureRect" parent="ScrollContainer/GridContainer/terroir_card/details/stats/image/HBoxContainer" unique_id=295295209]
+visible = false
 layout_mode = 2
 texture = ExtResource("1_2tkwx")
 expand_mode = 2
 
 [node name="stock" type="Label" parent="ScrollContainer/GridContainer/terroir_card/details/stats/image/HBoxContainer" unique_id=2132289301]
 layout_mode = 2
-text = "122/1223"
+text = "1000 kg"
 
 [node name="chart" type="VBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats" unique_id=1625070780]
 layout_mode = 2
@@ -226,10 +229,26 @@ items/key_6/title = "Body"
 items/key_6/tooltip = ""
 extra_datasets_count = 0
 
-[node name="rating" type="Label" parent="ScrollContainer/GridContainer/terroir_card/details/stats/chart" unique_id=1057421773]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats/chart" unique_id=891623384]
+visible = false
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="star" type="Label" parent="ScrollContainer/GridContainer/terroir_card/details/stats/chart/HBoxContainer" unique_id=1390817961]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
 theme_override_font_sizes/font_size = 20
-text = "⭐90"
+text = "⭐"
+horizontal_alignment = 1
+
+[node name="rating" type="Label" parent="ScrollContainer/GridContainer/terroir_card/details/stats/chart/HBoxContainer" unique_id=1761900905]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
+text = "90"
 horizontal_alignment = 1
 
 [node name="action" type="HBoxContainer" parent="ScrollContainer/GridContainer/terroir_card/details/stats" unique_id=1828215254]

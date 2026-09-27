@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://de7rfqxgkd7s4" path="res://themes/ui_theme.tres" id="1_odg5w"]
 [ext_resource type="Texture2D" uid="uid://ihmcjim1yn12" path="res://assets/ui/icons/Seting.png" id="1_svile"]
+[ext_resource type="Script" uid="uid://hdpmn1srn7sc" path="res://scripts/ui/menu/tab_coffeelog.gd" id="2_771uw"]
 [ext_resource type="FontFile" uid="uid://blxtbq7avsy75" path="res://assets/font/LondrinaSolid-Light.ttf" id="2_odg5w"]
 [ext_resource type="PackedScene" uid="uid://dehofmfbhqm8m" path="res://scenes/ui/popups/radar_widget.tscn" id="3_771uw"]
 
@@ -88,6 +89,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_odg5w")
+script = ExtResource("2_771uw")
 
 [node name="contents" type="HBoxContainer" parent="." unique_id=301449145]
 layout_mode = 1
@@ -213,12 +215,12 @@ theme_override_constants/separation = 24
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=519127822]
+[node name="custom_name" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=519127822]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=593623427]
+[node name="year batch" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=593623427]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
@@ -229,11 +231,27 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=571834623]
+[node name="HBoxContainer2" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1428653133]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="star" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/HBoxContainer2" unique_id=943873132]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
+text = "⭐"
+horizontal_alignment = 1
+
+[node name="rating" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/HBoxContainer2" unique_id=392479950]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
 theme_override_font_sizes/font_size = 20
 text = "90"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
 [node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1219721657]
 layout_mode = 2
@@ -241,11 +259,28 @@ theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=186089978]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=874223826]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+
+[node name="stock_avail" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/HBoxContainer" unique_id=186089978]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "122/1223"
-horizontal_alignment = 2
+text = "122"
+horizontal_alignment = 1
+
+[node name="slices" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/HBoxContainer" unique_id=178364243]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "/"
+horizontal_alignment = 1
+
+[node name="stock_packed" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/HBoxContainer" unique_id=2129125948]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "1223"
+horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="contents" unique_id=494786769]
 layout_mode = 2
@@ -453,6 +488,7 @@ theme_override_fonts/font = ExtResource("2_odg5w")
 text = "value"
 
 [node name="size" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=623091917]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 2
 
@@ -467,6 +503,7 @@ theme_override_fonts/font = ExtResource("2_odg5w")
 text = "value"
 
 [node name="stock" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=537350542]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 2
 

@@ -104,6 +104,24 @@ func show_popup(tile_data: Dictionary) -> void:
 		# Simpan kualitas ke batch
 		target_batch.set_meta("quality_score", score)
 		
+		# Sinkronisasi ke Warehouse jika kopi ini sudah telanjur di-pack
+		if has_node("/root/WarehouseManager"):
+			var wm = get_node("/root/WarehouseManager")
+			var inv = wm.get_all_inventory()
+			var changed = false
+			for item in inv:
+				if item.has("batch_year") and item["batch_year"] == target_batch.batch_year:
+					item["quality_score"] = score
+					item["aroma"] = target_batch.aroma
+					item["acidity"] = target_batch.acidity
+					item["body"] = target_batch.body
+					item["sweetness"] = target_batch.sweetness
+					item["flavor"] = target_batch.flavor
+					item["bitterness"] = target_batch.bitterness
+					changed = true
+			if changed and wm.has_signal("inventory_updated"):
+				wm.inventory_updated.emit()
+		
 		if val_rating:
 			val_rating.text = str(round(score))
 			
