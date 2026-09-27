@@ -293,6 +293,21 @@ content_margin_right = 4.0
 content_margin_bottom = 0.0
 bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ep62g"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.49411765, 0.49411765, 0.49411765, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.20392157, 0.78039217, 0.34901962, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_to61q"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(1, 1, 1, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mcuyb"]
 bg_color = Color(0.99347824, 0.27486748, 0.62467414, 1)
 
@@ -395,6 +410,14 @@ label_terroir/styles/normal = SubResource("StyleBoxFlat_ybjhs")
 label_varietas/base_type = &"Label"
 label_varietas/fonts/font = ExtResource("2_gfhtu")
 label_varietas/styles/normal = SubResource("StyleBoxFlat_gfhtu")
+lineedit_customname/base_type = &"LineEdit"
+lineedit_customname/colors/caret_color = Color(0.20392157, 0.78039217, 0.34901962, 1)
+lineedit_customname/colors/font_color = Color(0.24313726, 0.24313726, 0.24313726, 1)
+lineedit_customname/colors/font_selected_color = Color(1, 1, 1, 1)
+lineedit_customname/constants/caret_width = 2
+lineedit_customname/font_sizes/font_size = 24
+lineedit_customname/styles/focus = SubResource("StyleBoxFlat_ep62g")
+lineedit_customname/styles/normal = SubResource("StyleBoxFlat_to61q")
 panel_contoh/base_type = &"Panel"
 panel_contoh/styles/panel = SubResource("StyleBoxFlat_mcuyb")
 panel_label/base_type = &"Label"

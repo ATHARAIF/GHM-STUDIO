@@ -146,7 +146,7 @@ func _refresh_machine_list() -> void:
 			
 	var target_category = ItemData.ItemCategory.DRYER
 	if current_card_data and current_card_data.get("process_id"):
-		if current_card_data.process_id.begins_with("RP"):
+		if current_card_data.process_id == "DP01" or current_card_data.process_id.begins_with("RP"):
 			target_category = ItemData.ItemCategory.ROASTER
 			
 	var machines = FactoryManager.get_machines_by_category(target_category)

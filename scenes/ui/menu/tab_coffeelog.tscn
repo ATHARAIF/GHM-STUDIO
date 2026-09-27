@@ -29,17 +29,30 @@ border_color = Color(0, 0.53333336, 1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hqulv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bguyw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_odg5w"]
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgpni"]
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.53333336, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jtbux"]
 content_margin_top = 12.0
 content_margin_bottom = 12.0
 bg_color = Color(0.19607843, 0.19607843, 0.19607843, 0)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_48q4c"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_blni7"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_io4e5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ai6e0"]
 bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_771uw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0jewy"]
 content_margin_left = 12.0
 content_margin_top = 12.0
 content_margin_right = 12.0
@@ -56,13 +69,13 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 anti_aliasing = false
 
-[sub_resource type="Theme" id="Theme_hp1cy"]
+[sub_resource type="Theme" id="Theme_2x2kg"]
 default_base_scale = 1.08
 TooltipLabel/colors/font_color = Color(1, 1, 1, 1)
 TooltipLabel/colors/font_outline_color = Color(1, 1, 1, 1)
 TooltipLabel/constants/outline_size = 2
 TooltipLabel/font_sizes/font_size = 24
-TooltipPanel/styles/panel = SubResource("StyleBoxFlat_771uw")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_0jewy")
 
 [node name="tab_coffeelog" type="Control" unique_id=1131410544]
 clip_contents = true
@@ -74,8 +87,9 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_odg5w")
 
-[node name="contents" type="HBoxContainer" parent="." unique_id=1228958184]
+[node name="contents" type="HBoxContainer" parent="." unique_id=301449145]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,36 +98,35 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_odg5w")
 theme_override_constants/separation = 24
 
-[node name="bean_list" type="VBoxContainer" parent="contents" unique_id=1215809244]
+[node name="bean_list" type="VBoxContainer" parent="contents" unique_id=573409979]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 
-[node name="header" type="HBoxContainer" parent="contents/bean_list" unique_id=1754063673]
+[node name="header" type="HBoxContainer" parent="contents/bean_list" unique_id=1738188382]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="contents/bean_list/header" unique_id=93251457]
+[node name="Label" type="Label" parent="contents/bean_list/header" unique_id=1565603832]
 layout_mode = 2
 theme_type_variation = &"label_terroir"
 theme_override_font_sizes/font_size = 32
 text = "COFFEE BEAN LIST"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/header" unique_id=753078217]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/header" unique_id=34127734]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_wqmkk")
 
-[node name="sort" type="HBoxContainer" parent="contents/bean_list/header" unique_id=52975262]
+[node name="sort" type="HBoxContainer" parent="contents/bean_list/header" unique_id=161084908]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="contents/bean_list/header/sort" unique_id=877046589]
+[node name="Label" type="Label" parent="contents/bean_list/header/sort" unique_id=484985061]
 layout_mode = 2
 text = "Sort by :"
 
-[node name="opt1" type="Button" parent="contents/bean_list/header/sort" unique_id=768686225]
+[node name="opt1" type="Button" parent="contents/bean_list/header/sort" unique_id=1056624299]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -125,7 +138,7 @@ icon = ExtResource("1_svile")
 icon_alignment = 1
 expand_icon = true
 
-[node name="opt2" type="Button" parent="contents/bean_list/header/sort" unique_id=1910180502]
+[node name="opt2" type="Button" parent="contents/bean_list/header/sort" unique_id=1528612827]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -136,7 +149,7 @@ icon = ExtResource("1_svile")
 icon_alignment = 1
 expand_icon = true
 
-[node name="opt3" type="Button" parent="contents/bean_list/header/sort" unique_id=27803127]
+[node name="opt3" type="Button" parent="contents/bean_list/header/sort" unique_id=1489438134]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -147,7 +160,7 @@ icon = ExtResource("1_svile")
 icon_alignment = 1
 expand_icon = true
 
-[node name="opt4" type="Button" parent="contents/bean_list/header/sort" unique_id=1243279506]
+[node name="opt4" type="Button" parent="contents/bean_list/header/sort" unique_id=1474843630]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -158,12 +171,12 @@ icon = ExtResource("1_svile")
 icon_alignment = 1
 expand_icon = true
 
-[node name="HSeparator" type="HSeparator" parent="contents/bean_list" unique_id=98700461]
+[node name="HSeparator" type="HSeparator" parent="contents/bean_list" unique_id=1353485465]
 layout_mode = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ftmxa")
 
-[node name="list" type="ScrollContainer" parent="contents/bean_list" unique_id=782062716]
+[node name="list" type="ScrollContainer" parent="contents/bean_list" unique_id=1639262383]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -171,11 +184,11 @@ size_flags_stretch_ratio = 0.85
 theme_override_constants/scrollbar_h_separation = 14
 scroll_hint_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="contents/bean_list/list" unique_id=1234002735]
+[node name="VBoxContainer" type="VBoxContainer" parent="contents/bean_list/list" unique_id=259824342]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="bean" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1155063035]
+[node name="bean" type="Button" parent="contents/bean_list/list/VBoxContainer" unique_id=1577708551]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
@@ -184,7 +197,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_kuwy6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean" unique_id=986744797]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean" unique_id=530158612]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -196,141 +209,141 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=347194168]
+[node name="name" type="VBoxContainer" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1819765087]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=641255860]
+[node name="label" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=519127822]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Kintamani"
 
-[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=1780471600]
+[node name="year" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer/name" unique_id=593623427]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "2077"
 
-[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1303208742]
+[node name="VSeparator" type="VSeparator" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=623138841]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hqulv")
 
-[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=650782217]
+[node name="score" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=571834623]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 
-[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=469562112]
+[node name="size" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1219721657]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100g"
 horizontal_alignment = 2
 
-[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=1810657215]
+[node name="stock" type="Label" parent="contents/bean_list/list/VBoxContainer/bean/HBoxContainer" unique_id=186089978]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "122/1223"
 horizontal_alignment = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="contents" unique_id=2048023938]
+[node name="VBoxContainer2" type="VBoxContainer" parent="contents" unique_id=494786769]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16
 
-[node name="tab_button" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=1890864681]
+[node name="tab_button" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=104702742]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="info" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=257407091]
+[node name="info" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=2073886862]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 0.7254902)
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_buth3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_bguyw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_odg5w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lgpni")
+theme_override_styles/hover = SubResource("StyleBoxFlat_odg5w")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jtbux")
 toggle_mode = true
 button_pressed = true
-button_group = SubResource("ButtonGroup_48q4c")
+button_group = SubResource("ButtonGroup_blni7")
 text = "INFO"
 
-[node name="ideal" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=1273890535]
+[node name="ideal" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=558807057]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_buth3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_bguyw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_odg5w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lgpni")
+theme_override_styles/hover = SubResource("StyleBoxFlat_odg5w")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jtbux")
 toggle_mode = true
-button_group = SubResource("ButtonGroup_48q4c")
+button_group = SubResource("ButtonGroup_blni7")
 text = "IDEAL"
 
-[node name="terroir" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=988597272]
+[node name="terroir" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=411346024]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_buth3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_bguyw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_odg5w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lgpni")
+theme_override_styles/hover = SubResource("StyleBoxFlat_odg5w")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jtbux")
 disabled = true
 toggle_mode = true
-button_group = SubResource("ButtonGroup_48q4c")
+button_group = SubResource("ButtonGroup_blni7")
 text = "TERROIR"
 
-[node name="sales" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=388763389]
+[node name="sales" type="Button" parent="contents/VBoxContainer2/tab_button" unique_id=1097258092]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_a8o2d")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_buth3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8o2d")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_bguyw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_odg5w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lgpni")
+theme_override_styles/hover = SubResource("StyleBoxFlat_odg5w")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jtbux")
 disabled = true
 toggle_mode = true
-button_group = SubResource("ButtonGroup_48q4c")
+button_group = SubResource("ButtonGroup_blni7")
 text = "SALES"
 
-[node name="terroir_header" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=613653994]
+[node name="header" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=48258302]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="terroir_name" type="Label" parent="contents/VBoxContainer2/terroir_header" unique_id=200282095]
+[node name="variety_name" type="Label" parent="contents/VBoxContainer2/header" unique_id=806281690]
 layout_mode = 2
 theme_type_variation = &"label_terroir"
-text = "TERROIR"
+text = "Variety"
 
-[node name="terroir_species" type="Label" parent="contents/VBoxContainer2/terroir_header" unique_id=382470758]
+[node name="species_name" type="Label" parent="contents/VBoxContainer2/header" unique_id=1725903675]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_type_variation = &"label_species"
 text = "Species"
 
-[node name="stats" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=1859752860]
+[node name="stats" type="HBoxContainer" parent="contents/VBoxContainer2" unique_id=906898696]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="packaging_3d" type="Panel" parent="contents/VBoxContainer2/stats" unique_id=107062835]
+[node name="packaging_3d" type="Panel" parent="contents/VBoxContainer2/stats" unique_id=1663219675]
 custom_minimum_size = Vector2(154, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
-theme_override_styles/panel = SubResource("StyleBoxFlat_io4e5")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ai6e0")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="contents/VBoxContainer2/stats" unique_id=159358560]
+[node name="VBoxContainer2" type="VBoxContainer" parent="contents/VBoxContainer2/stats" unique_id=1754624951]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="radar" parent="contents/VBoxContainer2/stats/VBoxContainer2" unique_id=956399758 instance=ExtResource("3_771uw")]
+[node name="radar" parent="contents/VBoxContainer2/stats/VBoxContainer2" unique_id=985268081 instance=ExtResource("3_771uw")]
 layout_mode = 2
 size_flags_horizontal = 6
-theme = SubResource("Theme_hp1cy")
-key_count = 7
+theme = SubResource("Theme_2x2kg")
+key_count = 6
 radius = 82.975
 key_items = Array[Dictionary]([{
 "title": "Sweetness
@@ -359,10 +372,6 @@ Vivamus vel tempor lacus. Proin sit amet varius libero, vel placerat felis.",
 "tooltip": "",
 "value": 0.0
 }, {
-"title": "Typicity",
-"tooltip": "",
-"value": 0.0
-}, {
 "title": "Body",
 "tooltip": "",
 "value": 0.0
@@ -378,11 +387,16 @@ background_outline_width = 0.7
 graph_color = Color(0.20392157, 0.78039217, 0.34901962, 0.39215687)
 graph_outline_color = Color(0.20392157, 0.78039217, 0.34901962, 1)
 graph_outline_width = 0.5
-vertex_dot_radius = null
 guide_color = Color(1, 1, 1, 0.44313726)
 guide_width = 0.5
 items/key_0/title = "Sweetness
 "
+items/key_0/tooltip = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Fusce nisl sapien, cursus sit amet dui sit amet, pharetra egestas tortor.
+Praesent in porta nibh. Pellentesque ac mauris id purus mollis bibendum a sed sem. In at elementum velit, id dictum massa. Phasellus consectetur eros et nibh aliquet pretium.
+Proin imperdiet purus lorem, a euismod neque porttitor quis. Fusce quis cursus urna. Pellentesque gravida lacinia lectus, ac consequat mi.
+Duis ligula leo, bibendum a velit id, dignissim volutpat mi.
+Vivamus vel tempor lacus. Proin sit amet varius libero, vel placerat felis."
 items/key_1/title = "Aroma"
 items/key_2/title = "Acidity"
 items/key_3/value = 0.0
@@ -392,123 +406,107 @@ items/key_4/value = 0.0
 items/key_4/title = "Bitterness"
 items/key_4/tooltip = ""
 items/key_5/value = 0.0
-items/key_5/title = "Typicity"
+items/key_5/title = "Body"
 items/key_5/tooltip = ""
-items/key_6/value = 0.0
-items/key_6/title = "Body"
-items/key_6/tooltip = ""
 extra_datasets_count = 0
 
-[node name="rating" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer2" unique_id=873428876]
+[node name="HBoxContainer" type="HBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer2" unique_id=1714394340]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="star" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer2/HBoxContainer" unique_id=1408644263]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
 theme_override_font_sizes/font_size = 20
-text = "⭐90"
+text = "⭐"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="contents/VBoxContainer2/stats" unique_id=1645447485]
+[node name="rating" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer2/HBoxContainer" unique_id=617893867]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="contents/VBoxContainer2/stats" unique_id=2064501010]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="speciality" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=1150904523]
+[node name="speciality" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=214396510]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/speciality" unique_id=213007305]
+[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/speciality" unique_id=221817290]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Speciality:"
+text = "Grade:"
 
-[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/speciality" unique_id=135357670]
+[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/speciality" unique_id=1138389033]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "value"
 
-[node name="size" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=176823962]
+[node name="size" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=623091917]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/size" unique_id=546210448]
+[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/size" unique_id=100163088]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Size:"
 
-[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/size" unique_id=1196653241]
+[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/size" unique_id=651283032]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "value"
 
-[node name="stock" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=1944026177]
+[node name="stock" type="VBoxContainer" parent="contents/VBoxContainer2/stats/VBoxContainer" unique_id=537350542]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/stock" unique_id=874245826]
+[node name="label" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/stock" unique_id=996118815]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Stock:"
 
-[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/stock" unique_id=1476700492]
+[node name="value" type="Label" parent="contents/VBoxContainer2/stats/VBoxContainer/stock" unique_id=810238749]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_odg5w")
 text = "value"
 
-[node name="aftertaste" type="VBoxContainer" parent="contents/VBoxContainer2" unique_id=1858868187]
+[node name="aftertaste" type="VBoxContainer" parent="contents/VBoxContainer2" unique_id=834904518]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="label" type="Label" parent="contents/VBoxContainer2/aftertaste" unique_id=725927545]
+[node name="label" type="Label" parent="contents/VBoxContainer2/aftertaste" unique_id=86775669]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Aftertastes:"
 
-[node name="GridContainer" type="HBoxContainer" parent="contents/VBoxContainer2/aftertaste" unique_id=2057641210]
+[node name="GridContainer" type="HBoxContainer" parent="contents/VBoxContainer2/aftertaste" unique_id=635634977]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Panel" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1937889890]
+[node name="Panel" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=815614839]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="Panel2" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1713311763]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-
-[node name="Panel3" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1422136990]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-
-[node name="Panel4" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1088303423]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-
-[node name="Panel5" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=662226633]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-
-[node name="Panel6" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1026375065]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-
-[node name="Panel7" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1452392653]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-
-[node name="Panel8" type="Panel" parent="contents/VBoxContainer2/aftertaste/GridContainer" unique_id=1621107706]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-
-[node name="note" type="VBoxContainer" parent="contents/VBoxContainer2" unique_id=877183068]
+[node name="note" type="VBoxContainer" parent="contents/VBoxContainer2" unique_id=1553673099]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="label" type="Label" parent="contents/VBoxContainer2/note" unique_id=1809931414]
+[node name="label" type="Label" parent="contents/VBoxContainer2/note" unique_id=498715690]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Notes:"
 
-[node name="value" type="RichTextLabel" parent="contents/VBoxContainer2/note" unique_id=512548437]
+[node name="value" type="RichTextLabel" parent="contents/VBoxContainer2/note" unique_id=356345378]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("2_odg5w")
 text = "lorem ipsum dolor sit amet consectetur adipiscing elit blanditiis officia aliquip sint quo eiusmod ut sed est distinctio sunt id do deleniti est deleniti provident fugiat soluta eu ullamco qui facilis id consectetur nisi facere animi "

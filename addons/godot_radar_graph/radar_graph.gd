@@ -811,9 +811,13 @@ func _rg_draw_titles() -> void:
 				title_font, font_position, title, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x,
 				font_size, -1, font_outline_size, font_outline_color
 			)
+		var current_color = font_color
+		if "★" in title:
+			current_color = Color(1.0, 0.84, 0.0) # Gold
+		
 		draw_multiline_string(
 			title_font, font_position, title, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size,
-			-1, font_color)
+			-1, current_color)
 
 
 #endregion

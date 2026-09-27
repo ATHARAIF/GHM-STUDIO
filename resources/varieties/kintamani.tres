@@ -10,3 +10,5 @@ base_sweetness = 3
 base_body = 8
 base_flavor = 0
 base_bitterness = 4
+target_acidity = 8.0
+target_flavor = 8.0

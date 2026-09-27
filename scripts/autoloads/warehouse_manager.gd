@@ -42,6 +42,7 @@ func store_packed_goods(batch: CoffeeBatch, packaging_data: Dictionary) -> void:
 		"batch_year": batch.batch_year,
 		"species": batch.species_name,
 		"variety": batch.variety_name,
+		"custom_name": packaging_data.get("custom_name", "%s %s" % [batch.variety_name, batch.batch_year]),
 		
 		# Kualitas rasa dan atribut lainnya dibawa ke gudang!
 		"aroma": batch.aroma,
@@ -75,7 +76,7 @@ func store_packed_goods(batch: CoffeeBatch, packaging_data: Dictionary) -> void:
 func _is_same_specs(item_a: Dictionary, item_b: Dictionary) -> bool:
 	# Kita cek kesamaan dari tahun, jenis, packaging, sampai kualitas rasa
 	var keys_to_check = [
-		"batch_year", "species", "variety", "packaging_size", "packaging_type", "packaging_material",
+		"batch_year", "species", "variety", "custom_name", "packaging_size", "packaging_type", "packaging_material",
 		"aroma", "acidity", "body", "sweetness", "flavor", "bitterness", "defect_rate"
 	]
 	

@@ -73,6 +73,9 @@ func _ready() -> void:
 		btn_confirm.pressed.connect(_on_confirm)
 		btn_confirm.disabled = true
 		
+	if val_variety and val_variety is LineEdit:
+		val_variety.text_submitted.connect(_on_variety_text_submitted)
+		
 	# Tab Connections (Manual Toggling)
 	var tab_group = ButtonGroup.new()
 	if btn_tab_spec and btn_tab_visual:
@@ -240,12 +243,17 @@ func _on_confirm() -> void:
 			"material": selected_material,
 			"turn_duration": calculated_turns,
 			"override_cost": int(calculated_total_cost),
-			"target_batch_year": target_batch.batch_year if target_batch else 0
+			"target_batch_year": target_batch.batch_year if target_batch else 0,
+			"custom_name": val_variety.text if val_variety else ""
 		}
 		var em = get_node("/root/EventManager")
 		em.card_placement_interaction_confirmed.emit("Packing", current_tile, current_card_data, extra_data)
 		
 	queue_free()
+
+func _on_variety_text_submitted(new_text: String) -> void:
+	if val_variety:
+		val_variety.release_focus()
 
 func _on_close() -> void:
 	if has_node("/root/EventManager"):
@@ -259,11 +267,21 @@ func _on_card_placement_interaction_requested(card_name: String, tile: Node3D, c
 		current_card_data = card_data
 		show_popup()
 
+func _get_target_batch() -> CoffeeBatch:
+	if current_tile and PlacementManager.placement_data.has(current_tile):
+		var p_data = PlacementManager.placement_data[current_tile]
+		if p_data.has("target_batch_year") and p_data["target_batch_year"] != -1:
+			var byear = p_data["target_batch_year"]
+			if StageManager.batches.has(byear):
+				return StageManager.batches[byear]
+	if StageManager.has_method("get_oldest_ready_batch"):
+		return StageManager.get_oldest_ready_batch("DP03")
+	return null
+
 func show_popup() -> void:
 	total_yield_grams = 0.0
 	
-	if StageManager.has_method("get_oldest_ready_batch"):
-		target_batch = StageManager.get_oldest_ready_batch("DP03")
+	target_batch = _get_target_batch()
 		
 	if target_batch:
 		if target_batch.roasted_bean_kg <= 0 and target_batch.cherry_kg > 0:
@@ -272,7 +290,7 @@ func show_popup() -> void:
 			
 		if val_batch: 
 			val_batch.text = str(target_batch.batch_year)
-		if val_variety: val_variety.text = str(target_batch.variety_name)
+		if val_variety: val_variety.text = str(target_batch.variety_name) + " " + str(target_batch.batch_year)
 		if val_yield: val_yield.text = "%.1f kg" % target_batch.roasted_bean_kg
 		if lbl_arabica: lbl_arabica.visible = (target_batch.species_name == "Arabica")
 		if lbl_robusta: lbl_robusta.visible = (target_batch.species_name == "Robusta")

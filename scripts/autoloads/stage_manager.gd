@@ -76,8 +76,20 @@ func get_oldest_ready_batch(process_id: String) -> CoffeeBatch:
 		var b = batches[y]
 		if b.has_meta("sold_out") and b.get_meta("sold_out") == true:
 			continue
+			
+		var process_done = b.completed_processes.has(process_id)
+		if process_id == "DP03":
+			var avail = b.roasted_bean_kg
+			if b.get("reserved_roasted_bean_kg") != null:
+				avail -= b.reserved_roasted_bean_kg
+			# Minimal butuh 100g (0.1 kg) untuk bisa dibungkus.
+			if avail >= 0.099:
+				process_done = false # Force allow packing if there are still AVAILABLE roasted beans!
+			else:
+				process_done = true # Cancel spawning if all beans are reserved
+			
 		# Asumsikan kalau mau diproses lebih lanjut, minimal sudah lewat FP04 (Harvest)
-		if b.completed_processes.has("FP04") and not b.completed_processes.has(process_id):
+		if b.completed_processes.has("FP04") and not process_done:
 			if y < oldest_year:
 				oldest_year = y
 				target_batch = b
@@ -92,7 +104,19 @@ func get_ready_batches_for_process(process_id: String, unlock_condition: String 
 		var b = batches[y]
 		if b.has_meta("sold_out") and b.get_meta("sold_out") == true:
 			continue
-		if b.completed_processes.has("FP04") and not b.completed_processes.has(process_id):
+			
+		var process_done = b.completed_processes.has(process_id)
+		if process_id == "DP03":
+			var avail = b.roasted_bean_kg
+			if b.get("reserved_roasted_bean_kg") != null:
+				avail -= b.reserved_roasted_bean_kg
+			# Minimal butuh 100g (0.1 kg) untuk bisa dibungkus.
+			if avail >= 0.099:
+				process_done = false # Force allow packing if there are still AVAILABLE roasted beans!
+			else:
+				process_done = true # Cancel spawning if all beans are reserved
+			
+		if b.completed_processes.has("FP04") and not process_done:
 			if unlock_condition == "" or b.completed_processes.has(unlock_condition):
 				var already_placed = false
 				for tile_dict in active_tiles:
@@ -137,6 +161,20 @@ func register_placed_tile(tile_node: Node3D, card_data: CardData, extra_data: Di
 			resolve_interaction(tile_dict, false)
 			return # Do not append to active_tiles if instantly resolved
 			
+	var target_b = null
+	if tile_dict.has("target_batch_year") and tile_dict.target_batch_year != -1:
+		if batches.has(tile_dict.target_batch_year):
+			target_b = batches[tile_dict.target_batch_year]
+	if target_b == null:
+		target_b = get_oldest_ready_batch(card_data.process_id)
+		
+	if target_b != null and tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
+		if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
+			var m = FactoryManager.placed_machines[tile_dict["machine_id"]]
+			if m.get("current_amount_kg", 0.0) <= 0.01:
+				m["current_batch"] = target_b
+				m["state"] = "USED"
+			
 	active_tiles.append(tile_dict)
 	
 	# Emit agar UI/kartu di tangan langsung update (misal men-disable kartu yang konflik)
@@ -158,6 +196,13 @@ func unregister_placed_tile(tile_node: Node3D) -> void:
 				if target_b and target_b.get("reserved_roasted_bean_kg") != null:
 					target_b.reserved_roasted_bean_kg = max(0.0, target_b.reserved_roasted_bean_kg - kg_used)
 					
+			if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
+				if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
+					var m = FactoryManager.placed_machines[tile_dict["machine_id"]]
+					if m.get("current_amount_kg", 0.0) <= 0.01:
+						m["current_batch"] = null
+						m["state"] = "IDLE"
+						
 			active_tiles.remove_at(i)
 			break
 	stats_changed.emit()
@@ -190,6 +235,8 @@ func advance_turn() -> void:
 			
 			budget -= final_cost
 			budget_changed.emit(budget)
+			
+			_extract_beans_for_process(tile_dict)
 			
 		# Lock the tile if it's not locked yet
 		if tile_dict.tile and is_instance_valid(tile_dict.tile) and not tile_dict.tile.has_meta("locked"):
@@ -308,27 +355,6 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 		target_b.cherry_kg = int(clamp(final_yield, 0, 5000))
 		
 	if tile_dict.data.process_id == "WP01" or tile_dict.data.process_id == "DP01":
-		# --- HYBRID FIX: Sedot kopi dari Hopper fisik! ---
-		var kg_needed = target_b.cherry_kg
-		print("DEBUG: Sedot dari Hopper! kg_needed = ", kg_needed)
-		var hoppers = FactoryManager.get_all_hoppers()
-		for h in hoppers:
-			print("DEBUG: Checking Hopper ", h["id"], " amount: ", h["current_amount_kg"])
-			if kg_needed <= 0: break
-			if h["current_amount_kg"] > 0 and h["current_batch"] != null:
-				print("DEBUG: Hopper holds ", h["current_batch"].variety_name, " ", h["current_batch"].batch_year, " Target: ", target_b.variety_name, " ", target_b.batch_year)
-				if h["current_batch"].variety_name == target_b.variety_name and h["current_batch"].batch_year == target_b.batch_year:
-					var taken = min(kg_needed, h["current_amount_kg"])
-					h["current_amount_kg"] -= taken
-					kg_needed -= taken
-					print("DEBUG: Took ", taken, " from hopper. Remaining kg_needed = ", kg_needed, " Hopper remaining = ", h["current_amount_kg"])
-					if h["current_amount_kg"] <= 0.01:
-						h["current_amount_kg"] = 0.0
-						h["current_batch"] = null
-						h["state"] = "IDLE"
-						print("DEBUG: Hopper is now IDLE")
-					FactoryManager.hopper_updated.emit(h["id"])
-		# ------------------------------------------------
 		
 		# Processing / Washing Station
 		if target_b.green_bean_kg == 0 and target_b.cherry_kg > 0:
@@ -336,25 +362,6 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 			target_b.cherry_kg = 0 # Cherry sudah diubah jadi Green Bean
 			
 	if tile_dict.data.process_id == "DP01":
-		# --- HYBRID FIX: Sedot Green Bean dari Patio fisik! ---
-		if target_b.green_bean_kg == 0 and target_b.cherry_kg > 0:
-			# Fallback kalau belum diproses di Washing Station (langsung Natural)
-			target_b.green_bean_kg = target_b.cherry_kg * 0.2
-			target_b.cherry_kg = 0
-			
-		var kg_needed = target_b.green_bean_kg
-		var patios = FactoryManager.get_machines_with_batch(target_b.batch_year)
-		for p in patios:
-			if kg_needed <= 0: break
-			if p["current_amount_kg"] > 0:
-				var taken = min(kg_needed, p["current_amount_kg"])
-				p["current_amount_kg"] -= taken
-				kg_needed -= taken
-				if p["current_amount_kg"] <= 0.01:
-					p["current_amount_kg"] = 0.0
-					p["current_batch"] = null
-					p["state"] = "IDLE"
-		# ------------------------------------------------
 			
 		if target_b.roasted_bean_kg == 0 and target_b.green_bean_kg > 0:
 			target_b.roasted_bean_kg = target_b.green_bean_kg * 0.85
@@ -375,7 +382,7 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 					var taken = min(kg_needed, r["current_amount_kg"])
 					r["current_amount_kg"] -= taken
 					kg_needed -= taken
-					if r["current_amount_kg"] <= 0.01:
+					if r["current_amount_kg"] < 0.11:
 						r["current_amount_kg"] = 0.0
 						r["current_batch"] = null
 						r["state"] = "IDLE"
@@ -395,12 +402,22 @@ func resolve_interaction(tile_dict: Dictionary, process_next: bool) -> void:
 			var m = FactoryManager.placed_machines[tile_dict["machine_id"]]
 			if tile_dict.data.process_id == "WP01":
 				m["current_batch"] = target_b
-				m["current_amount_kg"] = target_b.green_bean_kg
-				m["state"] = "USED"
+				m["current_amount_kg"] = max(0.0, target_b.green_bean_kg)
+				if m["current_amount_kg"] > 0.01:
+					m["state"] = "USED"
+				else:
+					m["current_amount_kg"] = 0.0
+					m["current_batch"] = null
+					m["state"] = "IDLE"
 			elif tile_dict.data.process_id == "DP01":
 				m["current_batch"] = target_b
-				m["current_amount_kg"] = target_b.roasted_bean_kg
-				m["state"] = "USED"
+				m["current_amount_kg"] = max(0.0, target_b.roasted_bean_kg)
+				if m["current_amount_kg"] > 0.01:
+					m["state"] = "USED"
+				else:
+					m["current_amount_kg"] = 0.0
+					m["current_batch"] = null
+					m["state"] = "IDLE"
 			else:
 				m["state"] = "IDLE"
 			
@@ -526,3 +543,61 @@ func restore_room_state(room_id: String) -> void:
 
 
 	stats_changed.emit()
+
+
+func _extract_beans_for_process(tile_dict: Dictionary) -> void:
+	var target_b: CoffeeBatch = null
+	if tile_dict.has("target_batch_year") and tile_dict.target_batch_year != -1:
+		if batches.has(tile_dict.target_batch_year):
+			target_b = batches[tile_dict.target_batch_year]
+			
+	if target_b == null:
+		target_b = get_oldest_ready_batch(tile_dict.data.process_id)
+		
+	if target_b == null: return
+	
+	if tile_dict.data.process_id == "WP01" or tile_dict.data.process_id == "DP01":
+		var kg_needed = target_b.cherry_kg
+		var hoppers = FactoryManager.get_all_hoppers()
+		for h in hoppers:
+			if kg_needed <= 0: break
+			if h["current_amount_kg"] > 0 and h["current_batch"] != null:
+				if h["current_batch"].variety_name == target_b.variety_name and h["current_batch"].batch_year == target_b.batch_year:
+					var taken = min(kg_needed, h["current_amount_kg"])
+					h["current_amount_kg"] -= taken
+					kg_needed -= taken
+					if h["current_amount_kg"] < 0.11:
+						h["current_amount_kg"] = 0.0
+						h["current_batch"] = null
+						h["state"] = "IDLE"
+					FactoryManager.hopper_updated.emit(h["id"])
+					
+		if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
+			if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
+				var m = FactoryManager.placed_machines[tile_dict["machine_id"]]
+				m["current_amount_kg"] = max(0.0, target_b.cherry_kg)
+
+	if tile_dict.data.process_id == "DP01":
+		var kg_needed = target_b.green_bean_kg
+		if kg_needed == 0 and target_b.cherry_kg > 0:
+			kg_needed = target_b.cherry_kg * 0.2
+			
+		var patios = FactoryManager.get_machines_with_batch(target_b.batch_year)
+		for p in patios:
+			if kg_needed <= 0: break
+			if p["current_amount_kg"] > 0:
+				var taken = min(kg_needed, p["current_amount_kg"])
+				p["current_amount_kg"] -= taken
+				kg_needed -= taken
+				if p["current_amount_kg"] < 0.11:
+					p["current_amount_kg"] = 0.0
+					p["current_batch"] = null
+					p["state"] = "IDLE"
+					
+		if tile_dict.has("machine_id") and tile_dict["machine_id"] != "":
+			if FactoryManager.placed_machines.has(tile_dict["machine_id"]):
+				var m = FactoryManager.placed_machines[tile_dict["machine_id"]]
+				if target_b.green_bean_kg > 0:
+					m["current_amount_kg"] = max(0.0, target_b.green_bean_kg)
+				else:
+					m["current_amount_kg"] = max(0.0, target_b.cherry_kg * 0.2)

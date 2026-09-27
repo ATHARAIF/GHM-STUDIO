@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var val_variety = $CenterContainer/panel/contents/VBoxContainer2/header/variety_name
 @onready var val_species = $CenterContainer/panel/contents/VBoxContainer2/header/species_name
 
-@onready var val_rating = $CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer2/rating
+@onready var val_rating = $CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer2/HBoxContainer/rating
 @onready var val_speciality = $CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer/speciality/value
 @onready var val_size = $CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer/size/value
 @onready var val_stock = $CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer/stock/value
@@ -43,8 +43,8 @@ func show_popup(tile_data: Dictionary) -> void:
 	current_tile = tile_data.get("tile")
 	
 	if target_batch:
-		if val_variety: val_variety.text = str(target_batch.variety_name)
-		if val_species: val_species.text = str(target_batch.species_name)
+		var display_custom_name = str(target_batch.variety_name)
+		var display_species = str(target_batch.species_name) + " " + str(target_batch.variety_name)
 		
 		var score = 0.0
 		var note_text = ""
@@ -63,13 +63,13 @@ func show_popup(tile_data: Dictionary) -> void:
 			var dev_body = abs(target_batch.body - variety_res.target_body)
 			var dev_bit = abs(target_batch.bitterness - variety_res.target_bitterness)
 			
-			# 2. Total Penalti (Deviasi maksimal adalah 10, jadi Deviasi / 10 * Bobot Maksimal)
-			var total_penalty = ((dev_aci / 10.0) * variety_res.penalty_weight_acidity) + \
-								((dev_aro / 10.0) * variety_res.penalty_weight_aroma) + \
-								((dev_swe / 10.0) * variety_res.penalty_weight_sweetness) + \
-								((dev_fla / 10.0) * variety_res.penalty_weight_flavor) + \
-								((dev_body / 10.0) * variety_res.penalty_weight_body) + \
-								((dev_bit / 10.0) * variety_res.penalty_weight_bitterness)
+			# 2. Total Penalti = Sum(Deviasi * Bobot)
+			var total_penalty = (dev_aci * variety_res.penalty_weight_acidity) + \
+								(dev_aro * variety_res.penalty_weight_aroma) + \
+								(dev_swe * variety_res.penalty_weight_sweetness) + \
+								(dev_fla * variety_res.penalty_weight_flavor) + \
+								(dev_body * variety_res.penalty_weight_body) + \
+								(dev_bit * variety_res.penalty_weight_bitterness)
 			
 			# 3. Skor Dasar
 			var skor_dasar = 80.0 * (1.0 - total_penalty)
@@ -127,6 +127,8 @@ func show_popup(tile_data: Dictionary) -> void:
 				var inv = wm.get_all_inventory()
 				for item in inv:
 					if item.has("batch_year") and item["batch_year"] == target_batch.batch_year:
+						if item.has("custom_name") and item["custom_name"] != "":
+							display_custom_name = item["custom_name"]
 						total_qty += item["qty"]
 						var p_size = str(item["packaging_size"]) + "g"
 						if not pack_sizes.has(p_size):
@@ -136,6 +138,9 @@ func show_popup(tile_data: Dictionary) -> void:
 				val_stock.text = str(total_qty) + " Pcs"
 			if val_size:
 				val_size.text = ", ".join(pack_sizes) if pack_sizes.size() > 0 else "Unknown"
+				
+		if val_variety: val_variety.text = display_custom_name
+		if val_species: val_species.text = display_species
 			
 		# Update Radar Chart
 		if radar_chart and radar_chart.has_method("set_item_value"):
@@ -144,8 +149,23 @@ func show_popup(tile_data: Dictionary) -> void:
 			radar_chart.set_item_value(2, target_batch.acidity)
 			radar_chart.set_item_value(3, target_batch.flavor)
 			radar_chart.set_item_value(4, target_batch.bitterness)
-			radar_chart.set_item_value(5, 7.0) # Typicity (Placeholder)
-			radar_chart.set_item_value(6, target_batch.body)
+			radar_chart.set_item_value(5, target_batch.body)
+			
+			if radar_chart.has_method("set_item_title"):
+				var stats = [
+					{"id": 0, "val": target_batch.sweetness, "target": variety_res.target_sweetness, "name": "Sweetness"},
+					{"id": 1, "val": target_batch.aroma, "target": variety_res.target_aroma, "name": "Aroma"},
+					{"id": 2, "val": target_batch.acidity, "target": variety_res.target_acidity, "name": "Acidity"},
+					{"id": 3, "val": target_batch.flavor, "target": variety_res.target_flavor, "name": "Flavour"},
+					{"id": 4, "val": target_batch.bitterness, "target": variety_res.target_bitterness, "name": "Bitterness"},
+					{"id": 5, "val": target_batch.body, "target": variety_res.target_body, "name": "Body"}
+				]
+				for stat in stats:
+					var dev = abs(stat.val - stat.target)
+					if dev <= 0.01: # Harus pas persis 100% sama dengan target!
+						radar_chart.set_item_title(stat.id, "★ " + stat.name + " ★")
+					else:
+						radar_chart.set_item_title(stat.id, stat.name)
 			
 			# Paksa render ulang radar chart
 			if radar_chart.has_method("queue_redraw"):
