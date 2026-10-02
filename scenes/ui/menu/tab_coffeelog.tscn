@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://hdpmn1srn7sc" path="res://scripts/ui/menu/tab_coffeelog.gd" id="2_771uw"]
 [ext_resource type="FontFile" uid="uid://blxtbq7avsy75" path="res://assets/font/LondrinaSolid-Light.ttf" id="2_odg5w"]
 [ext_resource type="PackedScene" uid="uid://dehofmfbhqm8m" path="res://scenes/ui/popups/radar_widget.tscn" id="3_771uw"]
+[ext_resource type="Script" uid="uid://doedojhbh0c7p" path="res://scripts/ui/components/model_viewer_3d.gd" id="5_lgpni"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wqmkk"]
 
@@ -363,7 +364,65 @@ text = "Species"
 layout_mode = 2
 theme_override_constants/separation = 16
 
+[node name="PanelContainer" type="PanelContainer" parent="contents/VBoxContainer2/stats" unique_id=1471336537]
+custom_minimum_size = Vector2(240, 210)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.65
+
+[node name="Control" type="Control" parent="contents/VBoxContainer2/stats/PanelContainer" unique_id=1788647390]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="contents/VBoxContainer2/stats/PanelContainer/Control" unique_id=248131347]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+stretch = true
+script = ExtResource("5_lgpni")
+zoom_speed = 0.05
+zoom_min = 0.5
+pan_max_limit_x = 0.2
+pan_max_limit_y = 0.2
+item_vertical_offset = 0.05
+
+[node name="SubViewport" type="SubViewport" parent="contents/VBoxContainer2/stats/PanelContainer/Control/SubViewportContainer" unique_id=1294448814]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(254, 243)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="contents/VBoxContainer2/stats/PanelContainer/Control/SubViewportContainer/SubViewport" unique_id=1193052052]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+projection = 1
+size = 0.9
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="contents/VBoxContainer2/stats/PanelContainer/Control/SubViewportContainer/SubViewport" unique_id=1291192562]
+sky_mode = 1
+
+[node name="anchor" type="Node3D" parent="contents/VBoxContainer2/stats/PanelContainer/Control/SubViewportContainer/SubViewport" unique_id=1696900346]
+
+[node name="Button" type="Button" parent="contents/VBoxContainer2/stats/PanelContainer/Control" unique_id=1979119273]
+z_index = 1
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_bottom = 30.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+text = "🔄"
+alignment = 2
+
 [node name="packaging_3d" type="Panel" parent="contents/VBoxContainer2/stats" unique_id=1663219675]
+visible = false
 custom_minimum_size = Vector2(154, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -379,7 +438,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 theme = SubResource("Theme_2x2kg")
 key_count = 6
-radius = 82.975
+radius = 80.0
 key_items = Array[Dictionary]([{
 "title": "Sweetness
 ",
@@ -518,6 +577,7 @@ theme_override_fonts/font = ExtResource("2_odg5w")
 text = "value"
 
 [node name="aftertaste" type="VBoxContainer" parent="contents/VBoxContainer2" unique_id=834904518]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 

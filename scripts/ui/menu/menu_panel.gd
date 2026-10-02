@@ -8,7 +8,8 @@ var tab_mapping = {
 	"tab_farmland": "tab_farmland",
 	"tab_coffee_log": "tab_coffeelog",
 	"tab_storage": "tab_storage",
-	"tab_order": "tab_order",
+	"tab_order": "",# Belum ada konten
+	#"tab_order": "tab_order",
 	"tab_upgrade": "", # Belum ada konten
 	"tab_balance": ""  # Belum ada konten
 }

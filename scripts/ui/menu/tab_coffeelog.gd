@@ -11,6 +11,7 @@ extends Control
 @onready var val_rating = $contents/VBoxContainer2/stats/VBoxContainer2/HBoxContainer/rating
 @onready var val_speciality = $contents/VBoxContainer2/stats/VBoxContainer/speciality/value
 @onready var val_note = $contents/VBoxContainer2/note/value
+@onready var subviewport_container = $contents/VBoxContainer2/stats/PanelContainer/Control/SubViewportContainer
 
 var inventory_items: Array[Dictionary] = []
 var empty_label: Label = null
@@ -133,7 +134,7 @@ func _on_item_selected(index: int) -> void:
 		# Belum di testing!
 		if val_rating: val_rating.text = "-"
 		if val_speciality: val_speciality.text = "Untested"
-		if val_note: val_note.text = "Kopi ini belum melalui proses Cupping (Quality Control) sehingga nilai dan tingkat grade-nya belum diketahui."
+		if val_note: val_note.text = "This coffee hasn't been cupped yet, so its grade and quality score are still unknown."
 	else:
 		# Sudah di testing!
 		if val_rating: val_rating.text = str(round(quality))
@@ -146,6 +147,13 @@ func _on_item_selected(index: int) -> void:
 			
 		if val_note:
 			val_note.text = "Hasil panen kopi " + variety + " tahun " + str(item.get("batch_year", "")) + ".\nSiap untuk dipasarkan!"
+	
+	# Update 3D model packaging
+	if subviewport_container and subviewport_container.has_method("update_packaging_preview"):
+		var pkg_type = item.get("packaging_type", "pouch")
+		var pkg_material = item.get("packaging_material", "plastic")
+		var pkg_size = float(item.get("packaging_size", 100.0))
+		subviewport_container.update_packaging_preview(pkg_type, pkg_material, pkg_size)
 
 func _clear_details() -> void:
 	if right_panel:
