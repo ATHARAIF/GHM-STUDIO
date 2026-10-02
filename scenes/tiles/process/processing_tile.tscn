@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://0orrrgvbpxpo" path="res://assets/3D/tiles/base_tiles/no_border.glb" id="2_mrevf"]
 [ext_resource type="PackedScene" uid="uid://cnk12vhht73ne" path="res://assets/3D/tiles/base_tiles/1side_border.glb" id="3_uxqqj"]
 [ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/tiles/tile_labels.tscn" id="4_bl6ek"]
+[ext_resource type="PackedScene" uid="uid://frh6p78eav5l" path="res://assets/3D/tiles/decorations/production_house/natural_drying_beans.glb" id="4_mrevf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43pgf"]
 resource_name = "color test"
@@ -170,6 +171,32 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 
 
 [node name="1side_border" parent="base_tiles/1side_border5" index="0" unique_id=1749094167]
 mesh = SubResource("ArrayMesh_4swon")
+
+[node name="decoration" type="Node3D" parent="." unique_id=1093652572]
+
+[node name="natural_drying_beans" parent="decoration" unique_id=1086556941 instance=ExtResource("4_mrevf")]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, -0.014919937, 0.0752888, 0.9864634)
+
+[node name="natural_drying_beans3" parent="decoration" unique_id=2131990132 instance=ExtResource("4_mrevf")]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, -0.9827082, 0.0752888, 0.9864634)
+
+[node name="natural_drying_beans2" parent="decoration" unique_id=403542141 instance=ExtResource("4_mrevf")]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 0.9519951, 0.0752888, 0.9864634)
+
+[node name="natural_drying_beans4" parent="decoration" unique_id=298552371 instance=ExtResource("4_mrevf")]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, -0.014919937, 0.0752888, -1.0129229)
+
+[node name="natural_drying_beans5" parent="decoration" unique_id=249019907 instance=ExtResource("4_mrevf")]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, -0.9827082, 0.0752888, -1.0129229)
+
+[node name="natural_drying_beans6" parent="decoration" unique_id=1282690997 instance=ExtResource("4_mrevf")]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 0.9519951, 0.0752888, -1.0129229)
+
+[node name="natural_drying_beans7" parent="decoration" unique_id=467325412 instance=ExtResource("4_mrevf")]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, -0.9827082, 0.0752888, -0.013262033)
+
+[node name="natural_drying_beans8" parent="decoration" unique_id=78808378 instance=ExtResource("4_mrevf")]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 0.9519951, 0.0752888, -0.013262033)
 
 [node name="tile_labels" parent="." unique_id=844450650 instance=ExtResource("4_bl6ek")]
 

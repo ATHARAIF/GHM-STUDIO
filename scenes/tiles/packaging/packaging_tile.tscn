@@ -1,11 +1,52 @@
-[gd_scene format=3 uid="uid://bqogf3rb1fff"]
+[gd_scene format=4 uid="uid://bqogf3rb1fff"]
 
 [ext_resource type="PackedScene" uid="uid://b5omglxf5doma" path="res://assets/3D/tiles/base_tiles/3side_border.glb" id="2_8w2sw"]
 [ext_resource type="PackedScene" uid="uid://d4jkvh7x4iwh1" path="res://assets/3D/tiles/base_tiles/cornerv2.glb" id="3_diylk"]
 [ext_resource type="PackedScene" uid="uid://fyfn51j3jhbb" path="res://assets/3D/tiles/base_tiles/2side_border.glb" id="3_vid5v"]
+[ext_resource type="PackedScene" uid="uid://0orrrgvbpxpo" path="res://assets/3D/tiles/base_tiles/no_border.glb" id="4_qlelc"]
+[ext_resource type="PackedScene" uid="uid://dm0algp4f3b7d" path="res://assets/3D/buildings/crate.glb" id="5_2idfk"]
+[ext_resource type="PackedScene" uid="uid://bwmlmpktamstc" path="res://assets/3D/packaging/side_gusset_paper.glb" id="6_3mey2"]
+[ext_resource type="PackedScene" uid="uid://d0nbougnlgfba" path="res://assets/3D/packaging/standing_pouch_paper.glb" id="7_2idfk"]
 [ext_resource type="PackedScene" uid="uid://cx8d4l51bqqe1" path="res://scenes/tiles/tile_labels.tscn" id="999_tilelbl"]
 
-[node name="roasting_tile" type="Node3D" unique_id=699342220]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jtf8p"]
+resource_name = "color test"
+cull_mode = 2
+albedo_color = Color(0.6803213, 0.6803213, 0.6803212, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f6sph"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.060000002, -0.5, 1, 0.120000005, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAwAAAAIAAAAEAAEAAQAFAAMAAwAGAAAABQAGAAMAAAAGAAcABQAHAAYAAAAHAAQAAQAHAAUAAQAEAAcA"),
+"name": "color test",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAD/////AAAAAAAA//8AAAAAAAD/////AAD//wAAAAAAAP///////wAAAAAAAP//AAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u1xpy"]
+resource_name = "no_border_Cube_015"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.060000002, -0.5, 1, 0.120000005, 1),
+"attribute_data": PackedByteArray("/1//v/+f/3//n/+//1//f/+f////X/+//5//v/9f////n/8//18AAP+fAAD/X/8//5//f//f/z//3/9//5//P/8f/3//X/8//1//f/8f/z//n/9//1//P/+f/z//X/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_jtf8p"),
+"name": "color test",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAAAA////////AAD//wAA//8AAP////8AAAAA//8AAP////9U1QAAAAAAAFTVAAD//wAAVNUAAAAA//9U1f////////+/AAAAAP///78AAP//////v///AAD///+//////wAA//8AAP///////wAA//8AAP////////////8AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAFTV//8AAP//VNX///////9U1f//AAAAAFTV/7//v/+//7//v/+//7//v1TVVNVU1VTVVNVU1VTVVNX//////////////////////3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3+qKqoqqiqqKqoqqiqqKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_f6sph")
+
+[node name="packaging_tile" type="Node3D" unique_id=699342220]
 
 [node name="base_tiles" type="Node3D" parent="." unique_id=519441691]
 
@@ -27,5 +68,87 @@ transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 0, 0
 [node name="decoration" type="Node3D" parent="." unique_id=489955234]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020626113, 0)
 
+[node name="no_border2" parent="decoration" unique_id=742330851 instance=ExtResource("4_qlelc")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.36228192, 0)
+
+[node name="no_border" parent="decoration/no_border2" index="0" unique_id=2106633132]
+mesh = SubResource("ArrayMesh_u1xpy")
+
+[node name="no_border3" parent="decoration" unique_id=1027242086 instance=ExtResource("4_qlelc")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.507054, 0.36228192, 0)
+
+[node name="no_border" parent="decoration/no_border3" index="0" unique_id=2106633132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.028319001, 0, 0)
+mesh = SubResource("ArrayMesh_u1xpy")
+
+[node name="no_border4" parent="decoration" unique_id=518098664 instance=ExtResource("4_qlelc")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.4922515, 0.36228192, 0)
+
+[node name="no_border" parent="decoration/no_border4" index="0" unique_id=2106633132]
+mesh = SubResource("ArrayMesh_u1xpy")
+
+[node name="no_border5" parent="decoration" unique_id=432379503 instance=ExtResource("4_qlelc")]
+transform = Transform3D(-1.3987644e-08, -0.5, 0, 0.32, -2.1855694e-08, 0, 0, 0, 0.5, -0.76965606, 0.23280065, 0)
+
+[node name="no_border" parent="decoration/no_border5" index="0" unique_id=2106633132]
+mesh = SubResource("ArrayMesh_u1xpy")
+
+[node name="no_border6" parent="decoration" unique_id=139674846 instance=ExtResource("4_qlelc")]
+transform = Transform3D(-1.3987644e-08, -0.5, 0, 0.32, -2.1855694e-08, 0, 0, 0, 0.5, 0.7677722, 0.23280065, 0)
+
+[node name="no_border" parent="decoration/no_border6" index="0" unique_id=2106633132]
+mesh = SubResource("ArrayMesh_u1xpy")
+
+[node name="crate" parent="decoration" unique_id=1190808639 instance=ExtResource("5_2idfk")]
+transform = Transform3D(0.49497473, 0, -0.49497473, 0, 0.70000005, 0, 0.49497473, 0, 0.49497473, 1.15991, 0.19191411, 1.1310902)
+
+[node name="crate2" parent="decoration" unique_id=635171222 instance=ExtResource("5_2idfk")]
+transform = Transform3D(0.67614806, 0, -0.18117332, 0, 0.7, 0, 0.18117332, 0, 0.67614806, 1.3080529, 0.19191411, 0.7722137)
+
+[node name="crate3" parent="decoration" unique_id=1507689394 instance=ExtResource("5_2idfk")]
+transform = Transform3D(0.67614806, 0, 0.18117332, 0, 0.7, 0, -0.18117332, 0, 0.67614806, 0.77008617, 0.19191411, 1.0524435)
+
+[node name="crate4" parent="decoration" unique_id=1130766035 instance=ExtResource("5_2idfk")]
+transform = Transform3D(0.67614806, 0, 0.18117332, 0, 0.7, 0, -0.18117332, 0, 0.67614806, 0.94592285, 0.19191411, 0.6635982)
+
+[node name="side_gusset_paper" parent="decoration" unique_id=301744758 instance=ExtResource("6_3mey2")]
+transform = Transform3D(0.25980762, 0, 0.14999999, 0, 0.29999998, 0, -0.14999999, 0, 0.25980762, 0.98555624, 0.4059984, 0.6493556)
+
+[node name="side_gusset_paper2" parent="decoration" unique_id=98852309 instance=ExtResource("6_3mey2")]
+transform = Transform3D(0.16241443, 0.07746185, -0.24004416, -0.03882284, 0.28977767, 0.067243144, 0.24922745, -0.0053402046, 0.16690463, 0.8981562, 0.4059984, 0.67151934)
+
+[node name="side_gusset_paper3" parent="decoration" unique_id=1657621178 instance=ExtResource("6_3mey2")]
+transform = Transform3D(0.19999789, -0.22007433, -0.03959924, 0, -0.053127494, 0.29525825, -0.22360866, -0.19683674, -0.035417974, 1.2863717, 0.10308699, 0.37168738)
+
+[node name="side_gusset_paper4" parent="decoration" unique_id=1389433146 instance=ExtResource("6_3mey2")]
+transform = Transform3D(0.2730458, 0.12231753, 0.022009293, -1.3141862e-09, -0.05312749, 0.29525825, 0.1242819, -0.2687301, -0.04835415, 1.1005974, 0.10308705, 0.18328539)
+
+[node name="standing_pouch_paper" parent="decoration" unique_id=2118806849 instance=ExtResource("7_2idfk")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.33893126, 0.52599645, -0.0062719584)
+
+[node name="standing_pouch_paper2" parent="decoration" unique_id=1740262740 instance=ExtResource("7_2idfk")]
+transform = Transform3D(0.24518575, 0, -0.17286974, 0, 0.29999998, 0, 0.17286974, 0, 0.24518575, -0.09994039, 0.52599645, -0.098698676)
+
+[node name="standing_pouch_paper3" parent="decoration" unique_id=603216451 instance=ExtResource("7_2idfk")]
+transform = Transform3D(0.2803106, 0, 0.10689227, 0, 0.29999998, 0, -0.10689227, 0, 0.2803106, -0.68400466, 0.52599645, -0.17085111)
+
+[node name="standing_pouch_paper4" parent="decoration" unique_id=1735374895 instance=ExtResource("7_2idfk")]
+transform = Transform3D(0.24943776, 0, -0.16667573, 0, 0.29999998, 0, 0.16667573, 0, 0.24943776, -0.49771106, 0.52599645, 0.11907324)
+
+[node name="standing_pouch_paper5" parent="decoration" unique_id=321938597 instance=ExtResource("7_2idfk")]
+transform = Transform3D(0.15491258, 0.2544422, 0.035514195, 0, -0.04147099, 0.29711977, 0.2569087, -0.1534253, -0.021414595, -0.572489, 0.40329558, -0.0186508)
+
+[node name="standing_pouch_paper6" parent="decoration" unique_id=2024291316 instance=ExtResource("7_2idfk")]
+transform = Transform3D(-0.2714049, 0.12659828, 0.017670168, 0, -0.041470986, 0.29711974, 0.1278255, 0.2687992, 0.037518103, 0.0579879, 0.40329558, -0.09058222)
+
+[node name="standing_pouch_paper7" parent="decoration" unique_id=1168850512 instance=ExtResource("7_2idfk")]
+transform = Transform3D(-0.22610971, 0.19527294, 0.02725555, 0, -0.041470986, 0.29711974, 0.19716588, 0.22393888, 0.031256642, 0.6057091, 0.40329558, 0.0049782097)
+
 [node name="tile_labels" parent="." unique_id=344741940 instance=ExtResource("999_tilelbl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0.973)
+
+[editable path="decoration/no_border2"]
+[editable path="decoration/no_border3"]
+[editable path="decoration/no_border4"]
+[editable path="decoration/no_border5"]
+[editable path="decoration/no_border6"]

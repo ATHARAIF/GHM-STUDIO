@@ -267,6 +267,7 @@ transform = Transform3D(0.10606601, 0, -0.10606602, 0, 0.15, 0, 0.10606602, 0, 0
 texture = ExtResource("16_p5s2n")
 
 [node name="debugcamera" type="Node3D" parent="Building" unique_id=947395238]
+visible = false
 
 [node name="warehouse2" parent="Building/debugcamera" unique_id=196333792 instance=ExtResource("13_l53mr")]
 transform = Transform3D(-0.45, 0, 6.794811e-08, 0, 0.45, 0, -6.794811e-08, 0, -0.45, 10.418487, 0.6912811, 12.324273)
