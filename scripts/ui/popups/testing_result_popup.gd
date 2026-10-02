@@ -11,6 +11,7 @@ extends CanvasLayer
 
 @onready var radar_chart = $CenterContainer/panel/contents/VBoxContainer2/stats/VBoxContainer2/radar
 @onready var val_note = $CenterContainer/panel/contents/VBoxContainer2/note/value
+@onready var subviewport_container = $CenterContainer/panel/contents/VBoxContainer2/stats/PanelContainer/Control/SubViewportContainer
 
 var target_batch = null
 var current_tile: Node3D = null
@@ -140,6 +141,10 @@ func show_popup(tile_data: Dictionary) -> void:
 			var total_qty = 0
 			var pack_sizes = []
 			
+			var sample_type = ""
+			var sample_material = ""
+			var sample_size = 100.0
+			
 			if has_node("/root/WarehouseManager"):
 				var wm = get_node("/root/WarehouseManager")
 				var inv = wm.get_all_inventory()
@@ -148,6 +153,13 @@ func show_popup(tile_data: Dictionary) -> void:
 						if item.has("custom_name") and item["custom_name"] != "":
 							display_custom_name = item["custom_name"]
 						total_qty += item["qty"]
+						
+						# Ambil info model 3D (ambil yang pertama kali ketemu)
+						if sample_type == "":
+							sample_type = item.get("packaging_type", "pouch")
+							sample_material = item.get("packaging_material", "plastic")
+							sample_size = float(item.get("packaging_size", 100.0))
+						
 						var p_size = str(item["packaging_size"]) + "g"
 						if not pack_sizes.has(p_size):
 							pack_sizes.append(p_size)
@@ -156,6 +168,14 @@ func show_popup(tile_data: Dictionary) -> void:
 				val_stock.text = str(total_qty) + " Pcs"
 			if val_size:
 				val_size.text = ", ".join(pack_sizes) if pack_sizes.size() > 0 else "Unknown"
+				
+			# Render 3D Model!
+			if subviewport_container and subviewport_container.has_method("update_packaging_preview"):
+				if sample_type == "":
+					sample_type = "pouch"
+					sample_material = "plastic"
+					sample_size = 100.0
+				subviewport_container.update_packaging_preview(sample_type, sample_material, sample_size)
 				
 		if val_variety: val_variety.text = display_custom_name
 		if val_species: val_species.text = display_species
